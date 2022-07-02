@@ -13,6 +13,7 @@ import { addRPC } from '../../utils/addRPC'
 import { MuonTools } from 'muon-toolbox'
 import UtopiaLogo from '../utopiaLogo/utopiaLogo'
 import PageMenu from '../pageMenu';
+import MuonToolbox from "../muonToolbix/Muontoolbox";
 
 const WalletModal = dynamic(() => import('../modal/WalletModal'))
 
@@ -69,6 +70,13 @@ const Status = styled.div`
   border-radius: 50%;
   margin-right: 5px;
 `
+const MenuIcon = styled.div`{
+  margin-top:25px;
+  display: none;
+  @media (max-width: 630px) {
+    display: block;
+  }
+}`
 
 const Media = styled.div`
   display: flex;
@@ -84,7 +92,7 @@ const WrapMuonNetwork = styled.div`
   }
 `
 const Label = styled.span`
-  @media (max-width: 767px) {
+  @media (max-width: 630px) {
     display: none;
   }
 `
@@ -105,9 +113,32 @@ const Menu = ({ selectedChain }) => {
       <AppInfo>
         <Media>
         </Media>
-        <Flex>
           <UtopiaLogo />
-          <PageMenu />
+          <Flex>
+          <Label>
+            <PageMenu />
+          </Label>
+          <MenuIcon>
+          <MuonToolbox 
+            name={'Menu'}  
+            links={[{ 
+              projectName:'Home',
+              href:'/'
+            },
+            { 
+              projectName:'Mint',
+              href:'/Mint'
+            },
+            { 
+              projectName:'MyIDs',
+              href:'/NFTs'
+            },
+            { 
+              projectName:'CreateAvatar',
+              href:'/CreateAvatar'
+            }]}
+          />
+          </MenuIcon>
           </Flex>
       </AppInfo>
       <AppInfo>

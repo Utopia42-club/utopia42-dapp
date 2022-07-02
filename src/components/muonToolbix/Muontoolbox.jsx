@@ -42,19 +42,9 @@ const Image = styled.img`
 `
 const Wrapper = styled.div``
 
-const links = [
-  { 
-    projectName:'Mint',
-    href:'/Mint'
-  },
-  { 
-    projectName:'My IDs',
-    href:'/NFTs'
-  }
-]
-
 const MuonToolbox = (props) => {
-  const { mode, menuColor, menuBackground, itemColor } = props
+  const { name, links, mode, menuColor, menuBackground, itemColor } = props
+  console.log(links)
   const [toolBoxOpen, setToolBoxOpen] = React.useState(false)
   const btnRef = React.useRef()
   
@@ -81,7 +71,7 @@ const MuonToolbox = (props) => {
           onClick={() => setToolBoxOpen(!toolBoxOpen)}
           cursor='pointer'
         >
-          Citizen Id
+          {name}
         </Type>
       </Flex>
 
@@ -90,7 +80,7 @@ const MuonToolbox = (props) => {
         background={menuBackground}
         color={itemColor}
       >
-        {chunk(links, 2).map((tools, index) => (
+        {chunk(links, 1).map((tools, index) => (
           <Flex key={index}>
             {tools.map((item) => (
               <DropDownMenuItem

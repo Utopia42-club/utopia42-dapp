@@ -13,7 +13,17 @@ const PageMenu = () => {
                 <a>Home</a>
             </Div>
             </Link>
-            <MuonToolbox />
+            <MuonToolbox name={'Citizen Id'}  
+                links={[
+                    { 
+                        projectName:'Mint',
+                        href:'/Mint'
+                    },
+                    { 
+                        projectName:'MyIDs',
+                        href:'/NFTs'
+                    },]}
+            />
             <Link href="/CreateAvatar">
             <Div>
                 <a>Create Avatar</a>
