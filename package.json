@@ -1,0 +1,45 @@
+{
+  "name": "utopia42-dapp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "PORT=4000 next start"
+  },
+  "dependencies": {
+    "@ethersproject/contracts": "^5.6.0",
+    "@reduxjs/toolkit": "^1.8.0",
+    "@web3-react/core": "^6.1.9",
+    "@web3-react/fortmatic-connector": "^6.1.6",
+    "@web3-react/frame-connector": "^6.0.9",
+    "@web3-react/injected-connector": "^6.0.7",
+    "@web3-react/walletconnect-connector": "^6.2.13",
+    "@web3-react/walletlink-connector": "^6.2.13",
+    "axios": "^0.26.1",
+    "bignumber.js": "^9.0.2",
+    "brightid_sdk": "^1.0.1",
+    "cryptocurrency-icons": "^0.18.0",
+    "ethereum-multicall": "^2.10.0",
+    "lodash": "^4.17.21",
+    "muon": "github:muon-protocol/muon-client-js",
+    "muon-toolbox": "github:znamazi/muon-toolbox",
+    "next": "^12.1.1",
+    "next-transpile-modules": "^9.0.0",
+    "qrcode.react": "^3.1.0",
+    "react": "^17.0.2",
+    "react-copy-to-clipboard": "^5.0.4",
+    "react-dom": "^17.0.2",
+    "react-modal": "^3.14.4",
+    "react-redux": "^7.2.6",
+    "react-select": "^5.2.2",
+    "rebass": "^4.0.7",
+    "styled-components": "^5.3.5",
+    "sweetalert2": "^11.4.19",
+    "web3": "^1.7.1"
+  },
+  "devDependencies": {
+    "eslint": "8.18.0",
+    "eslint-config-next": "12.2.0"
+  }
+}
