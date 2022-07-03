@@ -44,7 +44,6 @@ const Wrapper = styled.div``
 
 const MuonToolbox = (props) => {
   const { name, links, mode, menuColor, menuBackground, itemColor } = props
-  console.log(links)
   const [toolBoxOpen, setToolBoxOpen] = React.useState(false)
   const btnRef = React.useRef()
   

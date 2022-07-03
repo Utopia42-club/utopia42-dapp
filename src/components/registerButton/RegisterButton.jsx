@@ -24,6 +24,7 @@ const RegisterButton = (props) => {
   }
 
   const handleConnectWallet = () => {
+    localStorage.setItem('isWalletConnected', 'true')
     setOpen(true)
   }
   let contentBtn = ''

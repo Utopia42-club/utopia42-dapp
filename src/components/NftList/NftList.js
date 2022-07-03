@@ -110,7 +110,7 @@ const NftList = () => {
 
     const handleSelectToken = (item) => {
       console.log(item)
-        if(registeredNFT > 0){
+        if(registeredNFT == item){
           return Swal.fire({
             icon: 'error',
             text: 'Yor registered before',
@@ -206,8 +206,6 @@ const NftList = () => {
     </Container>
     </>
     )
-
-
 }
 
 

@@ -14,6 +14,7 @@ import { MuonTools } from 'muon-toolbox'
 import UtopiaLogo from '../utopiaLogo/utopiaLogo'
 import PageMenu from '../pageMenu';
 import MuonToolbox from "../muonToolbix/Muontoolbox";
+import LogOutButton from '../logOutButton/logOutButton'
 
 const WalletModal = dynamic(() => import('../modal/WalletModal'))
 
@@ -33,7 +34,7 @@ const AppInfo = styled(Flex)`
 const Button = styled.button`
   padding: ${({ padding }) => (padding ? padding : '0 15px')};
   cursor: ${({ active }) => (active ? 'pointer' : 'default')};
-  border: ${({ active, border }) => (border ? border : active ? '1px solid #00AA58' : '1px solid #d2d2d2')};
+  border: ${({ active, border }) => (border ? border : active ? '1px solid #76568e' : '1px solid #d2d2d2')};
   height: 35px;
   background: #f8faff;
   border-radius: 5px;
@@ -103,6 +104,7 @@ const Menu = ({ selectedChain }) => {
   const [open, setOpen] = React.useState(false)
 
   const handleConnect = async () => {
+    localStorage.setItem('isWalletConnected', 'true')
     setOpen(true)
   }
   // console.log(process.env.NEXT_PUBLIC_MODE)
@@ -144,12 +146,15 @@ const Menu = ({ selectedChain }) => {
       <AppInfo>
         {account ? (
           validChains.includes(chainId) ? (
+            <>
+            <LogOutButton />
             <Button padding="0 17px !important" active={account}>
               <Status active={account} />
               <Type.SM fontSize="15px" color="#313144">
                 {formatAddress(account)}
               </Type.SM>
             </Button>
+            </>
           ) : (
             <Button
               padding="0 17px !important"

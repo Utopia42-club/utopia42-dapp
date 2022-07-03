@@ -6,6 +6,7 @@ import Web3ReactManager from '../src/utils/web3ReactManager'
 import Layout from '../src/components/layouts'
 import GlobalStyle from '../styles/GlobalStyle'
 import { store } from '../src/state'
+import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   return (

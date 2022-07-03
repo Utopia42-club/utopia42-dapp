@@ -13,7 +13,7 @@ export function useEagerConnect() {
 
   useEffect(() => {
     injected.isAuthorized().then((isAuthorized) => {
-      if (isAuthorized) {
+      if (isAuthorized && localStorage?.getItem('isWalletConnected') === 'true') {
         activate(injected, undefined, true).catch(() => {
           setTried(true)
         })
