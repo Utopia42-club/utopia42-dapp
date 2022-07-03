@@ -26,15 +26,16 @@ const CreateTable = (props) => {
     }
 
     data.map((item) => {
+        console.log(item)
         res.id = item
         res.registered = 'No'
         if(registeredWallet && registeredNFT != '0'){
-            res.action = <Button onClick={handleTransfer}>Transfer</Button>
+            res.action = <Button  onClick={() => handleTransfer(item)}>Transfer</Button>
         }
         else if(registeredWallet && registeredNFT == '0'){
             res.action = <div>
                             <Button onClick={() => {prepareToRegister(item)}}>Register NFT</Button>
-                            <Button color={color} onClick={handleTransfer}>Transfer</Button>
+                            <Button color={color}  onClick={() => handleTransfer(item)}>Transfer</Button>
                         </div>       
         }
         else{
