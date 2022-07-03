@@ -3,17 +3,18 @@ import { useWeb3React } from '@web3-react/core'
 import { getContract } from '../utils/contractHelpers'
 import { sendTransaction } from '../utils/sendTx'
 import useWeb3 from './useWeb3'
+import useWalletBalance from './useWalletBalance'
+import { fromWei } from '../utils/wei'
 
 const useMintNFTsetBrightId = () => {
-    const Swal = require('sweetalert2')
-    const { account } = useWeb3React()
-    const contractAddress = '0xaF7f06309dbefd4cA671111B587013B7B58588cc'
-    const web3 = useWeb3()
-
-    const mintAndSet = async (data) => {
-
-      console.log('mintAndSet')
-
+  const Swal = require('sweetalert2')
+  const { account } = useWeb3React()
+  const contractAddress = '0xaF7f06309dbefd4cA671111B587013B7B58588cc'
+  const web3 = useWeb3()
+    
+  const mintAndSet = async (data) => {
+    
+      const balance = useWalletBalance(account, chainId)
       let contextIds = data.contextIds
       let sgiR = '0x' + data.sigR
       let sugS = '0x' + data.sigS
@@ -37,7 +38,6 @@ const useMintNFTsetBrightId = () => {
             timer: 1500
         })
       }
-      console.log(account)
       if (account == null){
         return Swal.fire({
             text: "You'r wallet is not connect",
@@ -49,7 +49,14 @@ const useMintNFTsetBrightId = () => {
 
       const contract = getContract(mrc721MinterAbi, contractAddress, web3)
       const price =  await contract.methods.price('1').call()
-      console.log(price)
+      if (Number(balance) < fromWei(price)){
+        return Swal.fire({
+          text: 'Insufficient balance',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
 
       return sendTransaction(
         contract,

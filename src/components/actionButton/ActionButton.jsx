@@ -24,6 +24,7 @@ const ActionButtonComponent = (props) => {
     localStorage.setItem('isWalletConnected', 'true')
     setOpen(true)
   }
+
   let contentBtn = ''
   if (!account)
     contentBtn = (
@@ -91,7 +92,7 @@ const ActionButtonComponent = (props) => {
       background={'rgba(255, 164, 81, 0.2)'}
       border="1px solid rgba(255, 164, 81, 1)"
       cursor="text">
-        Mint and Register NFT: You'r wallet is not registered on brightID
+        Scan QR code. You'r wallet is not registered on brightID.
       </Button>
     )
   }

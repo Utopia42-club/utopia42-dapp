@@ -13,8 +13,6 @@ import useMintNFTsetBrightId from '../../hooks/useMintNFTsetBrightId'
 import useUserRegisterNFTs from '../../hooks/useUserRegisterNFTs';
 import { useWeb3React } from '@web3-react/core';
 import BrightId from '../BrightIdApp/BrightIdApp';
-// import PageMenu from '../pageMenu';
-
 
 const MintCitizenNFT = () => {
     const { account, chainId} = useWeb3React()
@@ -28,6 +26,7 @@ const MintCitizenNFT = () => {
     const [status, setStatus] = useState('Mint')
     const mint = useMinterNft(account, chainId, count, toAddress)
     const mintAndSet = useMintNFTsetBrightId(toAddress)
+
     
     const handleChange = async () => {
         console.log('handle change')
@@ -48,6 +47,12 @@ const MintCitizenNFT = () => {
         }
         setChecked(!checked);
     };
+
+
+    useEffect(() => {
+        setChecked(false)
+        setStatus('Mint')
+    }, [account])
 
     const handelCountChange =  (value) => {
         setCount(value)
@@ -72,7 +77,6 @@ const MintCitizenNFT = () => {
         }
     }
 
-
     useEffect(() => {
         if(checked === true){
             isRegisteredWallet()
@@ -82,7 +86,7 @@ const MintCitizenNFT = () => {
                 setStatus('Mint and register')
             }
         }
-    }, [checked])
+    }, [checked,registeredWallet,registeredNFT])
 
 
     const handleMint = async () => {
@@ -158,7 +162,7 @@ const MintCitizenNFT = () => {
                     onChange={handleChange} 
                 />
             </div>
-        {!registeredWallet && checked? <BrightId account={account}/> : ''}
+        {status == "You'r wallet is not registered on brightID" ? <BrightId account={account}/> : ''}
         </div>
         <ActionButton handleMint={handleMint} status={status} checked={checked}/>
         </Box>

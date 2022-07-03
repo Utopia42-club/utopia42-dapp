@@ -54,7 +54,7 @@ export const rpcConfig = {
       symbol: 'ETH',
       decimals: 18,
     },
-    rpcUrls: [`https://rinkeby.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_KEY}`],
+    rpcUrls: [`https://rinkeby.infura.io/v3/5ff4241f89cc422a935937ac2d675e59`],
     blockExplorerUrls: ['https://rinkeby.etherscan.io/'],
   },
   [ChainMap.ROPSTEN]: {

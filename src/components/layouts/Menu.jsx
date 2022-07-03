@@ -139,6 +139,7 @@ const Menu = ({ selectedChain }) => {
               projectName:'CreateAvatar',
               href:'/CreateAvatar'
             }]}
+            status={'mobile'}
           />
           </MenuIcon>
           </Flex>

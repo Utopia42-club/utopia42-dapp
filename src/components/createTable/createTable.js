@@ -10,7 +10,6 @@ const CreateTable = (props) => {
 
     const handleTransfer = (item) => {
         setColor('#300c4b')
-        console.log(item)
         handleSelectToken(item)
         setBrightIdModal(false)
     }
@@ -21,12 +20,10 @@ const CreateTable = (props) => {
     }
 
     const handleBrightID = () => {
-        console.log('beight id tezssst')
         setBrightIdModal(true)
     }
 
     data.map((item) => {
-        console.log(item)
         res.id = item
         res.registered = 'No'
         if(registeredWallet && registeredNFT != '0'){
@@ -34,18 +31,19 @@ const CreateTable = (props) => {
         }
         else if(registeredWallet && registeredNFT == '0'){
             res.action = <div>
-                            <Button onClick={() => {prepareToRegister(item)}}>Register NFT</Button>
+                            <Button color={color} onClick={() => {prepareToRegister(item)}}>Register NFT</Button>
                             <Button color={color}  onClick={() => handleTransfer(item)}>Transfer</Button>
                         </div>       
         }
         else{
             res.action = <div>
-                            <Button onClick={handleBrightID}>Connect to BrightID</Button>
+                            <Button color={color} onClick={handleBrightID}>Connect to BrightID</Button>
                             <Button color={color} onClick={() => handleTransfer(item)}>Transfer</Button>
                         </div>
         }
         nftListConfig.push({...res})
     })
+    
     if (registeredNFT !=  '0'){
         res.id = registeredNFT
         res.registered = 'Yes'
@@ -63,7 +61,7 @@ const CreateTable = (props) => {
             <Table id="table">
                 <Thead>
                 <Tr>
-                    <Th>Number</Th>
+                    <Th  style={{width:'10%'}}>Number</Th>
                     <Th>Citizen ID</Th>
                     <Th>Registered</Th>
                     <Th>Actions</Th>
@@ -73,7 +71,7 @@ const CreateTable = (props) => {
                     {
                         nftListConfig.map((item, index) => (
                             <Tr key={item.id} id={item.id}>
-                                <Td>{index}</Td>
+                                <Td style={{width:'10%'}}>{index+1}</Td>
                                 <Td>#{item.id}</Td>
                                 <Td>{item.registered}</Td>
                                 <Td>{item.action}</Td>
