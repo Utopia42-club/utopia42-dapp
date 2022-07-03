@@ -5,11 +5,11 @@ import { sendTransaction } from '../utils/sendTx'
 import useWeb3 from './useWeb3'
 import useWalletBalance from './useWalletBalance'
 import { fromWei } from '../utils/wei'
+import { minterContractAddress } from '../ContractsAddresses'
 
 const useMintNFTsetBrightId = () => {
   const Swal = require('sweetalert2')
   const { account } = useWeb3React()
-  const contractAddress = '0xaF7f06309dbefd4cA671111B587013B7B58588cc'
   const web3 = useWeb3()
     
   const mintAndSet = async (data) => {
@@ -47,7 +47,7 @@ const useMintNFTsetBrightId = () => {
         })
       }
 
-      const contract = getContract(mrc721MinterAbi, contractAddress, web3)
+      const contract = getContract(mrc721MinterAbi, minterContractAddress, web3)
       const price =  await contract.methods.price('1').call()
       if (Number(balance) < fromWei(price)){
         return Swal.fire({

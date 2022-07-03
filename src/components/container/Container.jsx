@@ -24,6 +24,7 @@ export const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: ${({ marginBottom }) => marginBottom};
+  margin-top: ${({ marginTop }) => marginTop};
 `
 
 export const Box = styled.div`

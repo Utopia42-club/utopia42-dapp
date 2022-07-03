@@ -104,7 +104,7 @@ const NftList = () => {
 
     useEffect(() => {
         checkNFT()
-
+        setTransferModal(false)
     }, [account])
     
 

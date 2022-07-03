@@ -4,15 +4,16 @@ import { sendTransaction } from '../utils/sendTx'
 import useWeb3 from './useWeb3'
 import useWalletBalance from './useWalletBalance'
 import { fromWei } from '../utils/wei'
+import { minterContractAddress } from '../ContractsAddresses'
 
 const useMinterNft = (address, chainId, count, toAddress) => {
   const Swal = require('sweetalert2')
   const web3 = useWeb3()
-  const contractAddress = '0xaF7f06309dbefd4cA671111B587013B7B58588cc'
+  // const contractAddress = '0xAE2ade04cBd44D2c723252114f3545130D609a93'
   const balance = useWalletBalance(address, chainId)
 
   const mint = async () => {
-    const contract = getContract(mrc721MinterAbi, contractAddress, web3)
+    const contract = getContract(mrc721MinterAbi, minterContractAddress, web3)
     console.log(contract)
     if (!contract) {
       console.error('contract is null')

@@ -8,7 +8,7 @@ const useUserNFTs =  (account) => {
         // console.log(account)
         // account = '0xF3cB8cb6170FA64Ea20DFe4D46762fb4d9BB23f4'
         if (account != undefined){
-            const contractAddress = '0x7A4aCd401DBea587fb7ecC42D6a74AED86694fE2';
+            const contractAddress = '0xb800B8AC21a451444A5E9d21ce0ac89Da219F3D4';
             const contract = getContract(unbcNFTAbi, contractAddress, web3)
             const res =  await contract.methods.tokensOfOwner(account).call();
             // console.log(res)

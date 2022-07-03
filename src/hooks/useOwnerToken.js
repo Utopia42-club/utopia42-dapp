@@ -3,10 +3,11 @@ import Swal from 'sweetalert2';
 import { getContract } from '../utils/contractHelpers'
 import { sendTransaction } from '../utils/sendTx'
 import useWeb3 from './useWeb3'
+import { UNBCNFTContractAddress } from '../ContractsAddresses';
 
 const useOwnerToken = (id, account) => {
     const web3 = useWeb3()
-    const contractAddress = '0x7A4aCd401DBea587fb7ecC42D6a74AED86694fE2';
+    // const contractAddress = '0xb800B8AC21a451444A5E9d21ce0ac89Da219F3D4';
 
     const ownerOfToken = async (data) => {
         if (!id) {
@@ -26,7 +27,7 @@ const useOwnerToken = (id, account) => {
         try {
                 // const {ethereum} = window
                 // if (ethereum) {
-                const NFTContract = getContract(unbcNFTAbi, contractAddress, web3)
+                const NFTContract = getContract(unbcNFTAbi, UNBCNFTContractAddress, web3)
                 let res =  await NFTContract.methods.ownerOf(id).call()
                 console.log(account, res, id)
                 if (account == res) {
