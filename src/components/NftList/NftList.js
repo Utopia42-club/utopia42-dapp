@@ -110,18 +110,18 @@ const NftList = () => {
 
     const handleSelectToken = (item) => {
       console.log(item)
-        if(registeredNFT > 0){
-          return Swal.fire({
-            icon: 'error',
-            text: 'Yor registered before',
-            showConfirmButton: false,
-            timer: 1500,
-          })
-        }
-        else {
+        // if(registeredNFT > 0){
+        //   return Swal.fire({
+        //     icon: 'error',
+        //     text: 'Yor registered before',
+        //     showConfirmButton: false,
+        //     timer: 1500,
+        //   })
+        // }
+        // else {
           setSelectedNFT(item)
           setTransferModal(true)
-        }
+        // }
     }
 
     const handleRegister = async () => {
