@@ -1,7 +1,7 @@
 // import { TransactionStatus } from '../constants/transactionStatus'
 import Swal from 'sweetalert2'
 
-export const sendTransaction = (contract, methodName, params, account, 
+export const sendTransaction = (status, contract, methodName, params, account, 
   payableValue = null) => {
   return new Promise((resolve, reject) => {
     try {
@@ -20,7 +20,7 @@ export const sendTransaction = (contract, methodName, params, account,
         .once('receipt', () => {
           Swal.fire({
             icon: 'success',
-            text:'Successfully',
+            text:`Successfully ${status}`,
             showConfirmButton: false,
             timer:1500
           })

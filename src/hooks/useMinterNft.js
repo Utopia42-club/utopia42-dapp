@@ -8,7 +8,8 @@ import { minterContractAddress } from '../ContractsAddresses'
 
 const useMinterNft = (address, chainId, count, toAddress) => {
   const Swal = require('sweetalert2')
-  const web3 = useWeb3()
+  const web3 = useWeb3();
+  let status = 'Mint'
   // const contractAddress = '0xAE2ade04cBd44D2c723252114f3545130D609a93'
   const balance = useWalletBalance(address, chainId)
 
@@ -31,6 +32,7 @@ const useMinterNft = (address, chainId, count, toAddress) => {
       })
     }
       return sendTransaction(
+        status,
         contract,
         'mint',
         [toAddress, count],

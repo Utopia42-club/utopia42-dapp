@@ -1,20 +1,15 @@
 import { useRef, useState } from "react";
-import {  Button } from "./CreateNewAvatar.style.jsx";
-import useUpdateSetting from "../../hooks/useUpdateSetting.js";
-import { useWeb3React } from '@web3-react/core'
 import { Container, Wrapper, Box } from '../container/Container'
 import { Flex } from "rebass";
-import Swal from "sweetalert2";
 import AvatarForm from "../avatarForm/AvatarForm.jsx";
 
 const CreateNewAvatar = () => {
   const subdomain = 'utopia42club';
-  const { account } = useWeb3React()
+  
   const [show, setShow] = useState()
   const [avatarLink, setAvatarLink] = useState()
   const iFrameRef = useRef()
-  const  updateSetting = useUpdateSetting()
-  const valuesList = []
+
   let json;
 
   function subscribe(event) {
@@ -40,7 +35,6 @@ const CreateNewAvatar = () => {
     if (json.eventName === 'v1.avatar.exported') {
       setShow(false)
       setAvatarLink(json.data.url)
-      valuesList.push(json.data.url)
     }
 
     if (json.eventName === 'v1.user.set') {
@@ -65,26 +59,6 @@ const CreateNewAvatar = () => {
     // document.addEventListener('message', subscribe);
   }
 
-  const handleUpdate = () => {
-    if(!avatarLink){
-      return Swal.fire({
-        text:'No data for updating',
-        icon: 'error',
-        confirmButtonText: false,
-        timer: 1500
-    })
-    }
-    if(!account) {
-      return Swal.fire({
-          text:'Wallet is not connect',
-          icon: 'error',
-          confirmButtonText: false,
-          timer: 1500
-      })
-    }
-    valuesList.push(avatarLink)
-    updateSetting(account,['avatar'], valuesList)
-  }
 
   return (
     <>
@@ -128,7 +102,7 @@ const CreateNewAvatar = () => {
                 {/* :  */}
                 {/* ''  */}
               {/* } */}
-            <AvatarForm avatarLink={avatarLink} handleUpdate={handleUpdate}/>
+            <AvatarForm avatarLink={avatarLink}/>
             </Box>
           </Flex>
         </Wrapper>

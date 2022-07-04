@@ -28,6 +28,7 @@ export const BorderBottom = styled.div`
 export const Input = styled.input`
   max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : '400px')};
   width: 100%;
+  type: ${({type}) => {type ? type : 'text'}}
   background: ${({ background }) => (background ? background : 'transparent')};
   height: ${({ height }) => (height ? height : '45px')};
   border: ${({ border }) => (border ? border : '1px solid #5F5CFE')};

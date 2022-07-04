@@ -13,6 +13,8 @@ import useMintNFTsetBrightId from '../../hooks/useMintNFTsetBrightId'
 import useUserRegisterNFTs from '../../hooks/useUserRegisterNFTs';
 import { useWeb3React } from '@web3-react/core';
 import BrightId from '../BrightIdApp/BrightIdApp';
+import useMaxPerUser from '../../hooks/useMaxPerUser';
+import { async } from 'muon';
 
 const MintCitizenNFT = () => {
     const { account, chainId} = useWeb3React()
@@ -22,10 +24,18 @@ const MintCitizenNFT = () => {
     const [registeredNFT, setRegisteredNFT] = useState('0')
     const [registeredWallet, setRegisteredWallet] = useState(false)
     const brightIdData = useBrightIdApi()
+    const [max, setMax] = useState()
     const getRegisterNFTs = useUserRegisterNFTs(account)
     const [status, setStatus] = useState('Mint')
     const mint = useMinterNft(account, chainId, count, toAddress)
     const mintAndSet = useMintNFTsetBrightId(toAddress)
+    const maxPay = useMaxPerUser()
+
+    const getMaxPay = async () => {
+        console.log(await maxPay())
+        setMax(await maxPay())
+    }
+
 
     
     const handleChange = async () => {
@@ -48,14 +58,17 @@ const MintCitizenNFT = () => {
         setChecked(!checked);
     };
 
-
     useEffect(() => {
         setChecked(false)
         setStatus('Mint')
+        getMaxPay()
     }, [account])
 
-    const handelCountChange =  (value) => {
-        setCount(value)
+    const handelCountChange = async  (value) => {
+
+        if(Number(value) <= Number(max) && Number(value) >= 0){
+            setCount(value)
+        } 
     }
 
     const isRegisteredWallet = async () => {
@@ -145,8 +158,9 @@ const MintCitizenNFT = () => {
       <Box background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 126.95%)">
              {!checked ? 
               <Input
+                type="text"
                 label = 'Count'
-                placeholder = 'Count'
+                placeholder = {`Max count for user ${max}`}
                 value = {count ?? ''} 
                 onChange = {(event) => handelCountChange(event.target.value)} 
             /> 

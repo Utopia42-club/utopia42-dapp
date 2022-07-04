@@ -6,6 +6,7 @@ import { v4 } from 'uuid';
 import { GradientTitle, } from '../text/Title';
 import { useWeb3React } from '@web3-react/core';
 import { useEffect } from 'react';
+import styled from 'styled-components'
 
 function BrightIdApp(props) {
   const { account } = useWeb3React()
@@ -17,6 +18,13 @@ function BrightIdApp(props) {
   const [deeplink, setDeeplink] = React.useState()
   const [sponsorships, setSponsorships] = React.useState(0)
   const [res, setRes] = React.useState()
+
+  const Box = styled.div`{
+    margin-top:20px;
+    @media screen and (max-width: 780px) {
+      display: none;
+    }
+  }`
 
   const generateContextId = () => {
     setContextId(v4())
@@ -87,10 +95,12 @@ function BrightIdApp(props) {
                 {/* <button onClick={generateContextId}>Generate ContextId</button> */}
             </div>
           </div>
-            <div style={{marginTop:"20px"}}>
+            <Box>
               <header style={{marginBottom:"10px", color:"#999"}}>Linking QR Code</header>
                 <QRCode style={{width:'50%', height:'50%'}} value={deeplink ? deeplink : ''} />
-                {/* <a href={deeplink}>Clickable link</a> */}
+            </Box>
+            <div style={{marginTop:'30px'}}>
+              <a style={{color:'#814f8c'}} href={deeplink}>Clickable link</a>
             </div>
         </div>
           {/* <div>

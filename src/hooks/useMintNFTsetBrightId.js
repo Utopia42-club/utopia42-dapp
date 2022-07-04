@@ -13,6 +13,7 @@ const useMintNFTsetBrightId = () => {
   const web3 = useWeb3()
     
   const mintAndSet = async (data) => {
+     let status = 'Mint and Register'
     
       const balance = useWalletBalance(account, chainId)
       let contextIds = data.contextIds
@@ -58,7 +59,8 @@ const useMintNFTsetBrightId = () => {
         })
       }
 
-      return sendTransaction(
+      await sendTransaction(
+        status,
         contract,
         'mintAndRegister',
         [ account,

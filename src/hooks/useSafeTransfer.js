@@ -8,6 +8,7 @@ import { UNBCNFTContractAddress } from '../ContractsAddresses';
 const useSafeTransfer = () => {
     const web3 = useWeb3()
     const { account } = useWeb3React()
+    let status = 'Transfer'
     // const contractAddress = '0xb800B8AC21a451444A5E9d21ce0ac89Da219F3D4'
     const contract = getContract(unbcNFTAbi, UNBCNFTContractAddress, web3)
 
@@ -19,6 +20,7 @@ const useSafeTransfer = () => {
           }
       
           return sendTransaction(
+            status,
             contract,
             'transferFrom',
             [account, toAddress, tokenId],

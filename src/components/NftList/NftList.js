@@ -18,7 +18,7 @@ import { Button } from '../button/Button'
 import CreateTable from '../createTable/createTable';
 
 const NftList = () => {
-    const { account } = useWeb3React()
+    const { account, chainId } = useWeb3React()
     const [registeredNFT, setRegisteredNFT] = useState('0')
     const [registeredWallet, setRegisteredWallet] = useState(null)
     const [NFTs, setNFTs] = useState(null);
@@ -103,9 +103,16 @@ const NftList = () => {
     })
 
     useEffect(() => {
+      if(chainId == 4){
         checkNFT()
         setTransferModal(false)
-    }, [account])
+      }
+      else{
+        setTransferModal(false)
+        setNFTs(null)
+        setRegisteredNFT('0')
+      }
+    }, [account, chainId])
     
 
     const handleSelectToken = (item) => {
@@ -160,6 +167,18 @@ const NftList = () => {
       <>
       <CreateTable 
         data={NFTs} 
+        registeredWallet={registeredWallet} 
+        registeredNFT={registeredNFT} 
+        setBrightIdModal={setBrightIdModal} 
+        handleSelectToken={handleSelectToken} 
+        handleRegister={handleRegister}/>
+        </>
+    }
+    {
+      !NFTs &&
+      <>
+      <CreateTable 
+        data={[]} 
         registeredWallet={registeredWallet} 
         registeredNFT={registeredNFT} 
         setBrightIdModal={setBrightIdModal} 

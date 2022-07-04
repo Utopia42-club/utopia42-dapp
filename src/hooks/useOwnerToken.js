@@ -8,7 +8,7 @@ import { UNBCNFTContractAddress } from '../ContractsAddresses';
 const useOwnerToken = (id, account) => {
     const web3 = useWeb3()
     // const contractAddress = '0xb800B8AC21a451444A5E9d21ce0ac89Da219F3D4';
-
+    let status = 'Register'
     const ownerOfToken = async (data) => {
         if (!id) {
             return Swal.fire({
@@ -31,7 +31,8 @@ const useOwnerToken = (id, account) => {
                 let res =  await NFTContract.methods.ownerOf(id).call()
                 console.log(account, res, id)
                 if (account == res) {
-                 await sendTransaction(
+                 return sendTransaction(
+                        status,
                         NFTContract,
                         'setBrightId',
                         [id,
@@ -43,13 +44,6 @@ const useOwnerToken = (id, account) => {
                             account
                         
                       )
-
-                    return Swal.fire({
-                      text: "Successful Register",
-                      icon: 'success',
-                      showConfirmButton: false,
-                      timer: 1500
-                    }) 
                 }
                 else{
                     return Swal.fire({

@@ -3,6 +3,10 @@ import styled from 'styled-components'
 export const Td = styled.td`{
     border: 1px solid #76568e;
     padding: 5px;
+        @media screen and (max-width: 780px) {
+        width:20%;
+        font-size:10px;
+      }
 }`
 
 export const Tr = styled.tr`{
@@ -18,6 +22,10 @@ export const Th = styled.th`{
     text-align: center;
     color: white;
     border: 1px solid #76568e;
+    @media screen and (max-width: 780px) {
+        width:20%;
+        font-size:10px;
+      }
 
   }`
 
