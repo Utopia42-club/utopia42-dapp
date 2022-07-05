@@ -3,10 +3,22 @@ import styled from 'styled-components'
 export const Td = styled.td`{
     border: 1px solid #76568e;
     padding: 5px;
-        @media screen and (max-width: 780px) {
-        width:20%;
-        font-size:10px;
-      }
+    height:50px;
+    @media screen and (max-width: 780px) {
+    width:20%;
+    height:30px;
+    font-size:10px;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  @media screen and (max-width: 990px) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+      
 }`
 
 export const Tr = styled.tr`{
@@ -24,6 +36,7 @@ export const Th = styled.th`{
     border: 1px solid #76568e;
     @media screen and (max-width: 780px) {
         width:20%;
+        padding:5px;
         font-size:10px;
       }
 
@@ -37,12 +50,12 @@ export const Table = styled.table`{
   margin:0 auto;
   background: none;
   color:#683f87;
-    display: flex;
-    flex-flow: column;
-    border-collapse: collapse;
-    text-align: center;
-    width: 90%;
-    height: 387px;
+  display: flex;
+  flex-flow: column;
+  border-collapse: collapse;
+  text-align: center;
+  width: 100%;
+  height: 387px;
 }`
 
 export const Tbody = styled.tbody`{

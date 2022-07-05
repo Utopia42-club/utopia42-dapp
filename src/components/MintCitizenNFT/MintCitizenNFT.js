@@ -134,15 +134,16 @@ const MintCitizenNFT = () => {
                 })
               } 
 
-            //   try{
+              try{
                 setStatus('Minting ...')
                 await mint()
                 setStatus('Mint')
-            //   }
-            //   catch{
-            //     console.log('error')
-            //     setStatus('Mint')
-            //   }
+              }
+              catch{
+                location.reload()
+                console.log('error')
+                setStatus('Mint')
+              }
         }
     }
 

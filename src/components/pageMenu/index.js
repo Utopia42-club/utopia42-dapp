@@ -28,7 +28,12 @@ const PageMenu = () => {
             <Div>
                 <a>Create Avatar</a>
             </Div>
-            </Link> 
+            </Link>
+            <Link href="/Verses">
+            <Div>
+                <a>Verses</a>
+            </Div>
+            </Link>  
             </Flex>
         </div>
     )

@@ -105,7 +105,6 @@ const Menu = ({ selectedChain }) => {
 
   const handleConnect = async () => {
     // localStorage.setItem('isWalletConnected', 'true')
-    console.log('conecting')
     try{
       setOpen(true)
     }
@@ -145,6 +144,10 @@ const Menu = ({ selectedChain }) => {
             { 
               projectName:'CreateAvatar',
               href:'/CreateAvatar'
+            },
+            { 
+              projectName:'Verses',
+              href:'/Verses'
             }]}
             status={'mobile'}
           />

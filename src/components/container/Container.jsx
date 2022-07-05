@@ -43,3 +43,7 @@ export const Box = styled.div`
   align-items: center;
   padding: ${({ padding }) => (padding ? padding : '20px')};
 `
+
+export const Label = styled.label`
+
+`

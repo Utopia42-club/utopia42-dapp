@@ -14,7 +14,6 @@ export function useEagerConnect() {
   useEffect(() => {
 
     injected.isAuthorized().then((isAuthorized) => {
-      console.log(isAuthorized)
 
       if (isAuthorized && localStorage?.getItem('isWalletConnected') === 'true' && !localStorage?.getItem('walletconnect')) {
         activate(injected, undefined, true).catch(() => {
@@ -47,9 +46,9 @@ export function useEagerConnect() {
 export function useInactiveListener(suppress = false) {
   const { active, error, activate } = useWeb3React()
   useEffect(() => {
-    if(!active){
-      localStorage.setItem('isWalletConnected', 'false')
-    }
+    // if(!active){
+    //   localStorage.setItem('isWalletConnected', 'false')
+    // }
 
     const { ethereum } = window
     if (ethereum && ethereum.on && !active && !error && !suppress) {
