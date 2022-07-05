@@ -60,6 +60,16 @@ export const Button = styled.button `{
   border:none;
   border-radius: 5px;
   cursor: pointer;
+  @media screen and (max-width: 890px) {
+    font-size: 12px;
+    padding:5px;
+    margin:3px;
+  }
+  @media screen and (max-width: 760px) {
+    font-size: 7px;
+    padding:5px;
+    margin:3px;
+  }
 }`
 
 export const Wrapper = styled.div `{
