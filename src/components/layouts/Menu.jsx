@@ -104,8 +104,15 @@ const Menu = ({ selectedChain }) => {
   const [open, setOpen] = React.useState(false)
 
   const handleConnect = async () => {
-    localStorage.setItem('isWalletConnected', 'true')
-    setOpen(true)
+    // localStorage.setItem('isWalletConnected', 'true')
+    console.log('conecting')
+    try{
+      setOpen(true)
+    }
+    catch{
+      localStorage.setItem('isWalletConnected', 'false')
+      console.log('close')
+    }
   }
   // console.log(process.env.NEXT_PUBLIC_MODE)
 

@@ -28,7 +28,7 @@ export const sendTransaction = (status, contract, methodName, params, account,
         .once('error', (error) => {
           Swal.fire({
             icon: 'error',
-            text:'Something Wrong',
+            text: error.message,
             showConfirmButton: false,
             timer:1500
           })

@@ -5,7 +5,7 @@ import { minterContractAddress } from '../ContractsAddresses'
 
 const useMaxPerUser = () => {
     const web3 = useWeb3()
-    const maxPerUser = async () => {
+    const maxPerUser = async (count) => {
         const contract = getContract(mrc721MinterAbi, minterContractAddress, web3)
         return await contract.methods.maxPerUser().call()
     }

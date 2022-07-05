@@ -18,7 +18,13 @@ const WalletModal = (props) => {
           <ModalItem
             key={name}
             onClick={() => {
-              activate(connectorsByName[name])
+              localStorage.setItem('isWalletConnected', 'true')
+              try{
+                activate(connectorsByName[name])
+              }
+              catch{
+                localStorage.setItem('isWalletConnected', 'false')
+              }
               hide()
             }}
           >

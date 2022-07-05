@@ -89,7 +89,7 @@ const CreateNewAvatar = () => {
                 <iframe 
                 ref={iFrameRef} 
                 style={{'width': '100%',
-                        'height': '700px',
+                        'height': '800px',
                         'marginTop': '30px',
                         'fontSize': '14px',
                         'border': 'none',

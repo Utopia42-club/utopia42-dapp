@@ -18,7 +18,7 @@ const supportedChainIds = [
   137, // Matic
   80001, // Maticc Mumbai
 ]
-const INFURA_KEY = process.env.NEXT_PUBLIC_INFURA_KEY
+const INFURA_KEY = '5ff4241f89cc422a935937ac2d675e59'
 // const FORTMATIC_KEY = process.env.NEXT_PUBLIC_FORTMATIC_KEY
 
 const RPC_URLS = {
@@ -45,14 +45,14 @@ const POLLING_INTERVAL = 2000
 
 //only mainnet (walletconnect only one chain supports)
 export const walletconnect = new WalletConnectConnector({
-  rpc: { 1: RPC_URLS[1] },
+  rpc: { 4: RPC_URLS[4]},
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   pollingInterval: POLLING_INTERVAL,
 })
 
 export const walletlink = new WalletLinkConnector({
-  url: RPC_URLS[1],
+  url: RPC_URLS[4],
   appName: 'app.deus.finance',
 })
 
@@ -61,7 +61,7 @@ export const fortmatic = new FortmaticConnector({
   chainId: 1,
 })
 
-export const frame = new FrameConnector({ supportedChainIds: [1] })
+export const frame = new FrameConnector({ supportedChainIds: [4] })
 
 export const ConnectorNames = {
   Injected: 'MetaMask',

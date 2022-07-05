@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { injected } from './connectors'
+import { connectorsByName } from './connectors'
 
 export function getLibrary(provider) {
   return provider
@@ -8,16 +9,23 @@ export function getLibrary(provider) {
 
 export function useEagerConnect() {
   const { activate, active } = useWeb3React()
-
   const [tried, setTried] = useState(false)
 
   useEffect(() => {
+
     injected.isAuthorized().then((isAuthorized) => {
-      if (isAuthorized && localStorage?.getItem('isWalletConnected') === 'true') {
+
+      if (isAuthorized && localStorage?.getItem('isWalletConnected') === 'true' && !localStorage?.getItem('walletconnect')) {
         activate(injected, undefined, true).catch(() => {
           setTried(true)
         })
-      } else {
+      } 
+      else if (isAuthorized && localStorage?.getItem('walletconnect')) {
+        activate(connectorsByName['WalletConnect'], undefined, true).catch(() => {
+          setTried(true)
+        })
+      }
+      else{
         setTried(true)
       }
     })
@@ -28,6 +36,7 @@ export function useEagerConnect() {
   useEffect(() => {
     if (!tried && active) {
       setTried(true)
+      
     }
   }, [tried, active])
 
@@ -36,10 +45,12 @@ export function useEagerConnect() {
 
 export function useInactiveListener(suppress = false) {
   const { active, error, activate } = useWeb3React()
-
   useEffect(() => {
-    const { ethereum } = window
+    if(!active){
+      localStorage.setItem('isWalletConnected', 'false')
+    }
 
+    const { ethereum } = window
     if (ethereum && ethereum.on && !active && !error && !suppress) {
       const handleChainChanged = () => {
         // eat errors
@@ -47,7 +58,6 @@ export function useInactiveListener(suppress = false) {
           console.error('Failed to activate after chain changed', error)
         })
       }
-
       const handleAccountsChanged = (accounts) => {
         if (accounts.length > 0) {
           // eat errors
@@ -56,7 +66,6 @@ export function useInactiveListener(suppress = false) {
           })
         }
       }
-
       ethereum.on('chainChanged', handleChainChanged)
       ethereum.on('accountsChanged', handleAccountsChanged)
 

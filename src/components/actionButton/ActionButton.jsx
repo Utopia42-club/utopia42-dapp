@@ -21,8 +21,15 @@ const ActionButtonComponent = (props) => {
   }
 
   const handleConnectWallet = () => {
-    localStorage.setItem('isWalletConnected', 'true')
-    setOpen(true)
+    // localStorage.setItem('isWalletConnected', 'true')
+    try{
+      setOpen(true)
+    }
+
+    catch{
+      localStorage.setItem('isWalletConnected', 'false')
+      console.log('close wallet')
+    }
   }
 
   let contentBtn = ''

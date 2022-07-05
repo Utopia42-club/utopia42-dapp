@@ -10,17 +10,16 @@ const useMinterNft = (address, chainId, count, toAddress) => {
   const Swal = require('sweetalert2')
   const web3 = useWeb3();
   let status = 'Mint'
-  // const contractAddress = '0xAE2ade04cBd44D2c723252114f3545130D609a93'
-  const balance = useWalletBalance(address, chainId)
 
+  const balance = useWalletBalance(address, chainId)
+  
   const mint = async () => {
     const contract = getContract(mrc721MinterAbi, minterContractAddress, web3)
-    console.log(contract)
+
     if (!contract) {
       console.error('contract is null')
       return
     }
-    
     const price =  await contract.methods.price(count).call()
 
     if (Number(balance) < fromWei(price)){

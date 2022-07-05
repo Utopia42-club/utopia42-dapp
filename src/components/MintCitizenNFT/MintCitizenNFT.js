@@ -1,4 +1,3 @@
-
 import { GradientTitle } from '../text/Title';
 import { Input } from '../common/FormControlls';
 import { Box } from './Container';
@@ -14,7 +13,8 @@ import useUserRegisterNFTs from '../../hooks/useUserRegisterNFTs';
 import { useWeb3React } from '@web3-react/core';
 import BrightId from '../BrightIdApp/BrightIdApp';
 import useMaxPerUser from '../../hooks/useMaxPerUser';
-import { async } from 'muon';
+// import useGetPrice from '../../hooks/useGetPrice';
+
 
 const MintCitizenNFT = () => {
     const { account, chainId} = useWeb3React()
@@ -24,7 +24,7 @@ const MintCitizenNFT = () => {
     const [registeredNFT, setRegisteredNFT] = useState('0')
     const [registeredWallet, setRegisteredWallet] = useState(false)
     const brightIdData = useBrightIdApi()
-    const [max, setMax] = useState()
+    const [max, setMax] = useState('')
     const getRegisterNFTs = useUserRegisterNFTs(account)
     const [status, setStatus] = useState('Mint')
     const mint = useMinterNft(account, chainId, count, toAddress)
@@ -32,11 +32,8 @@ const MintCitizenNFT = () => {
     const maxPay = useMaxPerUser()
 
     const getMaxPay = async () => {
-        console.log(await maxPay())
         setMax(await maxPay())
     }
-
-
     
     const handleChange = async () => {
         console.log('handle change')
@@ -61,7 +58,9 @@ const MintCitizenNFT = () => {
     useEffect(() => {
         setChecked(false)
         setStatus('Mint')
-        getMaxPay()
+        if(account){
+            getMaxPay()
+        }
     }, [account])
 
     const handelCountChange = async  (value) => {
@@ -135,15 +134,15 @@ const MintCitizenNFT = () => {
                 })
               } 
 
-              try{
+            //   try{
                 setStatus('Minting ...')
                 await mint()
                 setStatus('Mint')
-              }
-              catch{
-                console.log('error')
-                setStatus('Mint')
-              }
+            //   }
+            //   catch{
+            //     console.log('error')
+            //     setStatus('Mint')
+            //   }
         }
     }
 
@@ -193,9 +192,6 @@ const MintCitizenNFT = () => {
 
 
 }
-
-
-
 
 
 export default MintCitizenNFT

@@ -71,7 +71,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : '390px')};
-width: 100%;
+width: 200px;
 min-height: ${({ height }) => (height ? height : '45px')};
 background: ${({ background }) => (background ? background : '#D7D7D7')};
 border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : '5px')};
@@ -122,38 +122,38 @@ const AvatarForm = (props) => {
   let keyList = [];
 
   const handleUpdate = () => {
-    if(telegram.trim()){
-      valuesList.push(telegram)
-      keyList.push('telegram')
-    }
-    if(instagram.trim()){
-      valuesList.push(instagram)
-      keyList.push('instagram')
-    }
-    if(discord.trim()){
-      valuesList.push(discord)
-      keyList.push('discord') 
-    }
-    if(facebook.trim()){
-      valuesList.push(facebook)
-      keyList.push('facebook')  
-    }
-    if(twitter.trim()){
-      valuesList.push(twitter)
-      keyList.push('twitter') 
-    }
-    if(bio.trim()){
-      valuesList.push(bio)
-      keyList.push('bio') 
-    }
-    if(name.trim()){
-      valuesList.push(name)
-      keyList.push('name') 
-    }
-    if(image.trim()){
-      valuesList.push(image)
-      keyList.push('image') 
-    }
+    // if(telegram.trim()){
+    //   valuesList.push(telegram)
+    //   keyList.push('telegram')
+    // }
+    // if(instagram.trim()){
+    //   valuesList.push(instagram)
+    //   keyList.push('instagram')
+    // }
+    // if(discord.trim()){
+    //   valuesList.push(discord)
+    //   keyList.push('discord') 
+    // }
+    // if(facebook.trim()){
+    //   valuesList.push(facebook)
+    //   keyList.push('facebook')  
+    // }
+    // if(twitter.trim()){
+    //   valuesList.push(twitter)
+    //   keyList.push('twitter') 
+    // }
+    // if(bio.trim()){
+    //   valuesList.push(bio)
+    //   keyList.push('bio') 
+    // }
+    // if(name.trim()){
+    //   valuesList.push(name)
+    //   keyList.push('name') 
+    // }
+    // if(image.trim()){
+    //   valuesList.push(image)
+    //   keyList.push('image') 
+    // }
 
     if(!account) {
       return Swal.fire({
@@ -182,7 +182,7 @@ const AvatarForm = (props) => {
   return (
     <>
       <div style={{marginTop:'50px'}}>
-        <div  style={{ marginTop:'20px', display:'flex',}}>
+        {/* <div  style={{ marginTop:'20px', display:'flex',}}>
           <div style={{ marginRight:'20px'}}>
             <label>Avatar Link</label>
             <div>
@@ -195,8 +195,8 @@ const AvatarForm = (props) => {
               <Input value={name ?? ''} onChange={(item) => {setName(item.target.value)}}/>
             </div>
           </div>
-        </div>
-        <div style={{display:'flex', marginTop:'20px'}}>
+        </div> */}
+        {/* <div style={{display:'flex', marginTop:'20px'}}>
           <div style={{ marginRight:'20px'}}>
             <label>Image</label>
             <div>
@@ -213,8 +213,8 @@ const AvatarForm = (props) => {
             </div>
             </div>
           </div>
-        </div>
-        <div style={{display:'flex', marginTop:'20px'}}>
+        </div> */}
+        {/* <div style={{display:'flex', marginTop:'20px'}}>
           <div style={{ marginRight:'20px'}}>
             <label>Telegram</label>
             <div>
@@ -227,8 +227,8 @@ const AvatarForm = (props) => {
               <Input value={facebook ?? ''} onChange={(item) => {setFacebook(item.target.value)}}/>
             </div>
           </div>
-        </div>
-        <div style={{display:'flex', marginTop:'20px'}}>
+        </div> */}
+        {/* <div style={{display:'flex', marginTop:'20px'}}>
           <div style={{ marginRight:'20px'}}>
             <label>Twitter</label>
             <div>
@@ -241,12 +241,12 @@ const AvatarForm = (props) => {
               <Input value={discord ?? ''} onChange={(item) => {setDiscord(item.target.value)}}/>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div style={{marginTop:'20px'}}>
+        {/* <div style={{marginTop:'20px'}}>
           <label>Bio</label>
           <Textarea value={bio ?? ''} onChange={(item) => {setBio(item.target.value)}} background="none"/>
-        </div>
+        </div> */}
 
         <Button 
           onClick={handleUpdate} 
