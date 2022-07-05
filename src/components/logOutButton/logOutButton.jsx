@@ -5,7 +5,7 @@ const LogOutButton = () => {
     const { account, deactivate } = useWeb3React()
 
     const handleLogOut = () => {
-        localStorage.setItem('isWalletConnected', 'false')
+        localStorage.setItem('walletConnectedFlag', 'false')
         try{
             deactivate()
         }

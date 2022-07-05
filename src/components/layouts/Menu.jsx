@@ -101,6 +101,10 @@ const Label = styled.span`
 const Menu = ({ selectedChain }) => {
   const { account, chainId } = useWeb3React()
 
+  if(account){
+    localStorage.setItem('walletConnectedFlag', 'true')
+  }
+
   const [open, setOpen] = React.useState(false)
 
   const handleConnect = async () => {
@@ -157,6 +161,7 @@ const Menu = ({ selectedChain }) => {
       <AppInfo>
         {account ? (
           validChains.includes(chainId) ? (
+            
             <>
             <LogOutButton />
             <Button padding="0 17px !important" active={account}>

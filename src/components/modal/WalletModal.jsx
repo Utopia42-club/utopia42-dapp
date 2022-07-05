@@ -5,8 +5,10 @@ import { Image } from '../common/FormControlls'
 import Modal from './Modal'
 import { connectorsByName } from '../../utils/connectors'
 import { ModalItem } from './Modal.style'
+import { useAddWalletType } from '../../state/walletType/hooks'
 
 const WalletModal = (props) => {
+  const addWalletType = useAddWalletType()
   const { open, hide } = props
 
   const web3React = useWeb3React()
@@ -18,12 +20,14 @@ const WalletModal = (props) => {
           <ModalItem
             key={name}
             onClick={() => {
-              localStorage.setItem('isWalletConnected', 'true')
+              localStorage.setItem('isWalletConnected', name)
+              // addWalletType(name)
               try{
                 activate(connectorsByName[name])
               }
               catch{
-                localStorage.setItem('isWalletConnected', 'false')
+                console.log('wallet modal error')
+                localStorage.setItem('walletConnectedFlag', 'false')
               }
               hide()
             }}
