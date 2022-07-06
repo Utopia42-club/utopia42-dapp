@@ -12,8 +12,8 @@ import CreateCollectionsTable from '../createCollectionsTable/createCollectionsT
 
 const VersesFactory = () => {
     const [admin, setAdmin] = useState('')
-    const createVerse = useCreateVerse()
-    const { account, chainId} = useWeb3React()
+    const { account, chainId }  = useWeb3React()
+    const createVerse = useCreateVerse(account, chainId)
     const [allCollections, setAllCollections] = useState()
     const getCollections = useGetCollections()
     const [buttonName, setButtonName] = useState('Create New Verse')
@@ -25,19 +25,32 @@ const VersesFactory = () => {
 
     useEffect(() => {
 
-        if(chainId == 4){
-            collections()
+        if(chainId == 80001){
+            // collections()
         }
 
     },[account])
 
     const handleCreateVerse = async () => {
+        if(chainId != 80001){
+            return Swal.fire({
+                text: 'Wrong Network',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
 
         if(account){
             setButtonName('Creating New Verse...')
-            await createVerse(account, admin)
+            try{
+                await createVerse(account, admin)
+            }
+            catch{
+                console.log('error')
+            }
             setButtonName('Create New Vers')
-            collections()
+            // collections()
         }
         else{
             return Swal.fire({
@@ -58,8 +71,7 @@ const VersesFactory = () => {
         }
     }
 
-
-    return(
+    return (
         <>
         <Container>
         <Wrapper maxWidth="100px" width="100%"></Wrapper>

@@ -10,9 +10,7 @@ const useMinterNft = (address, chainId, count, toAddress) => {
   const Swal = require('sweetalert2')
   const web3 = useWeb3();
   let status = 'Mint'
-
   const balance = useWalletBalance(address, chainId)
-  
   const mint = async () => {
     const contract = getContract(mrc721MinterAbi, minterContractAddress, web3)
 

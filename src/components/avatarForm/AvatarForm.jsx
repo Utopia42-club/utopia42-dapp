@@ -116,7 +116,7 @@ const AvatarForm = (props) => {
   const [bio, setBio] = useState('')
   const [image, setImage] = useState('')
   const  updateSetting = useUpdateSetting()
-  const { account } = useWeb3React()
+  const { account, chainId } = useWeb3React()
 
   let valuesList = [];
   let keyList = [];
@@ -158,6 +158,16 @@ const AvatarForm = (props) => {
     if(!account) {
       return Swal.fire({
           text:'Wallet is not connect',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 1500
+      })
+    }
+
+
+    if(chainId != 80001) {
+      return Swal.fire({
+          text:'Wrong Network',
           icon: 'error',
           showConfirmButton: false,
           timer: 1500

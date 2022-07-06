@@ -45,14 +45,14 @@ const POLLING_INTERVAL = 2000
 
 //only mainnet (walletconnect only one chain supports)
 export const walletconnect = new WalletConnectConnector({
-  rpc: { 4: RPC_URLS[4]},
+  rpc: { 80001: RPC_URLS[80001]},
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   pollingInterval: POLLING_INTERVAL,
 })
 
 export const walletlink = new WalletLinkConnector({
-  url: RPC_URLS[4],
+  url: RPC_URLS[80001],
   appName: 'app.deus.finance',
 })
 

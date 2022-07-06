@@ -1,6 +1,6 @@
 import { ChainMap } from './chainsMap'
 
-export const validChains = [4]
+export const validChains = [80001]
 
 let tokens = [
   {
@@ -30,15 +30,15 @@ let tokens = [
     logo: '/media/tokens/bt.svg',
     balance: 0,
   },
-  // {
-  //   chainId: 80001,
-  //   address: '0xC879CE4DB4AeD72E1ad243A2F9d775e60BED0D33',
-  //   name: 'BloodToken',
-  //   symbol: 'BT',
-  //   decimals: 18,
-  //   logo: '/media/tokens/bt.svg',
-  //   balance: 0,
-  // },
+  {
+    chainId: 80001,
+    address: '0xC879CE4DB4AeD72E1ad243A2F9d775e60BED0D33',
+    name: 'BloodToken',
+    symbol: 'BT',
+    decimals: 18,
+    logo: '/media/tokens/bt.svg',
+    balance: 0,
+  },
   // {
   //   chainId: 4002,
   //   address: '0xA093B771F127FbBdbd2e2E722Aa2ee01F361384c',

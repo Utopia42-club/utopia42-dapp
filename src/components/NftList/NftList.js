@@ -104,7 +104,7 @@ const NftList = () => {
     })
 
     useEffect(() => {
-      if(chainId == 4){
+      if(chainId == 80001){
         checkNFT()
         setTransferModal(false)
       }

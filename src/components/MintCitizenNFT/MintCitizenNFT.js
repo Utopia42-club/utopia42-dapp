@@ -45,7 +45,7 @@ const MintCitizenNFT = () => {
                 showConfirmButton: false,
             })
         }
-        if (chainId != 4){
+        if (chainId != 80001){
             return
         }
         console.log(checked)
@@ -58,7 +58,7 @@ const MintCitizenNFT = () => {
     useEffect(() => {
         setChecked(false)
         setStatus('Mint')
-        if(account){
+        if(account && chainId == 80001){
             getMaxPay()
         }
     }, [account])

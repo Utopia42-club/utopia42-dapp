@@ -42,7 +42,7 @@ export const rpcConfig = {
       symbol: 'ETH',
       decimals: 18,
     },
-    rpcUrls: [`https://mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_KEY}`],
+    rpcUrls: [`https://mainnet.infura.io/v3/5ff4241f89cc422a935937ac2d675e59`],
     blockExplorerUrls: ['https://etherscan.io/'],
   },
   [ChainMap.RINKEBY]: {
