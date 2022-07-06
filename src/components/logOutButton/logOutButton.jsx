@@ -6,6 +6,7 @@ const LogOutButton = () => {
 
     const handleLogOut = () => {
         localStorage.setItem('walletConnectedFlag', 'false')
+        localStorage.setItem('isWalletConnected', 'none')
         try{
             deactivate()
         }

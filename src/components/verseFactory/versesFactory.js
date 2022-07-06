@@ -62,23 +62,22 @@ const VersesFactory = () => {
     return(
         <>
         <Container>
-        <Wrapper maxWidth="300px" width="100%"></Wrapper>
+        <Wrapper maxWidth="100px" width="100%"></Wrapper>
         <Wrapper  width="100%">
         <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
         <Box background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 126.95%)">
         {allCollections && <CreateCollectionsTable data={allCollections}/>}
         {/* {!allCollections && <CreateCollectionsTable data={[]}/>} */}
             <div>
-                <label>Admin Wallet</label>
+                <GradientTitle fontSize="14px">Admin Wallet</GradientTitle>
                 <Input value={admin} onChange={(event) => {setAdmin(event.target.value)}}/>
+            <Button onClick={handleCreateVerse} maxWidth='100%' margin="25px 0 0" color="#300c4b" background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);">{buttonName}</Button>
             </div>
-            <Button onClick={handleCreateVerse} maxWidth='25%' margin="25px 0 0" color="#300c4b" background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);">{buttonName}</Button>
+
         </Box>
         </Flex>
         </Wrapper>
-        <Wrapper maxWidth="300px" width="100%">
-
-        </Wrapper>
+        <Wrapper maxWidth="100px" width="100%"></Wrapper>
         </Container>
         </>
     )

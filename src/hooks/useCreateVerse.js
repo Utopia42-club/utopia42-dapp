@@ -10,7 +10,6 @@ const useCreateVerse = () => {
   
   const createVerse = async (account ,admin) => {
     const contract = getContract(utopiaFactoryAbi, utopiaFactoryContractAddress, web3)
-
     if (!contract) {
       console.error('contract is null')
       return

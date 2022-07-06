@@ -21,7 +21,7 @@ export function useEagerConnect() {
           setTried(true)
         })
       } 
-      else if (isAuthorized && localStorage?.getItem('isWalletConnected') === 'WalletConnect' && localStorage?.getItem('walletConnectedFlag') == 'true') {
+      else if (localStorage?.getItem('isWalletConnected') === 'WalletConnect' && localStorage?.getItem('walletConnectedFlag') == 'true') {
         activate(connectorsByName['WalletConnect'], undefined, true).catch(() => {
           setTried(true)
         })

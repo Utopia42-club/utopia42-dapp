@@ -18,6 +18,11 @@ export const Td = styled.td`{
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+  @media screen and (max-width: 1670px) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
       
 }`
 
@@ -96,14 +101,14 @@ export const Container = styled.div`
   padding:20px;
   margin-left:3.8%;
   justify-content: space-between;
-  // @media screen and (max-width: 1200px) {
-  //   flex-direction: column;
-  //   padding: 20px 5px;
-  // }
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+    padding: 20px 5px;
+  }
 
-  // @media screen and (max-width: 780px) {
-  //   flex-direction: column;
-  //   padding: 0 20px;
-  //   padding-top: 50px;
-  // }
+  @media screen and (max-width: 780px) {
+    flex-direction: column;
+    padding: 0 20px;
+    padding-top: 50px;
+  }
 `

@@ -156,16 +156,16 @@ const MintCitizenNFT = () => {
       <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
       <GradientTitle margin="0 0 10px">Mint Citizen NFTs</GradientTitle>
       <Box background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 126.95%)">
-             {!checked ? 
-              <Input
-                type="text"
-                label = 'Count'
-                placeholder = {`Max count for user ${max}`}
-                value = {count ?? ''} 
-                onChange = {(event) => handelCountChange(event.target.value)} 
-            /> 
-            :''}
-            <div>
+        {!checked ? 
+        <Input
+            type="text"
+            label = 'Count'
+            placeholder = {`Max count for user ${max}`}
+            value = {count ?? ''} 
+            onChange = {(event) => handelCountChange(event.target.value)} 
+        /> 
+        :''}
+        <div>
             <div style={{display:"flex", marginBottom:"100px", marginTop:"20px"}}>
                 <label style={{marginRight:"10px"}}>
                     Mint and Register
@@ -176,10 +176,10 @@ const MintCitizenNFT = () => {
                     onChange={handleChange} 
                 />
             </div>
-        {status == "You'r wallet is not registered on brightID" ? <BrightId account={account}/> : ''}
+            {status == "You'r wallet is not registered on brightID" ? <BrightId account={account}/> : ''}
         </div>
         <ActionButton handleMint={handleMint} status={status} checked={checked}/>
-        </Box>
+      </Box>
 
       {/* <button onClick={() => deactivate()}>disconnect</button> */}
       </Flex>

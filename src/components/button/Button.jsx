@@ -19,6 +19,8 @@ export const Button = styled.button`
     outline: none;
   };
   color:${({color}) => (color ? color: "#000")}
+  }
+
 `
 export const ActionButton = styled(Button)`
   margin: 50px 0 0;

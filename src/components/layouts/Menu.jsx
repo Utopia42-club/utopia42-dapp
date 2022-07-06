@@ -102,6 +102,7 @@ const Menu = ({ selectedChain }) => {
   const { account, chainId } = useWeb3React()
 
   if(account){
+    console.log(account)
     localStorage.setItem('walletConnectedFlag', 'true')
   }
 

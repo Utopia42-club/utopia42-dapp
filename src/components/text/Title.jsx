@@ -14,7 +14,7 @@ export const Title = styled.div`
 
 export const GradientTitle = styled.div`
   font-weight: bold;
-  font-size: 25px;
+  font-size: ${({ fontSize }) => fontSize ? fontSize : '25px'};
   line-height: 30px;
   margin: ${({ margin }) => margin ? margin : ''};
   background: -webkit-linear-gradient(10deg, #5551ff 0%, #d08f85 100%);

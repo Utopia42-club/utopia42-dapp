@@ -15,7 +15,7 @@ const CreateCollectionsTable = (props) => {
             <Table id="table">
                 <Thead>
                 <Tr>
-                    <Th  style={{width:'10%'}}>Number</Th>
+                    <Th  style={{width:'12%', padding:'5px'}}>Number</Th>
                     <Th>Verses</Th>
                     <Th>Collections</Th>
                 </Tr>
@@ -24,7 +24,7 @@ const CreateCollectionsTable = (props) => {
                    {
                         data._verses.map((item, index) => (
                             <Tr key={item.id} id={item.id}>
-                                <Td style={{width:'10%'}}>{index+1}</Td>
+                                <Td style={{width:'12%',padding:'5px' }}>{index+1}</Td>
                                 <Td>{item}</Td>
                                 <Td>{data._collections[index]}</Td>
                             </Tr>
