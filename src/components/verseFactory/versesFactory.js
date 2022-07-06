@@ -49,7 +49,7 @@ const VersesFactory = () => {
             catch{
                 console.log('error')
             }
-            setButtonName('Create New Vers')
+            setButtonName('Create New Verse')
             // collections()
         }
         else{

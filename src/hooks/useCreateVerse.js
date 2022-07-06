@@ -13,7 +13,6 @@ const useCreateVerse = (account, chainId) => {
   const balance = useWalletBalance(account, chainId)
   const createVerse = async (account ,admin) => {
     toCheckSumAddress(account)
-    console.log('create verse')
     const contract = getContract(utopiaFactoryAbi, utopiaFactoryContractAddress, web3)
     if (!contract) {
       console.error('contract is null')
