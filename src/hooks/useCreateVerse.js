@@ -6,7 +6,7 @@ import { utopiaFactoryContractAddress } from '../ContractsAddresses'
 import useWalletBalance from './useWalletBalance'
 import { fromWei } from '../utils/wei'
 import Swal from 'sweetalert2'
-import {toCheckSumAddress} from '../utils/toCheckSumAddress'
+import { toCheckSumAddress } from '../utils/toCheckSumAddress'
 const useCreateVerse = (account, chainId) => {
   const web3 = useWeb3();
   let status = 'Created new verse'

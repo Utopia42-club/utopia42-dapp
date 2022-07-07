@@ -2,6 +2,7 @@ import { utopiaFactoryAbi } from '../ABI/ABI'
 import { getContract } from '../utils/contractHelpers'
 import useWeb3 from './useWeb3'
 import { utopiaFactoryContractAddress } from '../ContractsAddresses'
+import axios from 'axios'
 
 const useGetCollections = () => {
     const web3 = useWeb3();

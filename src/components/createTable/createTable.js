@@ -3,7 +3,7 @@ import { GradientTitle } from '../text/Title';
 import {Td, Th, Table, Thead, Tr, Tbody, Button, Wrapper, Container}  from './table.style'
 
 const CreateTable = (props) => {
-    const {data, registeredWallet, registeredNFT, setBrightIdModal, handleSelectToken, handleRegister} = props
+    const {data, registeredWallet, registeredNFT, setBrightIdModal, handleSelectToken, handleRegister, setTransferModal} = props
     let nftListConfig = []
     let res = {}
     const [color, setColor] = useState('#300c4b')
@@ -12,6 +12,7 @@ const CreateTable = (props) => {
         setColor('#300c4b')
         handleSelectToken(item)
         setBrightIdModal(false)
+        setTransferModal(true)
     }
 
     const prepareToRegister = (item) => {
@@ -31,7 +32,7 @@ const CreateTable = (props) => {
         }
         else if(registeredWallet && registeredNFT == '0'){
             res.action = <div>
-                            <Button color={color} onClick={() => {prepareToRegister(item)}}>Register NFT</Button>
+                            <Button color={color} onClick={() => prepareToRegister(item)}>Register NFT</Button>
                             <Button color={color}  onClick={() => handleTransfer(item)}>Transfer</Button>
                         </div>       
         }

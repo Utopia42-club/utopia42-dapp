@@ -128,7 +128,7 @@ const NftList = () => {
         // }
         // else {
           setSelectedNFT(item)
-          setTransferModal(true)
+          // setTransferModal(true)
         // }
     }
 
@@ -172,7 +172,9 @@ const NftList = () => {
         registeredNFT={registeredNFT} 
         setBrightIdModal={setBrightIdModal} 
         handleSelectToken={handleSelectToken} 
-        handleRegister={handleRegister}/>
+        handleRegister={handleRegister}
+        setTransferModal={setTransferModal}
+        />
         </>
     }
     {

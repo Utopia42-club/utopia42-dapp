@@ -61,7 +61,7 @@ export const fortmatic = new FortmaticConnector({
   chainId: 1,
 })
 
-export const frame = new FrameConnector({ supportedChainIds: [4] })
+export const frame = new FrameConnector({ supportedChainIds: [1] })
 
 export const ConnectorNames = {
   Injected: 'MetaMask',
