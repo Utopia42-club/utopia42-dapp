@@ -50,7 +50,7 @@ const VersesFactory = () => {
                 console.log('error')
             }
             setButtonName('Create New Verse')
-            // collections()
+            collections()
         }
         else{
             return Swal.fire({

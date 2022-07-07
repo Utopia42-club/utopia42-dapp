@@ -5,18 +5,20 @@ import { utopiaFactoryContractAddress } from '../ContractsAddresses'
 import axios from 'axios'
 
 const useGetCollections = () => {
-    const web3 = useWeb3();
-    const graphUrl = 'https://thegraph.com/hosted-service/subgraph/jafari-mi/utopia42-mumbai'
-    const getCollections = async (account) => {
 
+    const web3 = useWeb3();
+    const graphUrl = 'https://api.thegraph.com/subgraphs/name/jafari-mi/utopia42-mumbai'
+    const getCollections = async (account) => {
+        let factories;
         let totalData = await axios.post(
             graphUrl,
             {
+
               query:
               `{
                 factories (
                   where: {
-                    owner: "${account}"
+                    owner: "${account.toLowerCase()}"
                   }
                 
                   ) {
@@ -27,25 +29,31 @@ const useGetCollections = () => {
             }
               `
             }
-          )
+          ).then((res) => {
+            factories  = res.data.data.factories
+        })
+        
+        return factories
 
 
-          console.log(totalData)
+        //   console.log(totalData)
 
 
 
         // const contract = getContract(utopiaFactoryAbi, utopiaFactoryContractAddress, web3)
 
-        if (!contract) {
-            console.error('contract is null')
-            return
-        }
+        // if (!contract) {
+        //     console.error('contract is null')
+        //     return
+        // }
 
-        const collections =  await contract.methods.userInfo(account).call()
+        // const collections =  await contract.methods.userInfo(account).call()
 
-        return collections
+        // return collections
 
     }
+
+
 
     return getCollections
 }

@@ -4,7 +4,13 @@ import {Td, Th, Table, Thead, Tr, Tbody, Button, Wrapper, Container}  from './ta
 
 const CreateCollectionsTable = (props) => {
     const {data} = props
-    console.log(data._collections)
+    console.log(data)
+    let verses = []
+    let collections = []
+    data.map((item) => {
+        verses.push(item.utopiaAddress)
+        collections.push(item.collectionAddress)
+    })
     return (
         <>
             <Container>
@@ -22,11 +28,11 @@ const CreateCollectionsTable = (props) => {
                 </Thead>
                 <Tbody>
                    {
-                        data._verses.map((item, index) => (
-                            <Tr key={item.id} id={item.id}>
+                        verses.map((item, index) => (
+                            <Tr key={index} id={index}>
                                 <Td style={{width:'12%',padding:'5px' }}>{index+1}</Td>
                                 <Td>{item}</Td>
-                                <Td>{data._collections[index]}</Td>
+                                <Td>{collections[index]}</Td>
                             </Tr>
                         ))
                     } 
