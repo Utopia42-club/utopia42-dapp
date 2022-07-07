@@ -38,13 +38,13 @@ const NftList = () => {
     const isRegisteredWallet = async () => {
         data = await brightIdData()
         if (data.error) {
-            console.log(data.error)
+            // console.log(data.error)
             setRegisteredWallet(false)
         }
         else{
             setRegisteredWallet(true)
         }
-        console.log(data)
+        // console.log(data)
     }
 
     const isRegisteredNFT = async () => {
@@ -118,7 +118,7 @@ const NftList = () => {
     
 
     const handleSelectToken = (item) => {
-      console.log(item)
+      // console.log(item)
         // if(registeredNFT > 0){
         //   return Swal.fire({
         //     icon: 'error',
@@ -160,7 +160,7 @@ const NftList = () => {
             timer:3500,
             showConfirmButton: false,
           })
-          console.log(data.error)
+          // console.log(data.error)
         }
     }
 

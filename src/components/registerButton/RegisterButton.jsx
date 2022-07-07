@@ -13,7 +13,7 @@ import { NameChainMap } from '../../constants/chainsMap'
 const RegisterButton = (props) => {
   const { handleRegister, status } = props
   const [open, setOpen] = useState(false)
-  console.log(status)
+  // console.log(status)
   const { account, chainId } = useWeb3React()
   const bridge = useBridge()
   const wrongNetwork = !validChains.includes(chainId)

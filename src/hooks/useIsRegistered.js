@@ -10,14 +10,14 @@ const useMinterNft = (address, chainId, count, toAddress) => {
 
   const mint = async () => {
     const contract = getContract(mrc721MinterAbi, contractAddress, web3)
-    console.log(contract)
+    // console.log(contract)
     if (!contract) {
       console.error('contract is null')
       return
     }
     
     const price =  await contract.methods.price(count).call()
-    console.log(price)
+    // console.log(price)
       return sendTransaction(
         contract,
         'mint',

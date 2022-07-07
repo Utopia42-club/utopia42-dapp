@@ -7,7 +7,7 @@ const useWalletBalance = (account, chainId) => {
   const web3 = getWeb3NoAccount(chainId)
   useEffect(() => {
     const fetchBalance = async () => {
-      console.log('fetch balance')
+      // console.log('fetch balance')
      try {
 
       let walletBalance = null

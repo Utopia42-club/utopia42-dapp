@@ -36,7 +36,7 @@ const MintCitizenNFT = () => {
     }
     
     const handleChange = async () => {
-        console.log('handle change')
+        // console.log('handle change')
         if (!account) {
             return Swal.fire({
                 text: 'Wallet is not connect',
@@ -48,7 +48,7 @@ const MintCitizenNFT = () => {
         if (chainId != 80001){
             return
         }
-        console.log(checked)
+        // console.log(checked)
         if(checked){
             setStatus('Mint')
         }
@@ -73,7 +73,7 @@ const MintCitizenNFT = () => {
     const isRegisteredWallet = async () => {
         let data = await brightIdData()
         if (data.error) {
-            console.log(data.error)
+            // console.log(data.error)
             setRegisteredWallet(false)
             setStatus("You'r wallet is not registered on brightID")
         }
@@ -93,7 +93,7 @@ const MintCitizenNFT = () => {
         if(checked === true){
             isRegisteredWallet()
             isRegisteredNFT()
-            console.log(registeredWallet, registeredNFT, status)
+            // console.log(registeredWallet, registeredNFT, status)
             if (registeredNFT == '0' && registeredWallet == true) {
                 setStatus('Mint and register')
             }
@@ -113,7 +113,7 @@ const MintCitizenNFT = () => {
                 timer: 3500,
               })
             }
-            console.log(data.error)
+            // console.log(data.error)
             try{
               setStatus('Mint and register ...')
               await mintAndSet(data)

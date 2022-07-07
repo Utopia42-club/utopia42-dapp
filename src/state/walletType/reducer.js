@@ -11,7 +11,7 @@ const initialState = {
 export default createReducer(initialState, (builder) => {
   // add  wallet type
   builder.addCase(ADD_WALLET_TYPE, (state, action) => {
-    console.log(action.payload)
+    // console.log(action.payload)
     return { ...state, type_: action.payload }
   })
 

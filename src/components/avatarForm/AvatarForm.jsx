@@ -174,7 +174,7 @@ const AvatarForm = (props) => {
       })
     }
     if(avatarLink){
-      console.log(valuesList)
+      // console.log(valuesList)
       valuesList.push(avatarLink)
       keyList.push('avatar')
     }

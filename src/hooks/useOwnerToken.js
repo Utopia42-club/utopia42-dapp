@@ -30,7 +30,7 @@ const useOwnerToken = (account) => {
                 // if (ethereum) {
                 const NFTContract = getContract(unbcNFTAbi, UNBCNFTContractAddress, web3)
                 let res =  await NFTContract.methods.ownerOf(id).call()
-                console.log(account, res, id)
+                // console.log(account, res, id)
                 if (account == res) {
                  return sendTransaction(
                         status,

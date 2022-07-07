@@ -4,7 +4,6 @@ import {Td, Th, Table, Thead, Tr, Tbody, Button, Wrapper, Container}  from './ta
 
 const CreateCollectionsTable = (props) => {
     const {data} = props
-    console.log(data)
     let verses = []
     let collections = []
     data.map((item) => {

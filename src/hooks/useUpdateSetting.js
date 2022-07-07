@@ -12,8 +12,8 @@ const useUpdateSetting = () => {
   let status = 'Update Settings'
   const updateSetting = async (address, keys, values) => {
     const contract = getContract(settingAbi, settingContractAddress, web3)
-    console.log(contract)
-    console.log(address, keys, values)
+    // console.log(contract)
+    // console.log(address, keys, values)
     // const tokenId = await contract.methods.userToken(address).call()
     let res = await hasToken(address)
     if(!res.res){

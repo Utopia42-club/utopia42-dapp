@@ -9,9 +9,9 @@ const useUserHasAccessToken = () => {
         if (account != undefined){
             const contract = getContract(unbcNFTAbi, UNBCNFTContractAddress, web3)
             const tokenId = await contract.methods.uniqueOwner(account).call()
-            console.log(tokenId)
+            // console.log(tokenId)
             const res =  await contract.methods.userHasAccessToken(account, tokenId).call();
-            console.log(res)
+            // console.log(res)
             return {res: res, tokenId:tokenId}
         }
     }
