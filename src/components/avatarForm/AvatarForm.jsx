@@ -192,20 +192,20 @@ const AvatarForm = (props) => {
   return (
     <>
       <div style={{marginTop:'50px'}}>
-        {/* <div  style={{ marginTop:'20px', display:'flex',}}>
+        <div  style={{ marginTop:'20px', display:'flex',}}>
           <div style={{ marginRight:'20px'}}>
             <label>Avatar Link</label>
             <div>
               <Input value={avatarLink} readOnly/>
             </div>
           </div>
-          <div>
+          {/* <div>
             <label style={{ marginRight:'20px'}}>Name</label>
             <div>
               <Input value={name ?? ''} onChange={(item) => {setName(item.target.value)}}/>
             </div>
-          </div>
-        </div> */}
+          </div> */}
+        </div>
         {/* <div style={{display:'flex', marginTop:'20px'}}>
           <div style={{ marginRight:'20px'}}>
             <label>Image</label>

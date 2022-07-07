@@ -14,9 +14,9 @@ const useUpdateSetting = () => {
     const contract = getContract(settingAbi, settingContractAddress, web3)
     console.log(contract)
     console.log(address, keys, values)
-    const tokenId = await contract.methods.userToken(address).call()
-    let res = await hasToken(address, tokenId)
-    if(!res){
+    // const tokenId = await contract.methods.userToken(address).call()
+    let res = await hasToken(address)
+    if(!res.res){
       return Swal.fire({
         text: "Not Registered NFT. You can't update avatar",
         icon: 'error',
@@ -34,7 +34,7 @@ const useUpdateSetting = () => {
       status,
       contract,
       'updateSettings',
-      [tokenId, keys, values],
+      [res.tokenId, keys, values],
       address,
     )
   }

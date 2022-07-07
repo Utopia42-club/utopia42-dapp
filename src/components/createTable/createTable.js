@@ -25,6 +25,8 @@ const CreateTable = (props) => {
     }
 
     data.map((item) => {
+        if(Number(item) != Number(registeredNFT)){
+        console.log(registeredNFT)
         res.id = item
         res.registered = 'No'
         if(registeredWallet && registeredNFT != '0'){
@@ -43,6 +45,7 @@ const CreateTable = (props) => {
                         </div>
         }
         nftListConfig.push({...res})
+    }
     })
     
     if (registeredNFT !=  '0'){

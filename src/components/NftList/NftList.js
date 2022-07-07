@@ -147,6 +147,7 @@ const NftList = () => {
         if(!data.error){
           try{
             await isOwner(data, id)
+            updateData()
           }
           catch{
             console.log('error')
