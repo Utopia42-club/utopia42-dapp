@@ -28,8 +28,11 @@ const VersesFactory = () => {
         if(chainId == 80001){
             collections()
         }
+        else{
+            setAllCollections([])
+        }
 
-    },[account])
+    },[account, chainId])
 
     const handleCreateVerse = async () => {
         if(chainId != 80001){
@@ -79,7 +82,7 @@ const VersesFactory = () => {
         <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
         <Box background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 126.95%)">
         {allCollections && <CreateCollectionsTable data={allCollections}/>}
-        {/* {!allCollections && <CreateCollectionsTable data={[]}/>} */}
+        {!allCollections && <CreateCollectionsTable data={[]}/>}
             <div>
                 <GradientTitle fontSize="14px">Admin Wallet</GradientTitle>
                 <Input value={admin} onChange={(event) => {setAdmin(event.target.value)}}/>
