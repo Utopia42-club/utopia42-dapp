@@ -5,11 +5,12 @@ import { sendTransaction } from '../utils/sendTx'
 import useWeb3 from './useWeb3'
 import { UNBCNFTContractAddress } from '../ContractsAddresses';
 
-const useOwnerToken = (id, account) => {
+const useOwnerToken = (account) => {
+    // console.log(id)
     const web3 = useWeb3()
     // const contractAddress = '0xb800B8AC21a451444A5E9d21ce0ac89Da219F3D4';
     let status = 'Register'
-    const ownerOfToken = async (data) => {
+    const ownerOfToken = async (data, id) => {
         if (!id) {
             return Swal.fire({
                 text: 'Invalid NFT Id',

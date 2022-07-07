@@ -16,8 +16,8 @@ const CreateTable = (props) => {
     }
 
     const prepareToRegister = (item) => {
-        handleSelectToken(item)
-        handleRegister()
+        // handleSelectToken(item)
+        handleRegister(item)
     }
 
     const handleBrightID = () => {

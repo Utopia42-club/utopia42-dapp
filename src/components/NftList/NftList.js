@@ -26,7 +26,7 @@ const NftList = () => {
     const brightIdData = useBrightIdApi()
     const getRegisterNFTs = useUserRegisterNFTs(account)
     // const [status, setStatus] = useState()
-    const isOwner = useOwnerToken(selectedNFT, account)
+    const isOwner = useOwnerToken(account)
     const getNFTs = useUserNFTs(account)
     const [toAddress, setToAddress] = useState()
     const safeTransfer = useSafeTransfer()
@@ -44,6 +44,7 @@ const NftList = () => {
         else{
             setRegisteredWallet(true)
         }
+        console.log(data)
     }
 
     const isRegisteredNFT = async () => {
@@ -132,19 +133,20 @@ const NftList = () => {
         // }
     }
 
-    const handleRegister = async () => {
-        console.log(selectedNFT)
-        if(!selectedNFT){
-          return Swal.fire({
-            text: "Please select NFT ID",
-            icon: 'error',
-            timer:1500,
-            showConfirmButton: false,
-          })
-        }
+    const handleRegister = async (id) => {
+      data = await brightIdData()
+      // console.log(data)
+        // if(!selectedNFT){
+        //   return Swal.fire({
+        //     text: "Please select NFT ID",
+        //     icon: 'error',
+        //     timer:1500,
+        //     showConfirmButton: false,
+        //   })
+        // }
         if(!data.error){
           try{
-            await isOwner(data)
+            await isOwner(data, id)
           }
           catch{
             console.log('error')
