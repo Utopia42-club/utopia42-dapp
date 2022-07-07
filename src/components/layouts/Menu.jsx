@@ -15,6 +15,7 @@ import UtopiaLogo from '../utopiaLogo/utopiaLogo'
 import PageMenu from '../pageMenu';
 import MuonToolbox from "../muonToolbix/Muontoolbox";
 import LogOutButton from '../logOutButton/logOutButton'
+import { UnsupportedChainIdError } from '@web3-react/core'
 
 const WalletModal = dynamic(() => import('../modal/WalletModal'))
 
@@ -99,7 +100,7 @@ const Label = styled.span`
 `
 
 const Menu = ({ selectedChain }) => {
-  const { account, chainId } = useWeb3React()
+  const { account, chainId, error } = useWeb3React()
 
   if(account){
     console.log(account)
@@ -184,10 +185,21 @@ const Menu = ({ selectedChain }) => {
               </Type.SM>
             </Button>
           )
+        ) : error instanceof UnsupportedChainIdError ? (
+          <Button
+            padding="0 17px !important"
+            active={account}
+            className="hide-on-mobile"
+            onClick={() => addRPC(validChainId)}
+          >
+            <Type.SM fontSize="15px" color="#313144">
+              Switch to {NameChainMap[validChainId]}
+            </Type.SM>
+          </Button>
         ) : (
           <Button padding="0 17px !important" onClick={handleConnect} active={account}>
             <Status active={account} />
-            <Type.SM fontSize="15px" color="#313144" cursor="pointer">
+            <Type.SM fontSize="15px" color="#313144" cursor="pointer" fontSizeXS="13px">
               Connect Wallet
             </Type.SM>
           </Button>
@@ -201,7 +213,7 @@ const Menu = ({ selectedChain }) => {
             </Type.SM>
           </Button>
         )}
-        {!validChains.includes(chainId) && account && (
+        {((!validChains.includes(chainId) && account) || error instanceof UnsupportedChainIdError) &&(
           <Button border="1px solid #DC0000">
             <Status color="#DC0000" />
             <Type.MD color="#313144" padding="0 0 0 3px">
@@ -212,6 +224,7 @@ const Menu = ({ selectedChain }) => {
       </AppInfo>
       <WalletModal open={open} hide={() => setOpen(!open)} />
     </>
+    
   )
 }
 
