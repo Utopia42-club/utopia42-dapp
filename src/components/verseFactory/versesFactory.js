@@ -26,7 +26,7 @@ const VersesFactory = () => {
     useEffect(() => {
 
         if(chainId == 80001){
-            // collections()
+            collections()
         }
 
     },[account])

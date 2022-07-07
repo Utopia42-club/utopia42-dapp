@@ -1,16 +1,18 @@
-import { mrc721MinterAbi } from '../ABI/ABI'
-import { getContract } from '../utils/contractHelpers'
-import { sendTransaction } from '../utils/sendTx'
-import useWeb3 from './useWeb3'
-import useWalletBalance from './useWalletBalance'
-import { fromWei } from '../utils/wei'
-import { minterContractAddress } from '../ContractsAddresses'
+import { mrc721MinterAbi } from '../ABI/ABI';
+import { getContract } from '../utils/contractHelpers';
+import { sendTransaction } from '../utils/sendTx';
+import useWeb3 from './useWeb3';
+import useWalletBalance from './useWalletBalance';
+import { fromWei } from '../utils/wei';
+import { minterContractAddress } from '../ContractsAddresses';
 
 const useMinterNft = (address, chainId, count, toAddress) => {
+
   const Swal = require('sweetalert2')
   const web3 = useWeb3();
   let status = 'Mint'
   const balance = useWalletBalance(address, chainId)
+  console.log(balance)
   const mint = async () => {
     const contract = getContract(mrc721MinterAbi, minterContractAddress, web3)
 
@@ -18,7 +20,9 @@ const useMinterNft = (address, chainId, count, toAddress) => {
       console.error('contract is null')
       return
     }
+
     const price =  await contract.methods.price(count).call()
+    console.log(price)
 
     if (Number(balance) < fromWei(price)){
       return Swal.fire({

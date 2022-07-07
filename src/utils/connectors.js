@@ -2,6 +2,7 @@ import { InjectedConnector } from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { FrameConnector } from '@web3-react/frame-connector'
 import { WalletLinkConnector } from '@web3-react/walletlink-connector'
+import { validChains } from '../constants/settings'
 import { FortmaticConnector } from '@web3-react/fortmatic-connector'
 
 const supportedChainIds = [
@@ -18,7 +19,7 @@ const supportedChainIds = [
   137, // Matic
   80001, // Maticc Mumbai
 ]
-const INFURA_KEY = '5ff4241f89cc422a935937ac2d675e59'
+const INFURA_KEY = '3ae8f9dda66c42ec860b2e40a7322cae'
 // const FORTMATIC_KEY = process.env.NEXT_PUBLIC_FORTMATIC_KEY
 
 const RPC_URLS = {
@@ -46,7 +47,8 @@ const POLLING_INTERVAL = 2000
 //only mainnet (walletconnect only one chain supports)
 export const walletconnect = new WalletConnectConnector({
   rpc: { 80001: RPC_URLS[80001]},
-  bridge: 'https://bridge.walletconnect.org',
+  // bridge: 'https://bridge.walletconnect.org',
+  supportedChainIds: validChains[80001],
   qrcode: true,
   pollingInterval: POLLING_INTERVAL,
 })

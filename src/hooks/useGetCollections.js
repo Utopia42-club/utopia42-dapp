@@ -6,10 +6,35 @@ import axios from 'axios'
 
 const useGetCollections = () => {
     const web3 = useWeb3();
-
+    const graphUrl = 'https://thegraph.com/hosted-service/subgraph/jafari-mi/utopia42-mumbai'
     const getCollections = async (account) => {
 
-        const contract = getContract(utopiaFactoryAbi, utopiaFactoryContractAddress, web3)
+        let totalData = await axios.post(
+            graphUrl,
+            {
+              query:
+              `{
+                factories (
+                  where: {
+                    owner: "${account}"
+                  }
+                
+                  ) {
+                  id
+                    collectionAddress
+                    utopiaAddress
+                  }
+            }
+              `
+            }
+          )
+
+
+          console.log(totalData)
+
+
+
+        // const contract = getContract(utopiaFactoryAbi, utopiaFactoryContractAddress, web3)
 
         if (!contract) {
             console.error('contract is null')
