@@ -23,7 +23,7 @@ const useUserHasAccessToken = () => {
                 }
             }
             else{
-                let lastContextId = data.contextIds[data.contextIds.length-1]
+                let lastContextId = data.contextIds[0]
                 console.log(lastContextId)
                 const tokenId = await contract.methods.uniqueOwner(account).call()
                 console.log(tokenId)
