@@ -28,6 +28,7 @@ const MintCitizenNFT = () => {
     const [max, setMax] = useState('')
     const getRegisterNFTs = useUserRegisterNFTs(account)
     const [status, setStatus] = useState('Mint')
+    const [isSetOnBrightID, setIsSetOnBrightId] = useState(false)
     const mint = useMinterNft(account, chainId, count, toAddress)
     const mintAndSet = useMintNFTsetBrightId(toAddress)
     const maxPay = useMaxPerUser()
@@ -53,6 +54,7 @@ const MintCitizenNFT = () => {
         // console.log(checked)
         if(checked){
             setStatus('Mint')
+            setIsSetOnBrightId(false)
         }
         setChecked(!checked);
     };
@@ -77,6 +79,7 @@ const MintCitizenNFT = () => {
         if (data.error) {
           setRegisteredNFT(await getRegisterNFTs())
           setRegisteredWallet(false)
+          setIsSetOnBrightId(true)
             
         }
         else{
@@ -100,6 +103,7 @@ const MintCitizenNFT = () => {
             isRegisteredWallet()
             // isRegisteredNFT()
             // console.log(registeredWallet, registeredNFT, status)
+            console.log(registeredNFT, registeredWallet)
             if (registeredNFT == '0' && registeredWallet == true) {
                 setStatus('Mint and register')
             }
@@ -107,7 +111,12 @@ const MintCitizenNFT = () => {
                 setStatus('Registered before')
             }
             else if(registeredNFT != '0' && registeredWallet == false){
+
                 setStatus('Registered before')
+            }
+            else if(registeredNFT == '0' && registeredWallet == false){
+
+                setStatus('Mint and register')
             }
         }
     }, [checked,registeredWallet,registeredNFT])
@@ -214,7 +223,7 @@ const MintCitizenNFT = () => {
                     onChange={handleChange} 
                 />
             </div>
-            {status == "You'r wallet is not registered on brightID" ? <BrightId account={account}/> : ''}
+            {isSetOnBrightID  ? <BrightId account={account}/> : ''}
         </div>
         <ActionButton handleMint={handleMint} handleMintAndSet={handleMintAndSet} status={status} checked={checked}/>
       </Box>
