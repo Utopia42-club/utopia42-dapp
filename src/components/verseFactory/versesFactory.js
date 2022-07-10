@@ -85,7 +85,7 @@ const VersesFactory = () => {
         {!allCollections && <CreateCollectionsTable data={[]}/>}
             <div>
                 <GradientTitle fontSize="14px">Admin Wallet</GradientTitle>
-                <Input value={admin} onChange={(event) => {setAdmin(event.target.value)}}/>
+                <Input width='520px' value={admin} onChange={(event) => {setAdmin(event.target.value)}}/>
             <Button onClick={handleCreateVerse} maxWidth='100%' margin="25px 0 0" color="#300c4b" background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);">{buttonName}</Button>
             </div>
 
