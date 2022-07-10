@@ -32,7 +32,7 @@ const MintCitizenNFT = () => {
     const mintAndSet = useMintNFTsetBrightId(toAddress)
     const maxPay = useMaxPerUser()
     const mintAndRegisterNotID = useMintAndRegisterNotId(account, chainId)
-
+    let data;
     const getMaxPay = async () => {
         setMax(await maxPay())
     }
@@ -73,31 +73,41 @@ const MintCitizenNFT = () => {
     }
 
     const isRegisteredWallet = async () => {
-        let data = await brightIdData()
+        data = await brightIdData()
         if (data.error) {
-            // console.log(data.error)
-            setRegisteredWallet(false)
-            setStatus("You'r wallet is not registered on brightID")
+          setRegisteredNFT(await getRegisterNFTs())
+          setRegisteredWallet(false)
+            
         }
         else{
+            let lastContextId = data.contextIds[data.contextIds.length-1]
             setRegisteredWallet(true)
+            setRegisteredNFT(await getRegisterNFTs(lastContextId))
         }
+        // console.log(data)
     }
 
-    const isRegisteredNFT = async () => {
-        setRegisteredNFT(await getRegisterNFTs())
-        if (registeredNFT != '0'){
-            setStatus("Registered before")
-        }
-    }
+
+    // const isRegisteredNFT = async () => {
+    //     setRegisteredNFT(await getRegisterNFTs())
+    //     if (registeredNFT != '0'){
+    //         setStatus("Registered before")
+    //     }
+    // }
 
     useEffect(() => {
         if(checked === true){
             isRegisteredWallet()
-            isRegisteredNFT()
+            // isRegisteredNFT()
             // console.log(registeredWallet, registeredNFT, status)
             if (registeredNFT == '0' && registeredWallet == true) {
                 setStatus('Mint and register')
+            }
+            else if(registeredNFT != '0' && registeredWallet == true){
+                setStatus('Registered before')
+            }
+            else if(registeredNFT != '0' && registeredWallet == false){
+                setStatus('Registered before')
             }
         }
     }, [checked,registeredWallet,registeredNFT])
