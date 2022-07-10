@@ -10,8 +10,11 @@ import { toCheckSumAddress } from '../utils/toCheckSumAddress'
 const useCreateVerse = (account, chainId) => {
   const web3 = useWeb3();
   let status = 'Created new verse'
-  const balance = useWalletBalance(account, chainId)
+  const fetchBalance = useWalletBalance(account, chainId)
+
   const createVerse = async (account ,admin) => {
+    const balance = await fetchBalance()
+    console.log(balance)
     toCheckSumAddress(admin)
     const contract = getContract(utopiaFactoryAbi, utopiaFactoryContractAddress, web3)
     if (!contract) {

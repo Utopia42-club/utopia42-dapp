@@ -34,19 +34,19 @@ const CreateTable = (props) => {
         }
         else if(registeredWallet && registeredNFT == '0'){
             res.action = <div>
-                            <Button color={color} onClick={() => prepareToRegister(item)}>Register NFT</Button>
+                            <Button color={color} onClick={() => prepareToRegister(item)}>Register NFT with BrightID</Button>
                             <Button color={color}  onClick={() => handleTransfer(item)}>Transfer</Button>
                         </div>       
         }
         else if(!registeredWallet && registeredNFT != '0'){
             res.action = <div>
-                             <Button color={color} onClick={handleBrightID}>Connect to BrightID</Button>
+                             {/* <Button color={color} onClick={handleBrightID}>Connect to BrightID</Button> */}
                             <Button color={color}  onClick={() => handleTransfer(item)}>Transfer</Button>
                         </div>       
         }
         else{
             res.action = <div>
-                            <Button color={color} onClick={handleBrightID}>Connect to BrightID</Button>
+                            {/* <Button color={color} onClick={handleBrightID}>Connect to BrightID</Button> */}
                             <Button color={color} onClick={() => prepareToRegister(item)}>Register NFT</Button>
                             <Button color={color} onClick={() => handleTransfer(item)}>Transfer</Button>
                         </div>

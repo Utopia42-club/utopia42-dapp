@@ -49,9 +49,7 @@ const NftList = () => {
             setRegisteredWallet(true)
             setRegisteredNFT(await getRegisterNFTs(lastContextId))
         }
-        // console.log(data)
     }
-
  
     const checkNFT = async () => {
         setSelectedNFT(null)
