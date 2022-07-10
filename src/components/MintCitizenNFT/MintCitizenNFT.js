@@ -76,6 +76,7 @@ const MintCitizenNFT = () => {
 
     const isRegisteredWallet = async () => {
         data = await brightIdData()
+        console.log(data)
         if (data.error) {
           setRegisteredNFT(await getRegisterNFTs())
           setRegisteredWallet(false)
@@ -84,6 +85,7 @@ const MintCitizenNFT = () => {
         }
         else{
             let lastContextId = data.contextIds[data.contextIds.length-1]
+            console.log(lastContextId)
             setRegisteredWallet(true)
             setRegisteredNFT(await getRegisterNFTs(lastContextId))
         }
