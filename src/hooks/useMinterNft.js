@@ -12,6 +12,7 @@ const useMinterNft = (address, chainId, count, toAddress) => {
   const web3 = useWeb3();
   let status = 'Mint'
   const balance = useWalletBalance(address, chainId)
+  const fetchBalance = balance()
   // console.log(balance)
   const mint = async () => {
     const contract = getContract(mrc721MinterAbi, minterContractAddress, web3)
@@ -24,7 +25,7 @@ const useMinterNft = (address, chainId, count, toAddress) => {
     const price =  await contract.methods.price(count).call()
     // console.log(price)
 
-    if (Number(balance) < fromWei(price)){
+    if (Number(fetchBalance) < fromWei(price)){
       return Swal.fire({
         text: 'Insufficient balance',
         icon: 'error',

@@ -3,23 +3,25 @@ import { fromWei } from '../utils/wei'
 import { getWeb3NoAccount } from '../utils/web3'
 
 const useWalletBalance = (account, chainId) => {
-  const [balance, setBalance] = useState('0')
+  // const [balance, setBalance] = useState('0')
   const web3 = getWeb3NoAccount(chainId)
-  useEffect(() => {
+  let balance;
+  
     const fetchBalance = async () => {
       // console.log('fetch balance')
      try {
 
       let walletBalance = null
       walletBalance = await web3.eth.getBalance(account)
-      setBalance(fromWei(walletBalance))
+      balance = fromWei(walletBalance)
      } catch (error) {
        console.log("error happend in fetch balance",error)
      }
+     return balance
     }
-    if (account && chainId == 80001) fetchBalance()
-  }, [account])
-  return balance
+
+    return fetchBalance
+    // if (account && chainId == 80001) fetchBalance()
 }
 
 export default useWalletBalance

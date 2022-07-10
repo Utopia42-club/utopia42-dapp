@@ -10,7 +10,8 @@ import { addRPC } from '../../utils/addRPC'
 import { NameChainMap } from '../../constants/chainsMap'
 
 const ActionButtonComponent = (props) => {
-  const { handleMint, status, checked } = props
+  const { handleMint, handleMintAndSet, status, checked } = props
+  console.log(status)
   const [open, setOpen] = useState(false)
   const { account, chainId, error } = useWeb3React()
   const bridge = useBridge()
@@ -84,10 +85,10 @@ const ActionButtonComponent = (props) => {
 
   }
 
-    else if(status == 'Mint and register' && checked) {
+    else if((status == 'Mint and register' || status == 'Mint and register ...') && checked) {
 
       contentBtn = (
-        <Button margin="25px 0 0" color="#300c4b" background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);"  onClick={handleMint}>
+        <Button margin="25px 0 0" color="#300c4b" background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);"  onClick={handleMintAndSet}>
           <ActionText >{status}</ActionText>
         </Button>
       )
@@ -95,13 +96,9 @@ const ActionButtonComponent = (props) => {
 
   else if(status === "You'r wallet is not registered on brightID" && checked) {
     contentBtn = (
-      <Button         
-      margin="25px 0 0"
-      background={'rgba(255, 164, 81, 0.2)'}
-      border="1px solid rgba(255, 164, 81, 1)"
-      cursor="text">
-        Scan QR code. You'r wallet is not registered on brightID.
-      </Button>
+    <Button margin="25px 0 0" color="#300c4b" background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);"  onClick={handleMintAndSet}>
+      <ActionText >Mint and register</ActionText>
+    </Button>
     )
   }
 

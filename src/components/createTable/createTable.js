@@ -7,7 +7,7 @@ const CreateTable = (props) => {
     let nftListConfig = []
     let res = {}
     const [color, setColor] = useState('#300c4b')
-
+    console.log(registeredNFT)
     const handleTransfer = (item) => {
         setColor('#300c4b')
         handleSelectToken(item)
@@ -38,12 +38,31 @@ const CreateTable = (props) => {
                             <Button color={color}  onClick={() => handleTransfer(item)}>Transfer</Button>
                         </div>       
         }
+        else if(!registeredWallet && registeredNFT != '0'){
+            res.action = <div>
+                             <Button color={color} onClick={handleBrightID}>Connect to BrightID</Button>
+                            <Button color={color}  onClick={() => handleTransfer(item)}>Transfer</Button>
+                        </div>       
+        }
         else{
             res.action = <div>
                             <Button color={color} onClick={handleBrightID}>Connect to BrightID</Button>
+                            <Button color={color} onClick={() => prepareToRegister(item)}>Register NFT</Button>
                             <Button color={color} onClick={() => handleTransfer(item)}>Transfer</Button>
                         </div>
         }
+        // else if(registeredWallet && registeredNFT == '0'){
+        //     res.action = <div>
+        //                     <Button color={color} onClick={() => prepareToRegister(item)}>Register NFT</Button>
+        //                     <Button color={color}  onClick={() => handleTransfer(item)}>Transfer</Button>
+        //                 </div>       
+        // }
+        // else{
+        //     res.action = <div>
+        //                     <Button color={color} onClick={handleBrightID}>Connect to BrightID</Button>
+        //                     <Button color={color} onClick={() => handleTransfer(item)}>Transfer</Button>
+        //                 </div>
+        // }
         nftListConfig.push({...res})
     }
     })

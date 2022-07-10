@@ -2,17 +2,35 @@ import { unbcNFTAbi } from '../ABI/ABI'
 import { getContract } from '../utils/contractHelpers'
 import useWeb3 from './useWeb3'
 import { UNBCNFTContractAddress } from '../ContractsAddresses';
+import useUserHasAccessToken from './useUserHasAccessToken';
+
 const useUserRegisterNFTs =  (account) => {
     const web3 = useWeb3()
-    const getRegisterNFTs = async () => {
-        // console.log(account)
-        // account = '0xF3cB8cb6170FA64Ea20DFe4D46762fb4d9BB23f4'
-        if (account != undefined){
-            // const contractAddress = '0xb800B8AC21a451444A5E9d21ce0ac89Da219F3D4';
-            const contract = getContract(unbcNFTAbi, UNBCNFTContractAddress, web3)
-            const res =  await contract.methods.uniqueOwner(account).call();
-            // console.log(res)
-            return res
+    const getRegisterNFTs = async (lastContextId) => {
+        const contract = getContract(unbcNFTAbi, UNBCNFTContractAddress, web3)
+        if (lastContextId) {
+            const tokenId =  await contract.methods.uniqueOwner(account).call();
+            const res =  await contract.methods.userHasAccessToken(lastContextId, tokenId).call();
+            console.log({res: res, tokenId:tokenId})
+            if (!res) {
+                return '0'
+            }
+            else{
+                return tokenId
+            }
+        }
+        else{
+            const tokenId =  await contract.methods.usersTokenRegistered(account).call();
+            if (tokenId == 0){
+                return '0'
+            }
+            const res =  await contract.methods.userHasRegisteredToken(account, tokenId).call();
+            if (!res){
+                return '0'
+            }
+            else{
+                return tokenId
+            }
         }
     }
 

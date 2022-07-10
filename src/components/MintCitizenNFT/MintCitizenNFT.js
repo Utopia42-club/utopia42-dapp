@@ -13,6 +13,7 @@ import useUserRegisterNFTs from '../../hooks/useUserRegisterNFTs';
 import { useWeb3React } from '@web3-react/core';
 import BrightId from '../BrightIdApp/BrightIdApp';
 import useMaxPerUser from '../../hooks/useMaxPerUser';
+import useMintAndRegisterNotId from '../../hooks/useMintAndRegisterNotId'
 // import useGetPrice from '../../hooks/useGetPrice';
 
 
@@ -30,6 +31,7 @@ const MintCitizenNFT = () => {
     const mint = useMinterNft(account, chainId, count, toAddress)
     const mintAndSet = useMintNFTsetBrightId(toAddress)
     const maxPay = useMaxPerUser()
+    const mintAndRegisterNotID = useMintAndRegisterNotId(account, chainId)
 
     const getMaxPay = async () => {
         setMax(await maxPay())
@@ -101,30 +103,56 @@ const MintCitizenNFT = () => {
     }, [checked,registeredWallet,registeredNFT])
 
 
-    const handleMint = async () => {
-        if (registeredNFT == '0' && registeredWallet == true) {
-            let data = await brightIdData()
-            if (data.error) {
 
-              return Swal.fire({
-                icon: 'error',
-                text: "You'r account is not registered on BrightID",
-                showConfirmButton: false,
-                timer: 3500,
-              })
+
+    const handleMintAndSet = async () => {
+        // if (registeredNFT == '0' && registeredWallet == true) {
+            let data = await brightIdData()
+            console.log(data)
+            if (data.error) {
+                console.log('error')
+                mintAndRegisterNotID(account)
             }
+            else{
+
+                try{
+                  setStatus('Mint and register ...')
+                  await mintAndSet(data, chainId)
+                  setStatus('Mint and register')
+                }
+                catch{
+                    console.log('err')
+                    setStatus('Mint and register')
+                }
+            }
+
+    }
+
+
+    const handleMint = async () => {
+        // if (registeredNFT == '0' && registeredWallet == true) {
+        //     let data = await brightIdData()
+        //     if (data.error) {
+
+        //       return Swal.fire({
+        //         icon: 'error',
+        //         text: "You'r account is not registered on BrightID",
+        //         showConfirmButton: false,
+        //         timer: 3500,
+        //       })
+        //     }
             // console.log(data.error)
-            try{
-              setStatus('Mint and register ...')
-              await mintAndSet(data)
-              setStatus('Mint and register')
-            }
-            catch{
-                console.log('err')
-                setStatus('Mint and register')
-            }
-        }
-        else{
+            // try{
+            //   setStatus('Mint and register ...')
+            //   await mintAndSet(data, chainId)
+            //   setStatus('Mint and register')
+            // }
+            // catch{
+            //     console.log('err')
+            //     setStatus('Mint and register')
+            // }
+        // }
+        // else{
             if (!count) {
                 return Swal.fire({
                   icon: 'error',
@@ -134,17 +162,17 @@ const MintCitizenNFT = () => {
                 })
               } 
 
-              try{
+            //   try{
                 setStatus('Minting ...')
                 await mint()
                 setStatus('Mint')
-              }
-              catch{
-                location.reload()
-                console.log('error')
-                setStatus('Mint')
-              }
-        }
+            //   }
+            //   catch{
+            //     location.reload()
+            //     console.log('error')
+            //     setStatus('Mint')
+            //   }
+        // }
     }
 
     return(
@@ -178,7 +206,7 @@ const MintCitizenNFT = () => {
             </div>
             {status == "You'r wallet is not registered on brightID" ? <BrightId account={account}/> : ''}
         </div>
-        <ActionButton handleMint={handleMint} status={status} checked={checked}/>
+        <ActionButton handleMint={handleMint} handleMintAndSet={handleMintAndSet} status={status} checked={checked}/>
       </Box>
 
       {/* <button onClick={() => deactivate()}>disconnect</button> */}

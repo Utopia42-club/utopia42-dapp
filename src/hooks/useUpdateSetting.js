@@ -5,17 +5,21 @@ import { sendTransaction } from '../utils/sendTx'
 import useWeb3 from './useWeb3'
 import useUserHasAccessToken from './useUserHasAccessToken'
 import Swal from 'sweetalert2'
+import useBrightIdApi from './useBrightIdApi'
 
 const useUpdateSetting = () => {
   const web3 = useWeb3()
   const hasToken = useUserHasAccessToken()
+  const brightIdData = useBrightIdApi()
   let status = 'Update Settings'
   const updateSetting = async (address, keys, values) => {
+    let data = await brightIdData()
     const contract = getContract(settingAbi, settingContractAddress, web3)
     // console.log(contract)
     // console.log(address, keys, values)
     // const tokenId = await contract.methods.userToken(address).call()
-    let res = await hasToken(address)
+    let res = await hasToken(address, data)
+    console.log(res.res)
     if(!res.res){
       return Swal.fire({
         text: "Not Registered NFT. You can't update avatar",
@@ -30,10 +34,11 @@ const useUpdateSetting = () => {
       return
     }
   
+    console.log(res.methodName)
     return sendTransaction(
       status,
       contract,
-      'updateSettings',
+      res.methodName,
       [res.tokenId, keys, values],
       address,
     )

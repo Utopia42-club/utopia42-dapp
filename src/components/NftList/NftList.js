@@ -16,6 +16,7 @@ import useUserNFTs from '../../hooks/useUserNFTs';
 import useSafeTransfer from '../../hooks/useSafeTransfer';
 import { Button } from '../button/Button'
 import CreateTable from '../createTable/createTable';
+import useRegisterToken from '../../hooks/useRegisterToken';
 
 const NftList = () => {
     const { account, chainId } = useWeb3React()
@@ -25,6 +26,7 @@ const NftList = () => {
     const [selectedNFT, setSelectedNFT] = useState(null)
     const brightIdData = useBrightIdApi()
     const getRegisterNFTs = useUserRegisterNFTs(account)
+    const register = useRegisterToken()
     // const [status, setStatus] = useState()
     const isOwner = useOwnerToken(account)
     const getNFTs = useUserNFTs(account)
@@ -38,31 +40,23 @@ const NftList = () => {
     const isRegisteredWallet = async () => {
         data = await brightIdData()
         if (data.error) {
-            // console.log(data.error)
-            setRegisteredWallet(false)
+          setRegisteredNFT(await getRegisterNFTs())
+          setRegisteredWallet(false)
+            
         }
         else{
+            let lastContextId = data.contextIds[data.contextIds.length-1]
             setRegisteredWallet(true)
+            setRegisteredNFT(await getRegisterNFTs(lastContextId))
         }
         // console.log(data)
     }
 
-    const isRegisteredNFT = async () => {
-        setRegisteredNFT(await getRegisterNFTs())
-        if (registeredNFT != '0'){
-            // setStatus("Registered before")
-        }
-    }
-
+ 
     const checkNFT = async () => {
         setSelectedNFT(null)
         setNFTs(await getNFTs())
-        // setRegisteredNFT(await getRegisterNFTs())
         isRegisteredWallet()
-        isRegisteredNFT()
-        if(registeredNFT == '0' && registeredWallet){
-            // setStatus('Register')
-        }
     }
 
     const handleTransfer = async () => {
@@ -100,8 +94,9 @@ const NftList = () => {
     }
 
     const updateData = useCallback(async () => {
+      console.log(await getNFTs())
         setNFTs(await getNFTs())
-        setRegisteredNFT(await getRegisterNFTs())
+        isRegisteredWallet()
     })
 
     useEffect(() => {
@@ -118,49 +113,34 @@ const NftList = () => {
     
 
     const handleSelectToken = (item) => {
-      // console.log(item)
-        // if(registeredNFT > 0){
-        //   return Swal.fire({
-        //     icon: 'error',
-        //     text: 'Yor registered before',
-        //     showConfirmButton: false,
-        //     timer: 1500,
-        //   })
-        // }
-        // else {
+          console.log(item)
           setSelectedNFT(item)
-          // setTransferModal(true)
-        // }
     }
 
     const handleRegister = async (id) => {
+      console.log(id)
       data = await brightIdData()
-      // console.log(data)
-        // if(!selectedNFT){
-        //   return Swal.fire({
-        //     text: "Please select NFT ID",
-        //     icon: 'error',
-        //     timer:1500,
-        //     showConfirmButton: false,
-        //   })
-        // }
         if(!data.error){
+          console.log('set brightID')
           try{
             await isOwner(data, id)
             updateData()
           }
           catch{
+            updateData()
             console.log('error')
           }
         }
         else{
-          Swal.fire({
-            text: "You'r account is not registered on BrightID",
-            icon: 'error',
-            timer:3500,
-            showConfirmButton: false,
-          })
-          // console.log(data.error)
+          console.log(id, 'no brightId')
+          try{
+            await register(account, id)
+            updateData()
+          }
+          catch{
+            console.log('error')
+            updateData()
+          }
         }
     }
 

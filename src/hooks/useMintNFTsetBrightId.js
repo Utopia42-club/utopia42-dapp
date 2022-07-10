@@ -12,10 +12,11 @@ const useMintNFTsetBrightId = () => {
   const { account } = useWeb3React()
   const web3 = useWeb3()
     
-  const mintAndSet = async (data) => {
+  const mintAndSet = async (data, chainId) => {
      let status = 'Mint and Register'
     
       const balance = useWalletBalance(account, chainId)
+      const fetchBalance = await balance()
       let contextIds = data.contextIds
       let sgiR = '0x' + data.sigR
       let sugS = '0x' + data.sigS
@@ -50,7 +51,7 @@ const useMintNFTsetBrightId = () => {
 
       const contract = getContract(mrc721MinterAbi, minterContractAddress, web3)
       const price =  await contract.methods.price('1').call()
-      if (Number(balance) < fromWei(price)){
+      if (Number(fetchBalance) < fromWei(price)){
         return Swal.fire({
           text: 'Insufficient balance',
           icon: 'error',
@@ -62,7 +63,7 @@ const useMintNFTsetBrightId = () => {
       await sendTransaction(
         status,
         contract,
-        'mintAndRegister',
+        'mintAndRegisterBrightID',
         [ account,
           contextIds,
           timestamp, 
