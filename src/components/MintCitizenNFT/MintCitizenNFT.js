@@ -84,7 +84,7 @@ const MintCitizenNFT = () => {
             
         }
         else{
-            let lastContextId = data.contextIds[data.contextIds.length-1]
+            let lastContextId = data.contextIds[0]
             console.log(lastContextId)
             setRegisteredWallet(true)
             setRegisteredNFT(await getRegisterNFTs(lastContextId))

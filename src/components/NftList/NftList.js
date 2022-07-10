@@ -45,7 +45,7 @@ const NftList = () => {
             
         }
         else{
-            let lastContextId = data.contextIds[data.contextIds.length-1]
+            let lastContextId = data.contextIds[0]
             setRegisteredWallet(true)
             setRegisteredNFT(await getRegisterNFTs(lastContextId))
         }

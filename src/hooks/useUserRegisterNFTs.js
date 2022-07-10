@@ -12,12 +12,12 @@ const useUserRegisterNFTs =  (account) => {
             const tokenId =  await contract.methods.uniqueOwner(account).call();
             const res =  await contract.methods.userHasAccessToken(lastContextId, tokenId).call();
             console.log({res: res, tokenId:tokenId})
-            if (!res) {
-                return '0'
-            }
-            else{
+            // if (!res) {
+            //     return '0'
+            // }
+            // else{
                 return tokenId
-            }
+            // }
         }
         else{
             const tokenId =  await contract.methods.usersTokenRegistered(account).call();
@@ -25,12 +25,12 @@ const useUserRegisterNFTs =  (account) => {
                 return '0'
             }
             const res =  await contract.methods.userHasRegisteredToken(account, tokenId).call();
-            if (!res){
-                return '0'
-            }
-            else{
+            // if (!res){
+            //     return '0'
+            // }
+            // else{
                 return tokenId
-            }
+            // }
         }
     }
 
