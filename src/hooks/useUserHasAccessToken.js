@@ -27,7 +27,7 @@ const useUserHasAccessToken = () => {
                 console.log(lastContextId)
                 const tokenId = await contract.methods.uniqueOwner(account).call()
                 console.log(tokenId)
-                const res =  await contract.methods.userHasAccessToken(lastContextId, tokenId).call();
+                const res =  await contract.methods.userHasAccessToken(account, tokenId).call();
                 return {res: res, tokenId:tokenId, methodName: 'updateSettingsByBrigthId'}
             }
             // console.log(tokenId)

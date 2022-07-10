@@ -22,7 +22,7 @@ const useUpdateSetting = () => {
     console.log(res.res)
     if(!res.res){
       return Swal.fire({
-        text: "Not Registered NFT. You can't update avatar",
+        text: "You can't update avatar",
         icon: 'error',
         showConfirmButton: false,
         timer: 2500
