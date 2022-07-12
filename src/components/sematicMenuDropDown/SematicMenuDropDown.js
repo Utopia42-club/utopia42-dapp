@@ -63,10 +63,10 @@ const DropdownPointing = () => {
       `
 
         return(
-          <div  style={{position:'absolute'}}>
-          <Button onClick={() => setShow(!show)}>
-            menu
-          </Button>
+          <div  style={{position:'absolute', top:20, marginLeft:'30px'}}>
+          <img src='/media/common/menu.png' onClick={() => setShow(!show)} height="30px"/>
+            {/* menu */}
+          {/* </Button> */}
           {show ? 
           <div ref={wrapperRef}>
           <Menu  vertical>

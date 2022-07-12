@@ -10,6 +10,7 @@ const DropdownExamplePointing = (props) => {
   document.head.appendChild(styleLink);
         const {menuItem} = props
         return(
+          <div style={{position:'absolute', top:10}}>
             <Menu>
                 {menuItem.map((item) => {
 
@@ -60,6 +61,7 @@ const DropdownExamplePointing = (props) => {
             <Menu.Item>Forums</Menu.Item>
             <Menu.Item>Contact Us</Menu.Item> */}
           </Menu>
+          </div>
         )
 
     
