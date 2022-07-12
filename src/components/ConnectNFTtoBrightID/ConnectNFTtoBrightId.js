@@ -24,7 +24,7 @@ const ConnectNFTtoBrightId = (props) => {
         <div>
             <div style={{display:"flex", marginBottom:"100px", marginTop:"20px"}}>
                 <label style={{marginRight:"10px"}}>
-                    Connect NFT to brightID
+                    Connect NFT to BrightID
                 </label>
                 <input 
                     type="checkbox"

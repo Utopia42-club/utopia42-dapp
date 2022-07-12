@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Container, Wrapper, Box } from '../container/Container'
+import { Input, TriangleDown } from '../common/FormControlls';
 import { Flex } from "rebass";
 import AvatarForm from "../avatarForm/AvatarForm.jsx";
 
@@ -66,6 +67,8 @@ const CreateNewAvatar = () => {
         {/* <Wrapper maxWidth="100%" width="100%"></Wrapper> */}
         <Wrapper maxWidth="100%" width="100%">
           <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
+            {/* <div style={{width:"100%", background:"linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%"}}> */}
+
           {/* <GradientTitle margin="0 0 10px">Mint Citizen NFTs</GradientTitle> */}
             <Box background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 126.95%)">
               {/* <div>
@@ -86,10 +89,11 @@ const CreateNewAvatar = () => {
                 background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);">Create Your Avatar</Button>
               } */}
               {/* { show ?  */}
+              
                 <iframe 
                 ref={iFrameRef} 
                 style={{'width': '100%',
-                        'height': '800px',
+                        'height': '750px',
                         'marginTop': '30px',
                         'fontSize': '14px',
                         'border': 'none',
@@ -102,11 +106,17 @@ const CreateNewAvatar = () => {
                 {/* :  */}
                 {/* ''  */}
               {/* } */}
-            <AvatarForm avatarLink={avatarLink}/>
             </Box>
+            <Box background="#f2f4fb" padding="0" borderRadius="0" border="none" width="100%">
+                  <TriangleDown />
+            </Box>
+            <Box background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
+                <AvatarForm avatarLink={avatarLink}/>
+            </Box>
+            {/* </div> */}
+
           </Flex>
         </Wrapper>
-        {/* <Wrapper maxWidth="300px" width="100%"></Wrapper> */}
        </Container>
     </>
   )

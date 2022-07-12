@@ -16,6 +16,7 @@ import PageMenu from '../pageMenu';
 import MuonToolbox from "../muonToolbix/Muontoolbox";
 import LogOutButton from '../logOutButton/logOutButton'
 import { UnsupportedChainIdError } from '@web3-react/core'
+import DropdownPointing from '../sematicMenuDropDown/SematicMenuDropDown'
 
 const WalletModal = dynamic(() => import('../modal/WalletModal'))
 
@@ -75,7 +76,7 @@ const Status = styled.div`
 const MenuIcon = styled.div`{
   margin-top:25px;
   display: none;
-  @media (max-width: 630px) {
+  @media (max-width: 820px) {
     display: block;
   }
 }`
@@ -94,7 +95,7 @@ const WrapMuonNetwork = styled.div`
   }
 `
 const Label = styled.span`
-  @media (max-width: 630px) {
+  @media (max-width: 820px) {
     display: none;
   }
 `
@@ -133,30 +134,7 @@ const Menu = ({ selectedChain }) => {
             <PageMenu />
           </Label>
           <MenuIcon>
-          <MuonToolbox 
-            name={'Menu'}  
-            links={[{ 
-              projectName:'Home',
-              href:'/'
-            },
-            { 
-              projectName:'Mint',
-              href:'/Mint'
-            },
-            { 
-              projectName:'MyIDs',
-              href:'/NFTs'
-            },
-            { 
-              projectName:'CreateAvatar',
-              href:'/CreateAvatar'
-            },
-            { 
-              projectName:'Verses',
-              href:'/Verses'
-            }]}
-            status={'mobile'}
-          />
+            <DropdownPointing />
           </MenuIcon>
           </Flex>
       </AppInfo>

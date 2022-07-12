@@ -18,7 +18,7 @@ export const Button = styled.button`
   &:focus {
     outline: none;
   };
-  color:${({color}) => (color ? color: "#000")}
+  color:${({color}) => (color ? color: "#300c4b")}
   }
 
 `

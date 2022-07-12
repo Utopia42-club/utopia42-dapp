@@ -1,0 +1,65 @@
+import React from 'react'
+import { Dropdown, Menu } from 'semantic-ui-react'
+import Link from 'next/link'
+
+
+const DropdownExamplePointing = (props) => {
+        const {menuItem} = props
+        return(
+            <Menu>
+                {menuItem.map((item) => {
+
+                    if(item.subMenu){
+                        return (<Dropdown text={item.name} pointing className='link item'>
+                        <Dropdown.Menu>
+                        {item.subMenu.map((subName) => {
+                            return (<Dropdown.Item>
+                                <Link href={subName.link} ><p>{subName.name}</p></Link>
+                            </Dropdown.Item>)
+                        })}
+                        </Dropdown.Menu>
+                        </Dropdown>)
+                    }
+                    else{
+                        return <Menu.Item><Link href={item.link} ><p>{item.name}</p></Link></Menu.Item>
+                    }
+                })}
+            {/* 
+
+            {/* <Menu.Item>Home</Menu.Item>
+            <Dropdown text='Shopping' pointing className='link item'>
+              <Dropdown.Menu>
+                <Dropdown.Item>
+                  <Dropdown text='Clothing'>
+                    <Dropdown.Menu>
+                      <Dropdown.Header>Mens</Dropdown.Header>
+                      <Dropdown.Item>Shirts</Dropdown.Item>
+                      <Dropdown.Item>Pants</Dropdown.Item>
+                      <Dropdown.Item>Jeans</Dropdown.Item>
+                      <Dropdown.Item>Shoes</Dropdown.Item>
+                      <Dropdown.Divider />
+                      <Dropdown.Header>Womens</Dropdown.Header>
+                      <Dropdown.Item>Dresses</Dropdown.Item>
+                      <Dropdown.Item>Shoes</Dropdown.Item>
+                      <Dropdown.Item>Bags</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Dropdown.Item>
+                <Dropdown.Item>Home Goods</Dropdown.Item>
+                <Dropdown.Item>Bedroom</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Header>Order</Dropdown.Header>
+                <Dropdown.Item>Status</Dropdown.Item>
+                <Dropdown.Item>Cancellations</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <Menu.Item>Forums</Menu.Item>
+            <Menu.Item>Contact Us</Menu.Item> */}
+          </Menu>
+        )
+
+    
+
+        }
+
+export default DropdownExamplePointing

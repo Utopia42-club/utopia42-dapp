@@ -2,7 +2,6 @@ import { unbcNFTAbi } from '../ABI/ABI'
 import { getContract } from '../utils/contractHelpers'
 import useWeb3 from './useWeb3'
 import { UNBCNFTContractAddress } from '../ContractsAddresses';
-import useUserHasAccessToken from './useUserHasAccessToken';
 
 const useUserRegisterNFTs =  (account) => {
     const web3 = useWeb3()
@@ -20,16 +19,16 @@ const useUserRegisterNFTs =  (account) => {
             // }
         }
         else{
-            const tokenId =  await contract.methods.usersTokenRegistered(account).call();
-            if (tokenId == 0){
-                return '0'
-            }
-            const res =  await contract.methods.userHasRegisteredToken(account, tokenId).call();
+            // const tokenId =  await contract.methods.usersTokenRegistered(account).call();
+            // if (tokenId == 0){
+            //     return '0'
+            // }
+            // const res =  await contract.methods.userHasRegisteredToken(account, tokenId).call();
             // if (!res){
             //     return '0'
             // }
             // else{
-                return tokenId
+                // return tokenId
             // }
         }
     }

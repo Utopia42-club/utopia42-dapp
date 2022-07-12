@@ -1,0 +1,99 @@
+import { GradientTitle } from '../text/Title';
+import { Input, TriangleDown } from '../common/FormControlls';
+import Swal from 'sweetalert2'
+import { useEffect, useState } from 'react';
+import { Container, Wrapper, Box, Label } from '../container/Container'
+import { Flex } from 'rebass'
+import { Button, ActionText } from '../button/Button'
+import useCreateVerse from '../../hooks/useCreateVerse';
+import { Type } from '../text/Text'
+
+import { useWeb3React } from '@web3-react/core';
+import CreateCollectionsTable from '../createCollectionsTable/createCollectionsTable';
+
+const CreateVerse = () => {
+
+    const [admin, setAdmin] = useState('')
+    const { account, chainId }  = useWeb3React()
+    const createVerse = useCreateVerse(account, chainId)
+    const [buttonName, setButtonName] = useState('Create New Verse')
+
+    const handleCreateVerse = async () => {
+        if(account){
+            setButtonName('Creating New Verse...')
+            try{
+                await createVerse(account, admin)
+            }
+            catch{
+                console.log('error')
+            }
+            setButtonName('Create New Verse')
+        }
+        else{
+            return Swal.fire({
+                text: 'Wallet is not connect',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+
+        if(chainId != 80001){
+            return Swal.fire({
+                text: 'Wrong Network',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+
+
+        if(admin.trim() == ''){
+            return Swal.fire({
+                text: 'Enter Admin Wallet',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    }
+
+    return(
+<>
+<Container>
+  <Wrapper maxWidth="300px" width="100%"></Wrapper>
+  <Wrapper maxWidth="470px" width="100%">
+  <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
+
+  <Box background="linear-gradient(0deg,#D3DBE3 0%,rgba(231,235,243,0) 106.95%);">
+    <div style={{width:"100%"}}>
+    <Flex width="100%">
+        <Type.SM color="#313144" fontSize="12.5px" padding="5px 10px">
+          {'Admin Wallet'}
+        </Type.SM>
+      </Flex>
+    <Input placeholder='Admin Wallet' width="100%" maxWidth='420px' value={admin} onChange={(event) => {setAdmin(event.target.value)}}/>
+    </div>
+  </Box>
+  <Box background="#f2f4fb" padding="0" borderRadius="0" border="none" width="100%">
+    <TriangleDown />
+  </Box>
+  <div style={{width:"100%", background:"linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%"}}>
+  <Box marginTop="10" background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
+  <Button onClick={handleCreateVerse} maxWidth='420px' margin="10px 0 0" color="#300c4b" background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);">{buttonName}</Button>
+  </Box>
+  </div>
+  </Flex>
+  </Wrapper>
+  <Wrapper maxWidth="300px" width="100%">
+  </Wrapper>
+</Container>
+</>
+
+    )
+
+}
+
+export default CreateVerse
+
+

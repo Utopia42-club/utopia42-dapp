@@ -17,6 +17,7 @@ export const GradientTitle = styled.div`
   font-size: ${({ fontSize }) => fontSize ? fontSize : '25px'};
   line-height: 30px;
   margin: ${({ margin }) => margin ? margin : ''};
+  margin-left: ${({ marginLeft }) => marginLeft ? marginLeft : ''};
   background: -webkit-linear-gradient(10deg, #5551ff 0%, #d08f85 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

@@ -37,10 +37,10 @@ const ActionButtonComponent = (props) => {
   let contentBtn = ''
   if (!account && !(error instanceof UnsupportedChainIdError))
     contentBtn = (
-      <Button margin="25px 0 0" background="#5F5CFE" onClick={handleConnectWallet}>
-        <Type.LG color="#ffffff" fontSizeXS="16px">
+      <Button margin="25px 0 0" color="#300c4b" background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%)" onClick={handleConnectWallet}>
+        {/* <Type.LG color="#ffffff" fontSizeXS="16px"> */}
           Connect Wallet
-        </Type.LG>
+        {/* </Type.LG> */}
       </Button>
     )
   else if (wrongNetwork || validChainId || error instanceof UnsupportedChainIdError) {
@@ -89,7 +89,7 @@ const ActionButtonComponent = (props) => {
 
       contentBtn = (
         <Button margin="25px 0 0" color="#300c4b" background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);"  onClick={handleMintAndSet}>
-          <ActionText >{status}</ActionText>
+          {status}
         </Button>
       )
   }
@@ -97,7 +97,7 @@ const ActionButtonComponent = (props) => {
   else if(status === "You'r wallet is not registered on brightID" && checked) {
     contentBtn = (
     <Button margin="25px 0 0" color="#300c4b" background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);"  onClick={handleMintAndSet}>
-      <ActionText >Mint and register</ActionText>
+      Mint and register
     </Button>
     )
   }

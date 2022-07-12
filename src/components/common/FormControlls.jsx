@@ -1,5 +1,14 @@
 import styled from 'styled-components'
 
+export const TriangleDown = styled.div`
+  width: 0;
+  height: 0;
+  border-left: 116px solid transparent;
+  border-right: 116px solid transparent;
+  border-top: 24px solid #d3dbe3;
+  position: relative;
+`
+
 export const Selector = styled.div`
   display: flex;
   justify-content: space-between;
@@ -28,10 +37,10 @@ export const BorderBottom = styled.div`
 export const Input = styled.input`
   max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : '400px')};
   width: ${({ width }) => (width ? width : '100%')};;
-  type: ${({type}) => {type ? type : 'text'}}
+  type: ${({type}) => {type ? type : 'text'}};
   background: ${({ background }) => (background ? background : 'transparent')};
   height: ${({ height }) => (height ? height : '45px')};
-  border: ${({ border }) => (border ? border : '1px solid #5F5CFE')};
+  border: ${({ border }) => (border ? border : '1px solid rgb(255, 255, 255);')};
   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : '5px')};
   box-sizing: border-box;
   font-family: ${({ fontFamily }) => (fontFamily ? fontFamily : 'Montserrat')};

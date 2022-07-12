@@ -87,7 +87,7 @@ const RegisterButton = (props) => {
         border="1px solid rgba(255, 164, 81, 1)"
         cursor="text"
       >
-        Register NFT: You'r wallet is not registered on brightID
+        Register NFT: You'r wallet is not registered on BrightID
       </Button>
     )
   }

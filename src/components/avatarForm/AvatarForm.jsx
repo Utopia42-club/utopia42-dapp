@@ -3,107 +3,112 @@ import styled from 'styled-components'
 import useUpdateSetting from "../../hooks/useUpdateSetting.js";
 import { useWeb3React } from '@web3-react/core'
 import Swal from "sweetalert2";
+import { Input } from '../common/FormControlls';
+import { Box, Container, Wrapper } from '../container/Container';
+import { Flex } from "rebass";
+import { Button } from '../button/Button'
+import { Type } from '../text/Text'
 
-export const Input = styled.input`
-max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : '400px')};
-width: 100%;
-background: ${({ background }) => (background ? background : 'transparent')};
-height: ${({ height }) => (height ? height : '45px')};
-border: ${({ border }) => (border ? border : '1px solid #5F5CFE')};
-border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : '5px')};
-box-sizing: border-box;
-font-family: ${({ fontFamily }) => (fontFamily ? fontFamily : 'Montserrat')};
-font-style: normal;
-font-weight: normal;
-font-size: ${({ fontSize }) => (fontSize ? fontSize : '15px')};
-color: ${({ color }) => (color ? color : '#313144')};
-&:focus {
-  outline: none;
-}
-padding: 0 17px;
-@media screen and (max-width: 576px) {
-  font-size: ${({ fontSizeXS }) => (fontSizeXS ? fontSizeXS : '13px')};
-  // max-width: 150px;
-}
-@media screen and (max-width: 460px) {
-  // max-width: 120px;
-  /* font-size: 10px; */
-}
-::placeholder {
-  color: #909090;
-  opacity: 1; /* Firefox */
-  font-size: 13px;
-}
+// export const Input = styled.input`
+// max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : '400px')};
+// width: 100%;
+// background: ${({ background }) => (background ? background : 'transparent')};
+// height: ${({ height }) => (height ? height : '45px')};
+// border: ${({ border }) => (border ? border : '1px solid #5F5CFE')};
+// border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : '5px')};
+// box-sizing: border-box;
+// font-family: ${({ fontFamily }) => (fontFamily ? fontFamily : 'Montserrat')};
+// font-style: normal;
+// font-weight: normal;
+// font-size: ${({ fontSize }) => (fontSize ? fontSize : '15px')};
+// color: ${({ color }) => (color ? color : '#313144')};
+// &:focus {
+//   outline: none;
+// }
+// padding: 0 17px;
+// @media screen and (max-width: 576px) {
+//   font-size: ${({ fontSizeXS }) => (fontSizeXS ? fontSizeXS : '13px')};
+//   // max-width: 150px;
+// }
+// @media screen and (max-width: 460px) {
+//   // max-width: 120px;
+//   /* font-size: 10px; */
+// }
+// ::placeholder {
+//   color: #909090;
+//   opacity: 1; /* Firefox */
+//   font-size: 13px;
+// }
 
-:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  color: #909090;
-  font-size: 13px;
-}
+// :-ms-input-placeholder {
+//   /* Internet Explorer 10-11 */
+//   color: #909090;
+//   font-size: 13px;
+// }
 
-::-ms-input-placeholder {
-  /* Microsoft Edge */
-  color: #909090;
-  font-size: 13px;
-}
-`
+// ::-ms-input-placeholder {
+//   /* Microsoft Edge */
+//   color: #909090;
+//   font-size: 13px;
+// }
+// `
 
-export const Link = styled.a`
-text-decoration: ${({ active }) => (active ? 'underline' : 'none')};
-cursor: pointer;
-font-weight: 400;
-:hover {
-  text-decoration: underline;
-}
-:focus {
-  outline: none;
-  text-decoration: underline;
-}
-:active {
-  text-decoration: none;
-}
-`
+// export const Link = styled.a`
+// text-decoration: ${({ active }) => (active ? 'underline' : 'none')};
+// cursor: pointer;
+// font-weight: 400;
+// :hover {
+//   text-decoration: underline;
+// }
+// :focus {
+//   outline: none;
+//   text-decoration: underline;
+// }
+// :active {
+//   text-decoration: none;
+// }
+// `
 
-export const Button = styled.button`
-font-size: ${({ fontSize }) => fontSize};
-margin-top:20px;
-display: flex;
-justify-content: center;
-align-items: center;
-max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : '390px')};
-width: 200px;
-min-height: ${({ height }) => (height ? height : '45px')};
-background: ${({ background }) => (background ? background : '#D7D7D7')};
-border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : '5px')};
-border: ${({ border }) => (border ? border : 'transparent')};
-margin: ${({ margin }) => margin};
-box-sizing: border-box;
-cursor: ${({ cursor }) => (cursor ? cursor : 'pointer')};
-&:focus {
-  outline: none;
-};
-color:${({color}) => (color ? color: "#000")}
-`
+// export const Button = styled.button`
+// font-size: ${({ fontSize }) => fontSize};
+// margin-top:20px;
+// display: flex;
+// justify-content: center;
+// align-items: center;
+// max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : '390px')};
+// width: 200px;
+// min-height: ${({ height }) => (height ? height : '45px')};
+// background: ${({ background }) => (background ? background : '#D7D7D7')};
+// border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : '5px')};
+// border: ${({ border }) => (border ? border : 'transparent')};
+// margin: ${({ margin }) => margin};
+// box-sizing: border-box;
+// cursor: ${({ cursor }) => (cursor ? cursor : 'pointer')};
+// &:focus {
+//   outline: none;
+// };
+// color:${({color}) => (color ? color: "#000")}
+// `
 
-export const Textarea = styled.textarea`
-font-size: ${({ fontSize }) => fontSize};
-display: flex;
-justify-content: center;
-align-items: center;
-max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : '390px')};
-width: 100%;
-min-height: ${({ height }) => (height ? height : '80px')};
-background: ${({ background }) => (background ? background : '#D7D7D7')};
-border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : '5px')};
-border: ${({ border }) => (border ? border : '1px solid #5F5CFE')};
-margin: ${({ margin }) => margin};
-padding:5px;
-box-sizing: border-box;
-&:focus {
-  outline: none;
-};
-color:${({color}) => (color ? color: "#000")}
-`
+// export const Textarea = styled.textarea`
+// font-size: ${({ fontSize }) => fontSize};
+// display: flex;
+// justify-content: center;
+// align-items: center;
+// max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : '390px')};
+// width: 100%;
+// min-height: ${({ height }) => (height ? height : '80px')};
+// background: ${({ background }) => (background ? background : '#D7D7D7')};
+// border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : '5px')};
+// border: ${({ border }) => (border ? border : '1px solid #5F5CFE')};
+// margin: ${({ margin }) => margin};
+// padding:5px;
+// box-sizing: border-box;
+// &:focus {
+//   outline: none;
+// };
+// color:${({color}) => (color ? color: "#000")}
+// `
 
 const AvatarForm = (props) => {
   const {avatarLink} = props;
@@ -191,7 +196,33 @@ const AvatarForm = (props) => {
 
   return (
     <>
-      <div style={{marginTop:'50px'}}>
+
+
+      <Container>
+      {/* <Wrapper maxWidth="100%" width="100%"></Wrapper> */}
+      {/* <Wrapper maxWidth="470px" width="100%"> */}
+      <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
+
+      <Flex width="100%">
+        <Type.SM color="#313144" fontSize="12.5px" padding="5px 10px">
+          {'Avatar Link'}
+        </Type.SM>
+      </Flex>
+      <Input placeholder='Avatar Link' value={avatarLink} readOnly/>
+      <Button 
+          margin="10px"
+          onClick={handleUpdate} 
+          background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);">Update Avatar
+      </Button> 
+      </Flex>
+     {/* </Wrapper>  */}
+     {/* <Wrapper maxWidth="300px" width="100%"> */}
+     {/* </Wrapper>  */}
+     </Container> 
+
+
+
+      {/* <div style={{marginTop:'50px'}}>
         <div  style={{ marginTop:'20px', display:'flex',}}>
           <div style={{ marginRight:'20px'}}>
             <label>Avatar Link</label>
@@ -199,71 +230,16 @@ const AvatarForm = (props) => {
               <Input value={avatarLink} readOnly/>
             </div>
           </div>
-          {/* <div>
-            <label style={{ marginRight:'20px'}}>Name</label>
-            <div>
-              <Input value={name ?? ''} onChange={(item) => {setName(item.target.value)}}/>
-            </div>
-          </div> */}
         </div>
-        {/* <div style={{display:'flex', marginTop:'20px'}}>
-          <div style={{ marginRight:'20px'}}>
-            <label>Image</label>
-            <div>
-              <Input readOnly value={image ?? ''} onChange={(item) => {setImage(item.target.value)}}/>
-              <div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <label>Instagram</label>
-            <div>
-            <div>
-              <Input value={instagram ?? ''} onChange={(item) => {setInstagram(item.target.value)}}/>
-            </div>
-            </div>
-          </div>
-        </div> */}
-        {/* <div style={{display:'flex', marginTop:'20px'}}>
-          <div style={{ marginRight:'20px'}}>
-            <label>Telegram</label>
-            <div>
-              <Input value={telegram ?? ''} onChange={(item) => {setTelegram(item.target.value)}}/>
-            </div>
-          </div>
-          <div>
-            <label>Facebook</label>
-            <div>
-              <Input value={facebook ?? ''} onChange={(item) => {setFacebook(item.target.value)}}/>
-            </div>
-          </div>
-        </div> */}
-        {/* <div style={{display:'flex', marginTop:'20px'}}>
-          <div style={{ marginRight:'20px'}}>
-            <label>Twitter</label>
-            <div>
-              <Input value={twitter ?? ''} onChange={(item) => {setTwitter(item.target.value)}}/>
-            </div>
-          </div>
-          <div>
-            <label>Discord</label>
-            <div>
-              <Input value={discord ?? ''} onChange={(item) => {setDiscord(item.target.value)}}/>
-            </div>
-          </div>
-        </div> */}
-
-        {/* <div style={{marginTop:'20px'}}>
-          <label>Bio</label>
-          <Textarea value={bio ?? ''} onChange={(item) => {setBio(item.target.value)}} background="none"/>
-        </div> */}
 
         <Button 
           onClick={handleUpdate} 
-          background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);">Update Avatar</Button> 
-      </div>
+          background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);">Update Avatar
+        </Button> 
+      </div> */}
     </>
   )
 }
 
 export default AvatarForm
+

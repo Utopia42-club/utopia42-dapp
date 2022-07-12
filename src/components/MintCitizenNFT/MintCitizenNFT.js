@@ -1,5 +1,5 @@
 import { GradientTitle } from '../text/Title';
-import { Input } from '../common/FormControlls';
+import { Input, TriangleDown } from '../common/FormControlls';
 import { Box } from './Container';
 import Swal from 'sweetalert2'
 import { useEffect, useState } from 'react';
@@ -14,7 +14,6 @@ import { useWeb3React } from '@web3-react/core';
 import BrightId from '../BrightIdApp/BrightIdApp';
 import useMaxPerUser from '../../hooks/useMaxPerUser';
 import useMintAndRegisterNotId from '../../hooks/useMintAndRegisterNotId'
-// import useGetPrice from '../../hooks/useGetPrice';
 
 
 const MintCitizenNFT = () => {
@@ -61,7 +60,9 @@ const MintCitizenNFT = () => {
 
     useEffect(() => {
         setChecked(false)
+        setIsSetOnBrightId(false)
         setStatus('Mint')
+        setCount('')
         if(account && chainId == 80001){
             getMaxPay()
         }
@@ -92,19 +93,17 @@ const MintCitizenNFT = () => {
         // console.log(data)
     }
 
+    const afterMint = async () => {
+        setIsSetOnBrightId(false)
+        setCount('')
+        setChecked(false);
+        setStatus('Mint')
+    }
 
-    // const isRegisteredNFT = async () => {
-    //     setRegisteredNFT(await getRegisterNFTs())
-    //     if (registeredNFT != '0'){
-    //         setStatus("Registered before")
-    //     }
-    // }
 
     useEffect(() => {
         if(checked === true){
             isRegisteredWallet()
-            // isRegisteredNFT()
-            // console.log(registeredWallet, registeredNFT, status)
             console.log(registeredNFT, registeredWallet)
             if (registeredNFT == '0' && registeredWallet == true) {
                 setStatus('Mint and register')
@@ -128,52 +127,39 @@ const MintCitizenNFT = () => {
 
     const handleMintAndSet = async () => {
         // if (registeredNFT == '0' && registeredWallet == true) {
-            let data = await brightIdData()
-            console.log(data)
-            if (data.error) {
-                console.log('error')
-                mintAndRegisterNotID(account)
+        let data = await brightIdData()
+        if (data.error) {
+            console.log('error')
+            try{
+                setStatus('Mint and register ...')
+                await mintAndRegisterNotID(account)
+                afterMint()
             }
-            else{
 
-                try{
-                  setStatus('Mint and register ...')
-                  await mintAndSet(data, chainId)
-                  setStatus('Mint and register')
-                }
-                catch{
-                    console.log('err')
-                    setStatus('Mint and register')
-                }
+            catch{
+                console.log('err')
+                setStatus('Mint and register') 
             }
+        }
+        else{
+
+            try{
+                setStatus('Mint and register ...')
+                await mintAndSet(data, chainId)
+                afterMint()
+
+            }
+            catch{
+                console.log('err')
+                setStatus('Mint and register')
+            }
+        }
 
     }
 
 
     const handleMint = async () => {
-        // if (registeredNFT == '0' && registeredWallet == true) {
-        //     let data = await brightIdData()
-        //     if (data.error) {
 
-        //       return Swal.fire({
-        //         icon: 'error',
-        //         text: "You'r account is not registered on BrightID",
-        //         showConfirmButton: false,
-        //         timer: 3500,
-        //       })
-        //     }
-            // console.log(data.error)
-            // try{
-            //   setStatus('Mint and register ...')
-            //   await mintAndSet(data, chainId)
-            //   setStatus('Mint and register')
-            // }
-            // catch{
-            //     console.log('err')
-            //     setStatus('Mint and register')
-            // }
-        // }
-        // else{
             if (!count) {
                 return Swal.fire({
                   icon: 'error',
@@ -183,40 +169,41 @@ const MintCitizenNFT = () => {
                 })
               } 
 
-            //   try{
+              try{
                 setStatus('Minting ...')
                 await mint()
+                setCount('')
                 setStatus('Mint')
-            //   }
-            //   catch{
-            //     location.reload()
-            //     console.log('error')
-            //     setStatus('Mint')
-            //   }
+              }
+              catch{
+                // location.reload()
+                console.log('error')
+                setStatus('Mint')
+              }
         // }
     }
 
     return(
     <>
-        {/* <PageMenu /> */}
     <Container>
       <Wrapper maxWidth="300px" width="100%"></Wrapper>
       <Wrapper maxWidth="470px" width="100%">
       <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
       <GradientTitle margin="0 0 10px">Mint Citizen NFTs</GradientTitle>
-      <Box background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 126.95%)">
-        {!checked ? 
+      <Box background="linear-gradient(0deg,#D3DBE3 0%,rgba(231,235,243,0) 106.95%);">
+        {/* {!checked ?  */}
         <Input
+            background="rgb(230, 236, 242)"
             type="text"
             label = 'Count'
             placeholder = {`Max count for user ${max}`}
             value = {count ?? ''} 
             onChange = {(event) => handelCountChange(event.target.value)} 
         /> 
-        :''}
-        <div>
-            <div style={{display:"flex", marginBottom:"100px", marginTop:"20px"}}>
-                <label style={{marginRight:"10px"}}>
+        {/* // :''} */}
+        {/* <div>
+            <div style={{display:"flex", marginBottom:"20px", marginTop:"20px"}}>
+                <label style={{marginRight:"10px", fontFamily:'Montserrat', fontSize:'12.5px'}}>
                     Mint and Register
                 </label>
                 <input 
@@ -226,15 +213,20 @@ const MintCitizenNFT = () => {
                 />
             </div>
             {isSetOnBrightID  ? <BrightId account={account}/> : ''}
-        </div>
+        </div> */}
+
+      </Box>
+      <Box background="#f2f4fb" padding="0" borderRadius="0" border="none" width="100%">
+        <TriangleDown />
+      </Box>
+      <div style={{width:"100%", background:"linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%"}}>
+      <Box marginTop="10" background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
         <ActionButton handleMint={handleMint} handleMintAndSet={handleMintAndSet} status={status} checked={checked}/>
       </Box>
-
-      {/* <button onClick={() => deactivate()}>disconnect</button> */}
+      </div>
       </Flex>
       </Wrapper>
       <Wrapper maxWidth="300px" width="100%">
-
       </Wrapper>
     </Container>
     </>

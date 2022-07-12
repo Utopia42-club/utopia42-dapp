@@ -12,11 +12,13 @@ const CreateCollectionsTable = (props) => {
     })
     return (
         <>
-            <Container>
-            <Wrapper>
-            <GradientTitle >Collections</GradientTitle>
-            </Wrapper>
-            </Container>
+            {/* <Container> */}
+            {/* <Wrapper> */}
+            <div style={{marginBottom:"10px"}}>
+                <GradientTitle >Collections</GradientTitle>
+            </div>
+            {/* </Wrapper> */}
+            {/* </Container> */}
             <Table id="table">
                 <Thead>
                 <Tr>

@@ -37,11 +37,13 @@ export const Box = styled.div`
 
   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : '10px')};
   margin-top: ${({ marginTop }) => `${marginTop}px`};
+  margin-bottom: ${({ marginBottom }) => `${marginBottom}px`};
   display: flex;
   justify-content: center;
   flex-direction: column;
-  align-items: center;
+  align-items: ${({ alignItems }) => alignItems ? alignItems : 'center'};
   padding: ${({ padding }) => (padding ? padding : '20px')};
+  padding-bottom: ${({ paddingBottom }) => (paddingBottom ? paddingBottom : '')};
 `
 
 export const Label = styled.label`
