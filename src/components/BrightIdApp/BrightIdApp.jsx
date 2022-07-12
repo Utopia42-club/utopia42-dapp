@@ -26,6 +26,13 @@ function BrightIdApp(props) {
     }
   }`
 
+  const LinkBox = styled.div`{
+    display:none;
+    @media screen and (max-width: 780px) {
+      display: block;
+    }
+  }`
+
   const generateContextId = () => {
     setContextId(v4())
   }
@@ -99,9 +106,11 @@ function BrightIdApp(props) {
               <header style={{marginBottom:"10px", color:"#999"}}>Linking QR Code</header>
                 <QRCode style={{width:'50%', height:'50%'}} value={deeplink ? deeplink : ''} />
             </Box>
-            <div style={{marginTop:'30px'}}>
-              <a style={{color:'#814f8c'}} href={deeplink}>Clickable link</a>
-            </div>
+            <LinkBox>
+              <div style={{marginTop:'30px'}}>
+                <a style={{color:'#814f8c'}} href={deeplink}>Clickable link</a>
+              </div>
+            </LinkBox>
         </div>
           {/* <div>
             <header >Application Keys</header>
