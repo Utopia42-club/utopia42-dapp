@@ -21,7 +21,8 @@ const Navbar = styled.nav`
   }
 `
 
-const Content = styled.div``
+const Content = styled.div`
+`
 
 const index = (props) => {
   const { children } = props

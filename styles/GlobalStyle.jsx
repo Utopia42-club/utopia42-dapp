@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
     body {
       overflow-y:auto;
       font-family: Montserrat;
-      background: #f8f8ff;
+      background: #f8f8ff !important;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
