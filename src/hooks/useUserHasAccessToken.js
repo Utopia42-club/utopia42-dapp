@@ -10,25 +10,26 @@ const useUserHasAccessToken = () => {
             const contract = getContract(unbcNFTAbi, UNBCNFTContractAddress, web3)
             
             if (data.error) {
-                console.log(data.error)
-                const tokenId =  await contract.methods.usersTokenRegistered(account).call();
-                console.log(tokenId)
-                if(tokenId != '0'){
-                    const res =  await contract.methods.userHasRegisteredToken(account, tokenId).call();
-                    return {res: res, tokenId:tokenId, methodName: 'updateSettings'}
-                }
-                else{
-                    const res = false
-                    return {res: res, tokenId:tokenId}
-                }
+                return {res: false}
+                // console.log(data.error)
+                // const tokenId =  await contract.methods.usersTokenRegistered(account).call();
+                // console.log(tokenId)
+                // if(tokenId != '0'){
+                //     const res =  await contract.methods.userHasRegisteredToken(account, tokenId).call();
+                //     return {res: res, tokenId:tokenId, methodName: 'updateSettings'}
+                // }
+                // else{
+                //     const res = false
+                //     return {res: res, tokenId:tokenId}
+                // }
             }
             else{
                 let lastContextId = data.contextIds[0]
                 console.log(lastContextId)
-                const tokenId = await contract.methods.uniqueOwner(account).call()
-                console.log(tokenId)
+                const tokenId = await contract.methods.getUserCitizenID(account).call()
+    
                 const res =  await contract.methods.userHasAccessToken(account, tokenId).call();
-                return {res: res, tokenId:tokenId, methodName: 'updateSettingsByBrigthId'}
+                return {res: res, tokenId:tokenId, methodName: 'updateSettingsByBrightId'}
             }
             // console.log(tokenId)
             // console.log(res)

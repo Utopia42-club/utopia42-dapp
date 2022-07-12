@@ -4,6 +4,10 @@ import Link from 'next/link'
 
 
 const DropdownExamplePointing = (props) => {
+  const styleLink = document.createElement("link");
+  styleLink.rel = "stylesheet";
+  styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+  document.head.appendChild(styleLink);
         const {menuItem} = props
         return(
             <Menu>

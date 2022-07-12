@@ -6,7 +6,10 @@ import { useState, useRef, useEffect } from 'react'
 
 
 const DropdownPointing = () => {
-
+  const styleLink = document.createElement("link");
+  styleLink.rel = "stylesheet";
+  styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+  document.head.appendChild(styleLink);
 
         const [show, setShow] = useState(false)
         const menuItem = [{name: 'Home', link:'/'}, 
