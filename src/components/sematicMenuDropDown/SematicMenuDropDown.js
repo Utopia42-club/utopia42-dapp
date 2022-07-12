@@ -63,12 +63,13 @@ const DropdownPointing = () => {
       `
 
         return(
-          <div  style={{position:'absolute', top:20, marginLeft:'30px'}}>
+          <div  style={{ marginLeft:'10px', marginTop:'-5px'}}>
           <img src='/media/common/menu.png' onClick={() => setShow(!show)} height="30px"/>
             {/* menu */}
           {/* </Button> */}
           {show ? 
-          <div ref={wrapperRef}>
+          <div style={{position:'relative'}}>
+          <div ref={wrapperRef} style={{position:"absolute"}}>
           <Menu  vertical>
                 {menuItem.map((item) => {
 
@@ -88,6 +89,7 @@ const DropdownPointing = () => {
                 }
                 })}
         </Menu> 
+        </div>
         </div>
         :
         ''
