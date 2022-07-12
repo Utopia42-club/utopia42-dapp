@@ -169,6 +169,15 @@ const MintCitizenNFT = () => {
                 })
               } 
 
+            if(count < 1){
+                return Swal.fire({
+                    icon: 'error',
+                    text: 'Please Enter count',
+                    showConfirmButton: false,
+                    timer: 1500,
+                  })
+            }
+
               try{
                 setStatus('Minting ...')
                 await mint()
