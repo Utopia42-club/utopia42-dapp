@@ -70,7 +70,7 @@ const DropdownPointing = () => {
           {show ? 
           <div style={{position:'relative'}}>
           <div ref={wrapperRef} style={{position:"absolute"}}>
-          <Menu  vertical>
+          <Menu size='mini' vertical>
                 {menuItem.map((item) => {
 
                 if(item.subMenu){
