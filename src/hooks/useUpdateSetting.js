@@ -34,7 +34,7 @@ const useUpdateSetting = () => {
       return
     }
   
-    console.log(res.methodName)
+    console.log(res.methodName, res.tokenId, keys, values)
     return sendTransaction(
       status,
       contract,

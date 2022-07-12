@@ -29,7 +29,7 @@ const useUserHasAccessToken = () => {
                 const tokenId = await contract.methods.getUserCitizenID(account).call()
     
                 const res =  await contract.methods.userHasAccessToken(account, tokenId).call();
-                return {res: res, tokenId:tokenId, methodName: 'updateSettingsByBrightId'}
+                return {res: res, tokenId:tokenId, methodName: 'updateSettings'}
             }
             // console.log(tokenId)
             // console.log(res)
