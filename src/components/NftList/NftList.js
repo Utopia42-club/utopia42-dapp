@@ -94,9 +94,8 @@ const NftList = () => {
     }
 
     const updateData = useCallback(async () => {
-      console.log(await getNFTs())
         setNFTs(await getNFTs())
-        isRegisteredWallet()
+        await isRegisteredWallet()
     })
 
     useEffect(() => {
