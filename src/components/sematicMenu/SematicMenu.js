@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Dropdown, Menu } from 'semantic-ui-react'
 import Link from 'next/link'
 
@@ -19,7 +19,8 @@ const DropdownExamplePointing = (props) => {
                         return (<Dropdown  text={item.name} pointing className='link item'>
                         <Dropdown.Menu>
                         {item.subMenu.map((subName) => {
-                            return (<Dropdown.Item>
+                            return (<Dropdown.Item
+                            >
                                 <Link href={subName.link} ><p>{subName.name}</p></Link>
                             </Dropdown.Item>)
                         })}
@@ -27,7 +28,10 @@ const DropdownExamplePointing = (props) => {
                         </Dropdown>)
                     }
                     else{
-                        return <Menu.Item ><Link href={item.link} ><p>{item.name}</p></Link></Menu.Item>
+                        return <Menu.Item 
+                        name={item.name}
+                        href={item.link}
+                        ></Menu.Item>
                     }
                 })}
                           

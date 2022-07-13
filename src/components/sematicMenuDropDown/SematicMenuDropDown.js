@@ -45,7 +45,7 @@ const DropdownPointing = () => {
 
         return(
           <div  style={{ marginLeft:'10px', marginTop:'-5px'}}>
-          <img id='img' src='/media/common/menu.png' onClick={() => setShow(!show)} height="30px"/>
+          <img style={{cursor:"pointer"}} id='img' src='/media/common/menu.png' onClick={() => setShow(!show)} height="30px"/>
             {/* menu */}
           {/* </Button> */}
           {show ? 
@@ -55,7 +55,7 @@ const DropdownPointing = () => {
                 {menuItem.map((item) => {
 
                 if(item.subMenu){
-                    return (<Dropdown text={item.name} pointing='left' className='link item'>
+                    return (<Dropdown   text={item.name} pointing='left' className='link item'>
                     <Dropdown.Menu>
                     {item.subMenu.map((subName) => {
                         return (<Dropdown.Item>
@@ -66,7 +66,10 @@ const DropdownPointing = () => {
                     </Dropdown>)
                 }
                 else{
-                    return <Menu.Item><Link href={item.link} ><p>{item.name}</p></Link></Menu.Item>
+                    return <Menu.Item
+                    name={item.name}
+                    link={item.link}
+                    ></Menu.Item>
                 }
                 })}
         </Menu> 
