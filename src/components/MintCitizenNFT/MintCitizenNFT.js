@@ -33,7 +33,7 @@ const MintCitizenNFT = () => {
     const maxPay = useMaxPerUser()
     const mintAndRegisterNotID = useMintAndRegisterNotId(account, chainId)
     let data;
-    
+
     const getMaxPay = async () => {
         setMax(await maxPay())
     }
@@ -179,17 +179,16 @@ const MintCitizenNFT = () => {
                   })
             }
 
-            //   try{
+              try{
                 setStatus('Minting ...')
                 await mint()
                 setCount('')
                 setStatus('Mint')
-            //   }
-            //   catch{
-                // console.log('error')
-                // setStatus('Mint')
-            //   }
-        // }
+              }
+              catch{
+                console.log('error')
+                setStatus('Mint')
+              }
     }
 
     return(
