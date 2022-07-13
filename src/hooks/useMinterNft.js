@@ -5,8 +5,10 @@ import useWeb3 from './useWeb3';
 import useWalletBalance from './useWalletBalance';
 import { fromWei } from '../utils/wei';
 import { minterContractAddress } from '../ContractsAddresses';
+import { useWeb3React } from '@web3-react/core'
 
 const useMinterNft = (address, chainId, count, toAddress) => {
+  const { account } = useWeb3React()
   const Swal = require('sweetalert2')
   const web3 = useWeb3();
   let status = 'Mint'
@@ -14,15 +16,16 @@ const useMinterNft = (address, chainId, count, toAddress) => {
   const fetchBalance = balance()
   // console.log(balance)
   const mint = async () => {
+    console.log(address, chainId, count, toAddress)
     const contract = getContract(mrc721MinterAbi, minterContractAddress, web3)
-
+    console.log(contract)
     if (!contract) {
       console.error('contract is null')
       return
     }
 
     const price =  await contract.methods.price(count).call()
-    // console.log(price)
+    console.log(price)
 
     if (Number(fetchBalance) < fromWei(price)){
       return Swal.fire({

@@ -10,8 +10,13 @@ const useWalletBalance = (account, chainId) => {
     const fetchBalance = async () => {
      try {
       let walletBalance = null
-      walletBalance = await web3.eth.getBalance(account)
-      balance = fromWei(walletBalance)
+      if(account){
+        walletBalance = await web3.eth.getBalance(account)
+        balance = fromWei(walletBalance)
+      }
+      else{
+        balance = '0'
+      }
      } catch (error) {
        console.log("error happend in fetch balance",error)
      }
