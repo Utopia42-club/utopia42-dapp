@@ -1,7 +1,6 @@
 import React from 'react'
 import { Dropdown, Menu } from 'semantic-ui-react'
 import Link from 'next/link'
-import styled from 'styled-components'
 import { useState, useRef, useEffect } from 'react'
 
 
@@ -27,10 +26,13 @@ const DropdownPointing = () => {
            * Alert if clicked on outside of element
            */
           function handleClickOutside(event) {
+            if(event.toElement.id != 'img'){
             if (ref.current && !ref.current.contains(event.target)) {
-              setShow(false)
+                setShow(show)
+              
             }
           }
+        }
           // Bind the event listener
           document.addEventListener("mousedown", handleClickOutside);
           return () => {
@@ -41,30 +43,9 @@ const DropdownPointing = () => {
       }
 
 
-      
-
-      const Button = styled.button`
-        padding: ${({ padding }) => (padding ? padding : '0 15px')};
-        cursor: ${({ active }) => (active ? 'pointer' : 'default')};
-        border: ${({ active, border }) => (border ? border : active ? '1px solid #76568e' : '1px solid #d2d2d2')};
-        height: 35px;
-        background: #f8faff;
-        border-radius: 5px;
-        box-sizing: border-box;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 15px;
-        line-height: 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #919191;
-        margin-top:-10px;
-      `
-
         return(
           <div  style={{ marginLeft:'10px', marginTop:'-5px'}}>
-          <img src='/media/common/menu.png' onClick={() => setShow(!show)} height="30px"/>
+          <img id='img' src='/media/common/menu.png' onClick={() => setShow(!show)} height="30px"/>
             {/* menu */}
           {/* </Button> */}
           {show ? 
