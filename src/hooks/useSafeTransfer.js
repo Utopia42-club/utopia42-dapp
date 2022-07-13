@@ -14,7 +14,7 @@ const useSafeTransfer = () => {
     const contract = getContract(unbcNFTAbi, UNBCNFTContractAddress, web3)
 
     const safeTransfer = async (toAddress, tokenId) => {
-        toCheckSumAddress(toAddress)
+        console.log(toCheckSumAddress(toAddress))
         if (!contract) {
             console.error('contract is null')
             return

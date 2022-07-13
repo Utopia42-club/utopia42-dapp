@@ -11,13 +11,12 @@ const DropdownExamplePointing = (props) => {
         const {menuItem} = props
         return(
           // <div style={{position:'relative'}}>
-          <div>
-            <div style={{marginTop:"-10px"}}>
-            <Menu>
+            <div className='homeMenu' style={{marginTop:"-10px"}}>
+            <Menu borderless>
                 {menuItem.map((item) => {
 
                     if(item.subMenu){
-                        return (<Dropdown text={item.name} pointing className='link item'>
+                        return (<Dropdown  text={item.name} pointing className='link item'>
                         <Dropdown.Menu>
                         {item.subMenu.map((subName) => {
                             return (<Dropdown.Item>
@@ -28,7 +27,7 @@ const DropdownExamplePointing = (props) => {
                         </Dropdown>)
                     }
                     else{
-                        return <Menu.Item><Link href={item.link} ><p>{item.name}</p></Link></Menu.Item>
+                        return <Menu.Item ><Link href={item.link} ><p>{item.name}</p></Link></Menu.Item>
                     }
                 })}
                           
@@ -64,7 +63,6 @@ const DropdownExamplePointing = (props) => {
             <Menu.Item>Forums</Menu.Item>
             <Menu.Item>Contact Us</Menu.Item> */}
           </Menu>
-          </div>
           </div>
 
         )

@@ -19,15 +19,15 @@ const useUpdateSetting = () => {
     // console.log(address, keys, values)
     // const tokenId = await contract.methods.userToken(address).call()
     let res = await hasToken(address, data)
-    console.log(res.res)
-    if(!res.res){
-      return Swal.fire({
-        text: "You can't update avatar",
-        icon: 'error',
-        showConfirmButton: false,
-        timer: 2500
-      })
-    }
+    // console.log(res.res)
+    // if(!res.res){
+    //   return Swal.fire({
+    //     text: "You can't update avatar",
+    //     icon: 'error',
+    //     showConfirmButton: false,
+    //     timer: 2500
+    //   })
+    // }
     // console.log(contract)
     if (!contract) {
       console.error('contract is null')
