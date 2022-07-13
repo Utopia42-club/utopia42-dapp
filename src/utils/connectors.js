@@ -19,7 +19,7 @@ const supportedChainIds = [
   137, // Matic
   80001, // Maticc Mumbai
 ]
-const INFURA_KEY = '3ae8f9dda66c42ec860b2e40a7322cae'
+const INFURA_KEY = '5ff4241f89cc422a935937ac2d675e59'
 // const FORTMATIC_KEY = process.env.NEXT_PUBLIC_FORTMATIC_KEY
 
 const RPC_URLS = {
@@ -63,7 +63,7 @@ export const fortmatic = new FortmaticConnector({
   chainId: 1,
 })
 
-export const frame = new FrameConnector({ supportedChainIds: [1] })
+export const frame = new FrameConnector({ supportedChainIds: [8001] })
 
 export const ConnectorNames = {
   Injected: 'MetaMask',

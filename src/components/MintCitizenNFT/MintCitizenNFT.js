@@ -185,7 +185,7 @@ const MintCitizenNFT = () => {
                 setStatus('Mint')
               }
               catch{
-                location.reload()
+                // location.reload()
                 console.log('error')
                 setStatus('Mint')
               }

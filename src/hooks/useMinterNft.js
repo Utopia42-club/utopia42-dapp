@@ -7,7 +7,6 @@ import { fromWei } from '../utils/wei';
 import { minterContractAddress } from '../ContractsAddresses';
 
 const useMinterNft = (address, chainId, count, toAddress) => {
-
   const Swal = require('sweetalert2')
   const web3 = useWeb3();
   let status = 'Mint'

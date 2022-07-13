@@ -11,9 +11,9 @@ const useMintNFTsetBrightId = () => {
   const Swal = require('sweetalert2')
   const { account } = useWeb3React()
   const web3 = useWeb3()
-    
+  
   const mintAndSet = async (data, chainId) => {
-     let status = 'Mint and Register'
+    let status = 'Mint and Register'
     
       const balance = useWalletBalance(account, chainId)
       const fetchBalance = await balance()

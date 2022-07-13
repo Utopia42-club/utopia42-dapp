@@ -8,9 +8,7 @@ const useWalletBalance = (account, chainId) => {
   let balance;
   
     const fetchBalance = async () => {
-      // console.log('fetch balance')
      try {
-
       let walletBalance = null
       walletBalance = await web3.eth.getBalance(account)
       balance = fromWei(walletBalance)
