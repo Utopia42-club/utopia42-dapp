@@ -107,23 +107,23 @@ const ProfileTable = (props) => {
                     <Th>CitizenID</Th>
                     <Td>{citizenIDvalue}</Td>
                     {Number(citizenId) == 0 ? <Td><Button color='#fff' backgroundColor="#76568e" onClick={handleMint}>Mint</Button></Td> : ''}
-                    {Number(citizenId) != 0 && Number(isSetNFTtoBrightID) == 0 ? <Td> <Button color='#fff' onClick={() => handleTransfer(citizenId)}>Transfer</Button></Td> : ''}
+                    {Number(citizenId) != 0 && Number(isSetNFTtoBrightID) == 0 ? <Td className='secondTd'> <Button color='#fff' onClick={() => handleTransfer(citizenId)}>Transfer</Button></Td> : ''}
                 </Tr>
                 <Tr>
                     <Th>Connect wallet to BrightID</Th>
                     <Td>{isBrightId}</Td>
-                   {!brightId ? <Td><Button color='#fff'  backgroundColor="#76568e" onClick={handleBrightID}>Connect you'r wallet to BrightID</Button></Td>:""}
+                   {!brightId ? <Td className='secondTd'><Button color='#fff'  backgroundColor="#76568e" onClick={handleBrightID}>Connect you'r wallet to BrightID</Button></Td>:""}
                 </Tr>
                 <Tr>
                     <Th>Connect CitizenID to BrightID</Th>
                     <Td>{isSetNFTtoBrightIDvalue}</Td>
-                    {brightId == true && Number(citizenId != 0) && Number(isSetNFTtoBrightID) == 0 ? <Td><Button color='#fff' onClick={handleSetBrightID}>{btnSetBrightID}</Button></Td> : ''}
+                    {brightId == true && Number(citizenId != 0) && Number(isSetNFTtoBrightID) == 0 ? <Td className='secondTd'><Button color='#fff' onClick={handleSetBrightID}>{btnSetBrightID}</Button></Td> : ''}
                 </Tr>
                 <Tr>
                     <Th>Avatar Link</Th>
                     {avatarLink ? <Td><a target="_blank" href={avatarLink}>You'r avatar link</a></Td> : <Td>Don't have avatar link</Td>}
-                    {avatarLink ? <Td><Button onClick={handleCopyClick} color='#fff'  backgroundColor="#76568e" >{copyState}</Button></Td> : ''}
-                    {Number(citizenId) != 0 && !avatarLink ? <Td><Button color='#fff'  backgroundColor="#76568e" onClick={handleCreateAvatar}>Create Avatar</Button></Td> : ''}
+                    {avatarLink ? <Td className='secondTd'><Button  onClick={handleCopyClick} color='#fff'  backgroundColor="#76568e" >{copyState}</Button></Td> : ''}
+                    {Number(citizenId) != 0 && !avatarLink ? <Td className='secondTd'><Button color='#fff'  backgroundColor="#76568e" onClick={handleCreateAvatar}>Create Avatar</Button></Td> : ''}
                 </Tr>
                 </Tbody>
             </Table>

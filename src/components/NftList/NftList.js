@@ -104,10 +104,6 @@ const NftList = () => {
         }
     }
 
-    const updateData = useCallback(async () => {
-        await isRegisteredWallet()
-    })
-
     useEffect(() => {
       setReady(false)
       if(chainId == 80001){

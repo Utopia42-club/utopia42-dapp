@@ -7,3 +7,6 @@ body{
     -webkit-box-shadow: none !important;
 }
 
+.secondTd {
+    text-align: right !important;
+}
