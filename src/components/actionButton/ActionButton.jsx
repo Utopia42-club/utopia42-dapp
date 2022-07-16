@@ -77,7 +77,7 @@ const ActionButtonComponent = (props) => {
       background={'rgba(255, 164, 81, 0.2)'}
       border="1px solid rgba(255, 164, 81, 1)"
       cursor="text" >
-        {status}
+        Already has a citizenID
       </Button>
     )
 

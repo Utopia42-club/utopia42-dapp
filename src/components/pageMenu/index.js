@@ -9,7 +9,7 @@ import { useState } from "react";
 
 const PageMenu = () => {
     const menuItem = [{name: 'Home', link:'/'}, 
-                      {name: 'Citizen ID', subMenu:[{name:'Mint', link:'/Mint'}, {name:'NFTs', link:'/NFTs'}]},
+                      {name: 'Citizen ID', subMenu:[{name:'Mint', link:'/Mint'}, {name:'Profile', link:'/Profile'}]},
                       {name: 'Setting', subMenu:[{name:'Create Avatar', link:'/CreateAvatar'}]}, 
                       {name:'Verses', subMenu:[{name:'Create Verses', link:'/CreateVerse'}, {name:'My Verses', link:'/Verses'}]}
                     ]

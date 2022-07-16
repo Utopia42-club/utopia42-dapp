@@ -1,10 +1,10 @@
 import React from "react"
 import NftList from '../../src/components/NftList/NftList'
 
-const NFTs = () => {
+const Profile = () => {
     return (
         <NftList />
     )
 }
 
-export default NFTs
+export default Profile

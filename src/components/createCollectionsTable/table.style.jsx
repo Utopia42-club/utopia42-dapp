@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Td = styled.td`{
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     border: 1px solid #9682a5;
-    padding: 5px;
+    padding: 15px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -27,7 +27,7 @@ export const Th = styled.th`{
     padding-top: 12px;
     width:30%;
     padding-bottom: 12px;
-    text-align: center;
+    // text-align: center;
     color: white;
     border: 1px solid #9682a5;
     @media screen and (max-width: 780px) {
@@ -51,6 +51,7 @@ export const Table = styled.table`{
   flex-flow: column;
   border-collapse: collapse;
   text-align: center;
+  
   width: 90%;
     
 }`
