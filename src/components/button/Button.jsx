@@ -3,11 +3,14 @@ import { Type } from '../text/Text'
 
 export const Button = styled.button`
   font-size: ${({ fontSize }) => fontSize};
+  font-family: ${({ fontFamily }) => fontFamily};
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: bold;
   max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : '390px')};
   width: 100%;
+
   min-height: ${({ height }) => (height ? height : '45px')};
   background: ${({ background }) => (background ? background : '#D7D7D7')};
   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : '5px')};

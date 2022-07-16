@@ -22,7 +22,7 @@ const CreateCollectionsTable = (props) => {
             <Table id="table">
                 <Thead>
                 <Tr>
-                    <Th  style={{width:'12%', padding:'5px'}}>Number</Th>
+                    <Th  style={{width:'8.2%', padding:'5px'}}>Number</Th>
                     <Th>Verses</Th>
                     <Th>Collections</Th>
                 </Tr>

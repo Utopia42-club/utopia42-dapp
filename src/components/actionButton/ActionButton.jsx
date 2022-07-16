@@ -10,7 +10,7 @@ import { addRPC } from '../../utils/addRPC'
 import { NameChainMap } from '../../constants/chainsMap'
 
 const ActionButtonComponent = (props) => {
-  const { handleMint, handleMintAndSet, status, checked } = props
+  const { handleMint, status} = props
   console.log(status)
   const [open, setOpen] = useState(false)
   const { account, chainId, error } = useWeb3React()
@@ -38,9 +38,7 @@ const ActionButtonComponent = (props) => {
   if (!account && !(error instanceof UnsupportedChainIdError))
     contentBtn = (
       <Button margin="25px 0 0" color="#300c4b" background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%)" onClick={handleConnectWallet}>
-        {/* <Type.LG color="#ffffff" fontSizeXS="16px"> */}
           Connect Wallet
-        {/* </Type.LG> */}
       </Button>
     )
   else if (wrongNetwork || validChainId || error instanceof UnsupportedChainIdError) {
@@ -62,16 +60,16 @@ const ActionButtonComponent = (props) => {
       </Button>
     )
   } 
-  else if(!checked) {
+  else if(status == 'Mint' || status == 'Minting ...') {
 
         contentBtn = (
-          <Button margin="25px 0 0" color="#300c4b" background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);"  onClick={handleMint} >
+          <Button border="2px solid #9682a5" fontFamily="Lato,'Helvetica Neue',Arial,Helvetica,sans-serif" margin="25px 0 0" color="#fff" background="#76568e"  onClick={handleMint} >
             {status}
           </Button>
         )
   }
 
-  else if(status == 'Registered before' && checked) {
+  else if(status == 'Duplicate citizenID') {
 
     contentBtn = (
       <Button         
@@ -79,28 +77,12 @@ const ActionButtonComponent = (props) => {
       background={'rgba(255, 164, 81, 0.2)'}
       border="1px solid rgba(255, 164, 81, 1)"
       cursor="text" >
-        Registered before
+        {status}
       </Button>
     )
 
   }
 
-    else if((status == 'Mint and register' || status == 'Mint and register ...') && checked) {
-
-      contentBtn = (
-        <Button margin="25px 0 0" color="#300c4b" background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);"  onClick={handleMintAndSet}>
-          {status}
-        </Button>
-      )
-  }
-
-  else if(status === "You'r wallet is not registered on brightID" && checked) {
-    contentBtn = (
-    <Button margin="25px 0 0" color="#300c4b" background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);"  onClick={handleMintAndSet}>
-      Mint and register
-    </Button>
-    )
-  }
 
   return (
     <>

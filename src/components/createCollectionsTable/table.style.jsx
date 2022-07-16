@@ -1,29 +1,16 @@
 import styled from 'styled-components'
 
 export const Td = styled.td`{
-    border: 1px solid #76568e;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid #9682a5;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     padding: 5px;
-    height:50px;
-    @media screen and (max-width: 780px) {
-    width:20%;
-    height:30px;
-    font-size:10px;
-    max-width: 100px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  @media screen and (max-width: 990px) {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  @media screen and (max-width: 1670px) {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-      
+        @media screen and (max-width: 780px) {
+        width:30%;
+        font-size:13px;
+        
+      }
 }`
 
 export const Tr = styled.tr`{
@@ -33,16 +20,16 @@ export const Tr = styled.tr`{
 }`
 
 export const Th = styled.th`{
-  background: linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 150.95%);
+  background:#76568e ;
     padding-top: 12px;
+    width:30%;
     padding-bottom: 12px;
     text-align: center;
     color: white;
-    border: 1px solid #76568e;
+    border: 1px solid #9682a5;
     @media screen and (max-width: 780px) {
         width:20%;
-        padding:5px;
-        font-size:10px;
+        font-size:12px;
       }
 
   }`
@@ -52,18 +39,24 @@ export const Thead = styled.thead`{
 }`
 
 export const Table = styled.table`{
-  margin:0 auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  margin:20px;
+  margin-top:5px;
   background: none;
   color:#683f87;
   display: flex;
   flex-flow: column;
   border-collapse: collapse;
   text-align: center;
-  width: 100%;
-  height: 387px;
+  width: 90%;
+    
 }`
 
 export const Tbody = styled.tbody`{
+  border-radius: 5px;
+  margin-top:-2px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  // border: 1px solid #9682a5;
   flex: 1 1 auto;
   display: block;
   overflow-y: auto;

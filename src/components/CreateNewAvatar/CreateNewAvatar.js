@@ -1,15 +1,19 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Container, Wrapper, Box } from '../container/Container'
 import { Input, TriangleDown } from '../common/FormControlls';
 import { Flex } from "rebass";
 import AvatarForm from "../avatarForm/AvatarForm.jsx";
+import useCitizenId from "../../hooks/useCitizenId";
+import { useWeb3React } from "@web3-react/core";
 
 const CreateNewAvatar = () => {
   const subdomain = 'utopia42club';
-  
+  const {account} = useWeb3React()
+  const getCitizenId = useCitizenId()
   const [show, setShow] = useState()
   const [avatarLink, setAvatarLink] = useState()
   const iFrameRef = useRef()
+  const [citizenID, setCitizenId] = useState()
 
   let json;
 
@@ -56,66 +60,54 @@ const CreateNewAvatar = () => {
   function displayIframe() {
     setAvatarLink('')
     setShow(true)
-    // window.addEventListener('message', subscribe);
-    // document.addEventListener('message', subscribe);
   }
+
+  const checkCitizenId = async () => {
+    setCitizenId(await getCitizenId(account))
+  }
+
+  useEffect(() => {
+    if(account){
+      checkCitizenId()
+    }
+  }, [account])
 
 
   return (
     <>
       <Container>
-        {/* <Wrapper maxWidth="100%" width="100%"></Wrapper> */}
         <Wrapper maxWidth="100%" width="100%">
-          <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
-            {/* <div style={{width:"100%", background:"linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%"}}> */}
-
-          {/* <GradientTitle margin="0 0 10px">Mint Citizen NFTs</GradientTitle> */}
+        {citizenID != 0 ?(<Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
             <Box background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 126.95%)">
-              {/* <div>
-                { avatarLink ? 
-                  <div style={{display:"flex", marginTop:'30px'}}>
-                    <p id="avatarUrl">Avatar URL : {avatarLink} </p>  
-                  </div> 
-                  : '' 
-                }
-              </div> */}
-              {/* { avatarLink ?
-                <Button 
-                onClick={handleUpdate} 
-                background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);">Update Avatar</Button> 
-                : 
-                <Button 
-                onClick={() => displayIframe()} 
-                background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);">Create Your Avatar</Button>
-              } */}
-              {/* { show ?  */}
-              
-                <iframe 
-                ref={iFrameRef} 
-                style={{'width': '100%',
-                        'height': '750px',
-                        'marginTop': '30px',
-                        'fontSize': '14px',
-                        'border': 'none',
-                      }} 
-                id="frame" 
-                className="frame" 
-                allow="camera *; microphone *" 
-                src={`https://${subdomain}.readyplayer.me/avatar?frameApi`} >  
-                </iframe> 
-                {/* :  */}
-                {/* ''  */}
-              {/* } */}
+                    <iframe 
+                    ref={iFrameRef} 
+                    style={{'width': '100%',
+                            'height': '750px',
+                            'marginTop': '30px',
+                            'fontSize': '14px',
+                            'border': 'none',
+                          }} 
+                    id="frame" 
+                    className="frame" 
+                    allow="camera *; microphone *" 
+                    src={`https://${subdomain}.readyplayer.me/avatar?frameApi`} >  
+                    </iframe> 
             </Box>
             <Box background="#f2f4fb" padding="0" borderRadius="0" border="none" width="100%">
                   <TriangleDown />
             </Box>
-            <Box background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
-                <AvatarForm avatarLink={avatarLink}/>
+            <Box color='#fff' background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
+                <AvatarForm avatarLink={avatarLink} citizenID={citizenID}/>
             </Box>
-            {/* </div> */}
 
-          </Flex>
+          </Flex>) :  (<Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
+            <Box color='#fff' background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
+                <AvatarForm avatarLink={avatarLink} citizenID={citizenID}/>
+            </Box>
+
+          </Flex>) }
+
+
         </Wrapper>
        </Container>
     </>

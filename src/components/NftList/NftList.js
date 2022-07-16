@@ -1,6 +1,6 @@
 
 import { GradientTitle } from '../text/Title';
-import { Input } from '../common/FormControlls';
+import { Input, TriangleDown } from '../common/FormControlls';
 import { Box } from './Container';
 import Swal from 'sweetalert2'
 import { useState } from 'react';
@@ -17,17 +17,23 @@ import useSafeTransfer from '../../hooks/useSafeTransfer';
 import { Button } from '../button/Button'
 import CreateTable from '../createTable/createTable';
 import useRegisterToken from '../../hooks/useRegisterToken';
+import useCitizenId from '../../hooks/useCitizenId';
+import { Flex } from 'rebass';
+import ProfileButton from '../profileButton/ProfileButton';
+import ProfileTable from '../profileTable/ProfileTable';
+import useGetAvatarLink from '../../hooks/useGetAvatarLink';
 
 const NftList = () => {
     const { account, chainId } = useWeb3React()
+    const getAvatarLink = useGetAvatarLink()
     const [registeredNFT, setRegisteredNFT] = useState('0')
     const [registeredWallet, setRegisteredWallet] = useState(null)
     const [NFTs, setNFTs] = useState(null);
     const [selectedNFT, setSelectedNFT] = useState(null)
     const brightIdData = useBrightIdApi()
+    const [citizenID, setCitizenID] = useState()
     const getRegisterNFTs = useUserRegisterNFTs(account)
     const register = useRegisterToken()
-    // const [status, setStatus] = useState()
     const isOwner = useOwnerToken(account)
     const getNFTs = useUserNFTs(account)
     const [toAddress, setToAddress] = useState()
@@ -36,27 +42,24 @@ const NftList = () => {
     let data;
     const [transferModal, setTransferModal] = useState(false)
     const [brightIdModal, setBrightIdModal] = useState(false)
+    const getCitizenId = useCitizenId()
+    const [avatarLink, setAvatarLink] = useState()
 
     const isRegisteredWallet = async () => {
         data = await brightIdData()
-        console.log(data.error)
         if (data.error) {
-          // setRegisteredNFT(await getRegisterNFTs())
-          setRegisteredNFT('0')
           setRegisteredWallet(false)
             
         }
         else{
-            let lastContextId = data.contextIds[0]
-            setRegisteredWallet(true)
-            setRegisteredNFT(await getRegisterNFTs(lastContextId))
+          setRegisteredWallet(true)
         }
     }
  
     const checkNFT = async () => {
-        setSelectedNFT(null)
-        setNFTs(await getNFTs())
-        isRegisteredWallet()
+        setCitizenID(await getCitizenId(account))
+        setAvatarLink(await getAvatarLink(account))
+        await isRegisteredWallet()
     }
 
     const handleTransfer = async () => {
@@ -94,7 +97,6 @@ const NftList = () => {
     }
 
     const updateData = useCallback(async () => {
-        setNFTs(await getNFTs())
         await isRegisteredWallet()
     })
 
@@ -105,8 +107,6 @@ const NftList = () => {
       }
       else{
         setTransferModal(false)
-        setNFTs(null)
-        setRegisteredNFT('0')
       }
     }, [account, chainId])
     
@@ -116,36 +116,32 @@ const NftList = () => {
           setSelectedNFT(item)
     }
 
-    const handleRegister = async (id) => {
-      console.log(id)
-      data = await brightIdData()
-        if(!data.error){
-          console.log('set brightID')
-          try{
-            await isOwner(data, id)
-            updateData()
-          }
-          catch{
-            updateData()
-            console.log('error')
-          }
-        }
-        else{
-          console.log(id, 'no brightId')
-          // try{
-          //   await register(account, id)
-          //   updateData()
-          // }
-          // catch{
-          //   console.log('error')
-          //   updateData()
-          // }
-        }
-    }
 
     return(
     <>
-    {
+    <Container>
+      <Wrapper maxWidth="300px" width="100%"></Wrapper>
+      <Wrapper maxWidth="600px" width="100%">
+      <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
+      <GradientTitle margin="0 0 10px">Profile</GradientTitle>
+      <Box background="linear-gradient(0deg,#D3DBE3 0%,rgba(231,235,243,0) 106.95%);">
+        <ProfileTable citizenId={citizenID} brightId={registeredWallet} avatarLink={avatarLink}/>
+      {/* {Number(citizenID ) == 0 ? <p>Not have citizenID</p> : <p>You'r citizenID: {citizenID}</p>} */}
+      </Box>
+      <Box background="#f2f4fb" padding="0" borderRadius="0" border="none" width="100%">
+        <TriangleDown />
+      </Box>
+      <div style={{width:"100%", background:"linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%"}}>
+      <Box marginTop="10" background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
+        <ProfileButton registeredWallet={registeredWallet} citizenID={citizenID} setBrightIdModal={setBrightIdModal} handleSelectToken={handleSelectToken} setTransferModal={setTransferModal}/>
+      </Box>
+      </div>
+      </Flex>
+      </Wrapper>
+      <Wrapper maxWidth="300px" width="100%">
+      </Wrapper>
+    </Container>
+    {/* {
       NFTs &&
       <>
       <CreateTable 
@@ -170,7 +166,7 @@ const NftList = () => {
         handleSelectToken={handleSelectToken} 
         handleRegister={handleRegister}/>
         </>
-    }
+    } */}
     <Container>
       <Modal 
         open={transferModal}         
