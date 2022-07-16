@@ -4,7 +4,8 @@ import {Td, Th, Table, Thead, Tr, Tbody, Button, Wrapper, Container}  from './ta
 const ProfileTable = (props) => {
     const { citizenId, brightId, avatarLink } = props
     let citizenIDvalue;
-    if (Number(citizenId) == 0) {
+
+    if (Number(citizenId) == 0 || !citizenId) {
         citizenIDvalue = 'Not have citizenID'
     }
     else{
@@ -24,6 +25,7 @@ const ProfileTable = (props) => {
                 <Tr>
                     <Th>CitizenID</Th>
                     <Td>{citizenIDvalue}</Td>
+                    
                 </Tr>
                 <Tr>
                     <Th>BrightID</Th>
