@@ -87,7 +87,7 @@ const NftList = () => {
           setTransferNFT('Transfer')
           setToAddress(null)
           setSelectedNFT(null)
-          updateData()
+          checkNFT()
         }
         catch(error){
             setTransferModal(false)

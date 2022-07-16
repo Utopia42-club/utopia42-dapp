@@ -84,6 +84,7 @@ const ProfileTable = (props) => {
         handleSelectToken(item)
         setBrightIdModal(false)
         setTransferModal(true)
+        checkNFT()
     }
 
     const handleSetBrightID = async () => {
