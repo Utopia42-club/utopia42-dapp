@@ -1,9 +1,16 @@
 import React, { useState } from "react"
 import {Button} from './button.style'
-const ProfileButton = (props) => {
- const { registeredWallet, citizenID, setBrightIdModal, handleSelectToken, setTransferModal } = props
- const [color, setColor] = useState('#300c4b')
+import useSetBrightId from "../../hooks/useSetBrightId"
+import { useWeb3React } from "@web3-react/core"
+import Router from 'next/router'
 
+const ProfileButton = (props) => {
+ const { account } = useWeb3React()
+ const setBrightId = useSetBrightId(account)
+ const {checkNFT, registeredWallet, citizenID, setBrightIdModal, handleSelectToken, setTransferModal, isSetNFTtoBrightID} = props
+ const [color, setColor] = useState('#300c4b')
+ const [btnSetBrightID, setBtnSetBrightId] = useState('Set BrightID')
+    console.log()
 console.log(registeredWallet, citizenID)
 
  let btn = ''
@@ -19,32 +26,51 @@ const handleTransfer = (item) => {
     setTransferModal(true)
 }
 
+const handleSetBrightID = async () => {
+setBtnSetBrightId('Set BrightID ...')
+    try{
+        await setBrightId(citizenID)
+        setBtnSetBrightId('Set BrightID')
+        checkNFT()
+    }
+    catch{
+        setBtnSetBrightId('Set BrightID')
+    }
+}
+
+const handleMint = async () => {
+    Router.push('/Mint')
+}
+
+
 if(!citizenID){
     btn = ''
 }
 
  if(registeredWallet == false && Number(citizenID != 0)) {
     btn = <div>
-                <Button color='#fff' onClick={handleBrightID}>Connect to BrightID</Button>
+                <Button color='#fff' onClick={handleBrightID}>Connect you'r wallet to BrightID</Button>
                 <Button color='#fff' onClick={() => handleTransfer(citizenID)}>Transfer</Button>
             </div>     
  }
 
  if(registeredWallet == false && Number(citizenID == 0)) {
     btn = <div>
-            <Button color='#fff' onClick={handleBrightID}>Connect to BrightID</Button>
+            <Button color='#fff' onClick={handleBrightID}>Connect you'r wallet to BrightID</Button>
+            <Button color='#fff' onClick={handleMint}>Mint</Button>
         </div>     
 }
 
 if(registeredWallet == true && Number(citizenID == 0)) {
-    btn = <div style={{width:"100%",textAlign:"center",color:"rgb(104, 63, 135)",border:"1px solid #9682a5", boxShadow: "0 0 20px rgb(0 0 0 / 15%)", borderRadius: "5px", padding:"10px",paddingTop:"15px", paddingBottom:"0px"}}>
-            <p style={{display:"inline-block", marginRight:"10px"}}>You have not citizenID on utopia42</p> 
-                <a href="/Mint">Mint</a>
-          </div>
+    btn = <div>
+            <Button color='#fff' onClick={handleMint}>Mint</Button>
+        </div>
 }
 
-if(registeredWallet == true && Number(citizenID != 0)) {
-
+if(registeredWallet == true && Number(citizenID != 0) && Number(isSetNFTtoBrightID) == 0) {
+    btn = <div>
+            <Button color='#fff' onClick={handleSetBrightID}>{btnSetBrightID}</Button>
+          </div>   
 }
 
  return(

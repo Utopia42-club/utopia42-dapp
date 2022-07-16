@@ -80,7 +80,7 @@ const CreateVerse = () => {
   </Box>
   <div style={{width:"100%", background:"linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%"}}>
   <Box marginTop="10" background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
-  <Button onClick={handleCreateVerse} maxWidth='420px' margin="10px 0 0" color="#300c4b" background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);">{buttonName}</Button>
+  <Button onClick={handleCreateVerse} maxWidth='420px' margin="10px 0 0" color='#fff' background="#76568e">{buttonName}</Button>
   </Box>
   </div>
   </Flex>

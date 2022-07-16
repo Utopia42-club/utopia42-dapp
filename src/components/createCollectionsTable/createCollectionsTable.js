@@ -32,7 +32,7 @@ const CreateCollectionsTable = (props) => {
                         verses.map((item, index) => (
                             <Tr key={index} id={index}>
                                 <Td style={{width:'12%',padding:'5px' }}>{index+1}</Td>
-                                <Td>{item}</Td>
+                                <Td><a target="_blank" href={'https://app.utopia42.club/game?network=80001&contract=' + item}>{item}</a></Td>
                                 <Td>{collections[index]}</Td>
                             </Tr>
                         ))

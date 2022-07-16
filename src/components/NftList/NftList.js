@@ -22,28 +22,27 @@ import { Flex } from 'rebass';
 import ProfileButton from '../profileButton/ProfileButton';
 import ProfileTable from '../profileTable/ProfileTable';
 import useGetAvatarLink from '../../hooks/useGetAvatarLink';
+import useIsSetBrightID from '../../hooks/useIsSetBrightId';
+// import loading from '../media/common/xm-loader.gif'
 
 const NftList = () => {
     const { account, chainId } = useWeb3React()
     const getAvatarLink = useGetAvatarLink()
-    const [registeredNFT, setRegisteredNFT] = useState('0')
     const [registeredWallet, setRegisteredWallet] = useState(null)
-    const [NFTs, setNFTs] = useState(null);
     const [selectedNFT, setSelectedNFT] = useState(null)
     const brightIdData = useBrightIdApi()
     const [citizenID, setCitizenID] = useState()
-    const getRegisterNFTs = useUserRegisterNFTs(account)
-    const register = useRegisterToken()
-    const isOwner = useOwnerToken(account)
-    const getNFTs = useUserNFTs(account)
+    const [isSetNFTtoBrightID, setIsSetNFTtoBrightID] = useState()
     const [toAddress, setToAddress] = useState()
     const safeTransfer = useSafeTransfer()
+    const [ready, setReady] = useState(false)
     const [transferNTF, setTransferNFT] = useState('Transfer')
     let data;
     const [transferModal, setTransferModal] = useState(false)
     const [brightIdModal, setBrightIdModal] = useState(false)
     const getCitizenId = useCitizenId()
     const [avatarLink, setAvatarLink] = useState()
+    const isSetBrightID = useIsSetBrightID()
 
     const isRegisteredWallet = async () => {
         data = await brightIdData()
@@ -57,9 +56,11 @@ const NftList = () => {
     }
  
     const checkNFT = async () => {
+        setIsSetNFTtoBrightID(await isSetBrightID(account))
         setCitizenID(await getCitizenId(account))
         setAvatarLink(await getAvatarLink(account))
         await isRegisteredWallet()
+        setReady(true)
     }
 
     const handleTransfer = async () => {
@@ -84,15 +85,22 @@ const NftList = () => {
           await safeTransfer(toAddress, selectedNFT)
           setTransferModal(false)
           setTransferNFT('Transfer')
-          setNFTs(null)
           setToAddress(null)
           setSelectedNFT(null)
           updateData()
         }
-        catch{
+        catch(error){
             setTransferModal(false)
-            console.log('error')
+            setToAddress(null)
             setTransferNFT('Transfer')
+            if(String(error).includes('Given address')){
+              return Swal.fire({
+                text:"Wrong Address",
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }
         }
     }
 
@@ -101,6 +109,7 @@ const NftList = () => {
     })
 
     useEffect(() => {
+      setReady(false)
       if(chainId == 80001){
         checkNFT()
         setTransferModal(false)
@@ -116,58 +125,30 @@ const NftList = () => {
           setSelectedNFT(item)
     }
 
-
     return(
     <>
     <Container>
       <Wrapper maxWidth="300px" width="100%"></Wrapper>
-      <Wrapper maxWidth="600px" width="100%">
+      <Wrapper width="100%">
       <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
       <GradientTitle margin="0 0 10px">Profile</GradientTitle>
-      <Box background="linear-gradient(0deg,#D3DBE3 0%,rgba(231,235,243,0) 106.95%);">
-        <ProfileTable citizenId={citizenID} brightId={registeredWallet} avatarLink={avatarLink}/>
-      {/* {Number(citizenID ) == 0 ? <p>Not have citizenID</p> : <p>You'r citizenID: {citizenID}</p>} */}
-      </Box>
-      <Box background="#f2f4fb" padding="0" borderRadius="0" border="none" width="100%">
-        <TriangleDown />
-      </Box>
-      <div style={{width:"100%", background:"linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%"}}>
-      <Box marginTop="10" background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
-        <ProfileButton registeredWallet={registeredWallet} citizenID={citizenID} setBrightIdModal={setBrightIdModal} handleSelectToken={handleSelectToken} setTransferModal={setTransferModal}/>
-      </Box>
-      </div>
+      {/* <Box background="linear-gradient(0deg,#D3DBE3 0%,rgba(231,235,243,0) 106.95%);"> */}
+        {chainId == 80001 && ready ? 
+        <ProfileTable  checkNFT={checkNFT} setTransferModal={setTransferModal} handleSelectToken={handleSelectToken} setBrightIdModal={setBrightIdModal} citizenId={citizenID} brightId={registeredWallet} avatarLink={avatarLink} isSetNFTtoBrightID={isSetNFTtoBrightID}/>
+        : account && !ready && chainId == 80001?
+        <img width='100px' src='media/common/loading-gif.jpg' />
+        :
+        ""
+        }
+        {/* </Box> */}
+
       </Flex>
       </Wrapper>
       <Wrapper maxWidth="300px" width="100%">
       </Wrapper>
     </Container>
-    {/* {
-      NFTs &&
-      <>
-      <CreateTable 
-        data={NFTs} 
-        registeredWallet={registeredWallet} 
-        registeredNFT={registeredNFT} 
-        setBrightIdModal={setBrightIdModal} 
-        handleSelectToken={handleSelectToken} 
-        handleRegister={handleRegister}
-        setTransferModal={setTransferModal}
-        />
-        </>
-    }
-    {
-      !NFTs &&
-      <>
-      <CreateTable 
-        data={[]} 
-        registeredWallet={registeredWallet} 
-        registeredNFT={registeredNFT} 
-        setBrightIdModal={setBrightIdModal} 
-        handleSelectToken={handleSelectToken} 
-        handleRegister={handleRegister}/>
-        </>
-    } */}
     <Container>
+      
       <Modal 
         open={transferModal}         
         backgroundColor={'#313144'}
@@ -183,7 +164,7 @@ const NftList = () => {
         <div style={{marginLeft:'-220px',display:"flex"}}>
         </div>
           <Input placeholder='To address' value={toAddress ?? ''} onChange={(event) => {setToAddress(event.target.value)}} />
-          <Button color='#300c4b' fontSize="18px" margin="25px 0 0" background="linear-gradient(0deg, rgb(118, 86, 142) 0%, rgba(231, 235, 243, 0) 126.95%);"  onClick={handleTransfer}>{transferNTF}</Button>
+          <Button color='#fff' fontSize="18px" margin="25px 0 0" background="#76568e" onClick={handleTransfer}>{transferNTF}</Button>
         </Box>
         </>
       </Modal>

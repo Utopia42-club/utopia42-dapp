@@ -8,7 +8,7 @@ import { useWeb3React } from "@web3-react/core";
 
 const CreateNewAvatar = () => {
   const subdomain = 'utopia42club';
-  const {account} = useWeb3React()
+  const {account, chainId} = useWeb3React()
   const getCitizenId = useCitizenId()
   const [show, setShow] = useState()
   const [avatarLink, setAvatarLink] = useState()
@@ -67,7 +67,7 @@ const CreateNewAvatar = () => {
   }
 
   useEffect(() => {
-    if(account){
+    if(account && chainId == 80001){
       checkCitizenId()
     }
   }, [account])
@@ -75,6 +75,7 @@ const CreateNewAvatar = () => {
 
   return (
     <>
+    {chainId == 80001 ? 
       <Container>
         <Wrapper maxWidth="100%" width="100%">
         {citizenID != 0 ?(<Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
@@ -110,6 +111,7 @@ const CreateNewAvatar = () => {
 
         </Wrapper>
        </Container>
+       : ''}
     </>
   )
 

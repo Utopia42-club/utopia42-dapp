@@ -3,13 +3,16 @@ import styled from 'styled-components'
 export const Td = styled.td`{
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     border: 1px solid #9682a5;
+    padding: 5px;
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    padding: 5px;
         @media screen and (max-width: 780px) {
         width:30%;
         font-size:13px;
-        
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 }`
 

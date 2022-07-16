@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import styled from 'styled-components'
 import useUpdateSetting from "../../hooks/useUpdateSetting.js";
 import { useWeb3React } from '@web3-react/core'
 import Swal from "sweetalert2";
@@ -57,6 +56,10 @@ const AvatarForm = (props) => {
     setBtnName('Update Avatar')
   }
 
+  const handleMint = async () => {
+    Router.push('/Mint')
+}
+
   return (
     <>
       <Container>
@@ -72,14 +75,18 @@ const AvatarForm = (props) => {
 
       <Button 
           margin="10px"
-          onClick={handleUpdate} 
-          background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);">{btnName}
+          background= "#76568e"
+          onClick={handleUpdate}
+          color="#fff" 
+          >{btnName}
       </Button> 
       </>
       : 
-        <div style={{width:"100%",textAlign:"center",color:"rgb(104, 63, 135)",border:"1px solid #9682a5", boxShadow: "0 0 20px rgb(0 0 0 / 15%)", borderRadius: "5px", padding:"10px",paddingTop:"15px", paddingBottom:"0px"}}>
+        <div style={{width:"100%",textAlign:"center",color:"rgb(104, 63, 135)", borderRadius: "5px", padding:"10px",paddingTop:"15px", paddingBottom:"0px"}}>
             <p style={{display:"inline-block", marginRight:"10px"}}>You have not citizenID on utopia42</p> 
-                <a href="/Mint">Mint</a>
+            <div>
+            <Button color='#fff' background="#76568e" onClick={handleMint}>Mint</Button>
+        </div>
         </div>
       }
       </Flex>
