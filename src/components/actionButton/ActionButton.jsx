@@ -37,7 +37,7 @@ const ActionButtonComponent = (props) => {
   let contentBtn = ''
   if (!account && !(error instanceof UnsupportedChainIdError))
     contentBtn = (
-      <Button margin="25px 0 0" color="#300c4b" background="linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%)" onClick={handleConnectWallet}>
+      <Button margin="25px 0 0" color="#fff" background="#76568e"  onClick={handleConnectWallet}>
           Connect Wallet
       </Button>
     )
