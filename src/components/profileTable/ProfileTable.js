@@ -106,7 +106,7 @@ const ProfileTable = (props) => {
                 <Tr>
                     <Th>CitizenID</Th>
                     <Td>{citizenIDvalue}</Td>
-                    {Number(citizenId) == 0 ? <Td><Button color='#fff' backgroundColor="#76568e" onClick={handleMint}>Mint</Button></Td> : ''}
+                    {Number(citizenId) == 0 ? <Td className='secondTd' ><Button color='#fff' backgroundColor="#76568e" onClick={handleMint}>Mint</Button></Td> : ''}
                     {Number(citizenId) != 0 && Number(isSetNFTtoBrightID) == 0 ? <Td className='secondTd'> <Button color='#fff' onClick={() => handleTransfer(citizenId)}>Transfer</Button></Td> : ''}
                 </Tr>
                 <Tr>
