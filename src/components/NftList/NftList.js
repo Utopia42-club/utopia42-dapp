@@ -8,21 +8,18 @@ import { useEffect, useCallback } from 'react';
 import { Container, Wrapper } from '../container/Container'
 import Modal from '../modal/Modal';
 import useBrightIdApi from '../../hooks/useBrightIdApi'
-import useOwnerToken from '../../hooks/useOwnerToken';
-import useUserRegisterNFTs from '../../hooks/useUserRegisterNFTs';
 import { useWeb3React } from '@web3-react/core';
 import BrightId from '../BrightIdApp/BrightIdApp';
 import useUserNFTs from '../../hooks/useUserNFTs';
 import useSafeTransfer from '../../hooks/useSafeTransfer';
 import { Button } from '../button/Button'
-import CreateTable from '../createTable/createTable';
-import useRegisterToken from '../../hooks/useRegisterToken';
 import useCitizenId from '../../hooks/useCitizenId';
 import { Flex } from 'rebass';
-import ProfileButton from '../profileButton/ProfileButton';
 import ProfileTable from '../profileTable/ProfileTable';
 import useGetAvatarLink from '../../hooks/useGetAvatarLink';
 import useIsSetBrightID from '../../hooks/useIsSetBrightId';
+import useIsVerified from '../../hooks/useIsVerified';
+import MintComponent from '../MintComponent/MintComponent';
 // import loading from '../media/common/xm-loader.gif'
 
 const NftList = () => {
@@ -38,14 +35,19 @@ const NftList = () => {
     const [ready, setReady] = useState(false)
     const [transferNTF, setTransferNFT] = useState('Transfer')
     let data;
+    const [isTransferable, setIsTransferable] = useState()
     const [transferModal, setTransferModal] = useState(false)
     const [brightIdModal, setBrightIdModal] = useState(false)
     const getCitizenId = useCitizenId()
     const [avatarLink, setAvatarLink] = useState()
     const isSetBrightID = useIsSetBrightID()
+    const isVerified = useIsVerified()
+    const [NFTs, setNFTs] = useState()
+    const getNFTs = useUserNFTs(account)
 
     const isRegisteredWallet = async () => {
         data = await brightIdData()
+        console.log(data)
         if (data.error) {
           setRegisteredWallet(false)
             
@@ -57,8 +59,11 @@ const NftList = () => {
  
     const checkNFT = async () => {
         setIsSetNFTtoBrightID(await isSetBrightID(account))
-        setCitizenID(await getCitizenId(account))
+        let id = await getCitizenId(account)
+        setCitizenID(id)
         setAvatarLink(await getAvatarLink(account))
+        setIsTransferable(await isVerified(id))
+        setNFTs(await getNFTs())
         await isRegisteredWallet()
         setReady(true)
     }
@@ -122,27 +127,29 @@ const NftList = () => {
     }
 
     return(
-    <>
+      <>
+    {Number(citizenID!=0 ) ?
     <Container>
       <Wrapper maxWidth="300px" width="100%"></Wrapper>
       <Wrapper width="100%">
       <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
       <GradientTitle margin="0 0 10px">Profile</GradientTitle>
-      {/* <Box background="linear-gradient(0deg,#D3DBE3 0%,rgba(231,235,243,0) 106.95%);"> */}
         {chainId == 80001 && ready ? 
-        <ProfileTable  checkNFT={checkNFT} setTransferModal={setTransferModal} handleSelectToken={handleSelectToken} setBrightIdModal={setBrightIdModal} citizenId={citizenID} brightId={registeredWallet} avatarLink={avatarLink} isSetNFTtoBrightID={isSetNFTtoBrightID}/>
+        <ProfileTable NFTs={NFTs} isTransferable={isTransferable}  checkNFT={checkNFT} setTransferModal={setTransferModal} handleSelectToken={handleSelectToken} setBrightIdModal={setBrightIdModal} citizenId={citizenID} brightId={registeredWallet} avatarLink={avatarLink} isSetNFTtoBrightID={isSetNFTtoBrightID}/>
         : account && !ready && chainId == 80001?
         <img width='100px' src='media/common/loading-gif.jpg' />
         :
         ""
         }
-        {/* </Box> */}
-
       </Flex>
       </Wrapper>
       <Wrapper maxWidth="300px" width="100%">
       </Wrapper>
     </Container>
+    :
+    <MintComponent checkNFT={checkNFT}/>
+    }
+
     <Container>
       
       <Modal 

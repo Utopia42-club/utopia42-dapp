@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Td = styled.td`{
   // box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    border: 1px solid #9682a5;
+    border: 1px solid #e0e0e0;
     border-right:none;
     border-left:none;
     text-align: left;
@@ -49,14 +49,15 @@ export const Table = styled.table`{
   border-collapse: collapse;
   text-align: center;
   width: 90%;
+  border-radius:10px;
     
 }`
 
 export const Tbody = styled.tbody`{
-  border-radius: 5px;
+  border-radius: 10px;
   margin-top:-2px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  border: 1px solid #9682a5;
+  // border: 1px solid #9682a5;
   flex: 1 1 auto;
   display: block;
   overflow-y: auto;

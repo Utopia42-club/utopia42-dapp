@@ -5,6 +5,7 @@ import { Flex } from "rebass";
 import AvatarForm from "../avatarForm/AvatarForm.jsx";
 import useCitizenId from "../../hooks/useCitizenId";
 import { useWeb3React } from "@web3-react/core";
+import MintComponent from "../MintComponent/MintComponent";
 
 const CreateNewAvatar = () => {
   const subdomain = 'utopia42club';
@@ -75,10 +76,10 @@ const CreateNewAvatar = () => {
 
   return (
     <>
-    {chainId == 80001 ? 
+    {chainId == 80001 &&  citizenID != 0? 
       <Container>
         <Wrapper maxWidth="100%" width="100%">
-        {citizenID != 0 ?(<Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
+        <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
             <Box background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 126.95%)">
                     <iframe 
                     ref={iFrameRef} 
@@ -101,17 +102,12 @@ const CreateNewAvatar = () => {
                 <AvatarForm avatarLink={avatarLink} citizenID={citizenID}/>
             </Box>
 
-          </Flex>) :  (<Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
-            <Box color='#fff' background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
-                <AvatarForm avatarLink={avatarLink} citizenID={citizenID}/>
-            </Box>
-
-          </Flex>) }
+          </Flex>
 
 
         </Wrapper>
        </Container>
-       : ''}
+       : <MintComponent checkCitizenId={checkCitizenId}/>}
     </>
   )
 

@@ -6,39 +6,27 @@ import { useEffect, useState } from 'react';
 import { Container, Wrapper } from '../container/Container'
 import ActionButton from '../actionButton/ActionButton'
 import { Flex } from 'rebass'
-// import useBrightIdApi from '../../hooks/useBrightIdApi'
 import useMinterNft from '../../hooks/useMinterNft'
-// import useMintNFTsetBrightId from '../../hooks/useMintNFTsetBrightId'
-// import useUserRegisterNFTs from '../../hooks/useUserRegisterNFTs';
 import { useWeb3React } from '@web3-react/core';
-// import BrightId from '../BrightIdApp/BrightIdApp';
-// import useMaxPerUser from '../../hooks/useMaxPerUser';
-// import useMintAndRegisterNotId from '../../hooks/useMintAndRegisterNotId'
-import useCitizenId from '../../hooks/useCitizenId'
+// import {Button} from '../profileButton/button.style'
+import { Button, ActionText } from '../button/Button'
 
 
-const MintCitizenNFT = () => {
+
+const MintComponent = (props) => {
+    const {checkNFT, checkCitizenId} = props
     const { account, chainId} = useWeb3React()
     const [count, setCount] = useState("You'r wallet");
-    const [status, setStatus] = useState()
-    const getCitizenId = useCitizenId()
+    const [buttonName, setButtonName] = useState('Mint')
+
     const mint = useMinterNft(account, chainId)
 
 
-    const checkCitizenID = async () => {
-      const citizenID = await getCitizenId(account)
-      if (Number(citizenID) != 0 ){
-          setStatus('Duplicate citizenID')
-      }
-      else
-      setStatus('Mint')
-    }
 
     useEffect(() => {
 
         if(account && chainId == 80001){
             setCount(account)
-            checkCitizenID()
         }
         else{
             setCount("You'r wallet")
@@ -47,21 +35,28 @@ const MintCitizenNFT = () => {
 
 
     const handleMint = async () => {
-
+              console.log('mint')
               try{
-                setStatus('Minting ...')
+                setButtonName('Minting ...')
                 await mint()
-                setStatus('Mint')
-                checkCitizenID()
+                setButtonName('Minting')
+                if (checkNFT) {
+                  checkNFT()
+                }
+                if (checkCitizenId) {
+                  checkCitizenId()
+                }
+                
               }
               catch{
                 console.log('error')
-                checkCitizenID()
+                setButtonName('Minting')
               }
     }
 
     return(
     <>
+    {account ?
     <Container>
       <Wrapper maxWidth="300px" width="100%"></Wrapper>
       <Wrapper maxWidth="470px" width="100%">
@@ -84,7 +79,7 @@ const MintCitizenNFT = () => {
       </Box>
       <div style={{width:"100%", background:"linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%"}}>
       <Box marginTop="10" background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
-        <ActionButton handleMint={handleMint} status={status} />
+        <Button background="#76568e" margin="25px 0 0" color='#FFF' onClick={handleMint} >{buttonName}</Button>
       </Box>
       </div>
       </Flex>
@@ -92,6 +87,7 @@ const MintCitizenNFT = () => {
       <Wrapper maxWidth="300px" width="100%">
       </Wrapper>
     </Container>
+    : ''}
     </>
     )
 
@@ -99,4 +95,4 @@ const MintCitizenNFT = () => {
 }
 
 
-export default MintCitizenNFT
+export default MintComponent

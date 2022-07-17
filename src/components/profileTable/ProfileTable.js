@@ -8,21 +8,19 @@ import Router from 'next/router'
 const ProfileTable = (props) => {
     const [copyState, setCopyState] = useState('Copy Link')
     const { account } = useWeb3React()
-    const {handleSelectToken, setTransferModal, citizenId, brightId, avatarLink, isSetNFTtoBrightID, setBrightIdModal, checkNFT} = props
+    const {handleSelectToken, setTransferModal, citizenId, brightId, avatarLink, isSetNFTtoBrightID, setBrightIdModal, checkNFT, isTransferable, NFTs} = props
     const setBrightId = useSetBrightId(account)
     let citizenIDvalue;
     let isSetNFTtoBrightIDvalue;
     const [btnSetBrightID, setBtnSetBrightId] = useState('Set BrightID')
+    console.log(NFTs[0], citizenId)
 
     async function copyTextToClipboard(text) {
         if (navigator.clipboard && window.isSecureContext) {
-          // navigator clipboard api method'
           return navigator.clipboard.writeText(text);
-      } else {
-          // text area method
+        } else {
           let textArea = document.createElement("textarea");
           textArea.value = text;
-          // make the textarea out of viewport
           textArea.style.position = "fixed";
           textArea.style.left = "-999999px";
           textArea.style.top = "-999999px";
@@ -34,10 +32,10 @@ const ProfileTable = (props) => {
               document.execCommand('copy') ? res() : rej();
               textArea.remove();
           });
-      }
-      }
+        }
+    }
 
-      const handleCopyClick = () => {
+    const handleCopyClick = () => {
         copyTextToClipboard(avatarLink)
           .then(() => {
             setCopyState('Copied')
@@ -45,7 +43,7 @@ const ProfileTable = (props) => {
           .catch((err) => {
             console.log(err);
           });
-      }
+    }
 
     if(Number(isSetNFTtoBrightID) == 0 || !isSetNFTtoBrightID) {
         isSetNFTtoBrightIDvalue = 'Not Registered'
@@ -60,6 +58,7 @@ const ProfileTable = (props) => {
     else{
         citizenIDvalue = '#'+ citizenId
     }
+
     let isBrightId;
     if(brightId){
         isBrightId = 'true'
@@ -70,14 +69,6 @@ const ProfileTable = (props) => {
 
     const handleBrightID = () => {
         setBrightIdModal(true)
-    }
-
-    const handleMint = async () => {
-        Router.push('../Mint')
-    }
-
-    const handleCreateAvatar = async () => {
-        Router.push('/CreateAvatar')
     }
 
     const handleTransfer = (item) => {
@@ -103,28 +94,36 @@ const ProfileTable = (props) => {
         <>
             <Table id="table">
                 <Tbody>
-                <Tr>
-                    <Th>CitizenID</Th>
-                    <Td>{citizenIDvalue}</Td>
-                    {Number(citizenId) == 0 ? <Td className='secondTd' ><Button color='#fff' backgroundColor="#76568e" onClick={handleMint}>Mint</Button></Td> : ''}
-                    {Number(citizenId) != 0 && Number(isSetNFTtoBrightID) == 0 ? <Td className='secondTd'> <Button color='#fff' onClick={() => handleTransfer(citizenId)}>Transfer</Button></Td> : ''}
-                </Tr>
-                <Tr>
-                    <Th>Connect wallet to BrightID</Th>
-                    <Td>{isBrightId}</Td>
-                   {!brightId ? <Td className='secondTd'><Button color='#fff'  backgroundColor="#76568e" onClick={handleBrightID}>Connect you'r wallet to BrightID</Button></Td>:""}
-                </Tr>
-                <Tr>
-                    <Th>Connect CitizenID to BrightID</Th>
-                    <Td>{isSetNFTtoBrightIDvalue}</Td>
-                    {brightId == true && Number(citizenId != 0) && Number(isSetNFTtoBrightID) == 0 ? <Td className='secondTd'><Button color='#fff' onClick={handleSetBrightID}>{btnSetBrightID}</Button></Td> : ''}
-                </Tr>
-                <Tr>
-                    <Th>Avatar Link</Th>
-                    {avatarLink ? <Td><a target="_blank" href={avatarLink}>You'r avatar link</a></Td> : <Td>Don't have avatar link</Td>}
-                    {avatarLink ? <Td className='secondTd'><Button  onClick={handleCopyClick} color='#fff'  backgroundColor="#76568e" >{copyState}</Button></Td> : ''}
-                    {Number(citizenId) != 0 && !avatarLink ? <Td className='secondTd'><Button color='#fff'  backgroundColor="#76568e" onClick={handleCreateAvatar}>Create Avatar</Button></Td> : ''}
-                </Tr>
+                    <Tr>
+                        <Th>CitizenID</Th>
+                        <Td>{citizenIDvalue}</Td>
+                        {/* {Number(citizenId) == 0 ? <Td className='secondTd' ><Button color='#fff' backgroundColor="#76568e" onClick={handleMint}>Mint</Button></Td> : ''} */}
+                        {Number(citizenId) != 0 && Number(!isTransferable) ? <Td className='secondTd'> <Button color='#fff' onClick={() => handleTransfer(citizenId)}>Transfer</Button></Td> : ''}
+                    </Tr>
+                    {!brightId  ?
+                    <Tr>
+                        <Th>Connect wallet to BrightID</Th>
+                        <Td>{isBrightId}</Td>
+                    {!brightId ? <Td className='secondTd'><Button color='#fff'  backgroundColor="#76568e" onClick={handleBrightID}>Connect you'r wallet to BrightID</Button></Td>:""}
+                    </Tr>
+                    :
+                    ''}
+
+                    <Tr>
+                        <Th>Connect CitizenID to BrightID</Th>
+                        <Td>{isSetNFTtoBrightIDvalue}</Td>
+                        {brightId == true && Number(citizenId != 0) && Number(isSetNFTtoBrightID) == 0 ? <Td className='secondTd'><Button color='#fff' onClick={handleSetBrightID}>{btnSetBrightID}</Button></Td> : ''}
+                    </Tr>
+                    {avatarLink ?
+                    <Tr>
+                        <Th>Avatar Link</Th>
+                         <Td><a target="_blank" href={avatarLink}>You'r avatar link</a></Td>
+                        {avatarLink ? <Td className='secondTd'><Button  onClick={handleCopyClick} color='#fff'  backgroundColor="#76568e" >{copyState}</Button></Td> : ''}
+                        {/* {Number(citizenId) != 0 && !avatarLink ? <Td className='secondTd'><Button color='#fff'  backgroundColor="#76568e" onClick={handleCreateAvatar}>Create Avatar</Button></Td> : ''} */}
+                    </Tr>
+                    :
+                    ''
+                    }
                 </Tbody>
             </Table>
         </>
