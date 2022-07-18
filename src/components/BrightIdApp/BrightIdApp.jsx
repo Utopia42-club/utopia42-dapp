@@ -7,9 +7,11 @@ import { GradientTitle, } from '../text/Title';
 import { useWeb3React } from '@web3-react/core';
 import { useEffect } from 'react';
 import styled from 'styled-components'
+import useSetBrightIdQrCode from '../../hooks/useSetBrightIdQrCode';
 
 function BrightIdApp(props) {
   const { account } = useWeb3React()
+  const {citizenID} = props
   const [verified, setVerified] = React.useState()
   const [privateKey, setPrivateKey] = React.useState()
   const [testingKey, setTestingKey] = React.useState()
@@ -18,6 +20,11 @@ function BrightIdApp(props) {
   const [deeplink, setDeeplink] = React.useState()
   const [sponsorships, setSponsorships] = React.useState(0)
   const [res, setRes] = React.useState()
+  const setBrightId = useSetBrightIdQrCode(account)
+
+  const handleSetBrightID = () => {
+    setBrightId(citizenID)
+  }
 
   const Box = styled.div`{
     margin-top:20px;
@@ -111,9 +118,10 @@ function BrightIdApp(props) {
                 <a style={{color:'#814f8c'}} href={deeplink}>Clickable link</a>
               </div>
             </LinkBox>
+              <button className='setBrightIDbuttonQR' onClick={handleSetBrightID} style={{marginTop:'10px',backgroundColor:"#76568e", border:'none', padding:'10px 10px', color:'white', fontWeight:"bold", borderRadius:'5px', cursor:'pointer'}}>set BrightID</button>
         </div>
           {/* <div>
-            <header >Application Keys</header>
+            <header <button>set BrightID</button> >Application Keys</header>
             <input type="password" placeholder="Sponsor Private Key" value={privateKey} onChange={(evt) => setPrivateKey(evt.target.value)} />
             <input type="password" placeholder="Testing Key" value={testingKey} onChange={(evt) => setTestingKey(evt.target.value)} />
           </div> */}
