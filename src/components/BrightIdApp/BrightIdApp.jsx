@@ -8,6 +8,7 @@ import { useWeb3React } from '@web3-react/core';
 import { useEffect } from 'react';
 import styled from 'styled-components'
 import useSetBrightIdQrCode from '../../hooks/useSetBrightIdQrCode';
+import { useState } from 'react';
 
 function BrightIdApp(props) {
   const { account } = useWeb3React()
@@ -18,12 +19,15 @@ function BrightIdApp(props) {
   const [context, setContext] = React.useState('UNBC')
   const [contextId, setContextId] = React.useState(account)
   const [deeplink, setDeeplink] = React.useState()
+  const [btnName, setBtnName] = useState('set BrightID')
   const [sponsorships, setSponsorships] = React.useState(0)
   const [res, setRes] = React.useState()
   const setBrightId = useSetBrightIdQrCode(account)
 
-  const handleSetBrightID = () => {
-    setBrightId(citizenID)
+  const handleSetBrightID = async () => {
+    setBtnName('set BrightID ...')
+    await setBrightId(citizenID)
+    setBtnName('set BrightID')
   }
 
   const Box = styled.div`{
@@ -118,7 +122,7 @@ function BrightIdApp(props) {
                 <a style={{color:'#814f8c'}} href={deeplink}>Clickable link</a>
               </div>
             </LinkBox>
-              <button className='setBrightIDbuttonQR' onClick={handleSetBrightID} style={{marginTop:'10px',backgroundColor:"#76568e", border:'none', padding:'10px 10px', color:'white', fontWeight:"bold", borderRadius:'5px', cursor:'pointer'}}>set BrightID</button>
+              <button className='setBrightIDbuttonQR' onClick={handleSetBrightID} style={{marginTop:'10px',backgroundColor:"#76568e", border:'none', padding:'10px 10px', color:'white', fontWeight:"bold", borderRadius:'5px', cursor:'pointer'}}>{btnName}</button>
         </div>
           {/* <div>
             <header <button>set BrightID</button> >Application Keys</header>
