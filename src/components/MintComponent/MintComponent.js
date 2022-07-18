@@ -4,71 +4,59 @@ import { Box } from './Container';
 import Swal from 'sweetalert2'
 import { useEffect, useState } from 'react';
 import { Container, Wrapper } from '../container/Container'
-import ActionButton from '../actionButton/ActionButton'
+import useCitizenId from '../../hooks/useCitizenId';
+// import ActionButton from '../actionButton/ActionButton'
 import { Flex } from 'rebass'
-import useMinterNft from '../../hooks/useMinterNft'
+// import useMinterNft from '../../hooks/useMinterNft'
 import { useWeb3React } from '@web3-react/core';
 // import {Button} from '../profileButton/button.style'
 import { Button, ActionText } from '../button/Button'
+import Router from 'next/router'
 
 
 
 const MintComponent = (props) => {
-    const {checkNFT, checkCitizenId} = props
+    const {titleName} = props
     const { account, chainId} = useWeb3React()
-    const [count, setCount] = useState("You'r wallet");
+    const getCitizenId = useCitizenId()
+    const [citizenID, setCitizenID] = useState()
+    // const [count, setCount] = useState("You'r wallet");
     const [buttonName, setButtonName] = useState('Mint')
 
-    const mint = useMinterNft(account, chainId)
+    // const mint = useMinterNft(account, chainId)
 
-
+  const checkCitizenId = async () => {
+    setCitizenID(await getCitizenId(account))
+  }
 
     useEffect(() => {
 
         if(account && chainId == 80001){
-            setCount(account)
+          checkCitizenId()
         }
-        else{
-            setCount("You'r wallet")
-        }
+
     }, [account])
 
 
     const handleMint = async () => {
-              console.log('mint')
-              try{
-                setButtonName('Minting ...')
-                await mint()
-                setButtonName('Minting')
-                if (checkNFT) {
-                  checkNFT()
-                }
-                if (checkCitizenId) {
-                  checkCitizenId()
-                }
-                
-              }
-              catch{
-                console.log('error')
-                setButtonName('Minting')
-              }
+      Router.push('/Mint')
     }
 
     return(
     <>
-    {account ?
+    {account && Number(citizenID) == 0 ?
     <Container>
       <Wrapper maxWidth="300px" width="100%"></Wrapper>
       <Wrapper maxWidth="470px" width="100%">
       <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
-      <GradientTitle margin="0 0 10px">Mint Citizen NFTs</GradientTitle>
+      <GradientTitle margin="0 0 10px">{titleName}</GradientTitle>
       <Box background="linear-gradient(0deg,#D3DBE3 0%,rgba(231,235,243,0) 106.95%);">
         <Input
             type="text"
             label = 'Count'
             readOnly
-            placeholder = "You'r wallet"
-            value = {count ?? ''} 
+            placeholder = "You don't have citizenID"
+            // value = {count ?? ''} 
             fontSize= '14px'
             color='#999'
         /> 

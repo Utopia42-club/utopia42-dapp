@@ -108,12 +108,16 @@ const ProfileTable = (props) => {
                     </Tr>
                     :
                     ''}
-
+                     {brightId == true && Number(citizenId != 0) && Number(isSetNFTtoBrightID) == 0 ?
                     <Tr>
                         <Th>Connect CitizenID to BrightID</Th>
                         <Td>{isSetNFTtoBrightIDvalue}</Td>
-                        {brightId == true && Number(citizenId != 0) && Number(isSetNFTtoBrightID) == 0 ? <Td className='secondTd'><Button color='#fff' onClick={handleSetBrightID}>{btnSetBrightID}</Button></Td> : ''}
+                        <Td className='secondTd'><Button color='#fff' onClick={handleSetBrightID}>{btnSetBrightID}</Button></Td>
                     </Tr>
+                    :
+                    ""
+                     }
+
                     {avatarLink ?
                     <Tr>
                         <Th>Avatar Link</Th>

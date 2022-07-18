@@ -107,7 +107,7 @@ const CreateNewAvatar = () => {
 
         </Wrapper>
        </Container>
-       : <MintComponent checkCitizenId={checkCitizenId}/>}
+       : <MintComponent titleName={'Create Avatar'}/>}
     </>
   )
 

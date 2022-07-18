@@ -147,7 +147,7 @@ const NftList = () => {
       </Wrapper>
     </Container>
     :
-    <MintComponent checkNFT={checkNFT}/>
+    <MintComponent titleName={'Profile'}/>
     }
 
     <Container>
