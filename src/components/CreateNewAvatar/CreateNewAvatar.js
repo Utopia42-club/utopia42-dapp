@@ -6,6 +6,7 @@ import AvatarForm from "../avatarForm/AvatarForm.jsx";
 import useCitizenId from "../../hooks/useCitizenId";
 import { useWeb3React } from "@web3-react/core";
 import MintComponent from "../MintComponent/MintComponent";
+import { GradientTitle } from '../text/Title';
 
 const CreateNewAvatar = () => {
   const subdomain = 'utopia42club';
@@ -71,7 +72,7 @@ const CreateNewAvatar = () => {
     if(account && chainId == 80001){
       checkCitizenId()
     }
-  }, [account])
+  }, [account, chainId])
 
 
   return (
@@ -80,6 +81,7 @@ const CreateNewAvatar = () => {
       <Container>
         <Wrapper maxWidth="100%" width="100%">
         <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
+        <GradientTitle margin="0 0 10px">Create Avatar</GradientTitle>
             <Box background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 126.95%)">
                     <iframe 
                     ref={iFrameRef} 

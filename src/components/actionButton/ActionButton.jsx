@@ -10,7 +10,7 @@ import { addRPC } from '../../utils/addRPC'
 import { NameChainMap } from '../../constants/chainsMap'
 
 const ActionButtonComponent = (props) => {
-  const { handleMint, status} = props
+  const { handleMint, status, checkCitizenID} = props
   console.log(status)
   const [open, setOpen] = useState(false)
   const { account, chainId, error } = useWeb3React()
@@ -34,6 +34,13 @@ const ActionButtonComponent = (props) => {
     }
   }
 
+  const handleWrongNetwork = () => {
+    wrongNetwork ? addRPC(bridge.fromChain ? bridge.fromChain.id : validChains[0]) : addRPC(validChainId)
+    if (checkCitizenID){
+      checkCitizenID()
+    }
+  }
+
   let contentBtn = ''
   if (!account && !(error instanceof UnsupportedChainIdError))
     contentBtn = (
@@ -48,15 +55,13 @@ const ActionButtonComponent = (props) => {
         background={'rgba(255, 164, 81, 0.2)'}
         border="1px solid rgba(255, 164, 81, 1)"
         cursor="pointer"
-        onClick={() =>
-          wrongNetwork ? addRPC(bridge.fromChain ? bridge.fromChain.id : validChains[0]) : addRPC(validChainId)
-        }
+        onClick={handleWrongNetwork}
       >
-        <Type.MD color={'rgba(49, 49, 68, 1)'} fontWeight="bold">
+
           {wrongNetwork
             ? ` Switch to ${NameChainMap[bridge.fromChain ? bridge.fromChain.id : validChains[0]]}`
             : ` Switch to ${NameChainMap[validChainId]}`}
-        </Type.MD>
+
       </Button>
     )
   } 

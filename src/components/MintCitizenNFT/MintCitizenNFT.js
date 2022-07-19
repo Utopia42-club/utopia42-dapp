@@ -6,14 +6,8 @@ import { useEffect, useState } from 'react';
 import { Container, Wrapper } from '../container/Container'
 import ActionButton from '../actionButton/ActionButton'
 import { Flex } from 'rebass'
-// import useBrightIdApi from '../../hooks/useBrightIdApi'
 import useMinterNft from '../../hooks/useMinterNft'
-// import useMintNFTsetBrightId from '../../hooks/useMintNFTsetBrightId'
-// import useUserRegisterNFTs from '../../hooks/useUserRegisterNFTs';
 import { useWeb3React } from '@web3-react/core';
-// import BrightId from '../BrightIdApp/BrightIdApp';
-// import useMaxPerUser from '../../hooks/useMaxPerUser';
-// import useMintAndRegisterNotId from '../../hooks/useMintAndRegisterNotId'
 import useCitizenId from '../../hooks/useCitizenId'
 
 
@@ -62,6 +56,7 @@ const MintCitizenNFT = () => {
 
     return(
     <>
+    {chainId == 80001 ?
     <Container>
       <Wrapper maxWidth="300px" width="100%"></Wrapper>
       <Wrapper maxWidth="470px" width="100%">
@@ -84,7 +79,7 @@ const MintCitizenNFT = () => {
       </Box>
       <div style={{width:"100%", background:"linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%"}}>
       <Box marginTop="10" background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
-        <ActionButton handleMint={handleMint} status={status} />
+        <ActionButton checkCitizenID={checkCitizenID} handleMint={handleMint} status={status} />
       </Box>
       </div>
       </Flex>
@@ -92,6 +87,9 @@ const MintCitizenNFT = () => {
       <Wrapper maxWidth="300px" width="100%">
       </Wrapper>
     </Container>
+    :
+    ''
+    }
     </>
     )
 

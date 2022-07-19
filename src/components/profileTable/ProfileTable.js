@@ -4,16 +4,22 @@ import useSetBrightId from "../../hooks/useSetBrightId"
 import { useWeb3React } from "@web3-react/core"
 import React, {useState} from 'react'
 import Router from 'next/router'
+import Show3dAvatar from '../show3dAvatar/Show3dAvatar'
 
 const ProfileTable = (props) => {
     const [copyState, setCopyState] = useState('Copy Link')
     const { account } = useWeb3React()
-    const {handleSelectToken, setTransferModal, citizenId, brightId, avatarLink, isSetNFTtoBrightID, setBrightIdModal, checkNFT, isTransferable, NFTs} = props
+    const {handleSelectToken, setTransferModal, citizenId, brightId, avatarLink, isSetNFTtoBrightID, registeredNFT, setBrightIdModal, checkNFT, isTransferable, NFTs} = props
     const setBrightId = useSetBrightId(account)
+    const [showAvatarLink, setShowAvatarLink] = useState(false)
     let citizenIDvalue;
     let isSetNFTtoBrightIDvalue;
     const [btnSetBrightID, setBtnSetBrightId] = useState('Set BrightID')
     console.log(NFTs[0], citizenId)
+
+    const handleShowAvatar = () => {
+        setShowAvatarLink(!showAvatarLink)
+    }
 
     async function copyTextToClipboard(text) {
         if (navigator.clipboard && window.isSecureContext) {
@@ -81,7 +87,13 @@ const ProfileTable = (props) => {
     const handleSetBrightID = async () => {
         setBtnSetBrightId('Set BrightID ...')
             try{
-                await setBrightId(citizenId)
+                if(registeredNFT){
+                    console.log(registeredNFT)
+                    await setBrightId(registeredNFT)
+                }
+                else{
+                    await setBrightId(citizenId)
+                }
                 setBtnSetBrightId('Set BrightID')
                 checkNFT()
             }
@@ -121,15 +133,23 @@ const ProfileTable = (props) => {
                     {avatarLink ?
                     <Tr>
                         <Th>Avatar Link</Th>
-                         <Td><a target="_blank" href={avatarLink}>You'r avatar link</a></Td>
-                        {avatarLink ? <Td className='secondTd'><Button  onClick={handleCopyClick} color='#fff'  backgroundColor="#76568e" >{copyState}</Button></Td> : ''}
-                        {/* {Number(citizenId) != 0 && !avatarLink ? <Td className='secondTd'><Button color='#fff'  backgroundColor="#76568e" onClick={handleCreateAvatar}>Create Avatar</Button></Td> : ''} */}
+                         <Td><a target="_blank" href={avatarLink}>Download avatar</a></Td>
+                        {avatarLink ? <Td className='secondTd'>
+                            <Button  onClick={handleCopyClick} color='#fff'  backgroundColor="#76568e" >{copyState}</Button>
+                            <Button  onClick={handleShowAvatar} color='#fff'  backgroundColor="#76568e" >View</Button>
+                            </Td> : ''}
+                        
                     </Tr>
                     :
                     ''
                     }
                 </Tbody>
             </Table>
+            {showAvatarLink ?
+            <Show3dAvatar avatarLink={avatarLink}/>
+            :
+            ''
+            }
         </>
     )
 }

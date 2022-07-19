@@ -60,10 +60,12 @@ const CreateVerse = () => {
 
     return(
 <>
+{account && chainId == 80001 ?
 <Container>
   <Wrapper maxWidth="300px" width="100%"></Wrapper>
   <Wrapper maxWidth="470px" width="100%">
   <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
+  <GradientTitle margin="0 0 10px">Create Verse</GradientTitle>
   <Box background="linear-gradient(0deg,#D3DBE3 0%,rgba(231,235,243,0) 106.95%);">
     <div style={{width:"100%"}}>
     <Flex width="100%">
@@ -87,6 +89,9 @@ const CreateVerse = () => {
   <Wrapper maxWidth="300px" width="100%">
   </Wrapper>
 </Container>
+:
+''
+}
 </>
 
     )

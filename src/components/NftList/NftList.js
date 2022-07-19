@@ -20,6 +20,7 @@ import useGetAvatarLink from '../../hooks/useGetAvatarLink';
 import useIsSetBrightID from '../../hooks/useIsSetBrightId';
 import useIsVerified from '../../hooks/useIsVerified';
 import MintComponent from '../MintComponent/MintComponent';
+import useGetLastCitizenId from '../../hooks/useGetLastCitizenId';
 // import loading from '../media/common/xm-loader.gif'
 
 const NftList = () => {
@@ -43,16 +44,21 @@ const NftList = () => {
     const isSetBrightID = useIsSetBrightID()
     const isVerified = useIsVerified()
     const [NFTs, setNFTs] = useState()
+    const [registeredNFT, setRegisteredNFT] = useState()
     const getNFTs = useUserNFTs(account)
+    const getLastCitizenId = useGetLastCitizenId()
 
     const isRegisteredWallet = async () => {
         data = await brightIdData()
         console.log(data)
         if (data.error) {
+          setRegisteredNFT(null)
           setRegisteredWallet(false)
-            
+          
         }
         else{
+          let lastContextId = data.contextIds[data.contextIds.length-1]
+          setRegisteredNFT(await getLastCitizenId(lastContextId))
           setRegisteredWallet(true)
         }
     }
@@ -128,14 +134,14 @@ const NftList = () => {
 
     return(
       <>
-    {Number(citizenID!=0 ) ?
+    {Number(citizenID!=0 ) && chainId == 80001 ?
     <Container>
       <Wrapper maxWidth="300px" width="100%"></Wrapper>
       <Wrapper width="100%">
       <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
       <GradientTitle margin="0 0 10px">Profile</GradientTitle>
         {chainId == 80001 && ready ? 
-        <ProfileTable NFTs={NFTs} isTransferable={isTransferable}  checkNFT={checkNFT} setTransferModal={setTransferModal} handleSelectToken={handleSelectToken} setBrightIdModal={setBrightIdModal} citizenId={citizenID} brightId={registeredWallet} avatarLink={avatarLink} isSetNFTtoBrightID={isSetNFTtoBrightID}/>
+        <ProfileTable NFTs={NFTs} isTransferable={isTransferable} registeredNFT={registeredNFT}  checkNFT={checkNFT} setTransferModal={setTransferModal} handleSelectToken={handleSelectToken} setBrightIdModal={setBrightIdModal} citizenId={citizenID} brightId={registeredWallet} avatarLink={avatarLink} isSetNFTtoBrightID={isSetNFTtoBrightID}/>
         : account && !ready && chainId == 80001?
         <img width='100px' src='media/common/loading-gif.jpg' />
         :

@@ -11,7 +11,7 @@ const useSetBrightId = (account) => {
     const brightIdData = useBrightIdApi()
     const setBrightId = async (id) => {
         const data = await brightIdData()
-        console.log(data)
+        console.log(id)
         if (!id) {
             return Swal.fire({
                 text: 'Invalid NFT Id',
