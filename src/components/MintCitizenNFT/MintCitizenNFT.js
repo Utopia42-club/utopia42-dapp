@@ -30,7 +30,7 @@ const MintCitizenNFT = () => {
 
     useEffect(() => {
 
-        if(account && chainId == 80001){
+        if(account && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN){
             setCount(account)
             checkCitizenID()
         }
@@ -56,7 +56,7 @@ const MintCitizenNFT = () => {
 
     return(
     <>
-    {chainId == 80001 ?
+    {chainId == process.env.NEXT_PUBLIC_VALID_CHAIN ?
     <Container>
       <Wrapper maxWidth="300px" width="100%"></Wrapper>
       <Wrapper maxWidth="470px" width="100%">

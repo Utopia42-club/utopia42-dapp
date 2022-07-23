@@ -13,14 +13,6 @@ import { Type } from '../text/Text'
 const AvatarForm = (props) => {
   const { avatarLink, citizenID} = props;
   const [btnName, setBtnName] = useState('Update Avatar')
-  // const [telegram, setTelegram] = useState('')
-  // const [name, setName] = useState('')
-  // const [instagram, setInstagram] = useState('')
-  // const [discord, setDiscord] = useState('')
-  // const [facebook, setFacebook] = useState('')
-  // const [twitter, setTwitter] = useState('')
-  // const [bio, setBio] = useState('')
-  // const [image, setImage] = useState('')
   const  updateSetting = useUpdateSetting()
   const { account, chainId } = useWeb3React()
 
@@ -62,16 +54,11 @@ const AvatarForm = (props) => {
 
   return (
     <>
-      <Container>
+      {/* <Container> */}
       <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
       {Number(citizenID) != 0 ? 
       <>
-      <Flex width="100%">
-        <Type.SM color="#313144" fontSize="12.5px" padding="5px 10px">
-          {'Avatar Link'}
-        </Type.SM>
-      </Flex>
-      <Input placeholder='Avatar Link' value={avatarLink ?? ''} readOnly/>
+      <Input width='100%' placeholder='Avatar Link' value={avatarLink ?? ''} readOnly/>
 
       <Button 
           margin="10px"
@@ -90,7 +77,7 @@ const AvatarForm = (props) => {
         </div>
       }
       </Flex>
-     </Container> 
+     {/* </Container>  */}
     </>
   )
 }

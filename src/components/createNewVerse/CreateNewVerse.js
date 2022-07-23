@@ -41,7 +41,7 @@ const CreateVerse = () => {
             })
         }
 
-        if(chainId != 80001){
+        if(chainId != process.env.NEXT_PUBLIC_VALID_CHAIN){
             return Swal.fire({
                 text: 'Wrong Network',
                 icon: 'error',
@@ -72,7 +72,7 @@ const CreateVerse = () => {
 
     return(
 <>
-{account && chainId == 80001 ?
+{account && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN ?
 <Container>
   <Wrapper maxWidth="300px" width="100%"></Wrapper>
   <Wrapper maxWidth="470px" width="100%">

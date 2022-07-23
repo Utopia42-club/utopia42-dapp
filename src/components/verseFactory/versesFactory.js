@@ -19,7 +19,7 @@ const VersesFactory = () => {
 
     useEffect(() => {
 
-        if(chainId == 80001){
+        if(chainId ==  process.env.NEXT_PUBLIC_VALID_CHAIN){
             collections()
         }
         else{

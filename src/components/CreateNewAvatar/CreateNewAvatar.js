@@ -69,7 +69,7 @@ const CreateNewAvatar = () => {
   }
 
   useEffect(() => {
-    if(account && chainId == 80001){
+    if(account && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN){
       checkCitizenId()
     }
   }, [account, chainId])
@@ -77,7 +77,7 @@ const CreateNewAvatar = () => {
 
   return (
     <>
-    {chainId == 80001 &&  citizenID != 0? 
+    {chainId == process.env.NEXT_PUBLIC_VALID_CHAIN &&  citizenID != 0? 
       <Container>
         <Wrapper maxWidth="100%" width="100%">
         <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
@@ -100,7 +100,7 @@ const CreateNewAvatar = () => {
             <Box background="#f2f4fb" padding="0" borderRadius="0" border="none" width="100%">
                   <TriangleDown />
             </Box>
-            <Box color='#fff' background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
+            <Box marginTop="100" color='#fff' background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
                 <AvatarForm avatarLink={avatarLink} citizenID={citizenID}/>
             </Box>
 

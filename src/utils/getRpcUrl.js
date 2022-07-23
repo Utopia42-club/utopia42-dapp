@@ -1,7 +1,7 @@
 import random from 'lodash/random'
 import { rpcConfig } from '../constants/chainsMap'
 
-const getNodeUrl = (chainId = 80001) => {
+const getNodeUrl = (chainId =  process.env.NEXT_PUBLIC_VALID_CHAIN) => {
   try {
     const nodes = rpcConfig[chainId]['rpcUrls']
     const randomIndex = random(0, nodes.length - 1)

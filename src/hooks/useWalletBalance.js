@@ -3,7 +3,6 @@ import { fromWei } from '../utils/wei'
 import { getWeb3NoAccount } from '../utils/web3'
 
 const useWalletBalance = (account, chainId) => {
-  // const [balance, setBalance] = useState('0')
   const web3 = getWeb3NoAccount(chainId)
   let balance;
   
@@ -24,7 +23,6 @@ const useWalletBalance = (account, chainId) => {
     }
 
     return fetchBalance
-    // if (account && chainId == 80001) fetchBalance()
 }
 
 export default useWalletBalance

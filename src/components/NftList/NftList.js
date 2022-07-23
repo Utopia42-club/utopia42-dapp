@@ -24,6 +24,7 @@ import useGetLastCitizenId from '../../hooks/useGetLastCitizenId';
 // import loading from '../media/common/xm-loader.gif'
 
 const NftList = () => {
+    console.log(process.env.NEXT_PUBLIC_VALID_CHAIN)
     const { account, chainId } = useWeb3React()
     const getAvatarLink = useGetAvatarLink()
     const [registeredWallet, setRegisteredWallet] = useState(null)
@@ -117,7 +118,7 @@ const NftList = () => {
 
     useEffect(() => {
       setReady(false)
-      if(chainId == 80001){
+      if(chainId == process.env.NEXT_PUBLIC_VALID_CHAIN){
         checkNFT()
         setTransferModal(false)
       }
@@ -134,15 +135,15 @@ const NftList = () => {
 
     return(
       <>
-    {Number(citizenID!=0 ) || registeredNFT && Number(registeredNFT) != 0 && chainId == 80001 ?
+    {Number(citizenID!=0 ) || registeredNFT && Number(registeredNFT) != 0 && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN  ?
     <Container>
       <Wrapper maxWidth="300px" width="100%"></Wrapper>
       <Wrapper width="100%">
       <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
       <GradientTitle margin="0 0 10px">Profile</GradientTitle>
-        {chainId == 80001 && ready ? 
+        {chainId ==  process.env.NEXT_PUBLIC_VALID_CHAIN && ready ? 
         <ProfileTable NFTs={NFTs} isTransferable={isTransferable} registeredNFT={registeredNFT}  checkNFT={checkNFT} setTransferModal={setTransferModal} handleSelectToken={handleSelectToken} setBrightIdModal={setBrightIdModal} citizenId={citizenID} brightId={registeredWallet} avatarLink={avatarLink} isSetNFTtoBrightID={isSetNFTtoBrightID}/>
-        : account && !ready && chainId == 80001?
+        : account && !ready && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN ?
         <img width='100px' src='media/common/loading-gif.jpg' />
         :
         ""
