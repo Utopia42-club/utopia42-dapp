@@ -12,9 +12,9 @@ const useCreateVerse = (account, chainId) => {
   let status = 'Created new verse'
   const fetchBalance = useWalletBalance(account, chainId)
 
-  const createVerse = async (account ,admin) => {
+  const createVerse = async (account ,admin, verseName, assignEnable) => {
     const balance = await fetchBalance()
-    console.log(balance)
+    console.log(balance, verseName, assignEnable)
     toCheckSumAddress(admin)
     const contract = getContract(utopiaFactoryAbi, utopiaFactoryContractAddress, web3)
     if (!contract) {
@@ -28,7 +28,7 @@ const useCreateVerse = (account, chainId) => {
         status,
         contract,
         'createVerse',
-        [admin],
+        [admin, verseName, assignEnable],
         account,
         verseCreationFee,
       )

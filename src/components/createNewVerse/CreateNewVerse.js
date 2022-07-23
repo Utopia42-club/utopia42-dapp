@@ -17,15 +17,18 @@ const CreateVerse = () => {
     const { account, chainId }  = useWeb3React()
     const createVerse = useCreateVerse(account, chainId)
     const [buttonName, setButtonName] = useState('Create New Verse')
+    const [verseName, setVerseName] = useState()
+    const [assignEnable , setAssignEnable] = useState(true)
 
     const handleCreateVerse = async () => {
         if(account){
-            setButtonName('Creating New Verse...')
+            setButtonName('Creating New Verse ...')
             try{
-                await createVerse(account, admin)
+                await createVerse(account, admin, verseName, assignEnable)
             }
             catch{
                 console.log('error')
+                setButtonName('Create New Verse')
             }
             setButtonName('Create New Verse')
         }
@@ -56,6 +59,15 @@ const CreateVerse = () => {
                 timer: 1500
             })
         }
+
+        if(verseName.trim() == ''){
+            return Swal.fire({
+                text: 'Enter verse name',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
     }
 
     return(
@@ -68,12 +80,18 @@ const CreateVerse = () => {
   <GradientTitle margin="0 0 10px">Create Verse</GradientTitle>
   <Box background="linear-gradient(0deg,#D3DBE3 0%,rgba(231,235,243,0) 106.95%);">
     <div style={{width:"100%"}}>
-    <Flex width="100%">
+    {/* <Flex width="100%">
         <Type.SM color="#313144" fontSize="12.5px" padding="5px 10px">
           {'Admin Wallet'}
         </Type.SM>
-      </Flex>
-    <Input placeholder='Admin Wallet' width="100%" maxWidth='420px' value={admin} onChange={(event) => {setAdmin(event.target.value)}}/>
+    </Flex> */}
+    <Input style={{marginBottom:'10px'}} placeholder='Verse Name' width="100%" maxWidth='420px' value={verseName} onChange={(event) => {setVerseName(event.target.value)}}/>
+    <Input style={{marginBottom:'10px'}} placeholder='Admin Wallet' width="100%" maxWidth='420px' value={admin} onChange={(event) => {setAdmin(event.target.value)}}/>
+    <label>Public assign enabled</label>
+    <select value={assignEnable ?? ''} onChange={(event) => setAssignEnable(event.target.value)} id='select-box'>
+        <option value={true}>Public</option>
+        <option value={false}>Private</option>
+    </select>
     </div>
   </Box>
   <Box background="#f2f4fb" padding="0" borderRadius="0" border="none" width="100%">

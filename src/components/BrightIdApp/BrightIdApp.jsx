@@ -10,24 +10,27 @@ import styled from 'styled-components'
 import useSetBrightIdQrCode from '../../hooks/useSetBrightIdQrCode';
 import { useState } from 'react';
 
+
 function BrightIdApp(props) {
   const { account } = useWeb3React()
-  const {citizenID} = props
+  const { checkNFT, NFTs} = props
   const [verified, setVerified] = React.useState()
   const [privateKey, setPrivateKey] = React.useState()
   const [testingKey, setTestingKey] = React.useState()
   const [context, setContext] = React.useState('UNBC')
   const [contextId, setContextId] = React.useState(account)
   const [deeplink, setDeeplink] = React.useState()
-  const [btnName, setBtnName] = useState('set BrightID')
+  const [btnName, setBtnName] = useState('Set BrightID')
   const [sponsorships, setSponsorships] = React.useState(0)
   const [res, setRes] = React.useState()
-  const setBrightId = useSetBrightIdQrCode(account)
+  const setBrightId = useSetBrightIdQrCode(account, NFTs, checkNFT, setBtnName)
+
 
   const handleSetBrightID = async () => {
-    setBtnName('set BrightID ...')
-    await setBrightId(citizenID)
-    setBtnName('set BrightID')
+      setBtnName('Set BrightID ...')
+      await setBrightId()
+      setBtnName('Set BrightID')
+      checkNFT()
   }
 
   const Box = styled.div`{

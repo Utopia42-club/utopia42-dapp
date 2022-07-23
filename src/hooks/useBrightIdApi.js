@@ -7,7 +7,7 @@ const useBrightIdApi = () => {
         let data = {}
         try{
           await axios({
-            url: `https://app.brightid.org/node/v5/verifications/UNBC/${account}?signed=eth&timestamp=seconds`,
+            url: `https://app.brightid.org/node/v5/verifications/Utopia42/${account}?signed=eth&timestamp=seconds`,
             method: "GET",
           })
         

@@ -11,13 +11,62 @@ body{
     text-align: right !important;
 }
 
+select {
 
-/* .setBrightIDbuttonQR {
-    background-color:"#76568e";
-    border:'none';
-    padding:'10px 10px';
-    color:'white';
-    font-weight:"bold";
-    border-radius:'5px';
-    cursor:'pointer';
-} */
+    /* styling */
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    display: inline-block;
+    font: inherit;
+    line-height: 1.5em;
+    height: 45px;
+    padding: 0.5em 3.5em 0.5em 1em;
+    color: rgb(141, 141, 141);
+    width: 100%;
+    max-width: 420px;
+    margin: 0;      
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+
+#select-box {
+  margin-top: 5px;
+    background-image:
+      linear-gradient(45deg, transparent 50%, gray 50%),
+      linear-gradient(135deg, gray 50%, transparent 50%),
+      linear-gradient(to right, #ccc, #ccc);
+    background-position:
+      calc(100% - 20px) calc(1.25em + 2px),
+      calc(100% - 15px) calc(1.25em + 2px),
+      calc(100% - 2.5em) 0.5em;
+    background-size:
+      5px 5px,
+      5px 5px,
+      1px 2em;
+    background-repeat: no-repeat;
+  }
+  
+  #select-box:focus {
+    outline: 0;
+  }
+
+  #select-box > option {
+    height: 45px !important;
+  }
+
+  label{
+    color:rgb(126, 124, 124);
+  }
+
+
+  option{
+
+    font-size: 120%;
+    padding:5px 0;
+  }

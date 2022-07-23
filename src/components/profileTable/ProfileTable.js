@@ -5,17 +5,18 @@ import { useWeb3React } from "@web3-react/core"
 import React, {useState} from 'react'
 import Router from 'next/router'
 import Show3dAvatar from '../show3dAvatar/Show3dAvatar'
+import Swal from 'sweetalert2'
 
 const ProfileTable = (props) => {
     const [copyState, setCopyState] = useState('Copy Link')
     const { account } = useWeb3React()
-    const {handleSelectToken, setTransferModal, citizenId, brightId, avatarLink, isSetNFTtoBrightID, registeredNFT, setBrightIdModal, checkNFT, isTransferable, NFTs} = props
+    const { handleSelectToken, setTransferModal, citizenId, brightId, avatarLink, isSetNFTtoBrightID, registeredNFT, setBrightIdModal, checkNFT, isTransferable, NFTs } = props
     const setBrightId = useSetBrightId(account)
     const [showAvatarLink, setShowAvatarLink] = useState(false)
     let citizenIDvalue;
     let isSetNFTtoBrightIDvalue;
     const [btnSetBrightID, setBtnSetBrightId] = useState('Set BrightID')
-    console.log(NFTs[0], citizenId)
+    console.log(NFTs[0], citizenId, registeredNFT)
 
     const handleShowAvatar = () => {
         setShowAvatarLink(!showAvatarLink)
@@ -85,6 +86,15 @@ const ProfileTable = (props) => {
     }
 
     const handleSetBrightID = async () => {
+        if(registeredNFT && NFTs[0] && Number(registeredNFT) != Number(NFTs[0])){
+            return Swal.fire({
+                text:"Transfer you'r CitizenID",
+                icon:'error',
+                showConfirmButton: false,
+                timer: 2500
+
+            })
+        }
         setBtnSetBrightId('Set BrightID ...')
             try{
                 if(registeredNFT){
@@ -106,12 +116,16 @@ const ProfileTable = (props) => {
         <>
             <Table id="table">
                 <Tbody>
+                    {Number(citizenId) != 0 ?
                     <Tr>
                         <Th>CitizenID</Th>
                         <Td>{citizenIDvalue}</Td>
                         {/* {Number(citizenId) == 0 ? <Td className='secondTd' ><Button color='#fff' backgroundColor="#76568e" onClick={handleMint}>Mint</Button></Td> : ''} */}
-                        {Number(citizenId) != 0 && Number(!isTransferable) ? <Td className='secondTd'> <Button color='#fff' onClick={() => handleTransfer(citizenId)}>Transfer</Button></Td> : ''}
+                        {Number(!isTransferable) ? <Td className='secondTd'> <Button color='#fff' onClick={() => handleTransfer(citizenId)}>Transfer</Button></Td> : ''}
                     </Tr>
+                    :
+                    ''
+                    }
                     {!brightId  ?
                     <Tr>
                         <Th>Connect wallet to BrightID</Th>
@@ -120,7 +134,7 @@ const ProfileTable = (props) => {
                     </Tr>
                     :
                     ''}
-                     {brightId == true && Number(citizenId != 0) && Number(isSetNFTtoBrightID) == 0 ?
+                     {brightId == true  && Number(isSetNFTtoBrightID) == 0 ?
                     <Tr>
                         <Th>Connect CitizenID to BrightID</Th>
                         <Td>{isSetNFTtoBrightIDvalue}</Td>

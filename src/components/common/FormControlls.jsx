@@ -34,6 +34,7 @@ export const Selector = styled.div`
 export const BorderBottom = styled.div`
   border-bottom: ${({ border }) => (border ? border : ' 1px solid rgba(172, 175, 243, 0.3)')};
 `
+
 export const Input = styled.input`
   max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : '400px')};
   width: ${({ width }) => (width ? width : '100%')};;

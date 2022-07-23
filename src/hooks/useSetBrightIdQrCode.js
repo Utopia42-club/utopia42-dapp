@@ -5,17 +5,19 @@ import { sendTransaction } from '../utils/sendTx'
 import useWeb3 from './useWeb3'
 import { UNBCNFTContractAddress } from '../ContractsAddresses';
 import useBrightIdApi from './useBrightIdApi'
-import useCitizenId from './useCitizenId';
-const useSetBrightIdQrCode = (account) => {
+import useGetLastCitizenId from './useGetLastCitizenId';
+
+const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
     const web3 = useWeb3()
+    const getLastCitizenId = useGetLastCitizenId()
     let status = 'Register'
-    const getCitizenId = useCitizenId()
     const brightIdData = useBrightIdApi()
     const setBrightId = async () => {
-        let id = await getCitizenId(account)
+        console.log(registeredNFT)
         const data = await brightIdData()
         console.log(data)
         if (data.error){
+            setBtnName('Set BrightID')
             return Swal.fire({
                 text: 'Please scan QR code',
                 icon: 'error',
@@ -24,15 +26,30 @@ const useSetBrightIdQrCode = (account) => {
     
             })
         }
-        if (!id || Number(id) == 0) {
+        let lastContextId = data.contextIds[data.contextIds.length-1]
+        let registeredNFT =  await getLastCitizenId(lastContextId)
+        console.log(registeredNFT)
+
+        if(registeredNFT && NFTs[0] && Number(registeredNFT) != Number(NFTs[0])){
+            checkNFT()
+            setBtnName('Set BrightID')
             return Swal.fire({
-                text: 'Invalid NFT Id',
-                icon: 'error',
+                text:"Transfer you'r CitizenID",
+                icon:'error',
                 showConfirmButton: false,
-                timer: 1500
-    
+                timer: 2500
+      
             })
-        }
+          }
+        // if (!id || Number(id) == 0) {
+        //     return Swal.fire({
+        //         text: 'Invalid NFT Id',
+        //         icon: 'error',
+        //         showConfirmButton: false,
+        //         timer: 1500
+    
+        //     })
+        // }
         let contextIds = data.contextIds
         let sgiR = '0x' + data.sigR
         let sugS = '0x' + data.sigS
@@ -44,17 +61,18 @@ const useSetBrightIdQrCode = (account) => {
                     status,
                     NFTContract,
                     'setBrightId',
-                    [id,
+                    [registeredNFT,
                         contextIds,
                         timestamp, 
                         sigV,
                         sgiR,
                         sugS,],
                         account
-                    
                     )
         }
         catch(err){
+            setBtnName('Set BrightID')
+            checkNFT()
             let error;
             err.reason ?  error = err.reason : error = err.message 
             //  setMintName('Mint')

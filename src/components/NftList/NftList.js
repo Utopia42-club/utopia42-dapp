@@ -66,11 +66,11 @@ const NftList = () => {
     const checkNFT = async () => {
         setIsSetNFTtoBrightID(await isSetBrightID(account))
         let id = await getCitizenId(account)
+        await isRegisteredWallet()
         setCitizenID(id)
         setAvatarLink(await getAvatarLink(account))
         setIsTransferable(await isVerified(id))
         setNFTs(await getNFTs())
-        await isRegisteredWallet()
         setReady(true)
     }
 
@@ -94,11 +94,11 @@ const NftList = () => {
         try{
           setTransferNFT('Transferring ...')
           await safeTransfer(toAddress, selectedNFT)
+          checkNFT()
           setTransferModal(false)
           setTransferNFT('Transfer')
           setToAddress(null)
           setSelectedNFT(null)
-          checkNFT()
         }
         catch(error){
             setTransferModal(false)
@@ -134,7 +134,7 @@ const NftList = () => {
 
     return(
       <>
-    {Number(citizenID!=0 ) && chainId == 80001 ?
+    {Number(citizenID!=0 ) || registeredNFT && Number(registeredNFT) != 0 && chainId == 80001 ?
     <Container>
       <Wrapper maxWidth="300px" width="100%"></Wrapper>
       <Wrapper width="100%">
@@ -186,7 +186,7 @@ const NftList = () => {
         mainBack={'#fff'}
       >
         <Wrapper maxWidth="470px" width="100%">
-          <BrightId account={account}/>
+          <BrightId account={account} checkNFT={checkNFT} registeredNFT={registeredNFT} citizenId={citizenID} NFTs={NFTs}/>
         </Wrapper>
       </Modal>
 
