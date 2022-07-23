@@ -37,7 +37,7 @@ const MintCitizenNFT = () => {
         else{
             setCount("You'r wallet")
         }
-    }, [account])
+    }, [account, chainId])
 
 
     const handleMint = async () => {
