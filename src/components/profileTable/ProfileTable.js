@@ -97,7 +97,7 @@ const ProfileTable = (props) => {
         }
         setBtnSetBrightId('Set BrightID ...')
             try{
-                if(registeredNFT){
+                if(registeredNFT && registeredNFT != 0){
                     console.log(registeredNFT)
                     await setBrightId(registeredNFT)
                 }
