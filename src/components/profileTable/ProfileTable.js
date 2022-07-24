@@ -86,7 +86,7 @@ const ProfileTable = (props) => {
     }
 
     const handleSetBrightID = async () => {
-        if(registeredNFT && NFTs[0] && Number(registeredNFT) != Number(NFTs[0])){
+        if(registeredNFT && NFTs[0] && Number(registeredNFT) != 0 && Number(registeredNFT) != Number(NFTs[0])){
             return Swal.fire({
                 text:"Transfer you'r CitizenID",
                 icon:'error',

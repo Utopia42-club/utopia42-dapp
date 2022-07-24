@@ -7,30 +7,34 @@ import axios from 'axios'
 const useGetCollections = () => {
 
     const web3 = useWeb3();
-    const graphUrl = 'https://api.thegraph.com/subgraphs/name/jafari-mi/utopia42-mumbai'
+    const graphUrl = 'https://api.thegraph.com/subgraphs/name/jafari-mi/utopia42-mumbai-v2'
     const getCollections = async (account) => {
         let factories;
+        owner: "${account.toLowerCase()}"
         let totalData = await axios.post(
             graphUrl,
             {
 
               query:
               `{
-                factories (
-                  where: {
-                    owner: "${account.toLowerCase()}"
-                  }
-                
-                  ) {
+                factories(where: {owner: "${account.toLowerCase()}"}) {
                   id
-                    collectionAddress
-                    utopiaAddress
+                  factory
+                  verse {
+                    owner
+                    id
                   }
-            }
+                  collection {
+                    id
+                  }
+                }
+              }
+              
               `
             }
           ).then((res) => {
             factories  = res.data.data.factories
+            // console.log(factories)
         })
         
         return factories
