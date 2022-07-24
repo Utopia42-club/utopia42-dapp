@@ -21,10 +21,9 @@ import useIsSetBrightID from '../../hooks/useIsSetBrightId';
 import useIsVerified from '../../hooks/useIsVerified';
 import MintComponent from '../MintComponent/MintComponent';
 import useGetLastCitizenId from '../../hooks/useGetLastCitizenId';
-// import loading from '../media/common/xm-loader.gif'
+
 
 const NftList = () => {
-    console.log(process.env.NEXT_PUBLIC_VALID_CHAIN)
     const { account, chainId } = useWeb3React()
     const getAvatarLink = useGetAvatarLink()
     const [registeredWallet, setRegisteredWallet] = useState(null)
@@ -140,10 +139,13 @@ const NftList = () => {
       <Wrapper maxWidth="300px" width="100%"></Wrapper>
       <Wrapper width="100%">
       <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
-      <GradientTitle margin="0 0 10px">Profile</GradientTitle>
         {chainId ==  process.env.NEXT_PUBLIC_VALID_CHAIN && ready ? 
+        <>
+        <GradientTitle margin="0 0 10px">Profile</GradientTitle>
         <ProfileTable NFTs={NFTs} isTransferable={isTransferable} registeredNFT={registeredNFT}  checkNFT={checkNFT} setTransferModal={setTransferModal} handleSelectToken={handleSelectToken} setBrightIdModal={setBrightIdModal} citizenId={citizenID} brightId={registeredWallet} avatarLink={avatarLink} isSetNFTtoBrightID={isSetNFTtoBrightID}/>
-        : account && !ready && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN ?
+        </>
+        : 
+        account && !ready && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN ?
         <img width='100px' src='media/common/loading-gif.jpg' />
         :
         ""

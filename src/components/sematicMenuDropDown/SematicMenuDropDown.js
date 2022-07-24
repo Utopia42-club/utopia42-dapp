@@ -55,7 +55,7 @@ const DropdownPointing = () => {
                 {menuItem.map((item) => {
 
                 if(item.subMenu){
-                    return (<Dropdown   text={item.name} pointing='left' className='link item'>
+                    return (<Dropdown text={item.name} pointing='left' className='link item'>
                     <Dropdown.Menu>
                     {item.subMenu.map((subName) => {
                         return (<Dropdown.Item>
@@ -66,10 +66,9 @@ const DropdownPointing = () => {
                     </Dropdown>)
                 }
                 else{
-                    return <Menu.Item
-                    name={item.name}
-                    link={item.link}
-                    ></Menu.Item>
+                    return <Menu.Item>
+                      <a href={item.link} ><p>{item.name}</p></a>
+                    </Menu.Item>
                 }
                 })}
         </Menu> 

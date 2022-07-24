@@ -70,3 +70,23 @@ select {
     font-size: 120%;
     padding:5px 0;
   }
+
+  .ui.menu .item> p {
+    position: relative;
+    top:-10px;
+    height: 40px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    margin-right: -16px;
+    padding-right: 10px;
+    margin-left: -16px; 
+  } 
+
+  .ui.dropdown .menu>.item{
+    height: 40px !important;
+  }
+
+  .ui.menu .item>a {
+    color:#000;
+  }

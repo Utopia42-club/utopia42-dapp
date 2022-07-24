@@ -19,12 +19,13 @@ const supportedChainIds = [
   137, // Matic
   80001, // Maticc Mumbai
 ]
-const INFURA_KEY = '5ff4241f89cc422a935937ac2d675e59'
+const INFURA_KEY = process.env.NEXT_PUBLIC_INFURA_KEY
+console.log(INFURA_KEY)
 // const FORTMATIC_KEY = process.env.NEXT_PUBLIC_FORTMATIC_KEY
 
 const RPC_URLS = {
-  1: 'https://mainnet.infura.io/v3/' + INFURA_KEY,
-  3: 'https://mainnet.infura.io/v3/' + INFURA_KEY,
+  // 1: 'https://mainnet.infura.io/v3/' + INFURA_KEY,
+  // 3: 'https://mainnet.infura.io/v3/' + INFURA_KEY,
   4: 'https://rinkeby.infura.io/v3/' + INFURA_KEY,
   56: 'https://bsc-dataseed1.binance.org',
   97: 'https://data-seed-prebsc-1-s1.binance.org:8545',
@@ -47,7 +48,7 @@ const POLLING_INTERVAL = 2000
 //only mainnet (walletconnect only one chain supports)
 export const walletconnect = new WalletConnectConnector({
   rpc: { 80001: RPC_URLS[80001]},
-  // bridge: 'https://bridge.walletconnect.org',
+  bridge: 'https://bridge.walletconnect.org',
   supportedChainIds: validChains[80001],
   qrcode: true,
   pollingInterval: POLLING_INTERVAL,
