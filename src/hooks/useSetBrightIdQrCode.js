@@ -8,6 +8,7 @@ import useBrightIdApi from './useBrightIdApi'
 import useGetLastCitizenId from './useGetLastCitizenId';
 
 const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
+    let nftID;
     const web3 = useWeb3()
     const getLastCitizenId = useGetLastCitizenId()
     let status = 'Register'
@@ -30,7 +31,7 @@ const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
         let registeredNFT =  await getLastCitizenId(lastContextId)
         console.log(registeredNFT)
 
-        if(registeredNFT && NFTs[0] && Number(registeredNFT) != Number(NFTs[0])){
+        if(registeredNFT && registeredNFT!=0 && NFTs[0] && Number(registeredNFT) != Number(NFTs[0])){
             checkNFT()
             setBtnName('Set BrightID')
             return Swal.fire({
@@ -41,15 +42,15 @@ const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
       
             })
           }
-        // if (!id || Number(id) == 0) {
-        //     return Swal.fire({
-        //         text: 'Invalid NFT Id',
-        //         icon: 'error',
-        //         showConfirmButton: false,
-        //         timer: 1500
-    
-        //     })
-        // }
+
+        if (registeredNFT && registeredNFT!= 0){
+            nftID = registeredNFT
+        }
+
+        else{
+            nftID = NFTs[0]
+        }
+
         let contextIds = data.contextIds
         let sgiR = '0x' + data.sigR
         let sugS = '0x' + data.sigS
@@ -61,7 +62,7 @@ const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
                     status,
                     NFTContract,
                     'setBrightId',
-                    [registeredNFT,
+                    [nftID,
                         contextIds,
                         timestamp, 
                         sigV,
@@ -75,7 +76,6 @@ const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
             checkNFT()
             let error;
             err.reason ?  error = err.reason : error = err.message 
-            //  setMintName('Mint')
             return Swal.fire({
                 title: 'Error!',
                 text: error,
