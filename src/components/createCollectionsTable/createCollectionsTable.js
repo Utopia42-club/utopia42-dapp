@@ -6,22 +6,21 @@ import { useEffect } from 'react';
 
 const CreateCollectionsTable = (props) => {
     const {data} = props
-    let verses = []
+    const [verses, setVerses] = useState([])
     const getName = useGetVerseName()
-    let collections = []
-    let names = []
+    const [collections, setCollections] = useState([])
+    const [names, setNames] = useState([])
 
-    const verseName = async (item) => {
-       return await getName(item)
-    }
-
-    data.map(async (item) => {
-        verses.push(item.verse[0].id)
-        collections.push(item.collection[0].id)
-        let name = await getName(item.verse[0].id)
-        names.push(name)
-        console.log(names, collections, verses)
-    })
+    useEffect(() => {
+        setNames([])
+        data.map(async (item) => {
+            console.log(item)
+            setVerses(oldName => [...oldName, item.verse[0].id])
+            setCollections(oldName => [...oldName, item.collection[0].id])
+            let newName = await getName(item.verse[0].id, names)
+            setNames(oldName => [...oldName, newName])
+        })
+    }, [])
 
     return (
         <>
