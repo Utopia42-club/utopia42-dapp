@@ -120,8 +120,16 @@ const ProfileTable = (props) => {
                     <Tr>
                         <Th>CitizenID</Th>
                         <Td>{citizenIDvalue}</Td>
-                        {/* {Number(citizenId) == 0 ? <Td className='secondTd' ><Button color='#fff' backgroundColor="#76568e" onClick={handleMint}>Mint</Button></Td> : ''} */}
                         {Number(!isTransferable) ? <Td className='secondTd'> <Button color='#fff' onClick={() => handleTransfer(citizenId)}>Transfer</Button></Td> : ''}
+                    </Tr>
+                    :
+                    ''
+                    }
+                    {Number(citizenId) > 0 && Number(registeredNFT) > 0 && Number(citizenId) == Number(registeredNFT) && Number(NFTs[0]) > 0?
+                    <Tr>
+                        <Th>NFT</Th>
+                        <Td>{NFTs[0]}</Td>
+                        <Td className='secondTd'> <Button color='#fff' onClick={() => handleTransfer(NFTs[0])}>Transfer</Button></Td>
                     </Tr>
                     :
                     ''
