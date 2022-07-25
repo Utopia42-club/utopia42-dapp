@@ -13,14 +13,21 @@ const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
     const getLastCitizenId = useGetLastCitizenId()
     let status = 'Register'
     const brightIdData = useBrightIdApi()
-    const setBrightId = async () => {
+    const setBrightId = async (isMobile) => {
         console.log(registeredNFT)
         const data = await brightIdData()
         console.log(data)
         if (data.error){
             setBtnName('Set BrightID')
+            let text;
+            if(isMobile){
+                text = "Link you'r BrightID to Utopia42"
+            }
+            else{
+                text = "Please scan QR code"
+            }
             return Swal.fire({
-                text: 'Please scan QR code',
+                text: text,
                 icon: 'error',
                 showConfirmButton: false,
                 timer: 1500

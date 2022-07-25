@@ -19,7 +19,7 @@ const useSafeTransfer = () => {
     const safeTransfer = async (toAddress, tokenId) => {
         if(Number(await getCitizenId(toAddress)) != 0 ) {
           return Swal.fire({
-            text: 'Address has citizenID',
+            text: 'Destination Address has citizenID',
             icon:'error',
             showConfirmButton: false,
             timer: 1500

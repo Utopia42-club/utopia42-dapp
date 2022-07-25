@@ -24,11 +24,26 @@ function BrightIdApp(props) {
   const [sponsorships, setSponsorships] = React.useState(0)
   const [res, setRes] = React.useState()
   const setBrightId = useSetBrightIdQrCode(account, NFTs, checkNFT, setBtnName)
+  const [width, setWidth] = useState(window.innerWidth)
 
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+}
+
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => {
+        window.removeEventListener('resize', handleWindowSizeChange);
+    }
+  }, []);
+
+  const isMobile = width <= 782;
+
+  console.log(isMobile)
 
   const handleSetBrightID = async () => {
       setBtnName('Set BrightID ...')
-      await setBrightId()
+      await setBrightId(isMobile)
       setBtnName('Set BrightID')
       checkNFT()
   }
@@ -122,7 +137,7 @@ function BrightIdApp(props) {
             </Box>
             <LinkBox>
               <div style={{marginTop:'30px'}}>
-                <a style={{color:'#814f8c'}} href={deeplink}>Clickable link</a>
+                <a style={{color:'#814f8c'}} href={deeplink}>Link you'r BrightID to Utopia42</a>
               </div>
             </LinkBox>
               <button className='setBrightIDbuttonQR' onClick={handleSetBrightID} style={{marginTop:'10px',backgroundColor:"#76568e", border:'none', padding:'10px 10px', color:'white', fontWeight:"bold", borderRadius:'5px', cursor:'pointer'}}>{btnName}</button>

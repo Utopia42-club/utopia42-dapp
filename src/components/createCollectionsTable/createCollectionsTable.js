@@ -3,6 +3,7 @@ import { GradientTitle } from '../text/Title';
 import {Td, Th, Table, Thead, Tr, Tbody, Button, Wrapper, Container}  from './table.style'
 import useGetVerseName from '../../hooks/useGetVerseName';
 import { useEffect } from 'react';
+import { useWeb3React } from '@web3-react/core';
 
 const CreateCollectionsTable = (props) => {
     const {data} = props
@@ -10,9 +11,14 @@ const CreateCollectionsTable = (props) => {
     const getName = useGetVerseName()
     const [collections, setCollections] = useState([])
     const [names, setNames] = useState([])
+    const { account, chainId } = useWeb3React()
+    console.log(account)
 
     useEffect(() => {
         setNames([])
+        setCollections([])
+        setVerses([])
+        console.log('effect')
         data.map(async (item) => {
             console.log(item)
             setVerses(oldName => [...oldName, item.verse[0].id])
@@ -20,7 +26,7 @@ const CreateCollectionsTable = (props) => {
             let newName = await getName(item.verse[0].id, names)
             setNames(oldName => [...oldName, newName])
         })
-    }, [])
+    }, [data])
 
     return (
         <>

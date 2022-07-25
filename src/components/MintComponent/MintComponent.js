@@ -28,7 +28,7 @@ const MintComponent = (props) => {
           checkCitizenId()
         }
 
-    }, [account])
+    }, [account, chainId])
 
 
     const handleMint = async () => {

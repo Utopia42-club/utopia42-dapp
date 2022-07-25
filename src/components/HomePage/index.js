@@ -5,7 +5,8 @@ import React from 'react'
 
 const HomePage = () => {
     return (
-        <></>
+        <>
+        </>
         // <Container>
         // <Wrapper width="100%" marginTop="50px">
         // <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">

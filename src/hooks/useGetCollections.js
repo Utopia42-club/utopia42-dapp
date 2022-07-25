@@ -36,7 +36,7 @@ const useGetCollections = () => {
             factories  = res.data.data.factories
             // console.log(factories)
         })
-        
+        console.log(factories)
         return factories
 
 
