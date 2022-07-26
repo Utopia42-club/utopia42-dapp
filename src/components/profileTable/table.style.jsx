@@ -8,8 +8,11 @@ export const Td = styled.td`{
     text-align: left;
     padding: 5px;
     padding-left:15px;
-        @media screen and (max-width: 780px) {
+      @media screen and (max-width: 780px) {
         font-size:13px;
+      }
+      @media screen and (max-width: 413px) {
+        font-size:12px !important;
       }
 }`
 
@@ -31,6 +34,10 @@ export const Th = styled.th`{
         width:30%;
         font-size:12px;
       }
+      @media screen and (max-width: 412px) {
+        font-size:8px;
+        padding:2px;
+      }
 
   }`
 
@@ -49,8 +56,7 @@ export const Table = styled.table`{
   border-collapse: collapse;
   text-align: center;
   width: 90%;
-  border-radius:10px;
-    
+  border-radius:10px;  
 }`
 
 export const Tbody = styled.tbody`{
@@ -65,13 +71,17 @@ export const Tbody = styled.tbody`{
 }`
 
 export const Button = styled.button `{
-  background: linear-gradient(0deg,#76568e 0%,rgba(231,235,243,0) 126.95%);
-  margin:5px;
-  padding:10px;
+  background: #76568e;
+  margin:4px;
+  padding:8px;
   color: ${({ color }) => color };
-  border:none;
   border-radius: 5px;
   cursor: pointer;
+  border:2px solid #9682a5;
+  font-size: 12px;
+  font-weight:bold;
+  // min-width:190px;
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
   @media screen and (max-width: 890px) {
     font-size: 12px;
     padding:5px;
@@ -81,6 +91,11 @@ export const Button = styled.button `{
     font-size: 7px;
     padding:5px;
     margin:3px;
+  }
+  @media screen and (max-width: 412px) {
+    font-size: 5px !important;
+    // padding:5px;
+    // margin:3px;
   }
 }`
 

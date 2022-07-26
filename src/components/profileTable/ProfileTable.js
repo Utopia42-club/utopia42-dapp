@@ -1,5 +1,5 @@
-import {Td, Th, Table, Thead, Tr, Tbody, Wrapper, Container}  from './table.style'
-import {Button} from './button.style'
+import {Td, Th, Table, Thead, Tr, Tbody, Wrapper, Container ,Button}  from './table.style'
+// import {Button} from './button.style'
 import useSetBrightId from "../../hooks/useSetBrightId"
 import { useWeb3React } from "@web3-react/core"
 import React, {useState} from 'react'
