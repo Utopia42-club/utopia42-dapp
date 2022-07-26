@@ -134,7 +134,7 @@ const NftList = () => {
 
     return(
       <>
-    {Number(citizenID!=0 ) || registeredNFT && Number(registeredNFT) != 0 && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN  ?
+    {Number(citizenID!=0 ) && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN  ?
     <Container>
       <Wrapper maxWidth="300px" width="100%"></Wrapper>
       <Wrapper width="100%">
