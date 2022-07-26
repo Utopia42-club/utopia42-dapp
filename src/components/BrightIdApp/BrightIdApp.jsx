@@ -6,9 +6,9 @@ import { v4 } from 'uuid';
 import { GradientTitle, } from '../text/Title';
 import { useWeb3React } from '@web3-react/core';
 import { useEffect } from 'react';
-import styled from 'styled-components'
 import useSetBrightIdQrCode from '../../hooks/useSetBrightIdQrCode';
 import { useState } from 'react';
+import {LinkBox, Box} from './style'
 
 
 function BrightIdApp(props) {
@@ -48,19 +48,7 @@ function BrightIdApp(props) {
       checkNFT()
   }
 
-  const Box = styled.div`{
-    margin-top:20px;
-    @media screen and (max-width: 780px) {
-      display: none;
-    }
-  }`
 
-  const LinkBox = styled.div`{
-    display:none;
-    @media screen and (max-width: 780px) {
-      display: block;
-    }
-  }`
 
   const generateContextId = () => {
     setContextId(v4())
@@ -123,7 +111,7 @@ function BrightIdApp(props) {
           <div style={{display:"flex"}}>
             <div style={{marginTop:"23px", width:"100%"}}>
               <div>
-                <input style={{width:"100%", height:"30px", marginBottom:"5px", borderRadius:"5px",  border:"1px solid #ccc", padding:"5px", backgroundColor:"#eee"}}  placeholder="Context" value={context} onChange={(evt) => setContext(evt.target.value)} readOnly/>
+                {/* <input style={{width:"100%", height:"30px", marginBottom:"5px", borderRadius:"5px",  border:"1px solid #ccc", padding:"5px", backgroundColor:"#eee"}}  placeholder="Context" value={context} onChange={(evt) => setContext(evt.target.value)} readOnly/> */}
               </div>
               <div>
                 <input style={{width:"100%", height:"30px",  borderRadius:"5px", border:"1px solid #ccc", padding:"5px",backgroundColor:"#eee"}} placeholder="ContextId" value={account} onChange={(evt) => setContextId(account)} readOnly/>

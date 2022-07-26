@@ -6,10 +6,12 @@ import { useWeb3React } from '@web3-react/core';
 
 const useIsSetBrightID = () => {
     const { account, chainId } = useWeb3React()
-    console.log(chainId)
+
+
     const web3 = useWeb3()
     const isSetBrightID = async (account) => {
-        const contract = getContract(unbcNFTAbi, UNBCNFTContractAddress, web3)
+        const contract = await getContract(unbcNFTAbi, UNBCNFTContractAddress, web3)
+        // console.log(contract)
         const res = await contract.methods.brightIDAddrs(account).call();
         return res
     }

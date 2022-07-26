@@ -20,7 +20,6 @@ const supportedChainIds = [
   80001, // Maticc Mumbai
 ]
 const INFURA_KEY = process.env.NEXT_PUBLIC_INFURA_KEY
-console.log(INFURA_KEY)
 // const FORTMATIC_KEY = process.env.NEXT_PUBLIC_FORTMATIC_KEY
 
 const RPC_URLS = {
@@ -47,10 +46,13 @@ const POLLING_INTERVAL = 2000
 
 //only mainnet (walletconnect only one chain supports)
 export const walletconnect = new WalletConnectConnector({
-  rpc: { 80001: RPC_URLS[80001]},
   bridge: 'https://bridge.walletconnect.org',
-  supportedChainIds: validChains[80001],
   qrcode: true,
+  infuraId: '',
+  rpc: { 80001: RPC_URLS[80001]},
+  network: 'mumbai', 
+  chainId: 80001,
+  supportedChainIds: validChains,
   pollingInterval: POLLING_INTERVAL,
 })
 

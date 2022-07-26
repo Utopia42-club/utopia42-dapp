@@ -46,13 +46,11 @@ const DropdownPointing = () => {
         return(
           <div  style={{ marginLeft:'10px', marginTop:'-5px'}}>
           <img style={{cursor:"pointer"}} id='img' src='/media/common/menu.png' onClick={() => setShow(!show)} height="30px"/>
-            {/* menu */}
-          {/* </Button> */}
           {show ? 
           <div style={{position:'relative'}}>
           <div ref={wrapperRef} style={{position:"absolute"}}>
           <Menu size='mini' vertical>
-                {menuItem.map((item) => {
+                {menuItem.map((item , index) => {
 
                 if(item.subMenu){
                     return (<Dropdown text={item.name} pointing='left' className='link item'>
@@ -76,31 +74,9 @@ const DropdownPointing = () => {
         </div>
         :
         ''
-          }
+        }
         </div>
-
-
-            /*   <Menu vertical>
-    <Menu.Item>Home</Menu.Item>
-    <Dropdown text='Messages' pointing='left' className='link item'>
-      <Dropdown.Menu>
-        <Dropdown.Item>Inbox</Dropdown.Item>
-        <Dropdown.Item>Starred</Dropdown.Item>
-        <Dropdown.Item>Sent Mail</Dropdown.Item>
-        <Dropdown.Item>Drafts (143)</Dropdown.Item>
-        <Dropdown.Divider />
-        <Dropdown.Item>Spam (1009)</Dropdown.Item>
-        <Dropdown.Item>Trash</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-    <Menu.Item>Browse</Menu.Item>
-    <Menu.Item>Help</Menu.Item>
-  </Menu> */
-
         )
-
-    
-
         }
 
 export default DropdownPointing

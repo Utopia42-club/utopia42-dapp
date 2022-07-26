@@ -125,7 +125,7 @@ const ProfileTable = (props) => {
                     :
                     ''
                     }
-                    {Number(citizenId) > 0 && Number(registeredNFT) > 0 && Number(citizenId) == Number(registeredNFT) && Number(NFTs[0]) > 0?
+                    {Number(citizenId) > 0 && Number(registeredNFT) > 0 && Number(citizenId) == Number(registeredNFT) && Number(NFTs[0]) > 0 && Number(NFTs[0]) != Number(registeredNFT)?
                     <Tr>
                         <Th>NFT</Th>
                         <Td>{NFTs[0]}</Td>
@@ -151,7 +151,6 @@ const ProfileTable = (props) => {
                     :
                     ""
                      }
-
                     {avatarLink ?
                     <Tr>
                         <Th>Avatar Link</Th>
@@ -160,7 +159,6 @@ const ProfileTable = (props) => {
                             <Button  onClick={handleCopyClick} color='#fff'  backgroundColor="#76568e" >{copyState}</Button>
                             <Button  onClick={handleShowAvatar} color='#fff'  backgroundColor="#76568e" >View</Button>
                             </Td> : ''}
-                        
                     </Tr>
                     :
                     ''
