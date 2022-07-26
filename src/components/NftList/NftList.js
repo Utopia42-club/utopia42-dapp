@@ -47,18 +47,20 @@ const NftList = () => {
     const [registeredNFT, setRegisteredNFT] = useState()
     const getNFTs = useUserNFTs(account)
     const getLastCitizenId = useGetLastCitizenId()
+    const [lastCitizenID, setLastCitizenID] = useState()
 
     const isRegisteredWallet = async () => {
         data = await brightIdData()
         console.log(data)
         if (data.error) {
-          setRegisteredNFT(null)
+          setRegisteredNFT(false)
           setRegisteredWallet(false)
+          setLastCitizenID(0)
           
         }
         else{
           let lastContextId = data.contextIds[data.contextIds.length-1]
-          setRegisteredNFT(await getLastCitizenId(lastContextId))
+          setRegisteredNFT(await getLastCitizenId(lastContextId, setLastCitizenID))
           setRegisteredWallet(true)
         }
     }
@@ -66,6 +68,7 @@ const NftList = () => {
     const checkNFT = async () => {
         setIsSetNFTtoBrightID(await isSetBrightID(account))
         let id = await getCitizenId(account)
+        console.log(id)
         await isRegisteredWallet()
         setCitizenID(id)
         setAvatarLink(await getAvatarLink(account))
@@ -134,7 +137,7 @@ const NftList = () => {
 
     return(
       <>
-    {Number(citizenID!=0 ) && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN  ?
+    {Number(citizenID!=0 ) || registeredNFT && lastCitizenID > 0  && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN ?
     <Container>
       <Wrapper maxWidth="300px" width="100%"></Wrapper>
       <Wrapper width="100%">
@@ -142,7 +145,7 @@ const NftList = () => {
         {chainId ==  process.env.NEXT_PUBLIC_VALID_CHAIN && ready ? 
         <>
         <GradientTitle margin="0 0 10px">Profile</GradientTitle>
-        <ProfileTable NFTs={NFTs} isTransferable={isTransferable} registeredNFT={registeredNFT}  checkNFT={checkNFT} setTransferModal={setTransferModal} handleSelectToken={handleSelectToken} setBrightIdModal={setBrightIdModal} citizenId={citizenID} brightId={registeredWallet} avatarLink={avatarLink} isSetNFTtoBrightID={isSetNFTtoBrightID}/>
+        <ProfileTable lastCitizenID={lastCitizenID} NFTs={NFTs} isTransferable={isTransferable} registeredNFT={registeredNFT}  checkNFT={checkNFT} setTransferModal={setTransferModal} handleSelectToken={handleSelectToken} setBrightIdModal={setBrightIdModal} citizenId={citizenID} brightId={registeredWallet} avatarLink={avatarLink} isSetNFTtoBrightID={isSetNFTtoBrightID}/>
         </>
         : 
         account && !ready && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN ?

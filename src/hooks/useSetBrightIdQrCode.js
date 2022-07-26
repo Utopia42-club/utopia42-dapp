@@ -6,19 +6,25 @@ import useWeb3 from './useWeb3'
 import { UNBCNFTContractAddress } from '../ContractsAddresses';
 import useBrightIdApi from './useBrightIdApi'
 import useGetLastCitizenId from './useGetLastCitizenId';
+import useCitizenId from './useCitizenId'
+import { useState } from 'react';
 
 const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
     let nftID;
     const web3 = useWeb3()
+    const getCitizenID = useCitizenId() 
     const getLastCitizenId = useGetLastCitizenId()
+    const [lastCitizenID, setLastCitizenID] = useState()
     let status = 'Register'
     const brightIdData = useBrightIdApi()
     const setBrightId = async (isMobile) => {
-        console.log(registeredNFT)
+        const citizenID = await getCitizenID(account)
+        console.log(citizenID)
         const data = await brightIdData()
         console.log(data)
         if (data.error){
             setBtnName('Set BrightID')
+            setLastCitizenID(0)
             let text;
             if(isMobile){
                 text = "Link you'r BrightID to Utopia42"
@@ -35,10 +41,10 @@ const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
             })
         }
         let lastContextId = data.contextIds[data.contextIds.length-1]
-        let registeredNFT =  await getLastCitizenId(lastContextId)
+        let registeredNFT =  await getLastCitizenId(lastContextId, setLastCitizenID)
         console.log(registeredNFT)
 
-        if(registeredNFT && registeredNFT!=0 && NFTs[0] && Number(registeredNFT) != Number(NFTs[0])){
+        if(registeredNFT && citizenID != 0){
             checkNFT()
             setBtnName('Set BrightID')
             return Swal.fire({
@@ -50,12 +56,12 @@ const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
             })
           }
 
-        if (registeredNFT && registeredNFT!= 0){
-            nftID = registeredNFT
+        if (registeredNFT){
+            nftID = lastCitizenID
         }
 
         else{
-            nftID = NFTs[0]
+            nftID = citizenID
         }
 
         let contextIds = data.contextIds

@@ -10,13 +10,13 @@ import Swal from 'sweetalert2'
 const ProfileTable = (props) => {
     const [copyState, setCopyState] = useState('Copy Link')
     const { account } = useWeb3React()
-    const { handleSelectToken, setTransferModal, citizenId, brightId, avatarLink, isSetNFTtoBrightID, registeredNFT, setBrightIdModal, checkNFT, isTransferable, NFTs } = props
+    const {lastCitizenID, handleSelectToken, setTransferModal, citizenId, brightId, avatarLink, isSetNFTtoBrightID, registeredNFT, setBrightIdModal, checkNFT, isTransferable, NFTs } = props
     const setBrightId = useSetBrightId(account)
     const [showAvatarLink, setShowAvatarLink] = useState(false)
     let citizenIDvalue;
     let isSetNFTtoBrightIDvalue;
     const [btnSetBrightID, setBtnSetBrightId] = useState('Set BrightID')
-    console.log(NFTs[0], citizenId, registeredNFT)
+    console.log('nft:', NFTs[0], 'citizenId:',citizenId, 'registeredNFT:',registeredNFT, 'lastCitizenID:', lastCitizenID)
 
     const handleShowAvatar = () => {
         setShowAvatarLink(!showAvatarLink)
@@ -86,7 +86,7 @@ const ProfileTable = (props) => {
     }
 
     const handleSetBrightID = async () => {
-        if(registeredNFT && NFTs[0] && Number(registeredNFT) != 0 && Number(registeredNFT) != Number(NFTs[0])){
+        if(registeredNFT && citizenId != 0){
             return Swal.fire({
                 text:"Transfer you'r CitizenID",
                 icon:'error',
@@ -97,9 +97,9 @@ const ProfileTable = (props) => {
         }
         setBtnSetBrightId('Set BrightID ...')
             try{
-                if(registeredNFT && registeredNFT != 0){
+                if(registeredNFT){
                     console.log(registeredNFT)
-                    await setBrightId(registeredNFT)
+                    await setBrightId(lastCitizenID)
                 }
                 else{
                     await setBrightId(citizenId)
@@ -125,7 +125,7 @@ const ProfileTable = (props) => {
                     :
                     ''
                     }
-                    {Number(citizenId) > 0 && Number(registeredNFT) > 0 && Number(citizenId) == Number(registeredNFT) && Number(NFTs[0]) > 0 && Number(NFTs[0]) != Number(registeredNFT)?
+                    {Number(NFTs[0]) > 0 && registeredNFT &&  Number(NFTs[0]) != Number(citizenId)?
                     <Tr>
                         <Th>NFT</Th>
                         <Td>{NFTs[0]}</Td>
