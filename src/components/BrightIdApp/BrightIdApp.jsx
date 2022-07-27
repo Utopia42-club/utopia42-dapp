@@ -17,7 +17,7 @@ function BrightIdApp(props) {
   const [verified, setVerified] = React.useState()
   const [privateKey, setPrivateKey] = React.useState(process.env.NEXT_PUBLIC_PRIVATE_KEY)
   const [testingKey, setTestingKey] = React.useState()
-  const [context, setContext] = React.useState('Utopia42')
+  const [context, setContext] = React.useState('UNBC')
   const [contextId, setContextId] = React.useState(account)
   const [deeplink, setDeeplink] = React.useState()
   const [btnName, setBtnName] = useState('Set BrightID')
@@ -84,7 +84,7 @@ function BrightIdApp(props) {
   }, [contextId])
 
   useEffect(() => {
-    setContext('Utopia42')
+    setContext('UNBC')
     setContextId(account)
 
   }, [account])
