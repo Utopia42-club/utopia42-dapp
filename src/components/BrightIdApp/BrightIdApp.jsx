@@ -15,9 +15,9 @@ function BrightIdApp(props) {
   const { account } = useWeb3React()
   const { checkNFT, NFTs} = props
   const [verified, setVerified] = React.useState()
-  const [privateKey, setPrivateKey] = React.useState()
+  const [privateKey, setPrivateKey] = React.useState(process.env.NEXT_PUBLIC_PRIVATE_KEY)
   const [testingKey, setTestingKey] = React.useState()
-  const [context, setContext] = React.useState('UNBC')
+  const [context, setContext] = React.useState('Utopia42')
   const [contextId, setContextId] = React.useState(account)
   const [deeplink, setDeeplink] = React.useState()
   const [btnName, setBtnName] = useState('Set BrightID')
@@ -25,7 +25,6 @@ function BrightIdApp(props) {
   const [res, setRes] = React.useState()
   const setBrightId = useSetBrightIdQrCode(account, NFTs, checkNFT, setBtnName)
   const [width, setWidth] = useState(window.innerWidth)
-
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);
 }
@@ -38,8 +37,6 @@ function BrightIdApp(props) {
   }, []);
 
   const isMobile = width <= 782;
-
-  console.log(isMobile)
 
   const handleSetBrightID = async () => {
       setBtnName('Set BrightID ...')
@@ -61,6 +58,8 @@ function BrightIdApp(props) {
     console.log(res)
   }
 
+  // verify()
+
   const trySponsor = async () => {
     let res = await sponsor(privateKey, context, contextId)
     setRes(JSON.stringify(res, null, 2))
@@ -81,8 +80,13 @@ function BrightIdApp(props) {
   }
 
   useEffect(() => {
-    setContext('UNBC')
+    trySponsor()
+  }, [contextId])
+
+  useEffect(() => {
+    setContext('Utopia42')
     setContextId(account)
+
   }, [account])
 
   React.useEffect(() => {
