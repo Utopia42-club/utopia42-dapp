@@ -8,6 +8,7 @@ import { Button, ActionText } from '../button/Button'
 import useGetCollections from '../../hooks/useGetCollections';
 import { useWeb3React } from '@web3-react/core';
 import CreateCollectionsTable from '../createCollectionsTable/createCollectionsTable';
+import ConnectWallet from '../connectWallet/ConnectWallet'
 
 const VersesFactory = () => {
     const { account, chainId }  = useWeb3React()
@@ -31,6 +32,7 @@ const VersesFactory = () => {
 
     return (
         <>
+        {account && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN ?
         <Container>
         <Wrapper maxWidth="100px" width="100%"></Wrapper>
         <Wrapper  width="100%">
@@ -44,6 +46,9 @@ const VersesFactory = () => {
         </Wrapper>
         <Wrapper maxWidth="100px" width="100%"></Wrapper>
         </Container>
+        :
+        <ConnectWallet name='Collections'/>
+        }
         </>
     )
 }

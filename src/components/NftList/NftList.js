@@ -21,6 +21,7 @@ import useIsSetBrightID from '../../hooks/useIsSetBrightId';
 import useIsVerified from '../../hooks/useIsVerified';
 import MintComponent from '../MintComponent/MintComponent';
 import useGetLastCitizenId from '../../hooks/useGetLastCitizenId';
+import ConnectWallet from '../connectWallet/ConnectWallet'
 
 
 const NftList = () => {
@@ -137,6 +138,7 @@ const NftList = () => {
 
     return(
       <>
+    {!account || chainId != process.env.NEXT_PUBLIC_VALID_CHAIN ? <ConnectWallet name='Profile'/> : ''}
     {Number(citizenID!=0 ) || registeredNFT && lastCitizenID > 0  && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN ?
     <Container>
       <Wrapper maxWidth="300px" width="100%"></Wrapper>
@@ -151,7 +153,7 @@ const NftList = () => {
         account && !ready && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN ?
         <img width='100px' src='media/common/loading-gif.jpg' />
         :
-        ""
+        ''
         }
       </Flex>
       </Wrapper>

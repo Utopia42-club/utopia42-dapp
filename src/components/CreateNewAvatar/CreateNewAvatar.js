@@ -7,6 +7,7 @@ import useCitizenId from "../../hooks/useCitizenId";
 import { useWeb3React } from "@web3-react/core";
 import MintComponent from "../MintComponent/MintComponent";
 import { GradientTitle } from '../text/Title';
+import ConnectWallet from '../connectWallet/ConnectWallet'
 
 const CreateNewAvatar = () => {
   const subdomain = 'utopia42club';
@@ -77,6 +78,7 @@ const CreateNewAvatar = () => {
 
   return (
     <>
+    {!account || chainId != process.env.NEXT_PUBLIC_VALID_CHAIN ? <ConnectWallet name='Create Avatar'/> : ''}
     {chainId == process.env.NEXT_PUBLIC_VALID_CHAIN &&  citizenID != 0? 
       <Container>
         <Wrapper maxWidth="100%" width="100%">

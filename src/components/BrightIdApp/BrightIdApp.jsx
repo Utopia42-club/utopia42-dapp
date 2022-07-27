@@ -17,7 +17,8 @@ function BrightIdApp(props) {
   const [verified, setVerified] = React.useState()
   const [privateKey, setPrivateKey] = React.useState(process.env.NEXT_PUBLIC_PRIVATE_KEY)
   const [testingKey, setTestingKey] = React.useState()
-  const [context, setContext] = React.useState('UNBC')
+  const appName = 'Utopia42'
+  const [context, setContext] = React.useState('Utopia42')
   const [contextId, setContextId] = React.useState(account)
   const [deeplink, setDeeplink] = React.useState()
   const [btnName, setBtnName] = useState('Set BrightID')
@@ -47,16 +48,16 @@ function BrightIdApp(props) {
 
 
 
-  const generateContextId = () => {
-    setContextId(v4())
-  }
+  // const generateContextId = () => {
+  //   setContextId(v4())
+  // }
 
-  const verify = async () => {
-    let res = await verifyContextId(context, contextId)
-    setVerified(res)
-    setRes(JSON.stringify(res, null, 2))
-    console.log(res)
-  }
+  // const verify = async () => {
+  //   let res = await verifyContextId(context, contextId)
+  //   setVerified(res)
+  //   setRes(JSON.stringify(res, null, 2))
+  //   console.log(res)
+  // }
 
   // verify()
 
@@ -66,27 +67,26 @@ function BrightIdApp(props) {
     console.log(res)
   }
 
-  const testBlocks = async (op) => {
-    let res = await putTestingBlock(op, testingKey, context, contextId)
-    setRes(JSON.stringify(res, null, 2))
-    console.log(res)
+  // const testBlocks = async (op) => {
+  //   let res = await putTestingBlock(op, testingKey, context, contextId)
+  //   setRes(JSON.stringify(res, null, 2))
+  //   console.log(res)
 
-  }
+  // }
 
-  const deleteTestBlocks = async (op) => {
-    let res = await removeTestingBlock(op, testingKey, context, contextId)
-    setRes(JSON.stringify(res, null, 2))
-    console.log(res)
-  }
+  // const deleteTestBlocks = async (op) => {
+  //   let res = await removeTestingBlock(op, testingKey, context, contextId)
+  //   setRes(JSON.stringify(res, null, 2))
+  //   console.log(res)
+  // }
 
   useEffect(() => {
     trySponsor()
-  }, [contextId])
+  }, [])
 
   useEffect(() => {
-    setContext('UNBC')
+    setContext('Utopia42')
     setContextId(account)
-
   }, [account])
 
   React.useEffect(() => {

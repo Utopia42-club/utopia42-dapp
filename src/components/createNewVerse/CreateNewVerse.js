@@ -7,7 +7,7 @@ import { Flex } from 'rebass'
 import { Button, ActionText } from '../button/Button'
 import useCreateVerse from '../../hooks/useCreateVerse';
 import { Type } from '../text/Text'
-
+import ConnectWallet from '../connectWallet/ConnectWallet'
 import { useWeb3React } from '@web3-react/core';
 import CreateCollectionsTable from '../createCollectionsTable/createCollectionsTable';
 
@@ -108,7 +108,7 @@ const CreateVerse = () => {
   </Wrapper>
 </Container>
 :
-''
+<ConnectWallet name='Create Verse'/>
 }
 </>
 

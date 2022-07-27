@@ -4,6 +4,7 @@ import { useWeb3React } from '@web3-react/core'
 const useBrightIdApi = () => {
     const { account } = useWeb3React()
     const getBrightIdData = async () => {
+        console.log('api -----------')
         let data = {}
         try{
           await axios({
@@ -18,17 +19,14 @@ const useBrightIdApi = () => {
                              data.sigV = res.data.data.sig.v ; 
                              data.timestamp = res.data.data.timestamp;
             })
-            .catch((err) => { return data.error = err.response.data.errorMessage });
+            .catch((err) => {
+               return data.error = err.response.data.errorMessage 
+              });
         }
-        catch{
-          console.log('err')
+        catch(error){
+          console.log(error)
         }
-
-        
-            // Catch errors if any
-
-
-            return data
+        return data
     }
 
     return getBrightIdData

@@ -9,6 +9,7 @@ import { Flex } from 'rebass'
 import useMinterNft from '../../hooks/useMinterNft'
 import { useWeb3React } from '@web3-react/core';
 import useCitizenId from '../../hooks/useCitizenId'
+import ConnectWallet from '../connectWallet/ConnectWallet';
 
 
 const MintCitizenNFT = () => {
@@ -56,7 +57,7 @@ const MintCitizenNFT = () => {
 
     return(
     <>
-    {chainId == process.env.NEXT_PUBLIC_VALID_CHAIN ?
+    {chainId == process.env.NEXT_PUBLIC_VALID_CHAIN && account?
     <Container>
       <Wrapper maxWidth="300px" width="100%"></Wrapper>
       <Wrapper maxWidth="470px" width="100%">
@@ -88,7 +89,7 @@ const MintCitizenNFT = () => {
       </Wrapper>
     </Container>
     :
-    ''
+    <ConnectWallet name="Mint CitizenID"/>
     }
     </>
     )
