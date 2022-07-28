@@ -23,7 +23,6 @@ const MintComponent = (props) => {
   }
 
     useEffect(() => {
-
         if(account && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN){
           checkCitizenId()
         }
@@ -37,7 +36,7 @@ const MintComponent = (props) => {
 
     return(
     <>
-    {account && Number(citizenID) == 0 && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN?
+    {citizenID&& account && Number(citizenID) == 0 && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN?
     <Container>
       <Wrapper maxWidth="300px" width="100%"></Wrapper>
       <Wrapper maxWidth="470px" width="100%">
