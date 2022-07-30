@@ -43,6 +43,7 @@ export const Th = styled.th`{
         padding:5px;
       }
       @media screen and (max-width: 375px) {
+        
         font-size:10px;
         padding:5px;
       }
@@ -113,17 +114,24 @@ export const Button = styled.button `{
     max-width:100px;
     margin:3px;
     line-height:15px;
+    margin-left:-5px;
   }
   @media screen and (max-width: 412px) {
     font-size: 9px !important;
-    min-width:120px;
+    min-width:100px;
     margin-left:-30px;
+    line-height:15px;
+  }
+  @media screen and (max-width: 393px) {
+    font-size: 9px !important;
+    min-width:100px;
+    // margin-left:-100px;
     line-height:15px;
   }
   @media screen and (max-width: 375px) {
     font-size: 9px !important;
     min-width:100px;
-    margin-left:-100px;
+    // margin-left:-100px;
     line-height:15px;
   }
   @media screen and (max-width: 360px) {
