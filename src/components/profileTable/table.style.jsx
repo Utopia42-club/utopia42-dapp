@@ -14,6 +14,10 @@ export const Td = styled.td`{
       @media screen and (max-width: 413px) {
         font-size:12px !important;
       }
+      @media screen and (max-width: 393px) {
+        font-size:13px !important;
+        padding-top:10px;
+      }
 }`
 
 export const Tr = styled.tr`{
@@ -42,6 +46,7 @@ export const Th = styled.th`{
         font-size:10px;
         padding:5px;
       }
+
       @media screen and (max-width: 375px) {
         
         font-size:10px;
@@ -124,8 +129,8 @@ export const Button = styled.button `{
   }
   @media screen and (max-width: 393px) {
     font-size: 9px !important;
-    min-width:100px;
-    // margin-left:-100px;
+    min-width:80px;
+    // margin-left:-10px;
     line-height:15px;
   }
   @media screen and (max-width: 375px) {
