@@ -37,7 +37,7 @@ const ProfileTable = (props) => {
     NFTs,
   } = props;
   const setBrightId = useSetBrightId(account);
-  console.log(lastContextID, lastCitizenID);
+  // console.log(lastContextID, lastCitizenID);
   const [showAvatarLink, setShowAvatarLink] = useState(false);
   let citizenIDvalue;
   let isSetNFTtoBrightIDvalue;
@@ -130,7 +130,7 @@ const ProfileTable = (props) => {
       account.toLocaleLowerCase() != lastContextID.toLocaleLowerCase() &&
       lastCitizenID != 0
     ) {
-      console.log(account, lastContextID);
+      // console.log(account, lastContextID);
       return Swal.fire({
         icon: "error",
         text: `Transfer CitizenID from ${formatAddress(
@@ -143,7 +143,7 @@ const ProfileTable = (props) => {
     setBtnSetBrightId("Set BrightID ...");
     try {
       if (registeredNFT) {
-        console.log(registeredNFT);
+        // console.log(registeredNFT);
         await setBrightId(firsID);
       } else {
         await setBrightId(citizenId);

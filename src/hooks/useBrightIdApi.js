@@ -4,7 +4,6 @@ import { useWeb3React } from '@web3-react/core'
 const useBrightIdApi = () => {
     const { account } = useWeb3React()
     const getBrightIdData = async () => {
-        console.log('api -----------')
         let data = {}
         try{
           await axios({

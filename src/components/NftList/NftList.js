@@ -81,7 +81,7 @@ const NftList = () => {
     const checkNFT = async () => {
         setIsSetNFTtoBrightID(await isSetBrightID(account))
         let id = await getCitizenId(account)
-        console.log(id)
+        // console.log(id)
         await isRegisteredWallet()
         setCitizenID(id)
         setAvatarLink(await getAvatarLink(account))
