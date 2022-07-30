@@ -6,7 +6,6 @@ import WalletModal from '../modal/WalletModal'
 
 const ActionButtonComponent = (props) => {
   const { handleMint, status, } = props
-  console.log(status)
   const [open, setOpen] = useState(false)
   const { account, chainId, error } = useWeb3React()
 

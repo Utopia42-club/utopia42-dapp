@@ -5,7 +5,7 @@ import { UNBCNFTContractAddress } from '../ContractsAddresses'
 
 const useLastCitizenId = () => {
     const web3 = useWeb3()
-    const getLastID = async (account, ) => {
+    const getLastID = async (account) => {
         const contract = await getContract(unbcNFTAbi, UNBCNFTContractAddress, web3)
         const citizenID = await contract.methods.getCitizenID(account).call()
         return citizenID

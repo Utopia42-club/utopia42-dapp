@@ -9,16 +9,23 @@ import useGetLastCitizenId from './useGetLastCitizenId';
 import useLastCitizenId from './useLastCitizenId';
 import useCitizenId from './useCitizenId'
 import { useState } from 'react';
+import { formatAddress } from '../utils/formatAddress'
+import useIsRegister from './useIsRegister';
 
 const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
     let nftID;
     const web3 = useWeb3()
     const getCitizenID = useCitizenId() 
+    const isRegister = useIsRegister()
     const getLastCitizenId = useGetLastCitizenId()
     const [lastCitizenID, setLastCitizenID] = useState()
     const getLastID = useLastCitizenId()
     let status = 'Register'
     const brightIdData = useBrightIdApi()
+    let registeredNFT
+    let lastId;
+    let firstId;
+    let lastContextId;
     
     const setBrightId = async (isMobile) => {
         const citizenID = await getCitizenID(account)
@@ -27,7 +34,7 @@ const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
         console.log(data)
         if (data.error){
             setBtnName('Set BrightID')
-            setLastCitizenID(0)
+            lastId = 0
             let text;
             if(isMobile){
                 text = "Link you'r BrightID to Utopia42"
@@ -43,10 +50,16 @@ const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
     
             })
         }
-        let lastContextId = data.contextIds[data.contextIds.length-1]
-        let registeredNFT =  await getLastCitizenId(lastContextId, setLastCitizenID)
-        let lastId = await getLastID(lastContextId)
-        console.log(registeredNFT, lastId)
+        lastContextId = data.contextIds[0]
+        if(!await isRegister(account) && !await isRegister(data.contextIds[data.contextIds.length-1])) {
+            registeredNFT =  false
+        }
+        else{
+            registeredNFT =  true
+        }
+        console.log(lastContextId)
+        lastId = await getLastID(lastContextId)
+        firstId = await getLastID(data.contextIds[data.contextIds.length-1])
 
         if(registeredNFT && citizenID != 0){
             checkNFT()
@@ -58,16 +71,27 @@ const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
                 timer: 2500
       
             })
-          }
+        }
 
-        if (registeredNFT){
-            nftID = lastId
+        if(account.toLocaleLowerCase() != lastContextId.toLocaleLowerCase() && lastId != 0) {
+            console.log(account, lastContextId, lastId)
+            return Swal.fire({
+                icon:'error',
+                text: `Transfer CitizenID from ${formatAddress(lastContextId)} to another address`,
+                showConfirmButton: false,
+                timer:3000,
+            })
+        }
+
+        if (registeredNFT) {
+            nftID = firstId
         }
 
         else{
             nftID = citizenID
         }
 
+        console.log(nftID)
         let contextIds = data.contextIds
         let sgiR = '0x' + data.sigR
         let sugS = '0x' + data.sigS

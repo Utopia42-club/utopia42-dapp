@@ -118,7 +118,7 @@ function BrightIdApp(props) {
                 {/* <input style={{width:"100%", height:"30px", marginBottom:"5px", borderRadius:"5px",  border:"1px solid #ccc", padding:"5px", backgroundColor:"#eee"}}  placeholder="Context" value={context} onChange={(evt) => setContext(evt.target.value)} readOnly/> */}
               </div>
               <div>
-                <input style={{width:"100%", height:"30px",  borderRadius:"5px", border:"1px solid #ccc", padding:"5px",backgroundColor:"#eee"}} placeholder="ContextId" value={account} onChange={(evt) => setContextId(account)} readOnly/>
+                {/* <input style={{width:"100%", height:"30px",  borderRadius:"5px", border:"1px solid #ccc", padding:"5px",backgroundColor:"#eee"}} placeholder="ContextId" value={account} onChange={(evt) => setContextId(account)} readOnly/> */}
               </div>
                 {/* <button onClick={generateContextId}>Generate ContextId</button> */}
             </div>
