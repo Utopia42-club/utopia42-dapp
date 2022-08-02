@@ -9,7 +9,7 @@ export const Td = styled.td`{
     white-space: nowrap;
     position: relative;
         @media screen and (max-width: 780px) {
-        // width:30%;
+
         font-size:13px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -42,7 +42,19 @@ export const Thead = styled.thead`{
   flex: 0 0 auto;
 }`
 
+export const WarpTable = styled.div `
+  height:330px;
+  overflow-y:scroll;
+  overflow-x:hidden;
+  background:none;
+  width:70%;
+  @media screen and (max-width: 1280px) {
+    width:100%;
+  }
+`
+
 export const Table = styled.table`{
+
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   margin-top:5px;
   background: none;
@@ -53,6 +65,7 @@ export const Table = styled.table`{
   text-align: center;
   width:100%;
   margin-top: -1px;
+
 }`
 
 export const Tbody = styled.tbody`{
