@@ -17,10 +17,27 @@ const CreateVerse = () => {
     const { account, chainId }  = useWeb3React()
     const createVerse = useCreateVerse(account, chainId)
     const [buttonName, setButtonName] = useState('Create New Verse')
-    const [verseName, setVerseName] = useState()
+    const [verseName, setVerseName] = useState('')
     const [assignEnable , setAssignEnable] = useState(true)
 
     const handleCreateVerse = async () => {
+        if(verseName.trim() == ''){
+            return Swal.fire({
+                text: 'Enter verse name',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+
+        if(admin.trim() == ''){
+            return Swal.fire({
+                text: 'Enter Admin Wallet',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
         if(account){
             setButtonName('Creating New Verse ...')
             try{
@@ -41,33 +58,6 @@ const CreateVerse = () => {
             })
         }
 
-        if(chainId != process.env.NEXT_PUBLIC_VALID_CHAIN){
-            return Swal.fire({
-                text: 'Wrong Network',
-                icon: 'error',
-                showConfirmButton: false,
-                timer: 1500
-            })
-        }
-
-
-        if(admin.trim() == ''){
-            return Swal.fire({
-                text: 'Enter Admin Wallet',
-                icon: 'error',
-                showConfirmButton: false,
-                timer: 1500
-            })
-        }
-
-        if(verseName.trim() == ''){
-            return Swal.fire({
-                text: 'Enter verse name',
-                icon: 'error',
-                showConfirmButton: false,
-                timer: 1500
-            })
-        }
     }
 
     return(
@@ -100,7 +90,7 @@ const CreateVerse = () => {
   </Box>
   <div style={{width:"100%", background:"linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%"}}>
     <Box marginTop="10" background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
-    <Button onClick={handleCreateVerse} maxWidth='420px' margin="10px 0 0" color='#fff' background="#76568e">{buttonName}</Button>
+    <button className='profile-btn' onClick={handleCreateVerse}>{buttonName}</button>
     </Box>
   </div>
   </Flex>

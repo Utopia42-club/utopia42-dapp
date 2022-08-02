@@ -130,18 +130,17 @@ const Menu = ({ selectedChain }) => {
         </Media>
           <UtopiaLogo />
           <Flex>
-          <Label>
-            <PageMenu />
-          </Label>
-          <MenuIcon>
-            <DropdownPointing />
-          </MenuIcon>
+            <Label>
+              <PageMenu />
+            </Label>
+            <MenuIcon>
+              <DropdownPointing />
+            </MenuIcon>
           </Flex>
       </AppInfo>
       <AppInfo>
         {account ? (
           validChains.includes(chainId) ? (
-            
             <>
             <LogOutButton />
             <Button padding="0 17px !important" active={account}>

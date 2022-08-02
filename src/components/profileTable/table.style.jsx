@@ -86,7 +86,7 @@ export const Tbody = styled.tbody`{
 
 export const Button = styled.button `{
   background: #76568e;
-  margin:4px;
+  margin: ${({ margin }) => (margin ? margin : '4px') };
   padding:8px;
   color: ${({ color }) => color };
   border-radius: 5px;
@@ -96,57 +96,57 @@ export const Button = styled.button `{
   font-weight:bold;
   // min-width:190px;
   font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
-  @media screen and (max-width: 1280px) {
-    min-width:130px;
-    max-width:130px;
-    line-height:18px;
-  }
-  @media screen and (max-width: 890px) {
-    font-size: 12px;
-    padding:5px;
-    margin:3px;
-  }
-  @media screen and (max-width: 760px) {
-    font-size: 9px;
-    padding:5px;
-    margin:3px;
-    line-height:15px;
-  }
-  @media screen and (max-width: 540px) {
-    font-size: 9px;
-    padding:5px;
-    min-width:100px;
-    max-width:100px;
-    margin:3px;
-    line-height:15px;
-    margin-left:-5px;
-  }
-  @media screen and (max-width: 412px) {
-    font-size: 9px !important;
-    min-width:100px;
-    margin-left:-30px;
-    line-height:15px;
-  }
-  @media screen and (max-width: 393px) {
-    font-size: 9px !important;
-    min-width:80px;
-    // margin-left:-10px;
-    line-height:15px;
-  }
-  @media screen and (max-width: 375px) {
-    font-size: 9px !important;
-    min-width:100px;
-    // margin-left:-100px;
-    line-height:15px;
-  }
-  @media screen and (max-width: 360px) {
-    font-size: 9px !important;
-    min-width:90px;
-    max-width:90px;
-    // max-width:60px
-    // margin-left:-100px;
-    // line-height:15px;
-  }
+  // @media screen and (max-width: 1280px) {
+  //   min-width:130px;
+  //   max-width:130px;
+  //   line-height:18px;
+  // }
+  // @media screen and (max-width: 890px) {
+  //   font-size: 12px;
+  //   padding:5px;
+  //   margin:3px;
+  // }
+  // @media screen and (max-width: 760px) {
+  //   font-size: 9px;
+  //   padding:5px;
+  //   margin:3px;
+  //   line-height:15px;
+  // }
+  // @media screen and (max-width: 540px) {
+  //   font-size: 9px;
+  //   padding:5px;
+  //   min-width:100px;
+  //   max-width:100px;
+  //   margin:3px;
+  //   line-height:15px;
+  //   margin-left:-5px;
+  // }
+  // @media screen and (max-width: 412px) {
+  //   font-size: 9px !important;
+  //   min-width:100px;
+  //   margin-left:-30px;
+  //   line-height:15px;
+  // }
+  // @media screen and (max-width: 393px) {
+  //   font-size: 9px !important;
+  //   min-width:80px;
+  //   // margin-left:-10px;
+  //   line-height:15px;
+  // }
+  // @media screen and (max-width: 375px) {
+  //   font-size: 9px !important;
+  //   min-width:100px;
+  //   // margin-left:-100px;
+  //   line-height:15px;
+  // }
+  // @media screen and (max-width: 360px) {
+  //   font-size: 9px !important;
+  //   min-width:90px;
+  //   max-width:90px;
+  //   // max-width:60px
+  //   // margin-left:-100px;
+  //   // line-height:15px;
+  // }
 }`
 
 export const Wrapper = styled.div `{

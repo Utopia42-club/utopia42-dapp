@@ -13,9 +13,9 @@ const ActionButtonComponent = (props) => {
   if(status == 'Mint' || status == 'Minting ...') {
 
         contentBtn = (
-          <Button border="2px solid #9682a5" fontFamily="Lato,'Helvetica Neue',Arial,Helvetica,sans-serif" margin="25px 0 0" color="#fff" background="#76568e"  onClick={handleMint} >
+          <button className='profile-btn'  onClick={handleMint} >
             {status}
-          </Button>
+          </button>
         )
   }
 

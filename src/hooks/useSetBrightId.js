@@ -10,7 +10,7 @@ const useSetBrightId = (account) => {
     let status = 'Register'
     const brightIdData = useBrightIdApi()
     const setBrightId = async (id) => {
-        const data = await brightIdData()
+        const data = await brightIdData(account)
         console.log(id)
         if (!id) {
             return Swal.fire({
@@ -21,6 +21,7 @@ const useSetBrightId = (account) => {
     
             })
         }
+        console.log(account, id, data)
         let contextIds = data.contextIds
         let sgiR = '0x' + data.sigR
         let sugS = '0x' + data.sigS

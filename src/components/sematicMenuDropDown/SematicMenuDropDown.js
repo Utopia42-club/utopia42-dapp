@@ -11,9 +11,8 @@ const DropdownPointing = () => {
   document.head.appendChild(styleLink);
 
         const [show, setShow] = useState(false)
-        const menuItem = [{name: 'Home', link:'/'}, 
-        {name: 'Citizen ID', subMenu:[{name:'Mint', link:'/Mint'}, {name:'Profile', link:'/Profile'}]},
-        {name: 'Setting', subMenu:[{name:'Create Avatar', link:'/CreateAvatar'}]}, 
+        const menuItem = [ 
+        {name: 'Citizen ID', subMenu:[{name:'Mint', link:'/Mint'}, {name:'Profile', link:'/Profile'}]}, 
         {name:'Verses', subMenu:[{name:'Create Verses', link:'/CreateVerse'}, {name:'My Verses', link:'/Verses'}]}
       ]
       const wrapperRef = useRef(null)

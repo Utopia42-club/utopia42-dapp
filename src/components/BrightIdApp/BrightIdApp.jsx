@@ -9,22 +9,23 @@ import { useEffect } from 'react';
 import useSetBrightIdQrCode from '../../hooks/useSetBrightIdQrCode';
 import { useState } from 'react';
 import {LinkBox, Box} from './style'
+import { toCheckSumAddress } from '../../utils/toCheckSumAddress';
 
 
 function BrightIdApp(props) {
   const { account } = useWeb3React()
-  const { checkNFT, NFTs} = props
+  const { checkNFT, NFTs, updateBrightID} = props
   const [verified, setVerified] = React.useState()
   const [privateKey, setPrivateKey] = React.useState(process.env.NEXT_PUBLIC_PRIVATE_KEY)
   const [testingKey, setTestingKey] = React.useState()
   const appName = 'Utopia42'
   const [context, setContext] = React.useState('Utopia42')
-  const [contextId, setContextId] = React.useState(account)
+  const [contextId, setContextId] = React.useState()
   const [deeplink, setDeeplink] = React.useState()
   const [btnName, setBtnName] = useState('Set BrightID')
   const [sponsorships, setSponsorships] = React.useState(0)
   const [res, setRes] = React.useState()
-  const setBrightId = useSetBrightIdQrCode(account, NFTs, checkNFT, setBtnName)
+  const setBrightId = useSetBrightIdQrCode(NFTs, checkNFT, setBtnName)
   const [width, setWidth] = useState(window.innerWidth)
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);
@@ -41,7 +42,7 @@ function BrightIdApp(props) {
 
   const handleSetBrightID = async () => {
       setBtnName('Set BrightID ...')
-      await setBrightId(isMobile)
+      await setBrightId(contextId, isMobile)
       setBtnName('Set BrightID')
       checkNFT()
   }
@@ -81,12 +82,25 @@ function BrightIdApp(props) {
   // }
 
   useEffect(() => {
-    trySponsor()
-  }, [])
+    if(contextId){
+    try{
+      toCheckSumAddress(contextId)
+      trySponsor()
+    }
+    catch{
+      return
+    }
+  }
+  }, [contextId])
 
   useEffect(() => {
     setContext('Utopia42')
-    setContextId(account)
+    if(!updateBrightID){
+      setContextId(account)
+    }
+    else{
+      setContextId('')
+    }
   }, [account])
 
   React.useEffect(() => {
@@ -107,32 +121,46 @@ function BrightIdApp(props) {
   return (
     <div style={{marginBottom:"30px", marginTop:"20px"}}>
       <div>
-      <GradientTitle margin="0 0 10px">Connect your wallet to BrightID</GradientTitle>
+      {
+        updateBrightID ?
+        <GradientTitle margin="0 0 10px">Connect new wallet to BrightID</GradientTitle>
+        :
+        <GradientTitle margin="0 0 10px">Connect your wallet to BrightID</GradientTitle>
+      }
         {/* <header style={{marginBottom:"5px"}}>BrightID App</header> */}
         <div>
-        <div style={{border:"1px solid #ccc", padding:"20px", borderRadius:"5px"}} >
+        <div style={{border:"1px solid #ccc", padding:"10px", borderRadius:"5px"}} >
           {/* <header>Application Context</header> */}
           <div style={{display:"flex"}}>
-            <div style={{marginTop:"23px", width:"100%"}}>
+            <div style={{ width:"100%"}}>
               <div>
                 {/* <input style={{width:"100%", height:"30px", marginBottom:"5px", borderRadius:"5px",  border:"1px solid #ccc", padding:"5px", backgroundColor:"#eee"}}  placeholder="Context" value={context} onChange={(evt) => setContext(evt.target.value)} readOnly/> */}
               </div>
               <div>
-                {/* <input style={{width:"100%", height:"30px",  borderRadius:"5px", border:"1px solid #ccc", padding:"5px",backgroundColor:"#eee"}} placeholder="ContextId" value={account} onChange={(evt) => setContextId(account)} readOnly/> */}
+                {updateBrightID ?
+                
+              <input style={{width:"100%", height:"30px",  borderRadius:"5px", border:"1px solid #ccc", padding:"5px",backgroundColor:"#eee"}} placeholder="Enter new wallet address" value={contextId ?? ''} onChange={(evt) => setContextId(evt.target.value)}/>
+              :
+              ''
+            }
               </div>
                 {/* <button onClick={generateContextId}>Generate ContextId</button> */}
             </div>
           </div>
             <Box>
               <header style={{marginBottom:"10px", color:"#999"}}>Linking QR Code</header>
-                <QRCode style={{width:'50%', height:'50%'}} value={deeplink ? deeplink : ''} />
+                <QRCode style={{width:'70%', height:'50%'}} value={deeplink ? deeplink : ''} />
+                {/* {!updateBrightID ? */}
+                <button className='setBrightIDbuttonQR' onClick={handleSetBrightID} style={{marginTop:'10px',backgroundColor:"#76568e", border:'none', padding:'10px 10px', color:'white', fontWeight:"bold", borderRadius:'5px', cursor:'pointer'}}>{btnName}</button>
+                {/* :
+                '' */}
+              
             </Box>
             <LinkBox>
               <div style={{marginTop:'30px'}}>
                 <a style={{color:'#814f8c'}} href={deeplink}>Link you'r BrightID to Utopia42</a>
               </div>
             </LinkBox>
-              <button className='setBrightIDbuttonQR' onClick={handleSetBrightID} style={{marginTop:'10px',backgroundColor:"#76568e", border:'none', padding:'10px 10px', color:'white', fontWeight:"bold", borderRadius:'5px', cursor:'pointer'}}>{btnName}</button>
         </div>
           {/* <div>
             <header <button>set BrightID</button> >Application Keys</header>

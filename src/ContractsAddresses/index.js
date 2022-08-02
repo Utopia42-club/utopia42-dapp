@@ -1,4 +1,4 @@
-export  const UNBCNFTContractAddress = '0xaC6aA87Cb3b1E5fFD92446b49CDfbE406cA8701e'
-export  const minterContractAddress = '0x0b0B6e54AdE0F700f9566fBD2A1ef99eE5991386'
-export  const settingContractAddress = '0xfF2914b6306Ac20105D34527Bb7aBF837cAA1747'
+export  const UNBCNFTContractAddress = '0x5f659C1b854e6C3EE97aaA04dac6937798aCEC32'
+export  const minterContractAddress = '0xC27e667a4A51280835C67F7482ef86cD5F6785D8'
+export  const settingContractAddress = '0x65465BB5C29387F87cb4A404Ee16e96783EfA2a5'
 export  const utopiaFactoryContractAddress   = '0x3FADe2932Edbe46337d83b8aBD28ba7aB0a63652'

@@ -8,10 +8,10 @@ import { Container, Header, List } from "semantic-ui-react";
 import { useState } from "react";
 
 const PageMenu = () => {
-    const menuItem = [{name: 'Home', link:'/'}, 
-                      {name: 'Citizen ID', subMenu:[{name:'Mint', link:'/Mint'}, {name:'Profile', link:'/Profile'}]},
-                      {name: 'Setting', subMenu:[{name:'Create Avatar', link:'/CreateAvatar'}]}, 
-                      {name:'Verses', subMenu:[{name:'Create Verses', link:'/CreateVerse'}, {name:'My Verses', link:'/Verses'}]}
+    const menuItem = [ 
+                      {name: 'Citizen ID', subMenu:[{name:'Mint', link:'/Mint'}, {name:'Profile', link:'/Profile'}]}, 
+                      {name:'Verses', subMenu:[{name:'Create Verses', link:'/CreateVerse'}, {name:'My Verses', link:'/Verses'}
+                    ,{name:'Explore Verses', link:'/ExploreVerses'}]}
                     ]
     const styleLink = document.createElement("link");
     styleLink.rel = "stylesheet";

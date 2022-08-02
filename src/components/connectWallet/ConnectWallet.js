@@ -36,20 +36,17 @@ const ConnectWallet = (props) => {
     if (!account && !(error instanceof UnsupportedChainIdError)){
     message = 'Wallet is not connect'
     contentBtn = (
-      <Button  background="#76568e" border="2px solid #9682a5" fontFamily="Lato,'Helvetica Neue',Arial,Helvetica,sans-serif" margin="25px 0 0" color="#fff" onClick={handleConnectWallet}>
+      <button className='profile-btn'  fontFamily="Lato,'Helvetica Neue',Arial,Helvetica,sans-serif" onClick={handleConnectWallet}>
           Connect Wallet
-      </Button>
+      </button>
     )
     }
     else if (wrongNetwork || validChainId || error instanceof UnsupportedChainIdError) {
         message = 'Wrong Network'
         console.log(wrongNetwork)
         contentBtn = (
-            <Button
-              margin="25px 0 0"
-              background={'rgba(255, 164, 81, 0.2)'}
-              border="1px solid rgba(255, 164, 81, 1)"
-              cursor="pointer"
+            <button
+              className='profile-btn' 
               onClick={() =>
                 wrongNetwork ? addRPC(bridge.fromChain ? bridge.fromChain.id : validChains[0]) : addRPC(validChainId)
               }
@@ -59,7 +56,7 @@ const ConnectWallet = (props) => {
                   ? ` Switch to ${NameChainMap[bridge.fromChain ? bridge.fromChain.id : validChains[0]]}`
                   : ` Switch to ${NameChainMap[validChainId]}`}
 
-            </Button>
+            </button>
           )
     }
 

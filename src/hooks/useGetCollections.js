@@ -7,36 +7,60 @@ import axios from 'axios'
 const useGetCollections = () => {
 
     const web3 = useWeb3();
-    const graphUrl = 'https://api.thegraph.com/subgraphs/name/jafari-mi/utopia42-mumbai-v2'
-    const getCollections = async (account) => {
+    const graphUrl = 'https://api.thegraph.com/subgraphs/name/jafari-mi/utopia42-mumbai-land'
+    const getCollections = async (account, status, lastCreateTime, order) => {
         let factories;
-        owner: "${account.toLowerCase()}"
+        let object;
+        console.log(lastCreateTime, status)
+        if (status == 'all') {
+          object = 
+          `{
+            factories{
+              totalVerse
+            }
+            verses (first: 5, orderBy:createdAt, where:{createdAt_gt: "${lastCreateTime}"}) {
+              id
+              createdAt
+              name
+              owner{
+                id
+              }
+            }
+          }
+          `
+        }
+       
+        else {
+          object = 
+          `{
+            factories{
+              totalVerse
+            }
+            verses (where: 
+              { owner :  "${account.toLowerCase()}"}) {
+              id
+              createdAt
+              name
+              owner{
+                id
+              }
+            }
+          }
+          `
+        }
         let totalData = await axios.post(
             graphUrl,
             {
 
-              query:
-              `{
-                factories(where: {owner: "${account.toLowerCase()}"}) {
-                  id
-                  factory
-                  verse {
-                    owner
-                    id
-                  }
-                  collection {
-                    id
-                  }
-                }
-              }
-              
-              `
+              query:object
+
             }
           ).then((res) => {
-            factories  = res.data.data.factories
+            // console.log(res)
+            factories  = res
             // console.log(factories)
         })
-        console.log(factories)
+        // console.log(factories)
         return factories
 
 

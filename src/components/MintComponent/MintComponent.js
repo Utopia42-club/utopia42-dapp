@@ -50,7 +50,7 @@ const MintComponent = (props) => {
       </Box>
       <div style={{width:"100%", background:"linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%"}}>
       <Box marginTop="10" background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
-        <Button background="#76568e" margin="25px 0 0" color='#FFF' onClick={handleMint} >{buttonName}</Button>
+        <button className='profile-btn' onClick={handleMint} >{buttonName}</button>
       </Box>
       </div>
       </Flex>

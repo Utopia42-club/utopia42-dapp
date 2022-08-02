@@ -8,7 +8,7 @@ export const Td = styled.td`{
     text-overflow: ellipsis;
     white-space: nowrap;
         @media screen and (max-width: 780px) {
-        width:30%;
+        // width:30%;
         font-size:13px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -25,13 +25,13 @@ export const Tr = styled.tr`{
 export const Th = styled.th`{
   background:#76568e ;
     padding-top: 12px;
-    width:30%;
+    // width:100%;
     padding-bottom: 12px;
     // text-align: center;
     color: white;
     border: 1px solid #9682a5;
     @media screen and (max-width: 780px) {
-        width:20%;
+        // width:20%;
         font-size:12px;
       }
 

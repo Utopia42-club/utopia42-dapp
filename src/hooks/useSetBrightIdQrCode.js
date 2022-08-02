@@ -5,20 +5,19 @@ import { sendTransaction } from '../utils/sendTx'
 import useWeb3 from './useWeb3'
 import { UNBCNFTContractAddress } from '../ContractsAddresses';
 import useBrightIdApi from './useBrightIdApi'
-import useGetLastCitizenId from './useGetLastCitizenId';
 import useLastCitizenId from './useLastCitizenId';
 import useCitizenId from './useCitizenId'
 import { useState } from 'react';
 import { formatAddress } from '../utils/formatAddress'
 import useIsRegister from './useIsRegister';
+import { toCheckSumAddress } from '../utils/toCheckSumAddress';
+import { useWeb3React } from '@web3-react/core';
 
-const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
+const useSetBrightIdQrCode = (NFTs, checkNFT, setBtnName) => {
     let nftID;
     const web3 = useWeb3()
     const getCitizenID = useCitizenId() 
     const isRegister = useIsRegister()
-    const getLastCitizenId = useGetLastCitizenId()
-    const [lastCitizenID, setLastCitizenID] = useState()
     const getLastID = useLastCitizenId()
     let status = 'Register'
     const brightIdData = useBrightIdApi()
@@ -26,11 +25,31 @@ const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
     let lastId;
     let firstId;
     let lastContextId;
+    const { account} = useWeb3React()
     
-    const setBrightId = async (isMobile) => {
-        const citizenID = await getCitizenID(account)
-        console.log(citizenID)
-        const data = await brightIdData()
+    const setBrightId = async (account_, isMobile) => {
+        console.log(account_)
+        if(!account_ || account_.trim() == ''){
+            return Swal.fire({
+                text:'Please enter an address',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            })  
+        }
+        try{
+            toCheckSumAddress(account_)
+        }
+        catch{
+            return Swal.fire({
+                text:'Wrong address',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+        const citizenID = await getCitizenID(account_)
+        const data = await brightIdData(account_)
         console.log(data)
         if (data.error){
             setBtnName('Set BrightID')
@@ -50,8 +69,17 @@ const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
     
             })
         }
+        // if (data.contextIds.includes(account_.toLowerCase())){
+        //     return Swal.fire({
+        //         text:"This wallet is connected before",
+        //         icon:'error',
+        //         showConfirmButton: false,
+        //         timer: 2500
+      
+        //     })
+        // }
         lastContextId = data.contextIds[0]
-        if(!await isRegister(account) && !await isRegister(data.contextIds[data.contextIds.length-1])) {
+        if(!await isRegister(account_) && !await isRegister(data.contextIds[data.contextIds.length-1])) {
             registeredNFT =  false
         }
         else{
@@ -73,8 +101,8 @@ const useSetBrightIdQrCode = (account,  NFTs, checkNFT, setBtnName) => {
             })
         }
 
-        if(account.toLocaleLowerCase() != lastContextId.toLocaleLowerCase() && lastId != 0) {
-            console.log(account, lastContextId, lastId)
+        if(account_.toLocaleLowerCase() != lastContextId.toLocaleLowerCase() && lastId != 0) {
+            // console.log(account_, lastContextId, lastId)
             return Swal.fire({
                 icon:'error',
                 text: `Transfer CitizenID from ${formatAddress(lastContextId)} to another address`,

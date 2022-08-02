@@ -53,15 +53,15 @@ const NftList = () => {
     const [firsID, setFiresID] = useState()
     const [lastCitizenID, setLastCitizenID] = useState()
     const [lastContextID, setLastContextID] = useState()
+    const [updateBrightID, setUpdateBrightId] = useState()
 
     const isRegisteredWallet = async () => {
-        data = await brightIdData()
+        data = await brightIdData(account)
         console.log(data)
         if (data.error) {
           setRegisteredNFT(false)
           setRegisteredWallet(false)
           setLastCitizenID(0)
-          
         }
         else{
           setLastContextID(data.contextIds[0])
@@ -152,26 +152,28 @@ const NftList = () => {
       <>
     {!account || chainId != process.env.NEXT_PUBLIC_VALID_CHAIN ? <ConnectWallet name='Profile'/> : ''}
     {Number(citizenID!=0 ) || registeredNFT && lastCitizenID == 0 && firsID > 0  && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN ?
-    <Container>
-      <Wrapper maxWidth="300px" width="100%"></Wrapper>
-      <Wrapper width="100%">
-      <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
+    <>
+      {/* <Wrapper maxWidth="300px" width="100%"></Wrapper> */}
+      {/* <Wrapper width="100%"> */}
+      {/* <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%"> */}
         {chainId ==  process.env.NEXT_PUBLIC_VALID_CHAIN && ready ? 
         <>
-        <GradientTitle margin="0 0 10px">Profile</GradientTitle>
-        <ProfileTable firsID={firsID} lastContextID={lastContextID} lastCitizenID={lastCitizenID} NFTs={NFTs} isTransferable={isTransferable} registeredNFT={registeredNFT}  checkNFT={checkNFT} setTransferModal={setTransferModal} handleSelectToken={handleSelectToken} setBrightIdModal={setBrightIdModal} citizenId={citizenID} brightId={registeredWallet} avatarLink={avatarLink} isSetNFTtoBrightID={isSetNFTtoBrightID}/>
+        {/* <GradientTitle margin="0 0 10px">Profile</GradientTitle> */}
+        <ProfileTable setUpdateBrightId={setUpdateBrightId} firsID={firsID} lastContextID={lastContextID} lastCitizenID={lastCitizenID} NFTs={NFTs} isTransferable={isTransferable} registeredNFT={registeredNFT}  checkNFT={checkNFT} setTransferModal={setTransferModal} handleSelectToken={handleSelectToken} setBrightIdModal={setBrightIdModal} citizenId={citizenID} brightId={registeredWallet} avatarLink={avatarLink} isSetNFTtoBrightID={isSetNFTtoBrightID}/>
         </>
         : 
         account && !ready && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN ?
-        <img width='100px' src='media/common/loading-gif.jpg' />
+        <div className='loading-icon'>
+          <img width='100px' src='media/common/loading-gif.jpg' />
+        </div>
         :
         ''
         }
-      </Flex>
-      </Wrapper>
-      <Wrapper maxWidth="300px" width="100%">
-      </Wrapper>
-    </Container>
+      {/* </Flex> */}
+      {/* </Wrapper> */}
+      {/* <Wrapper maxWidth="300px" width="100%"> */}
+      {/* </Wrapper> */}
+    </>
     :
     <MintComponent titleName={'Profile'}/>
     }
@@ -206,7 +208,7 @@ const NftList = () => {
         mainBack={'#fff'}
       >
         <Wrapper maxWidth="470px" width="100%">
-          <BrightId account={account} checkNFT={checkNFT} registeredNFT={registeredNFT} citizenId={citizenID} NFTs={NFTs}/>
+          <BrightId updateBrightID={updateBrightID} account={account} checkNFT={checkNFT} registeredNFT={registeredNFT} citizenId={citizenID} NFTs={NFTs}/>
         </Wrapper>
       </Modal>
 
