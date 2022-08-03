@@ -59,7 +59,7 @@ const useSetBrightIdQrCode = (NFTs, checkNFT, setBtnName) => {
                 text = "Link you'r BrightID to Utopia42"
             }
             else{
-                text = "Please scan QR code"
+                text = "Please scan QR code. (If you have scanned the QR Code Please wait for a few seconds to sync the data)"
             }
             return Swal.fire({
                 text: text,
