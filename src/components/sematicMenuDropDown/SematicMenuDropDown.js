@@ -13,7 +13,7 @@ const DropdownPointing = () => {
         const [show, setShow] = useState(false)
         const menuItem = [ 
         {name: 'Citizen ID', subMenu:[{name:'Mint', link:'/Mint'}, {name:'Profile', link:'/Profile'}]}, 
-        {name:'Verses', subMenu:[{name:'Create Verses', link:'/CreateVerse'}, {name:'My Verses', link:'/Verses'}]}
+        {name:'Verses', subMenu:[{name:'Create Verses', link:'/CreateVerse'}, {name:'My Verses', link:'/Verses'}, {name:'Explore Verses', link:'/ExploreVerses'}]}
       ]
       const wrapperRef = useRef(null)
 
