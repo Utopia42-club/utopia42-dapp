@@ -34,16 +34,16 @@ const ProfileTable = (props) => {
   let citizenIDvalue;
   let isSetNFTtoBrightIDvalue;
   const [btnSetBrightID, setBtnSetBrightId] = useState("Set BrightID");
-  console.log(
-    "nft:",
-    NFTs[0],
-    "citizenId:",
-    citizenId,
-    "registeredNFT:",
-    registeredNFT,
-    "lastCitizenID:",
-    lastCitizenID
-  );
+  // console.log(
+  //   "nft:",
+  //   NFTs[0],
+  //   "citizenId:",
+  //   citizenId,
+  //   "registeredNFT:",
+  //   registeredNFT,
+  //   "lastCitizenID:",
+  //   lastCitizenID
+  // );
 
   const handleShowAvatar = () => {
     setShowAvatarLink(!showAvatarLink);

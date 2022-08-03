@@ -11,7 +11,7 @@ const useGetCollections = () => {
     const getCollections = async (account, status, lastCreateTime, order) => {
         let factories;
         let object;
-        console.log(lastCreateTime, status)
+        // console.log(lastCreateTime, status)
         if (status == 'all') {
           object = 
           `{

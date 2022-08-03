@@ -1,5 +1,4 @@
 import {Button} from './btn.style'
-import useGetCollections from '../../hooks/useGetCollections';
 
 const CollectionsPagInation = (props) => {
     const {
@@ -12,12 +11,12 @@ const CollectionsPagInation = (props) => {
     const totalPages =  totalVerses / 5
     
     const increase = (pageNumber) => {
-        console.log(pageNumber, totalPages)
+        // console.log(pageNumber, totalPages)
         pagInationItems(lastCreateTime, 'createdAt_gt', pageNumber)
     }
 
     const decrease = (pageNumber) => {
-        console.log(pageNumber)
+        // console.log(pageNumber)
         pagInationItems(lastCreateTime, 'createdAt_lt', pageNumber)
     }
 
@@ -47,9 +46,10 @@ const CollectionsPagInation = (props) => {
                     > More
                     </button>
                     :
-                    <Button 
-                    > More
-                    </Button>
+                    ''
+                    // <Button 
+                    // > More
+                    // </Button>
                 }
             </div>
         </>

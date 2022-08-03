@@ -65,7 +65,7 @@ function BrightIdApp(props) {
   const trySponsor = async () => {
     let res = await sponsor(privateKey, context, contextId)
     setRes(JSON.stringify(res, null, 2))
-    console.log(res)
+    // console.log(res)
   }
 
   // const testBlocks = async (op) => {

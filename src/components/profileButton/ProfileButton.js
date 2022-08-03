@@ -10,8 +10,7 @@ const ProfileButton = (props) => {
  const {checkNFT, registeredWallet, citizenID, setBrightIdModal, handleSelectToken, setTransferModal, isSetNFTtoBrightID} = props
  const [color, setColor] = useState('#300c4b')
  const [btnSetBrightID, setBtnSetBrightId] = useState('Set BrightID')
-    console.log()
-console.log(registeredWallet, citizenID)
+// console.log(registeredWallet, citizenID)
 
  let btn = ''
 

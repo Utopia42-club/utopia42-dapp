@@ -11,7 +11,7 @@ const useSetBrightId = (account) => {
     const brightIdData = useBrightIdApi()
     const setBrightId = async (id) => {
         const data = await brightIdData(account)
-        console.log(id)
+        // console.log(id)
         if (!id) {
             return Swal.fire({
                 text: 'Invalid NFT Id',
@@ -21,7 +21,7 @@ const useSetBrightId = (account) => {
     
             })
         }
-        console.log(account, id, data)
+        // console.log(account, id, data)
         let contextIds = data.contextIds
         let sgiR = '0x' + data.sigR
         let sugS = '0x' + data.sigS

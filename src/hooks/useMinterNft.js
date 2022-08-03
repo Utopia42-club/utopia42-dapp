@@ -22,8 +22,8 @@ const useMinterNft = (address, chainId) => {
     }
 
     const price =  await contract.methods.price('1').call()
-    console.log(price)
-    console.log(Number(fetchBalance), fromWei(price))
+    // console.log(price)
+    // console.log(Number(fetchBalance), fromWei(price))
     if (Number(fetchBalance) < fromWei(price)){
       return Swal.fire({
         text: 'Insufficient balance',

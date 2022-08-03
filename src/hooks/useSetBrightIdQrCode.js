@@ -28,7 +28,7 @@ const useSetBrightIdQrCode = (NFTs, checkNFT, setBtnName) => {
     const { account} = useWeb3React()
     
     const setBrightId = async (account_, isMobile) => {
-        console.log(account_)
+        // console.log(account_)
         if(!account_ || account_.trim() == ''){
             return Swal.fire({
                 text:'Please enter an address',
@@ -50,7 +50,7 @@ const useSetBrightIdQrCode = (NFTs, checkNFT, setBtnName) => {
         }
         const citizenID = await getCitizenID(account_)
         const data = await brightIdData(account_)
-        console.log(data)
+        // console.log(data)
         if (data.error){
             setBtnName('Set BrightID')
             lastId = 0
@@ -85,7 +85,7 @@ const useSetBrightIdQrCode = (NFTs, checkNFT, setBtnName) => {
         else{
             registeredNFT =  true
         }
-        console.log(lastContextId)
+        // console.log(lastContextId)
         lastId = await getLastID(lastContextId)
         firstId = await getLastID(data.contextIds[data.contextIds.length-1])
 
@@ -119,7 +119,7 @@ const useSetBrightIdQrCode = (NFTs, checkNFT, setBtnName) => {
             nftID = citizenID
         }
 
-        console.log(nftID)
+        // console.log(nftID)
         let contextIds = data.contextIds
         let sgiR = '0x' + data.sigR
         let sugS = '0x' + data.sigS

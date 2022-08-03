@@ -43,7 +43,7 @@ const ConnectWallet = (props) => {
     }
     else if (wrongNetwork || validChainId || error instanceof UnsupportedChainIdError) {
         message = 'Wrong Network'
-        console.log(wrongNetwork)
+        // console.log(wrongNetwork)
         contentBtn = (
             <button
               className='profile-btn' 

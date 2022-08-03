@@ -8,7 +8,7 @@ const useRegisterToken = () => {
     const web3 = useWeb3()
     let status = 'Register'
     const register = async (account, tokenId) => {
-        console.log(account, tokenId)
+        // console.log(account, tokenId)
         if (account != undefined){
 
             const contract = getContract(unbcNFTAbi, UNBCNFTContractAddress, web3)

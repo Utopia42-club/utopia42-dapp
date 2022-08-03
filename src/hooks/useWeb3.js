@@ -19,7 +19,7 @@ const useWeb3 = () => {
 
 export const useCrossWeb3 = (targetChainId) => {
   const { library, chainId } = useWeb3React()
-  console.log(chainId)
+  // console.log(chainId)
   const [web3, setweb3] = useState(
     library && chainId === targetChainId ? new Web3(library) : getWeb3NoAccount(targetChainId)
   )

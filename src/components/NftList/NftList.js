@@ -57,7 +57,7 @@ const NftList = () => {
 
     const isRegisteredWallet = async () => {
         data = await brightIdData(account)
-        console.log(data)
+        // console.log(data)
         if (data.error) {
           setRegisteredNFT(false)
           setRegisteredWallet(false)
@@ -144,7 +144,7 @@ const NftList = () => {
     
 
     const handleSelectToken = (item) => {
-          console.log(item)
+          // console.log(item)
           setSelectedNFT(item)
     }
 

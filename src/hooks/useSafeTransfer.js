@@ -25,7 +25,7 @@ const useSafeTransfer = () => {
             timer: 1500
           })
         }
-        console.log(toCheckSumAddress(toAddress))
+        // console.log(toCheckSumAddress(toAddress))
 
         if (!contract) {
             console.error('contract is null')
