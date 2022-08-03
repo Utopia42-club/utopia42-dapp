@@ -8,7 +8,7 @@ const useGetCollections = () => {
 
 
     const web3 = useWeb3();
-    const graphUrl = 'https://api.thegraph.com/subgraphs/name/jafari-mi/utopia42-mumbai-land'
+    const graphUrl = 'https://api.thegraph.com/subgraphs/name/jafari-mi/utopia42-mumbai-v2'
     const getCollections = async (account, status, lastCreateTime, order) => {
         let factories;
         let object;
