@@ -79,13 +79,13 @@ const ExploreVerses = () => {
                     </Tbody>
                 </Table>
             </WarpTable>
-            <CollectionsPagInation 
+            {/* <CollectionsPagInation 
                 totalVerses= { totalVerse } 
                 pagInationItems = { pagInationItems }
                 lastCreateTime = { lastCreateTime }
                 pageNumber = { pageNumber }
                 firstCreateTime = { firstCreateTime }
-            />
+            /> */}
         </>
     );
 }

@@ -11,14 +11,6 @@ const CollectionsPagInation = (props) => {
     } = props
 
     const totalPages =  totalVerses / 5
-
-
-    const checkThis = () => { 
-        console.log('ok')
-    }
-
-    window.addEventListener('click', checkThis )
-
     
     const increase = (pageNumber) => {
         // console.log(pageNumber, totalPages)
@@ -49,7 +41,7 @@ const CollectionsPagInation = (props) => {
                     </Button>
                 } */}
 
-               {/* { 
+               { 
                     pageNumber < totalPages ?
                     <button className='profile-btn'
                         onClick={() => {increase(pageNumber+1)}}
@@ -57,10 +49,10 @@ const CollectionsPagInation = (props) => {
                     </button>
                     :
                     ''
-                    <Button 
-                    > More
-                    </Button>
-                } */}
+                    // <Button 
+                    // > More
+                    // </Button>
+                }
             </div>
         </>
     )
