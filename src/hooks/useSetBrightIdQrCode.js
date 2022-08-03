@@ -93,7 +93,7 @@ const useSetBrightIdQrCode = (NFTs, checkNFT, setBtnName) => {
             checkNFT()
             setBtnName('Set BrightID')
             return Swal.fire({
-                text:"Transfer you'r CitizenID",
+                text:"Already has CitizenID",
                 icon:'error',
                 showConfirmButton: false,
                 timer: 2500

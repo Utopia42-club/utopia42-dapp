@@ -113,7 +113,7 @@ const ProfileTable = (props) => {
   const handleSetBrightID = async () => {
     if (registeredNFT && citizenId != 0) {
       return Swal.fire({
-        text: "Transfer you'r CitizenID",
+        text: "Already has CitizenID",
         icon: "error",
         showConfirmButton: false,
         timer: 2500,

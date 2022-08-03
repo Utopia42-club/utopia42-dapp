@@ -6,6 +6,7 @@ import axios from 'axios'
 
 const useGetCollections = () => {
 
+
     const web3 = useWeb3();
     const graphUrl = 'https://api.thegraph.com/subgraphs/name/jafari-mi/utopia42-mumbai-land'
     const getCollections = async (account, status, lastCreateTime, order) => {
@@ -18,7 +19,7 @@ const useGetCollections = () => {
             factories{
               totalVerse
             }
-            verses (first: 5, orderBy:createdAt, where:{createdAt_gt: "${lastCreateTime}"}) {
+            verses (orderBy:createdAt, where:{createdAt_gt: "${lastCreateTime}"}) {
               id
               createdAt
               name

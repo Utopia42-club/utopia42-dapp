@@ -43,7 +43,7 @@ export const Thead = styled.thead`{
 }`
 
 export const WarpTable = styled.div `
-  height:330px;
+  
   overflow-y:scroll;
   overflow-x:hidden;
   background:none;
