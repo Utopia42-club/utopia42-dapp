@@ -51,9 +51,12 @@ export const Table = styled.table`{
   flex-flow: column;
   border-collapse: collapse;
   text-align: center;
+
+  width: 70%;
   
-  width: 90%;
-    
+  @media screen and (max-width: 1280px) {
+    width: 100%;
+  }
 }`
 
 export const Tbody = styled.tbody`{
