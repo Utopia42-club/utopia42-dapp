@@ -42,7 +42,7 @@ const useSetBrightIdQrCode = (NFTs, checkNFT, setBtnName) => {
         }
         catch{
             return Swal.fire({
-                text:'Wrong address',
+                text:'Invalid address',
                 icon: 'error',
                 showConfirmButton: false,
                 timer: 1500
