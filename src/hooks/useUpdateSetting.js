@@ -13,7 +13,7 @@ const useUpdateSetting = () => {
   // const brightIdData = useBrightIdApi()
   let status = 'Update Settings'
   const updateSetting = async (address, keys, values, citizenID) => {
-    console.log(address, keys, values, citizenID)
+    // console.log(address, keys, values, citizenID)
     // let data = await brightIdData()
     const contract = getContract(settingAbi, settingContractAddress, web3)
     // console.log(contract)

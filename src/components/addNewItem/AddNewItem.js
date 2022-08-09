@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { async } from 'muon';
 
 const AddNewItem = (props) => {
-  const [itemsList, setItemsList] = useState([]);
   const {citizenId} = props
   const [socialLinks, setSocialLinks] = useState([]);
   const [bio, setBio] = useState();
@@ -33,8 +32,6 @@ const AddNewItem = (props) => {
         ...prevState, {id:data.length, value:'', key:socialMedias[0], dropDown:true}
       ]));
     }
-
-
   };
 
 
