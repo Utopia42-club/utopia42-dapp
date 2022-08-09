@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Script from 'next/script'
 
 export default function Show3dAvatar(props) {
+  const [file, setFile] = useState('media/common/avatar-1.jpg');
   const {avatarLink} = props
   const modelRef = React.useRef();
   const [annots, setAnnots] = useState([]);
@@ -41,6 +42,27 @@ export default function Show3dAvatar(props) {
     return `${annot.normal.x} ${annot.normal.y} ${annot.normal.z}`;
   };
 
+  function handleChange(e) {
+    try{
+      console.log(e.target.files);
+      if(!e.target.files){
+        e.target.value = null;
+        setFile('media/common/avatar-1.jpg')
+      }
+      else{
+        setFile(URL.createObjectURL(e.target.files[0]));
+      }
+    }
+
+    catch{
+      setFile('media/common/avatar-1.jpg')
+    }
+
+  }
+
+  const handleRemovePic = () => {
+
+  }
   return (
     <>
     <Script
@@ -75,7 +97,20 @@ export default function Show3dAvatar(props) {
       <div>
         <img className="noAvatar" height='200px' src='media/common/avatar-1.jpg'/>
       </div>
-    }
+
+      // <div>
+      //   <input accept="image/*" id="file-upload"  type="file" onChange={handleChange} />
+      //   <img htmlFor="file-upload" className="noAvatar" height='250px' width="250px" src={file}/>
+      //   <div>
+      //     <label style={{cursor:'pointer'}} htmlFor="file-upload" className="image-upload">Click to choose picture</label>
+      //     {file != 'media/common/avatar-1.jpg' ?
+      //     <span onClick={handleChange} style={{marginLeft:'10px', cursor: 'pointer'}}>X</span>
+      //     :
+      //     ''
+      //     }
+      //   </div>
+      // </div>
+    } 
     </>
   );
 }

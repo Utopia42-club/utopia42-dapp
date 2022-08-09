@@ -23,6 +23,7 @@ import MintComponent from '../MintComponent/MintComponent';
 import useGetLastCitizenId from '../../hooks/useGetLastCitizenId';
 import ConnectWallet from '../connectWallet/ConnectWallet'
 import useIsRegister from '../../hooks/useIsRegister'
+import AddNewItem from '../addNewItem/AddNewItem';
 
 
 const NftList = () => {
@@ -160,6 +161,7 @@ const NftList = () => {
         <>
         {/* <GradientTitle margin="0 0 10px">Profile</GradientTitle> */}
         <ProfileTable setUpdateBrightId={setUpdateBrightId} firsID={firsID} lastContextID={lastContextID} lastCitizenID={lastCitizenID} NFTs={NFTs} isTransferable={isTransferable} registeredNFT={registeredNFT}  checkNFT={checkNFT} setTransferModal={setTransferModal} handleSelectToken={handleSelectToken} setBrightIdModal={setBrightIdModal} citizenId={citizenID} brightId={registeredWallet} avatarLink={avatarLink} isSetNFTtoBrightID={isSetNFTtoBrightID}/>
+        <AddNewItem citizenId={citizenID} />
         </>
         : 
         account && !ready && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN ?

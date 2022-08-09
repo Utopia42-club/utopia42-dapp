@@ -12,7 +12,59 @@ body{
     text-align: right !important;
 }
 
-select {
+
+.profile-select {
+  /* styling */
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid rgb(184, 184, 184);
+  /* border-radius: 4px; */
+  /* display: inline-block; */
+  font: inherit;
+  line-height: 1.5em;
+  height: 46px;
+  /* padding: 0.5em 3.5em 0.5em 0em; */
+  color: rgb(141, 141, 141);
+  /* max-width: 110px; */
+  margin: 0;      
+  margin-right: 10px;
+  /* -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none; */
+}
+
+.select-box-profile {
+/* margin-top: 5px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 20px) calc(1.25em + 2px),
+    calc(100% - 15px) calc(1.25em + 2px),
+    calc(100% - 2.5em) 0.5em;
+  background-size:
+    3px 3px,
+    5px 3px,
+    1px 2em;
+  background-repeat: no-repeat; */
+}
+
+.select-box-profile:focus {
+  outline: 0;
+}
+
+.select-box-profile > option {
+  height: 45px !important;
+}
+
+
+
+
+.create-verse-select {
     /* styling */
     cursor: pointer;
     background-color: transparent;
@@ -34,7 +86,7 @@ select {
     -moz-appearance: none;
   }
 
-#select-box {
+.select-box {
   margin-top: 5px;
     background-image:
       linear-gradient(45deg, transparent 50%, gray 50%),
@@ -51,11 +103,11 @@ select {
     background-repeat: no-repeat;
   }
   
-  #select-box:focus {
+  .select-box:focus {
     outline: 0;
   }
 
-  #select-box > option {
+  .select-box > option {
     height: 45px !important;
   }
 
@@ -256,3 +308,6 @@ select {
   margin-top: 30px;
 }
 
+input[type="file"] {
+  display: none;
+}

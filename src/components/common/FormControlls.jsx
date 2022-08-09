@@ -36,8 +36,8 @@ export const BorderBottom = styled.div`
 `
 
 export const Input = styled.input`
+width: ${({ width }) => (width ? width : '100%')};;
   max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : '400px')};
-  width: ${({ width }) => (width ? width : '100%')};;
   type: ${({type}) => {type ? type : 'text'}};
   background: ${({ background }) => (background ? background : 'transparent')};
   height: ${({ height }) => (height ? height : '45px')};
@@ -79,6 +79,57 @@ export const Input = styled.input`
     font-size: 13px;
   }
 `
+
+export const Textarea = styled.textarea`
+  margin-top:20px;
+  margin-bottom: 20px;
+  padding-left:20px;
+  padding-top:10px;
+  max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : '400px')};
+  width: ${({ width }) => (width ? width : '100%')};;
+  // type: ${({type}) => {type ? type : 'text'}};
+  background: ${({ background }) => (background ? background : 'transparent')};
+  height: ${({ height }) => (height ? height : '100px')};
+  border: ${({ border }) => (border ? border : '1px solid rgb(255, 255, 255);')};
+  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : '5px')};
+  box-sizing: border-box;
+  font-family: ${({ fontFamily }) => (fontFamily ? fontFamily : 'Montserrat')};
+  font-style: normal;
+  font-weight: normal;
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : '15px')};
+  color: ${({ color }) => (color ? color : '#313144')};
+  &:focus {
+    outline: none;
+  }
+  // padding: 0 17px;
+  @media screen and (max-width: 576px) {
+    font-size: ${({ fontSizeXS }) => (fontSizeXS ? fontSizeXS : '13px')};
+    // max-width: 150px;
+  }
+  @media screen and (max-width: 460px) {
+    // max-width: 120px;
+    /* font-size: 10px; */
+  }
+  ::placeholder {
+    color: #909090;
+    opacity: 1; /* Firefox */
+    font-size: 13px;
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #909090;
+    font-size: 13px;
+  }
+
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #909090;
+    font-size: 13px;
+  }
+`
+
+
 export const Image = styled.img`
   width: ${({ width }) => (width ? width : '26px')};
   height: ${({ height }) => (height ? height : '26px')};

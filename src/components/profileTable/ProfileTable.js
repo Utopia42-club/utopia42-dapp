@@ -1,17 +1,18 @@
-import {
-  Button,
-} from "./table.style";
 import useSetBrightId from "../../hooks/useSetBrightId";
 import { useWeb3React } from "@web3-react/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Router from "next/router";
 import Show3dAvatar from "../show3dAvatar/Show3dAvatar";
 import Swal from "sweetalert2";
 import { formatAddress } from "../../utils/formatAddress";
 
+
 const ProfileTable = (props) => {
   const [copyState, setCopyState] = useState("Copy Link");
+  const [itemsList, setItemsList] = useState([])
   const { account } = useWeb3React();
+  const [bio, setBio] = useState();
+  const [userName, setUserName] = useState()
   const {
     firsID,
     lastContextID,
@@ -31,9 +32,11 @@ const ProfileTable = (props) => {
   } = props;
   const setBrightId = useSetBrightId(account);
   const [showAvatarLink, setShowAvatarLink] = useState(false);
+  const [socialLinks, setSocialLinks] = useState([])
   let citizenIDvalue;
   let isSetNFTtoBrightIDvalue;
   const [btnSetBrightID, setBtnSetBrightId] = useState("Set BrightID");
+
   // console.log(
   //   "nft:",
   //   NFTs[0],
@@ -152,6 +155,9 @@ const ProfileTable = (props) => {
     Router.push("/CreateAvatar");
   };
 
+
+
+
   return (
     <div className="wrap-container">
       <div className="header">
@@ -242,7 +248,7 @@ const ProfileTable = (props) => {
                 <div className="profile-title">
                   <h3>Connect CitizenID to BrightID</h3>
                 </div>
-                  <button className="profile-btn" color="#fff" onClick={handleSetBrightID}>
+                  <button className="profile-btn" onClick={handleSetBrightID}>
                     {btnSetBrightID}
                   </button>
               </div>
@@ -250,9 +256,12 @@ const ProfileTable = (props) => {
               ""
           )}
 
+
         </div>
         
-        <div></div>
+      </div>
+      <div>
+
       </div>
     </div>
 
