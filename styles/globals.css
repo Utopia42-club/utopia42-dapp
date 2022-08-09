@@ -246,6 +246,17 @@ body{
     }
   }
 
+  .saveBtn {
+    text-align: right;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  @media screen and (max-width: 414px) {
+    .saveBtn{
+      text-align: center !important;
+    }
+  }
+
 .profile-item {
   border:1px solid rgb(248, 242, 250);
   padding:15px;
@@ -286,7 +297,28 @@ body{
 
 }
 
-.profile-btn:hover {
+.editBtn {
+  padding: 5px 10px;
+  margin:10px;
+  font-size: 15px;
+  border-radius: 15px;
+  font-weight: bold;
+  /* margin-top: 10px; */
+  background: none;
+  border: none;
+  cursor: pointer;
+  border: 2px solid #814f8c;
+  color:#814f8c;
+  transition: opacity .5s;
+
+}
+
+input:focus{
+  outline: none;
+  border-bottom: 2px solid #000;
+}
+
+.profile-btn:hover, .editBtn:hover {
   color: white;
   background-color: #814f8c;
   /* background-color: #814f8c; */
@@ -310,4 +342,15 @@ body{
 
 input[type="file"] {
   display: none;
+}
+
+select {
+  background-color: #76568e;
+  color:white;
+  border: none;
+  font-weight: bold;
+}
+
+select:focus {
+  outline: none;
 }

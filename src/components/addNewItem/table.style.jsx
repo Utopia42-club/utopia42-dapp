@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Td = styled.td`{
   // box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    border: 1px solid #e0e0e0;
+    border: 1px solid #f1f1f1;
     border-right:none;
     border-left:none;
     text-align: left;
@@ -60,32 +60,43 @@ export const Thead = styled.thead`{
 }`
 
 export const Table = styled.table`{
+  margin: 0 auto;
+  margin-top: 50px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  margin:20px;
-  margin-top:5px;
   background: none;
   color:#683f87;
   display: flex;
   flex-flow: column;
   border-collapse: collapse;
   text-align: center;
-  width: 90%;
+  width: 80%;
   border-radius:10px;  
 }`
 
 export const Tbody = styled.tbody`{
   border-radius: 10px;
   margin-top:-2px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  // box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   // border: 1px solid #9682a5;
   flex: 1 1 auto;
   display: block;
   overflow-y: auto;
   overflow-x: hidden;
 }`
-
+// padding: 5px 10px;
+// margin:10px;
+// font-size: 15px;
+// border-radius: 15px;
+// font-weight: bold;
+// /* margin-top: 10px; */
+// background: none;
+// border: none;
+// cursor: pointer;
+// border: 2px solid #814f8c;
+// color:#814f8c;
+// transition: opacity .5s;
 export const Button = styled.button `{
-  background: #76568e;
+  background: none;
   margin: ${({ margin }) => (margin ? margin : '4px') };
   padding:8px;
   color: ${({ color }) => color };
@@ -170,4 +181,12 @@ export const Container = styled.div`
   //   padding: 0 20px;
   //   padding-top: 50px;
   // }
+`
+
+export const Input = styled.input`
+  border:none;
+  background:none;
+  padding:5px;
+  width:100%;
+  font-weight:bold
 `

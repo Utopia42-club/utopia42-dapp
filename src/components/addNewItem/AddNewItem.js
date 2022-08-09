@@ -1,8 +1,10 @@
-import { Input, TriangleDown, Textarea } from "../common/FormControlls";
+// import { Input, TriangleDown, Textarea } from "../common/FormControlls";
+import {Table, Tbody, Tr, Td, Th, Input, Button} from './table.style'
 import { useWeb3React } from "@web3-react/core";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import useUpdateSettings from '../../hooks/useUpdateSetting'
 import Swal from "sweetalert2";
+import { async } from 'muon';
 
 const AddNewItem = (props) => {
   const [itemsList, setItemsList] = useState([]);
@@ -11,33 +13,30 @@ const AddNewItem = (props) => {
   const [bio, setBio] = useState();
   const [userName, setUserName] = useState();
   const { account } = useWeb3React();
+  const [newItems, setNewItems] = useState([])
   const updateSettings = useUpdateSettings()
+  const [tableItem, setTableItem] = useState([])
+  const socialMedias = ['Instagram', 'Telegram', 'Discord', 'Facebook', 'Other']
+  const refs = useRef([])
 
-  const addNewItem = async (slag) => {
-    let createID;
-    try {
-      createID = itemsList[itemsList.length - 1].id + 1;
-    } catch {
-      createID = itemsList.length;
+
+  const addNewItem = async () => {
+
+
+    if (tableItem.length > 0 ) {
+      setData(prevState => ([
+        ...prevState, {id:data[data.length-1].id + 1, value:'', key:socialMedias[0], dropDown:true}
+      ]));
     }
-    setItemsList([
-      ...itemsList,
-      {
-        id: createID,
+    else{
+      setData(prevState => ([
+        ...prevState, {id:data.length, value:'', key:socialMedias[0], dropDown:true}
+      ]));
+    }
 
-        value: <div id={createID} key={createID}></div>,
-        message: "",
-      },
-    ]);
-    setSocialLinks([...socialLinks, { id: createID, key: "Instagram" }]);
 
-    // handleChange('Instagram', createID, 'key')
   };
 
-  const deleteItem = async (id) => {
-    setItemsList(itemsList.filter((item) => item.id !== id));
-    setSocialLinks(socialLinks.filter((item) => item.id !== id));
-  };
 
   const isValidUrl = (url, key) => {
     let regex = {
@@ -51,175 +50,170 @@ const AddNewItem = (props) => {
     return url.match(regex[key]);
   };
 
-  const handleChange = async (value, id, status) => {
-    let isValid;
-    socialLinks.filter((item) => {
-      if (item.id == id && status == "key") {
-        item.key = value;
-        if (item.value) {
-          isValid = isValidUrl(item.value, item.key, status);
-        }
-      }
-      if (item.id == id && status == "value") {
-        isValid = isValidUrl(value, item.key, status);
-        if (isValid != null) {
-          item.value = value;
-        }
-      }
-    });
-
-    itemsList.filter((item) => {
-      if (item.id == id) {
-        if (isValid != null) {
-          item.message = "";
-        } else {
-          item.message = "Invalid URL";
-        }
-      }
-      setItemsList([...itemsList]);
-    });
-  };
 
   let valuesList = []
   let keysList = []
 
   const handleSave = async () => {
-    if(!userName || userName.trim == '') {
-      return Swal.fire({
-        text: 'Please inter name',
-        icon: 'error',
-        showConfirmButton: false,
-        timer: 1500,
-      })
-    }
-    valuesList.push(userName)
-    keysList.push('name')
-    if(!bio || bio.trim == '') {
-      return Swal.fire({
-        text: 'Please inter bio',
-        icon: 'error',
-        showConfirmButton: false,
-        timer: 1500,
-      })
-    }
-    valuesList.push(bio)
-    keysList.push('bio')
-    console.log(socialLinks)
-    socialLinks.map((item) => {
+    let isCorrect = true
+    data.map((item) => {
       if(item.value == undefined || !item.value) {
+        isCorrect = false
         return Swal.fire({
-          text: 'Invalid URL',
+          text: `Invalid ${item.key} URL`,
           icon: 'error',
           showConfirmButton: false,
-          timer: 1500,
+          timer: 2500,
+        })
+      }
+      if(item.key == undefined || !item.key) {
+        isCorrect = false
+        return Swal.fire({
+          text: 'Invalid key',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 2500,
         })
       }
       valuesList.push(item.value)
       keysList.push(item.key)
     })
     console.log(valuesList, keysList, citizenId)
-    // await updateSettings(account, keysList, valuesList, citizenId)
+    if (isCorrect) {
+      await updateSettings(account, keysList, valuesList, citizenId)
+    }
   };
+
+
+  const [data, setData] = useState(
+    [{id:0, key: 'name', value: 'my name'}, 
+    {id:1, key: 'bio', value:'this is my bio'}, 
+    {id:2, key:'instagram', value:'www.instagram.com'}, 
+    {id:3, key:'telegram', value:'www.telegram.com'}]
+  )
+
+  const getKeys = () => {
+    setTableItem([])
+    data.map((item, index) => {
+      {item.dropDown == true && item.key != 'Other' && item.input != true?
+        setTableItem(Item => [...Item,
+          <Tr key={index}>
+            <Th>
+              <select onChange={(event) => handleChangeKey(event.target.value, item.id)}>
+              {socialMedias.map((item) => {
+                return <option>{item}</option>
+              })
+              }
+              </select>
+            </Th>
+            <Td><Input style={{borderBottom:'2px solid #000'}} value={item.value ?? ''} onChange={(e) => handleChangeValue(e.target.value, item.key, item.id)}/></Td>
+            <Td className="secondTd">
+            <img
+                style={{ cursor: "pointer", margin: "10px" }}
+                onClick={() => deleteItem(item.id)}
+                width="15px"
+                src="/media/common/delete.png"
+              />
+            </Td>
+          </Tr>])
+        :
+        item.key == "Other" || item.input ?
+        setTableItem(Item => [...Item,
+          <Tr key={index}>
+            <Th><Input placeholder="Enter new data" style={{borderBottom:'2px solid #000', color:'white', width:'50%'}} value={item.key ?? ''}  onChange={(e) => handleOtherKey(e.target.value,  item.id)}/></Th>
+            <Td><Input style={{borderBottom:'2px solid #000'}} value={item.value ?? ''} onChange={(e) => handleChangeValue(e.target.value, item.key, item.id)}/></Td>
+            <Td className="secondTd">
+            <img
+                style={{ cursor: "pointer", margin: "10px" }}
+                onClick={() => deleteItem(item.id)}
+                width="15px"
+                src="/media/common/delete.png"
+              />
+            </Td>
+          </Tr>,])
+        :
+        setTableItem(Item => [...Item,
+          <Tr key={index}>
+            <Th>{item.key}</Th>
+            <Td><Input ref={(element) => {refs.current[index] = element;}} value={item.value ?? ''} onChange={(e) => handleChangeValue(e.target.value, item.key, item.id)}/></Td>
+            <Td className="secondTd">
+              <Button className='editBtn' onClick={() => editItem(item.id)}>Edit</Button>
+            </Td>
+          </Tr>,])
+      }
+      })
+  }
+
+  const editItem = (id) => {
+    refs.current[id].focus();
+  }
+
+  const deleteItem = (id) => {
+    let res = data.filter((item) => {
+      return item.id != id
+    })
+    setData(res)
+  }
+
+
+  useEffect(() => { 
+    getKeys()
+  }, [data])
+
+  const handleOtherKey = (key, id) => {
+    let res = data.map(item => item.id == id ? {...item, dropDown : false, input : true, key} : item)
+    setData(res)
+  }
+  
+  const handleChangeKey = (key, id) => {
+    let res;
+    if (key != 'Other'){
+      res = data.map(item => item.id == id ? {...item, key} : item)
+    }
+    else{
+      res = data.map(item => item.id == id ? {...item, key:'', dropDown : false, input : true} : item)
+    }
+    // setData(res)
+    // res = data.map(item => item.key == 'Other' ? {...item, dropDown : false, input : true} : item)
+    setData(res)
+  }
+  
+  const handleChangeValue = (value, key, id) => {
+    console.log(value, key)
+    const res = data.map(item => item.id == id ? {...item, value} : item)
+    setData(res)
+    console.log(data)
+  }
+
 
   return (
     <>
       <div className="wrap-container">
         <div className="container">
           <div></div>
-          <div className="profile-item">
-          <div className="item-p">
-            <div>
-                <Input
-                  border="1px solid rgb(184, 184, 184)"
-                  placeholder="Name*"
-                  type="text"
-                  fontSize="14px"
-                  color="#999"
-                  value={userName ?? ""}
-                  onChange={(e) => {
-                    setUserName(e.target.value);
-                  }}
-                />
-                <div>
-                  <Textarea
-                    border="1px solid rgb(184, 184, 184)"
-                    placeholder="Bio*"
-                    value={bio ?? ""}
-                    color="#999"
-                    onChange={(e) => {
-                      setBio(e.target.value);
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div id="newItems">
-                {itemsList.map((item) => {
-                  return (
-                    <div key={item.id} style={{ marginBottom: "20px" }}>
-                      <select
-                        onChange={(event) =>
-                          handleChange(event.target.value, item.id, "key")
-                        }
-                        className="profile-select select-box-profile"
-                      >
-                        <option>Instagram</option>
-                        <option>Telegram</option>
-                        <option>Discord</option>
-                        <option>Facebook</option>
-                        <option>Twitter</option>
-                      </select>
-
-                      <Input
-                        border="1px solid rgb(184, 184, 184)"
-                        style={{
-                          borderTop: "none",
-                          borderRight: "none",
-                          borderLeft: "none",
-                        }}
-                        placeholder="URL*"
-                        type="text"
-                        width="60%"
-                        borderRadius="0px"
-                        fontSize="14px"
-                        color="#999"
-                        onChange={(event) =>
-                          handleChange(event.target.value, item.id, "value")
-                        }
-                      />
-
-                      <img
-                        style={{ cursor: "pointer", marginTop: "10px" }}
-                        onClick={() => deleteItem(item.id)}
-                        width="15px"
-                        src="/media/common/delete.png"
-                      />
-
-                      {item.message && (
-                        <p style={{ color: "red" }}>{item.message}</p>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-
-              <button
-                style={{ marginTop: "30px" }}
-                className="profile-btn"
-                onClick={addNewItem}
-              >
-                Add new social link
-              </button>
-            </div>
-            <div style={{ marginBottom: "10px", textAlign: "right" }}>
+          <div className="profile-item" >
+            <Table id="table">
+              <Tbody>
+                {tableItem}
+              </Tbody>
+            </Table>
+            <button
+              style={{ marginTop: "20px" }}
+              className="profile-btn"
+              onClick={addNewItem}
+            >
+              Add new Item
+            </button>
+        <div className='saveBtn'>
               <button onClick={handleSave} className="profile-btn">
                 save
               </button>
-            </div>
+        </div>
           </div>
         </div>
       </div>
     </>
+    
   );
 };
 
