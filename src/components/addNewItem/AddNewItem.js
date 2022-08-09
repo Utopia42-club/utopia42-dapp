@@ -2,6 +2,7 @@ import { Input, TriangleDown, Textarea } from "../common/FormControlls";
 import { useWeb3React } from "@web3-react/core";
 import React, { useEffect, useState } from "react";
 import useUpdateSettings from '../../hooks/useUpdateSetting'
+import Swal from "sweetalert2";
 
 const AddNewItem = (props) => {
   const [itemsList, setItemsList] = useState([]);
@@ -83,18 +84,41 @@ const AddNewItem = (props) => {
   let keysList = []
 
   const handleSave = async () => {
-    console.log(userName, bio, socialLinks);
+    if(!userName || userName.trim == '') {
+      return Swal.fire({
+        text: 'Please inter name',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }
     valuesList.push(userName)
     keysList.push('name')
+    if(!bio || bio.trim == '') {
+      return Swal.fire({
+        text: 'Please inter bio',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }
     valuesList.push(bio)
     keysList.push('bio')
     console.log(socialLinks)
     socialLinks.map((item) => {
+      if(item.value == undefined || !item.value) {
+        return Swal.fire({
+          text: 'Invalid URL',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      }
       valuesList.push(item.value)
       keysList.push(item.key)
     })
     console.log(valuesList, keysList, citizenId)
-    await updateSettings(account, keysList, valuesList, citizenId)
+    // await updateSettings(account, keysList, valuesList, citizenId)
   };
 
   return (
