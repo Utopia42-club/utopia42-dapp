@@ -78,7 +78,7 @@ const AddNewItem = (props) => {
       valuesList.push(item.value)
       keysList.push(item.key)
     })
-    console.log(valuesList, keysList, citizenId)
+    // console.log(valuesList, keysList, citizenId)
     if (isCorrect) {
       await updateSettings(account, keysList, valuesList, citizenId)
     }
@@ -179,10 +179,10 @@ const AddNewItem = (props) => {
   }
   
   const handleChangeValue = (value, key, id) => {
-    console.log(value, key)
+    // console.log(value, key)
     const res = data.map(item => item.id == id ? {...item, value} : item)
     setData(res)
-    console.log(data)
+    // console.log(data)
   }
 
 
