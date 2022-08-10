@@ -8,33 +8,32 @@ import axios from 'axios';
 
 const AddNewItem = (props) => {
   const {citizenId} = props
-  const [socialLinks, setSocialLinks] = useState([]);
-  const [bio, setBio] = useState();
-  const [userName, setUserName] = useState();
   const { account } = useWeb3React();
-  const [newItems, setNewItems] = useState([])
   const updateSettings = useUpdateSettings()
   const [tableItem, setTableItem] = useState([])
-  const socialMedias = ['Name', 'Bio', 'Instagram', 'Telegram', 'Discord', 'Facebook', 'Other']
+  const optionList = ['Name', 'Bio', 'Instagram', 'Telegram', 'Discord', 'Facebook', 'Other']
+  const [socialMedias, setSocialMedias ]= useState([])
   const refs = useRef([])
   const [saveBtnName, setSaveBtnName] = useState('Save')
-
+  const [data, setData] = useState([])
+  const [originalData, setOriginalData] = useState([])
+  const [intervalId, setIntervalId] = useState(null)
 
   const addNewItem = async () => {
 
-
+    clearInterval(intervalId)
     if (tableItem.length > 0 ) {
       setData(prevState => ([
         ...prevState, {id:data[data.length-1].id + 1, value:'', key:socialMedias[0], dropDown:true}
       ]));
     }
-    else{
+    else {
       setData(prevState => ([
         ...prevState, {id:data.length, value:'', key:socialMedias[0], dropDown:true}
       ]));
     }
+    
   };
-
 
   const isValidUrl = (url, key) => {
     let regex = {
@@ -48,7 +47,6 @@ const AddNewItem = (props) => {
     return url.match(regex[key]);
   };
 
-
   let valuesList = []
   let keysList = []
 
@@ -58,7 +56,7 @@ const AddNewItem = (props) => {
       if(item.value == undefined || !item.value) {
         isCorrect = false
         return Swal.fire({
-          text: `Invalid ${item.key} URL`,
+          text: `Invalid ${item.key} value`,
           icon: 'error',
           showConfirmButton: false,
           timer: 2500,
@@ -73,35 +71,49 @@ const AddNewItem = (props) => {
           timer: 2500,
         })
       }
-      valuesList.push(item.value)
-      keysList.push(item.key)
+      let editedData = originalData.filter(originalItem => originalItem.key == item.key)
+      if(editedData[0] && editedData[0].value != item.value){
+        valuesList.push(item.value)
+        keysList.push(item.key)
+      }
+      if(!editedData[0]){
+        valuesList.push(item.value)
+        keysList.push(item.key)
+      }
     })
-    // console.log(valuesList, keysList, citizenId)
     if (isCorrect) {
+      console.log(valuesList, keysList)
+      if (valuesList.length == 0) {
+        return Swal.fire({
+          text: 'No data for Update',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 2500,
+        })
+      }
       setSaveBtnName('Saving ...')
       try{
         await updateSettings(account, keysList, valuesList, citizenId)
       }
       catch {
-
+        setSaveBtnName('Save')
       }
-      setSaveBtnName('Saving')
-      await getData()
+      setSaveBtnName('Save')
+      setIntervalId(setInterval(() => {
+        getData()
+      }, 3000)
+      )
     }
   };
 
-
-  const [data, setData] = useState(
-    []
-  )
-
   const getData = async () => {
+    // console.log('Get Item', citizenId, account)
     let res = await axios.post(
       'https://api.thegraph.com/subgraphs/name/jafari-mi/utopia42-settings-mumbai',
       {
         query: `
         {
-          users(where: {account:"${account}"}) {
+          users(where: {tokenID:"${citizenId}"}) {
             id
             account
             lastUpdate
@@ -123,49 +135,24 @@ const AddNewItem = (props) => {
         else{
           result = []
         }
+        result.map((item) => {
+          optionList = optionList.filter(i => i != item.key)
+        })
+        setSocialMedias(optionList)
         setData(result)
+        setOriginalData(result)
 
         // console.log(res.data.users.value)
       })
   }
 
-
   useEffect(() => {
-    const getData = async () => {
-      let res = await axios.post(
-        'https://api.thegraph.com/subgraphs/name/jafari-mi/utopia42-settings-mumbai',
-        {
-          query: `
-          {
-            users(where: {account:"${account}"}) {
-              id
-              account
-              lastUpdate
-              tokenID
-              keys
-              values
-            }
-          }
-          
-          `
-        }
-        ).then((res) => {
-          let result;
-          if (res.data.data.users.length > 0){
-            result = res.data.data.users[0].keys.map((item, index) => {
-              return {id:index, key:item, value:res.data.data.users[0].values[index]}
-            })
-          }
-          else{
-            result = []
-          }
-          setData(result)
+      setIntervalId(setInterval(() => {
+        getData()
+      }, 3000)
+    )
 
-          // console.log(res.data.users.value)
-        })
-    }
-    getData()
-  }, [])
+  }, [account])
 
   const getKeys = () => {
     setTableItem([])
@@ -210,7 +197,7 @@ const AddNewItem = (props) => {
         setTableItem(Item => [...Item,
           <Tr key={index}>
             <Th>{item.key}</Th>
-            <Td><Input ref={(element) => {refs.current[index] = element;}} value={item.value ?? ''} onChange={(e) => handleChangeValue(e.target.value, item.key, item.id)}/></Td>
+            <Td><Input readOnly ref={(element) => {refs.current[index] = element;}} value={item.value ?? ''} onChange={(e) => handleChangeValue(e.target.value, item.key, item.id)}/></Td>
             <Td className="secondTd">
               <Button className='editBtn' onClick={() => editItem(item.id)}>Edit</Button>
             </Td>
@@ -220,7 +207,9 @@ const AddNewItem = (props) => {
   }
 
   const editItem = (id) => {
+    clearInterval(intervalId)
     refs.current[id].focus();
+    refs.current[id].readOnly = false
   }
 
   const deleteItem = (id) => {
@@ -229,7 +218,6 @@ const AddNewItem = (props) => {
     })
     setData(res)
   }
-
 
   useEffect(() => { 
     getKeys()
@@ -244,17 +232,18 @@ const AddNewItem = (props) => {
     let res;
     if (key != 'Other'){
       res = data.map(item => item.id == id ? {...item, key} : item)
+      
     }
     else{
       res = data.map(item => item.id == id ? {...item, key:'', dropDown : false, input : true} : item)
     }
+    
     // setData(res)
     // res = data.map(item => item.key == 'Other' ? {...item, dropDown : false, input : true} : item)
     setData(res)
   }
   
   const handleChangeValue = (value, key, id) => {
-    // console.log(value, key)
     const res = data.map(item => item.id == id ? {...item, value} : item)
     setData(res)
     // console.log(data)
