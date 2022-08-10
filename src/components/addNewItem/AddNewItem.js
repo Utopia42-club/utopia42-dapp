@@ -4,7 +4,7 @@ import { useWeb3React } from "@web3-react/core";
 import React, { useEffect, useState, useRef } from "react";
 import useUpdateSettings from '../../hooks/useUpdateSetting'
 import Swal from "sweetalert2";
-import { async } from 'muon';
+import axios from 'axios';
 
 const AddNewItem = (props) => {
   const {citizenId} = props
@@ -17,6 +17,7 @@ const AddNewItem = (props) => {
   const [tableItem, setTableItem] = useState([])
   const socialMedias = ['Instagram', 'Telegram', 'Discord', 'Facebook', 'Other']
   const refs = useRef([])
+  const [saveBtnName, setSaveBtnName] = useState('Save')
 
 
   const addNewItem = async () => {
@@ -77,17 +78,94 @@ const AddNewItem = (props) => {
     })
     // console.log(valuesList, keysList, citizenId)
     if (isCorrect) {
-      await updateSettings(account, keysList, valuesList, citizenId)
+      setSaveBtnName('Saving ...')
+      try{
+        await updateSettings(account, keysList, valuesList, citizenId)
+      }
+      catch {
+
+      }
+      setSaveBtnName('Saving')
+      await getData()
     }
   };
 
 
   const [data, setData] = useState(
-    [{id:0, key: 'name', value: 'my name'}, 
-    {id:1, key: 'bio', value:'this is my bio'}, 
-    {id:2, key:'instagram', value:'www.instagram.com'}, 
-    {id:3, key:'telegram', value:'www.telegram.com'}]
+    []
   )
+
+  const getData = async () => {
+    let res = await axios.post(
+      'https://api.thegraph.com/subgraphs/name/jafari-mi/utopia42-settings-mumbai',
+      {
+        query: `
+        {
+          users(where: {account:"${account}"}) {
+            id
+            account
+            lastUpdate
+            tokenID
+            keys
+            values
+          }
+        }
+        
+        `
+      }
+      ).then((res) => {
+        let result;
+        if (res.data.data.users.length > 0){
+          result = res.data.data.users[0].keys.map((item, index) => {
+            return {id:index, key:item, value:res.data.data.users[0].values[index]}
+          })
+        }
+        else{
+          result = []
+        }
+        setData(result)
+
+        // console.log(res.data.users.value)
+      })
+  }
+
+
+  useEffect(() => {
+    const getData = async () => {
+      let res = await axios.post(
+        'https://api.thegraph.com/subgraphs/name/jafari-mi/utopia42-settings-mumbai',
+        {
+          query: `
+          {
+            users(where: {account:"${account}"}) {
+              id
+              account
+              lastUpdate
+              tokenID
+              keys
+              values
+            }
+          }
+          
+          `
+        }
+        ).then((res) => {
+          let result;
+          if (res.data.data.users.length > 0){
+            result = res.data.data.users[0].keys.map((item, index) => {
+              return {id:index, key:item, value:res.data.data.users[0].values[index]}
+            })
+          }
+          else{
+            result = []
+          }
+          setData(result)
+
+          // console.log(res.data.users.value)
+        })
+    }
+    getData()
+  }, [])
 
   const getKeys = () => {
     setTableItem([])
@@ -117,7 +195,7 @@ const AddNewItem = (props) => {
         item.key == "Other" || item.input ?
         setTableItem(Item => [...Item,
           <Tr key={index}>
-            <Th><Input placeholder="Enter new data" style={{borderBottom:'2px solid #000', color:'white', width:'50%'}} value={item.key ?? ''}  onChange={(e) => handleOtherKey(e.target.value,  item.id)}/></Th>
+            <Th><Input style={{borderBottom:'2px solid #000', color:'white', width:'50%'}} value={item.key ?? ''}  onChange={(e) => handleOtherKey(e.target.value,  item.id)}/></Th>
             <Td><Input style={{borderBottom:'2px solid #000'}} value={item.value ?? ''} onChange={(e) => handleChangeValue(e.target.value, item.key, item.id)}/></Td>
             <Td className="secondTd">
             <img
@@ -203,7 +281,7 @@ const AddNewItem = (props) => {
             </button>
         <div className='saveBtn'>
               <button onClick={handleSave} className="profile-btn">
-                save
+                {saveBtnName}
               </button>
         </div>
           </div>
