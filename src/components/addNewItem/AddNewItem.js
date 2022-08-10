@@ -113,23 +113,24 @@ const AddNewItem = (props) => {
       {
         query: `
         {
-          users(where: {tokenID:"${citizenId}"}) {
-            id
-            account
-            lastUpdate
-            tokenID
-            keys
-            values
+          
+            citizenIDs(where:{tokenID: "${citizenId}"}){
+              id
+              tokenID
+              keys
+              values
+            
           }
         }
         
         `
       }
       ).then((res) => {
+        console.log(res.data.data.citizenIDs)
         let result;
-        if (res.data.data.users.length > 0){
-          result = res.data.data.users[0].keys.map((item, index) => {
-            return {id:index, key:item, value:res.data.data.users[0].values[index]}
+        if (res.data.data.citizenIDs.length > 0){
+          result = res.data.data.citizenIDs[0].keys.map((item, index) => {
+            return {id:index, key:item, value:res.data.data.citizenIDs[0].values[index]}
           })
         }
         else{
@@ -147,10 +148,10 @@ const AddNewItem = (props) => {
   }
 
   useEffect(() => {
-      setIntervalId(setInterval(() => {
+      // setIntervalId(setInterval(() => {
         getData()
-      }, 3000)
-    )
+      // }, 3000)
+    // )
 
   }, [account])
 
