@@ -15,7 +15,7 @@ const AddNewItem = (props) => {
   const [newItems, setNewItems] = useState([])
   const updateSettings = useUpdateSettings()
   const [tableItem, setTableItem] = useState([])
-  const socialMedias = ['Instagram', 'Telegram', 'Discord', 'Facebook', 'Other']
+  const socialMedias = ['Name', 'Bio', 'Instagram', 'Telegram', 'Discord', 'Facebook', 'Other']
   const refs = useRef([])
   const [saveBtnName, setSaveBtnName] = useState('Save')
 
