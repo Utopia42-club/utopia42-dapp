@@ -82,7 +82,7 @@ const AddNewItem = (props) => {
       }
     })
     if (isCorrect) {
-      console.log(valuesList, keysList)
+      // console.log(valuesList, keysList)
       if (valuesList.length == 0) {
         return Swal.fire({
           text: 'No data for Update',
@@ -126,7 +126,7 @@ const AddNewItem = (props) => {
         `
       }
       ).then((res) => {
-        console.log(res.data.data.citizenIDs)
+        // console.log(res.data.data.citizenIDs)
         let result;
         if (res.data.data.citizenIDs.length > 0){
           result = res.data.data.citizenIDs[0].keys.map((item, index) => {
