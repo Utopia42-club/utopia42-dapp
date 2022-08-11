@@ -140,7 +140,7 @@ const AddNewItem = (props) => {
         result.map((item) => {
           optionList = optionList.filter(i => i != item.key)
         })
-        console.log(result)
+        // console.log(result)
         setSocialMedias(optionList)
         setData(result)
         setOriginalData(result)
@@ -159,7 +159,7 @@ const AddNewItem = (props) => {
 
   const getKeys = () => {
     setTableItem([])
-    console.log(data)
+    // console.log(data)
     data.map((item, index) => {
       {item.key == 'avatar'? '' :
       item.dropDown == true && item.key != 'Other' && item.input != true?
