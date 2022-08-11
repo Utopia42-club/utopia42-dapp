@@ -72,7 +72,7 @@ export default function Show3dAvatar(props) {
     {avatarLink || avatarLink.trim() != '' ?
       <model-viewer
         style={modelViewerStyle}
-        src= 'https://d1a370nemizbjq.cloudfront.net/7c801a62-6125-41b0-9227-55f457a2fb8e.glb'
+        src={avatarLink}
         alt="A rock"
         camera-controls
         seamless-poster shadow-intensity="1"

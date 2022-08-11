@@ -139,6 +139,7 @@ const AddNewItem = (props) => {
         result.map((item) => {
           optionList = optionList.filter(i => i != item.key)
         })
+        result = result.filter(item => item.key != 'avatar')
         setSocialMedias(optionList)
         setData(result)
         setOriginalData(result)
