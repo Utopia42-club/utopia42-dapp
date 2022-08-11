@@ -9,6 +9,7 @@ const useGetAvatarLink = () => {
         const contract = await getContract(settingAbi, settingContractAddress, web3)
         const avatarLink = await contract.methods.userInfo(account, ['avatar']).call()
         // console.log(avatarLink)
+        // console.log(avatarLink)
         return avatarLink[0]
     }
 

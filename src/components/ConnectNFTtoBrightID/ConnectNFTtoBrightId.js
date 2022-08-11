@@ -10,7 +10,7 @@ const ConnectNFTtoBrightId = (props) => {
     const handleChange = async () => {
         if (!account) {
             return Swal.fire({
-                text: 'Wallet is not connect',
+                text: 'Wallet is not connected',
                 timer:1500,
                 icon: 'error',
                 showConfirmButton: false,

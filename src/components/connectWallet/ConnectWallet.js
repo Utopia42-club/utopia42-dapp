@@ -34,7 +34,7 @@ const ConnectWallet = (props) => {
 
     let contentBtn = ''
     if (!account && !(error instanceof UnsupportedChainIdError)){
-    message = 'Wallet is not connect'
+    message = 'Wallet is not connected'
     contentBtn = (
       <button className='profile-btn'  fontFamily="Lato,'Helvetica Neue',Arial,Helvetica,sans-serif" onClick={handleConnectWallet}>
           Connect Wallet

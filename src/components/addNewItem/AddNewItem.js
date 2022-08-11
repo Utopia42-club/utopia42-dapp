@@ -169,7 +169,7 @@ const AddNewItem = (props) => {
               }
               </select>
             </Th>
-            <Td><Input style={{borderBottom:'2px solid #000'}} value={item.value ?? ''} onChange={(e) => handleChangeValue(e.target.value, item.key, item.id)}/></Td>
+            <Td><Input className='table-input' style={{borderBottom:'2px solid #000'}} value={item.value ?? ''} onChange={(e) => handleChangeValue(e.target.value, item.key, item.id)}/></Td>
             <Td className="secondTd">
             <img
                 style={{ cursor: "pointer", margin: "10px" }}
@@ -183,13 +183,13 @@ const AddNewItem = (props) => {
         item.key == "Other" || item.input ?
         setTableItem(Item => [...Item,
           <Tr key={index}>
-            <Th><Input style={{borderBottom:'2px solid #000', color:'white', width:'50%'}} value={item.key ?? ''}  onChange={(e) => handleOtherKey(e.target.value,  item.id)}/></Th>
-            <Td><Input style={{borderBottom:'2px solid #000'}} value={item.value ?? ''} onChange={(e) => handleChangeValue(e.target.value, item.key, item.id)}/></Td>
+            <Th><Input className='table-input' style={{borderBottom:'2px solid #000', color:'white', width:'50%'}} value={item.key ?? ''}  onChange={(e) => handleOtherKey(e.target.value,  item.id)}/></Th>
+            <Td><Input className='table-input' style={{borderBottom:'2px solid #000'}} value={item.value ?? ''} onChange={(e) => handleChangeValue(e.target.value, item.key, item.id)}/></Td>
             <Td className="secondTd">
             <img
                 style={{ cursor: "pointer", margin: "10px" }}
                 onClick={() => deleteItem(item.id)}
-                width="15px"
+                width="25px"
                 src="/media/common/delete.png"
               />
             </Td>
@@ -198,9 +198,9 @@ const AddNewItem = (props) => {
         setTableItem(Item => [...Item,
           <Tr key={index}>
             <Th>{item.key}</Th>
-            <Td><Input readOnly ref={(element) => {refs.current[index] = element;}} value={item.value ?? ''} onChange={(e) => handleChangeValue(e.target.value, item.key, item.id)}/></Td>
+            <Td><Input className='table-input' readOnly ref={(element) => {refs.current[index] = element;}} value={item.value ?? ''} onChange={(e) => handleChangeValue(e.target.value, item.key, item.id)}/></Td>
             <Td className="secondTd">
-              <Button className='editBtn' onClick={() => editItem(item.id)}>Edit</Button>
+              <img style={{margin:'10px', cursor:'pointer'}} width='20px' src='/media/common/edit.png' onClick={() => editItem(item.id)} />
             </Td>
           </Tr>,])
       }

@@ -4,6 +4,7 @@ import Script from 'next/script'
 export default function Show3dAvatar(props) {
   const [file, setFile] = useState('media/common/avatar-1.jpg');
   const {avatarLink} = props
+  console.log(avatarLink)
   const modelRef = React.useRef();
   const [annots, setAnnots] = useState([]);
   const modelViewerStyle = {
@@ -42,27 +43,27 @@ export default function Show3dAvatar(props) {
     return `${annot.normal.x} ${annot.normal.y} ${annot.normal.z}`;
   };
 
-  function handleChange(e) {
-    try{
-      console.log(e.target.files);
-      if(!e.target.files){
-        e.target.value = null;
-        setFile('media/common/avatar-1.jpg')
-      }
-      else{
-        setFile(URL.createObjectURL(e.target.files[0]));
-      }
-    }
+  // function handleChange(e) {
+  //   try{
+  //     console.log(e.target.files);
+  //     if(!e.target.files){
+  //       e.target.value = null;
+  //       setFile('media/common/avatar-1.jpg')
+  //     }
+  //     else{
+  //       setFile(URL.createObjectURL(e.target.files[0]));
+  //     }
+  //   }
 
-    catch{
-      setFile('media/common/avatar-1.jpg')
-    }
+  //   catch{
+  //     setFile('media/common/avatar-1.jpg')
+  //   }
 
-  }
+  // }
 
-  const handleRemovePic = () => {
+  // const handleRemovePic = () => {
 
-  }
+  // }
   return (
     <>
     <Script
@@ -71,7 +72,7 @@ export default function Show3dAvatar(props) {
     {avatarLink || avatarLink.trim() != '' ?
       <model-viewer
         style={modelViewerStyle}
-        src={avatarLink}
+        src= 'https://d1a370nemizbjq.cloudfront.net/7c801a62-6125-41b0-9227-55f457a2fb8e.glb'
         alt="A rock"
         camera-controls
         seamless-poster shadow-intensity="1"

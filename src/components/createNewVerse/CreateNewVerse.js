@@ -51,7 +51,7 @@ const CreateVerse = () => {
         }
         else{
             return Swal.fire({
-                text: 'Wallet is not connect',
+                text: 'Wallet is not connected',
                 icon: 'error',
                 showConfirmButton: false,
                 timer: 1500

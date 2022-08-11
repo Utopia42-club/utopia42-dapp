@@ -42,7 +42,7 @@ const useMintNFTsetBrightId = () => {
       }
       if (account == null){
         return Swal.fire({
-            text: "You'r wallet is not connect",
+            text: "You'r wallet is not connected",
             icon: 'error',
             showConfirmButton: false,
             timer: 1500
