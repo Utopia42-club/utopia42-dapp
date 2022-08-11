@@ -193,7 +193,7 @@ const AddNewItem = (props) => {
             <img
                 style={{ cursor: "pointer", margin: "10px" }}
                 onClick={() => deleteItem(item.id)}
-                width="25px"
+                width="15px"
                 src="/media/common/delete.png"
               />
             </Td>
