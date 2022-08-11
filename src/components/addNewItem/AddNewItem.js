@@ -22,6 +22,7 @@ const AddNewItem = (props) => {
   const addNewItem = async () => {
 
     clearInterval(intervalId)
+
     if (tableItem.length > 0 ) {
       setData(prevState => ([
         ...prevState, {id:data[data.length-1].id + 1, value:'', key:socialMedias[0], dropDown:true}
@@ -139,7 +140,7 @@ const AddNewItem = (props) => {
         result.map((item) => {
           optionList = optionList.filter(i => i != item.key)
         })
-        result = result.filter(item => item.key != 'avatar')
+        console.log(result)
         setSocialMedias(optionList)
         setData(result)
         setOriginalData(result)
@@ -158,8 +159,10 @@ const AddNewItem = (props) => {
 
   const getKeys = () => {
     setTableItem([])
+    console.log(data)
     data.map((item, index) => {
-      {item.dropDown == true && item.key != 'Other' && item.input != true?
+      {item.key == 'avatar'? '' :
+      item.dropDown == true && item.key != 'Other' && item.input != true?
         setTableItem(Item => [...Item,
           <Tr key={index}>
             <Th>
