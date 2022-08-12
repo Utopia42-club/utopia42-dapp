@@ -89,7 +89,7 @@ const CreateVerse = () => {
     </Flex> */}
     <Input style={{marginBottom:'10px'}} placeholder='Verse Name' width="100%" maxWidth='420px' value={verseName} onChange={(event) => {setVerseName(event.target.value)}}/>
     <Input style={{marginBottom:'10px'}} placeholder='Admin Wallet' width="100%" maxWidth='420px' value={admin} onChange={(event) => {setAdmin(event.target.value)}}/>
-    <label>Public assign enabled</label>
+    <label>Allow users to assign land</label>
     <select className='create-verse-select select-box' value={assignEnable ?? ''} onChange={(event) => setAssignEnable(event.target.value)} >
         <option value={true}>YES</option>
         <option value={false}>NO</option>
