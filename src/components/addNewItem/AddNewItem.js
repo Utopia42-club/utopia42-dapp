@@ -57,7 +57,7 @@ const AddNewItem = (props) => {
       if(item.value == undefined || !item.value) {
         isCorrect = false
         return Swal.fire({
-          text: `Invalid ${item.key} value`,
+          text: `Please fill the ${item.key} input`,
           icon: 'error',
           showConfirmButton: false,
           timer: 2500,
@@ -66,7 +66,7 @@ const AddNewItem = (props) => {
       if(item.key == undefined || !item.key) {
         isCorrect = false
         return Swal.fire({
-          text: 'Invalid key',
+          text: 'Please fill the input',
           icon: 'error',
           showConfirmButton: false,
           timer: 2500,

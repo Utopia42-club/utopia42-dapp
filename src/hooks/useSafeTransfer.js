@@ -4,7 +4,7 @@ import { getContract } from '../utils/contractHelpers'
 import { sendTransaction } from '../utils/sendTx'
 import useWeb3 from './useWeb3'
 import { UNBCNFTContractAddress } from '../ContractsAddresses';
-import { toCheckSumAddress } from '../utils/toCheckSumAddress'
+
 import useCitizenId from './useCitizenId'
 import Swal from 'sweetalert2'
 
@@ -25,6 +25,7 @@ const useSafeTransfer = () => {
             timer: 1500
           })
         }
+
         // console.log(toCheckSumAddress(toAddress))
 
         if (!contract) {

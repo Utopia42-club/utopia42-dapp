@@ -17,7 +17,7 @@ const CreateVerse = () => {
     const [admin, setAdmin] = useState('')
     const { account, chainId }  = useWeb3React()
     const createVerse = useCreateVerse(account, chainId)
-    const [buttonName, setButtonName] = useState('Create New Verse')
+    const [buttonName, setButtonName] = useState('Create new verse')
     const [verseName, setVerseName] = useState('')
     const [assignEnable , setAssignEnable] = useState(true)
 
@@ -51,15 +51,15 @@ const CreateVerse = () => {
             })
         }
         if(account){
-            setButtonName('Creating New Verse ...')
+            setButtonName('Creating new verse ...')
             try{
                 await createVerse(account, admin, verseName, assignEnable)
             }
             catch{
                 console.log('error')
-                setButtonName('Create New Verse')
+                setButtonName('Create new verse')
             }
-            setButtonName('Create New Verse')
+            setButtonName('Create new verse')
         }
         else{
             return Swal.fire({

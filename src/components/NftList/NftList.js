@@ -14,7 +14,6 @@ import useUserNFTs from '../../hooks/useUserNFTs';
 import useSafeTransfer from '../../hooks/useSafeTransfer';
 import { Button } from '../button/Button'
 import useCitizenId from '../../hooks/useCitizenId';
-import { Flex } from 'rebass';
 import ProfileTable from '../profileTable/ProfileTable';
 import useGetAvatarLink from '../../hooks/useGetAvatarLink';
 import useIsSetBrightID from '../../hooks/useIsSetBrightId';
@@ -24,6 +23,7 @@ import useGetLastCitizenId from '../../hooks/useGetLastCitizenId';
 import ConnectWallet from '../connectWallet/ConnectWallet'
 import useIsRegister from '../../hooks/useIsRegister'
 import AddNewItem from '../addNewItem/AddNewItem';
+import { toCheckSumAddress } from '../../utils/toCheckSumAddress'
 
 
 const NftList = () => {
@@ -92,10 +92,21 @@ const NftList = () => {
     }
 
     const handleTransfer = async () => {
-        if (!toAddress) {
+        if (!toAddress  || toAddress.trim() == '') {
           return Swal.fire({
-            text:"Please enter Address",
+            text:"Please enter an address",
             icon: 'error',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+        try {
+          toCheckSumAddress(toAddress)
+        }
+        catch{
+          return Swal.fire({
+            text: 'Wrong address',
+            icon:'error',
             showConfirmButton: false,
             timer: 1500
           })
