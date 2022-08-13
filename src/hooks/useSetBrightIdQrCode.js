@@ -19,7 +19,7 @@ const useSetBrightIdQrCode = (NFTs, checkNFT, setBtnName) => {
     const getCitizenID = useCitizenId() 
     const isRegister = useIsRegister()
     const getLastID = useLastCitizenId()
-    let status = 'Register'
+    let status = 'Set BrightID'
     const brightIdData = useBrightIdApi()
     let registeredNFT
     let lastId;

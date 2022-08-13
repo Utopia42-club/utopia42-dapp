@@ -7,7 +7,7 @@ import { UNBCNFTContractAddress } from '../ContractsAddresses';
 import useBrightIdApi from './useBrightIdApi'
 const useSetBrightId = (account) => {
     const web3 = useWeb3()
-    let status = 'Register'
+    let status = 'Set BrightID'
     const brightIdData = useBrightIdApi()
     const setBrightId = async (id) => {
         const data = await brightIdData(account)
