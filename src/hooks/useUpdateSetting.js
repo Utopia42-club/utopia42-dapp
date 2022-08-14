@@ -11,7 +11,7 @@ const useUpdateSetting = () => {
   const web3 = useWeb3()
   // const hasToken = useUserHasAccessToken()
   // const brightIdData = useBrightIdApi()
-  let status = 'Update Settings'
+  let status = 'Updated'
   const updateSetting = async (address, keys, values, citizenID) => {
     // console.log(address, keys, values, citizenID)
     // let data = await brightIdData()

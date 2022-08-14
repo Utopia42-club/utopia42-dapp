@@ -19,7 +19,7 @@ const useSetBrightIdQrCode = (NFTs, checkNFT, setBtnName) => {
     const getCitizenID = useCitizenId() 
     const isRegister = useIsRegister()
     const getLastID = useLastCitizenId()
-    let status = 'Set BrightID'
+    let status = 'Connected'
     const brightIdData = useBrightIdApi()
     let registeredNFT
     let lastId;
@@ -52,7 +52,7 @@ const useSetBrightIdQrCode = (NFTs, checkNFT, setBtnName) => {
         const data = await brightIdData(account_)
         // console.log(data)
         if (data.error){
-            setBtnName('Set BrightID')
+            setBtnName('Connect BrightID')
             lastId = 0
             let text;
             if(isMobile){
@@ -91,9 +91,9 @@ const useSetBrightIdQrCode = (NFTs, checkNFT, setBtnName) => {
 
         if(registeredNFT && citizenID != 0){
             checkNFT()
-            setBtnName('Set BrightID')
+            setBtnName('Connect BrightID')
             return Swal.fire({
-                text:"Already has CitizenID",
+                text:"You already have a Citizen ID.",
                 icon:'error',
                 showConfirmButton: false,
                 timer: 2500
@@ -141,7 +141,7 @@ const useSetBrightIdQrCode = (NFTs, checkNFT, setBtnName) => {
                     )
         }
         catch(err){
-            setBtnName('Set BrightID')
+            setBtnName('Connect BrightID')
             checkNFT()
             let error;
             err.reason ?  error = err.reason : error = err.message 

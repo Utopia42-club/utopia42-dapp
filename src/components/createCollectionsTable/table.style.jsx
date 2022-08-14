@@ -52,7 +52,7 @@ export const Table = styled.table`{
   border-collapse: collapse;
   text-align: center;
 
-  width: 70%;
+  width: 50%;
   
   @media screen and (max-width: 1280px) {
     width: 100%;

@@ -43,7 +43,7 @@ const MintComponent = (props) => {
       <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
       <GradientTitle margin="0 0 10px">{titleName}</GradientTitle>
       <Box background="linear-gradient(0deg,#D3DBE3 0%,rgba(231,235,243,0) 106.95%);">
-        <p style={{fontSize:"16px", color:"#76568e"}}>You don't have citizenID</p>
+        <p style={{fontSize:"16px", color:"#76568e"}}>You don't have Citizen ID yet.</p>
       </Box>
       <Box background="#f2f4fb" padding="0" borderRadius="0" border="none" width="100%">
         <TriangleDown />

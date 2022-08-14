@@ -11,7 +11,7 @@ const useMinterNft = (address, chainId) => {
   const { account } = useWeb3React()
   const Swal = require('sweetalert2')
   const web3 = useWeb3();
-  let status = 'Mint'
+  let status = 'Minted'
   const balance = useWalletBalance(address, chainId)
   const mint = async () => {
     const fetchBalance = await balance()

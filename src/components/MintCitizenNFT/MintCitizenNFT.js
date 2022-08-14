@@ -62,7 +62,7 @@ const MintCitizenNFT = () => {
       <Wrapper maxWidth="300px" width="100%"></Wrapper>
       <Wrapper maxWidth="470px" width="100%">
       <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
-      <GradientTitle margin="0 0 10px">Mint Citizen NFTs</GradientTitle>
+      <GradientTitle margin="0 0 10px">Mint Utopia42 Citizen ID</GradientTitle>
       <Box background="linear-gradient(0deg,#D3DBE3 0%,rgba(231,235,243,0) 106.95%);">
         <Input
             type="text"
@@ -89,7 +89,7 @@ const MintCitizenNFT = () => {
       </Wrapper>
     </Container>
     :
-    <ConnectWallet name="Mint CitizenID"/>
+    <ConnectWallet name="Mint Utopia42 Citizen ID"/>
     }
     </>
     )

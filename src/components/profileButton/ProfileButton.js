@@ -9,7 +9,7 @@ const ProfileButton = (props) => {
  const setBrightId = useSetBrightId(account)
  const {checkNFT, registeredWallet, citizenID, setBrightIdModal, handleSelectToken, setTransferModal, isSetNFTtoBrightID} = props
  const [color, setColor] = useState('#300c4b')
- const [btnSetBrightID, setBtnSetBrightId] = useState('Set BrightID')
+ const [btnSetBrightID, setBtnSetBrightId] = useState('Connect BrightID')
 // console.log(registeredWallet, citizenID)
 
  let btn = ''
@@ -26,14 +26,14 @@ const handleTransfer = (item) => {
 }
 
 const handleSetBrightID = async () => {
-setBtnSetBrightId('Set BrightID ...')
+setBtnSetBrightId('Connect BrightID ...')
     try{
         await setBrightId(citizenID)
-        setBtnSetBrightId('Set BrightID')
+        setBtnSetBrightId('Connect BrightID')
         checkNFT()
     }
     catch{
-        setBtnSetBrightId('Set BrightID')
+        setBtnSetBrightId('Connect BrightID')
     }
 }
 

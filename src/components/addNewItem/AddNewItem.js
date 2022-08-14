@@ -260,25 +260,28 @@ const AddNewItem = (props) => {
       <div className="wrap-container">
         <div className="container">
           <div></div>
-          <div className="profile-item" >
-            <Table id="table">
-              <Tbody>
-                {tableItem}
-              </Tbody>
-            </Table>
-            <button
-              style={{ marginTop: "20px" }}
-              className="profile-btn"
-              onClick={addNewItem}
-            >
-              Add new Item
-            </button>
-        <div className='saveBtn'>
-              <button onClick={handleSave} className="profile-btn">
-                {saveBtnName}
+          <div>
+            <div style={{textAlign:'center', marginBottom:'15px', fontSize:'18px'}}>Settings</div>
+            <div className="profile-item" >
+              <Table id="table">
+                <Tbody>
+                  {tableItem}
+                </Tbody>
+              </Table>
+              <button
+                style={{ marginTop: "20px" }}
+                className="profile-btn"
+                onClick={addNewItem}
+              >
+                Add new Item
               </button>
-        </div>
-          </div>
+              <div className='saveBtn'>
+                    <button onClick={handleSave} className="profile-btn">
+                      {saveBtnName}
+                    </button>
+              </div>
+            </div>
+            </div>
         </div>
       </div>
     </>

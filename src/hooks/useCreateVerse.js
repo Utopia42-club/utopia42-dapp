@@ -9,7 +9,7 @@ import Swal from 'sweetalert2'
 import { toCheckSumAddress } from '../utils/toCheckSumAddress'
 const useCreateVerse = (account, chainId) => {
   const web3 = useWeb3();
-  let status = 'created new verse'
+  let status = 'Created'
   const fetchBalance = useWalletBalance(account, chainId)
 
   const createVerse = async (account ,admin, verseName, assignEnable) => {

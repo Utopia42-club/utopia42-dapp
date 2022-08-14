@@ -17,7 +17,7 @@ const CreateVerse = () => {
     const [admin, setAdmin] = useState('')
     const { account, chainId }  = useWeb3React()
     const createVerse = useCreateVerse(account, chainId)
-    const [buttonName, setButtonName] = useState('Create new verse')
+    const [buttonName, setButtonName] = useState('Create')
     const [verseName, setVerseName] = useState('')
     const [assignEnable , setAssignEnable] = useState(true)
 
@@ -51,15 +51,15 @@ const CreateVerse = () => {
             })
         }
         if(account){
-            setButtonName('Creating new verse ...')
+            setButtonName('Create ...')
             try{
                 await createVerse(account, admin, verseName, assignEnable)
             }
             catch{
                 console.log('error')
-                setButtonName('Create new verse')
+                setButtonName('Create')
             }
-            setButtonName('Create new verse')
+            setButtonName('Create')
         }
         else{
             return Swal.fire({
@@ -79,7 +79,7 @@ const CreateVerse = () => {
   <Wrapper maxWidth="300px" width="100%"></Wrapper>
   <Wrapper maxWidth="470px" width="100%">
   <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
-  <GradientTitle margin="0 0 10px">Create Verse</GradientTitle>
+  <GradientTitle margin="0 0 10px">Create a new Verse</GradientTitle>
   <Box background="linear-gradient(0deg,#D3DBE3 0%,rgba(231,235,243,0) 106.95%);">
     <div style={{width:"100%"}}>
     {/* <Flex width="100%">
@@ -110,7 +110,7 @@ const CreateVerse = () => {
   </Wrapper>
 </Container>
 :
-<ConnectWallet name='Create Verse'/>
+<ConnectWallet name='Create a new Verse'/>
 }
 </>
 

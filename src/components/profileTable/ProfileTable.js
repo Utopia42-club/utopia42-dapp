@@ -9,10 +9,7 @@ import { formatAddress } from "../../utils/formatAddress";
 
 const ProfileTable = (props) => {
   const [copyState, setCopyState] = useState("Copy Link");
-  const [itemsList, setItemsList] = useState([])
   const { account } = useWeb3React();
-  const [bio, setBio] = useState();
-  const [userName, setUserName] = useState()
   const {
     firsID,
     lastContextID,
@@ -32,10 +29,9 @@ const ProfileTable = (props) => {
   } = props;
   const setBrightId = useSetBrightId(account);
   const [showAvatarLink, setShowAvatarLink] = useState(false);
-  const [socialLinks, setSocialLinks] = useState([])
   let citizenIDvalue;
   let isSetNFTtoBrightIDvalue;
-  const [btnSetBrightID, setBtnSetBrightId] = useState("Set BrightID");
+  const [btnSetBrightID, setBtnSetBrightId] = useState("Connect BrightID");
 
   // console.log(
   //   "nft:",
@@ -116,7 +112,7 @@ const ProfileTable = (props) => {
   const handleSetBrightID = async () => {
     if (registeredNFT && citizenId != 0) {
       return Swal.fire({
-        text: "Already has CitizenID",
+        text: "You already have a Citizen ID.",
         icon: "error",
         showConfirmButton: false,
         timer: 2500,
@@ -136,7 +132,7 @@ const ProfileTable = (props) => {
         timer: 3000,
       });
     }
-    setBtnSetBrightId("Set BrightID ...");
+    setBtnSetBrightId("Connect BrightID ...");
     try {
       if (registeredNFT) {
         // console.log(registeredNFT);
@@ -144,10 +140,10 @@ const ProfileTable = (props) => {
       } else {
         await setBrightId(citizenId);
       }
-      setBtnSetBrightId("Set BrightID");
+      setBtnSetBrightId("Connect BrightID");
       checkNFT();
     } catch {
-      setBtnSetBrightId("Set BrightID");
+      setBtnSetBrightId("Connect BrightID");
     }
   };
 
@@ -176,16 +172,26 @@ const ProfileTable = (props) => {
         </div>
       </div>
 
+      
+
       <div className="container">
         <div></div>
+        <div>
+        { Number(citizenId) != 0 ?
+        <div style={{textAlign:'center', marginBottom:'15px', fontSize:'18px'}}>
+        {'Citizen ID ' + citizenIDvalue}
+        </div>
+        :
+        ''
+        }
         <div className="profile-item">
-
           { Number(citizenId) != 0 ?
             <div className="item-p">
+              
               <div className="profile-title">
-                <h3>Utopia42 CitizenID :
+                {/* <h3>Utopia42 CitizenID :
                 {' ' + citizenIDvalue}
-                </h3>
+                </h3> */}
               </div>
                 {Number(!isTransferable) ? (
                 <div>
@@ -207,7 +213,7 @@ const ProfileTable = (props) => {
           { registeredNFT && citizenId > 0 ?
             <div className="item-p">
               <div className="profile-title">
-                <h3>Add new wallet to you'r BrightID</h3>
+                {/* <h3>Add new wallet to you'r BrightID</h3> */}
               </div>
                 <div>
                   <button
@@ -226,14 +232,14 @@ const ProfileTable = (props) => {
           { !brightId ? 
             <div className="item-p">
                 <div className="profile-title">
-                  <h3>Connect you'r wallet to BrightID</h3>
+                  {/* <h3>Connect you'r wallet to BrightID</h3> */}
                 </div>
                 <div>
                     <button
                       className="profile-btn"
                       onClick={() => handleBrightID(false)}
                     >
-                      Connect
+                      Connect BrightID
                     </button>
                 </div>
              </div>
@@ -246,7 +252,7 @@ const ProfileTable = (props) => {
           { brightId == true && Number(isSetNFTtoBrightID) == 0 ? (
               <div className="item-p">
                 <div className="profile-title">
-                  <h3>Connect CitizenID to BrightID</h3>
+                  {/* <h3>Connect CitizenID to BrightID</h3> */}
                 </div>
                   <button className="profile-btn" onClick={handleSetBrightID}>
                     {btnSetBrightID}
@@ -258,7 +264,7 @@ const ProfileTable = (props) => {
 
 
         </div>
-        
+        </div>
       </div>
       <div>
 

@@ -39,21 +39,21 @@ const CreateCollectionsTable = () => {
             <Table id="table">
                 <Thead>
                 <Tr>
-                    <Th style={{width:'65px'}}>Number</Th>
+                    <Th style={{width:'5%'}}>#</Th>
                     <Th style={{width:'20%'}}>Name</Th>
-                    <Th style={{width:'50%'}}>Verses</Th>
+                    {/* <Th style={{width:'50%'}}>Verses</Th> */}
 
-                    <Th style={{width:'65px'}}>Browse</Th>
+                    <Th style={{width:'5%'}}>Browse</Th>
                 </Tr>
                 </Thead>
                 <Tbody>
                    {
                         verses.map((item, index) => (
                             <Tr key={index} id={index}>
-                                <Td style={{width:'65px'}}><a target="_blank" href={'https://app.utopia42.club/game?network=80001&contract=' + item}>#{index+1}</a></Td>
-                                <Td style={{width:'20%'}}><a target="_blank" href={'https://app.utopia42.club/game?network=80001&contract=' + item}>{names[index]}</a></Td>
-                                <Td style={{width:'50%'}}><a target="_blank" href={'https://app.utopia42.club/game?network=80001&contract=' + item}>{item}</a></Td>
-                                <Td style={{width:'65px'}}><a target="_blank" href={'https://app.utopia42.club/game?network=80001&contract=' + item}><img src='media/common/openLink.png' width="20px"/></a></Td>
+                                <Td style={{width:'5%'}}><a target="_blank" href={'https://dev.utopia42.club/game?network=80001&contract=' + item}>{index+1}</a></Td>
+                                <Td style={{width:'20%'}}><a target="_blank" href={'https://dev.utopia42.club/game?network=80001&contract=' + item}>{names[index]}</a></Td>
+                                {/* <Td style={{width:'50%'}}><a target="_blank" href={'https://dev.utopia42.club/game?network=80001&contract=' + item}>{item}</a></Td> */}
+                                <Td style={{width:'5%'}}><a target="_blank" href={'https://dev.utopia42.club/game?network=80001&contract=' + item}><img src='media/common/openLink.png' width="20px"/></a></Td>
                             </Tr>
                         ))
                     } 

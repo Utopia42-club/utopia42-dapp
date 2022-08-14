@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { GradientTitle } from '../text/Title';
-import {Td, Th, Table, Thead, Tr, Tbody, WarpTable }  from './table.style'
+import {Td, Th, Table, Thead, Tr, Tbody, WrapTable }  from './table.style'
 import { useEffect } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import useGetCollections from '../../hooks/useGetCollections';
@@ -53,32 +53,32 @@ const ExploreVerses = () => {
             <div style={{marginBottom:"50px"}}>
                 <GradientTitle >All Utopia42 Verses</GradientTitle>
             </div>
-            <WarpTable>
+            <WrapTable>
                 <Table id="table">
                     <Thead>
                     <Tr>
-                        <Th style={{width:'10%'}}>Number</Th>
+                        <Th style={{width:'5%'}}>#</Th>
                         <Th style={{width:'10%'}}>Name</Th>
-                        <Th style={{width:'25%'}}>Verses</Th>
+                        {/* <Th style={{width:'25%'}}>Verses</Th> */}
                         {/* <Th>Collections</Th> */}
-                        <Th style={{width:'10%'}}>Browse</Th>
+                        <Th style={{width:'5%'}}>Browse</Th>
                     </Tr>
                     </Thead>
                     <Tbody>
                     {
                             verses.map((item, index) => (
                                 <Tr key={index} id={index}>
-                                    <Td style={{width:'10%'}}><a target="_blank" href={'https://app.utopia42.club/game?network=80001&contract=' + item}>#{index+1}</a></Td>
-                                    <Td  style={{width:'10%'}}><a target="_blank" href={'https://app.utopia42.club/game?network=80001&contract=' + item}>{names[index]}</a></Td>
-                                    <Td style={{width:'25%'}}><a target="_blank" href={'https://app.utopia42.club/game?network=80001&contract=' + item}>{item}</a></Td>
+                                    <Td style={{width:'5%'}}><a target="_blank" href={'https://dev.utopia42.club/game?network=80001&contract=' + item}>{index+1}</a></Td>
+                                    <Td  style={{width:'10%'}}><a target="_blank" href={'https://dev.utopia42.club/game?network=80001&contract=' + item}>{names[index]}</a></Td>
+                                    {/* <Td style={{width:'25%'}}><a target="_blank" href={'https://dev.utopia42.club/game?network=80001&contract=' + item}>{item}</a></Td> */}
                                     {/* <Td>{collections[index]}</Td> */}
-                                    <Td style={{width:'10%'}}><a target="_blank" href={'https://app.utopia42.club/game?network=80001&contract=' + item}><img src='media/common/openLink.png' width="20px"/></a></Td>
+                                    <Td style={{width:'5%'}}><a target="_blank" href={'https://dev.utopia42.club/game?network=80001&contract=' + item}><img src='media/common/openLink.png' width="20px"/></a></Td>
                                 </Tr>
                             ))
                         } 
                     </Tbody>
                 </Table>
-            </WarpTable>
+            </WrapTable>
             {/* <CollectionsPagInation 
                 totalVerses= { totalVerse } 
                 pagInationItems = { pagInationItems }

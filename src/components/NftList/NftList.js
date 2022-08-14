@@ -203,7 +203,7 @@ const NftList = () => {
           setTransferModal(!transferModal)
         }}>
         <>
-        <GradientTitle margin="0 0 10px">Transfer NFT: {selectedNFT}</GradientTitle>
+        <GradientTitle margin="0 0 10px">Transfer Citizen ID #{selectedNFT}</GradientTitle>
         <Box background="linear-gradient(0deg,#f0f2f5 0%,rgb(183 188 199 / 76%) 126.95%);">
         <div style={{marginLeft:'-220px',display:"flex"}}>
         </div>

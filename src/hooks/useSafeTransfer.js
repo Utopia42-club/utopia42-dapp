@@ -12,14 +12,14 @@ const useSafeTransfer = () => {
     const web3 = useWeb3()
     const getCitizenId = useCitizenId()
     const { account } = useWeb3React()
-    let status = 'Transfer'
+    let status = 'Transferred'
     // const contractAddress = '0xb800B8AC21a451444A5E9d21ce0ac89Da219F3D4'
     const contract = getContract(unbcNFTAbi, UNBCNFTContractAddress, web3)
 
     const safeTransfer = async (toAddress, tokenId) => {
         if(Number(await getCitizenId(toAddress)) != 0 ) {
           return Swal.fire({
-            text: 'Destination Address has citizenID',
+            text: 'You already have a Citizen ID.',
             icon:'error',
             showConfirmButton: false,
             timer: 1500

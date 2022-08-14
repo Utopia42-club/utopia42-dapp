@@ -22,7 +22,7 @@ function BrightIdApp(props) {
   const [context, setContext] = React.useState('Utopia42')
   const [contextId, setContextId] = React.useState()
   const [deeplink, setDeeplink] = React.useState()
-  const [btnName, setBtnName] = useState('Set BrightID')
+  const [btnName, setBtnName] = useState('Connect')
   const [sponsorships, setSponsorships] = React.useState(0)
   const [res, setRes] = React.useState()
   const setBrightId = useSetBrightIdQrCode(NFTs, checkNFT, setBtnName)
@@ -41,9 +41,9 @@ function BrightIdApp(props) {
   const isMobile = width <= 782;
 
   const handleSetBrightID = async () => {
-      setBtnName('Set BrightID ...')
+      setBtnName('Connect ...')
       await setBrightId(contextId, isMobile)
-      setBtnName('Set BrightID')
+      setBtnName('Connect')
       checkNFT()
   }
 
@@ -151,7 +151,7 @@ function BrightIdApp(props) {
               <header style={{marginBottom:"10px", color:"#999"}}>Linking QR Code</header>
                 <QRCode style={{width:'70%', height:'50%'}} value={deeplink ? deeplink : ''} />
                 {/* {!updateBrightID ? */}
-                <button className='setBrightIDbuttonQR' onClick={handleSetBrightID} style={{marginTop:'10px',backgroundColor:"#76568e", border:'none', padding:'10px 10px', color:'white', fontWeight:"bold", borderRadius:'5px', cursor:'pointer'}}>{btnName}</button>
+                <button className='setBrightIDbuttonQR' onClick={handleSetBrightID} style={{fontSize:'16px',marginTop:'10px',backgroundColor:"#76568e", border:'none', padding:'10px 20px', color:'white', fontWeight:"bold", borderRadius:'5px', cursor:'pointer'}}>{btnName}</button>
                 {/* :
                 '' */}
               
@@ -163,7 +163,7 @@ function BrightIdApp(props) {
             </LinkBox>
         </div>
           {/* <div>
-            <header <button>set BrightID</button> >Application Keys</header>
+            <header <button>Connect</button> >Application Keys</header>
             <input type="password" placeholder="Sponsor Private Key" value={privateKey} onChange={(evt) => setPrivateKey(evt.target.value)} />
             <input type="password" placeholder="Testing Key" value={testingKey} onChange={(evt) => setTestingKey(evt.target.value)} />
           </div> */}

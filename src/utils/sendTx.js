@@ -20,7 +20,7 @@ export const sendTransaction = (status, contract, methodName, params, account,
         .once('receipt', () => {
           Swal.fire({
             icon: 'success',
-            text:`Successfully ${status}`,
+            text:`${status} Successfully`,
             showConfirmButton: false,
             timer:1500
           })

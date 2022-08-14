@@ -42,12 +42,12 @@ export const Thead = styled.thead`{
   flex: 0 0 auto;
 }`
 
-export const WarpTable = styled.div `
+export const WrapTable = styled.div `
   
   overflow-y:scroll;
   overflow-x:hidden;
   background:none;
-  width:70%;
+  width:50%;
   @media screen and (max-width: 1280px) {
     width:100%;
   }
