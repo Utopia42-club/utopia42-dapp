@@ -188,5 +188,6 @@ export const Input = styled.input`
   background:none;
   padding:5px;
   width:100%;
-  font-weight:bold
+  // font-weight:bold;
+  font-family: Montserrat
 `
