@@ -315,7 +315,7 @@ body{
 
 .table-input:focus{
   outline: none;
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid rgb(211, 193, 224);
 }
 
 .profile-btn:hover, .editBtn:hover {
@@ -353,4 +353,5 @@ select {
 
 select:focus {
   outline: none;
+
 }

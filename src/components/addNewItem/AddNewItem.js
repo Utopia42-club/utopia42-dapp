@@ -183,7 +183,7 @@ const AddNewItem = (props) => {
               }
               </select>
             </Th>
-            <Td><Input className='table-input' style={{borderBottom:'2px solid #000'}} value={item.value ?? ''} onChange={(e) => handleChangeValue(e.target.value, item.key, item.id)}/></Td>
+            <Td><Input className='table-input' style={{borderBottom:'2px solid rgb(211, 193, 224)'}} value={item.value ?? ''} onChange={(e) => handleChangeValue(e.target.value, item.key, item.id)}/></Td>
             <Td className="secondTd">
             <img
                 style={{ cursor: "pointer", margin: "10px" }}
@@ -197,8 +197,8 @@ const AddNewItem = (props) => {
         item.key == "Other" || item.input ?
         setTableItem(Item => [...Item,
           <Tr key={index}>
-            <Th><Input className='table-input' style={{borderBottom:'2px solid #000', color:'white', width:'50%'}} value={item.key ?? ''}  onChange={(e) => handleOtherKey(e.target.value,  item.id)}/></Th>
-            <Td><Input className='table-input' style={{borderBottom:'2px solid #000'}} value={item.value ?? ''} onChange={(e) => handleChangeValue(e.target.value, item.key, item.id)}/></Td>
+            <Th><Input className='table-input' style={{borderBottom:'2px solid rgb(211, 193, 224)', color:'white', width:'50%'}} value={item.key ?? ''}  onChange={(e) => handleOtherKey(e.target.value,  item.id)}/></Th>
+            <Td><Input className='table-input' style={{borderBottom:'2px solid rgb(211, 193, 224)'}} value={item.value ?? ''} onChange={(e) => handleChangeValue(e.target.value, item.key, item.id)}/></Td>
             <Td className="secondTd">
             <img
                 style={{ cursor: "pointer", margin: "10px" }}
