@@ -37,7 +37,7 @@ const AvatarForm = (props) => {
     }
     if(valuesList.length == 0){
       return Swal.fire({
-        text:'No data for update',
+        text:'No data to update',
         icon: 'error',
         showConfirmButton: false,
         timer: 1500

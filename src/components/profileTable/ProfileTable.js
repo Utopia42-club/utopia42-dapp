@@ -5,6 +5,7 @@ import Router from "next/router";
 import Show3dAvatar from "../show3dAvatar/Show3dAvatar";
 import Swal from "sweetalert2";
 import { formatAddress } from "../../utils/formatAddress";
+import { GradientTitle } from '../text/Title';
 
 
 const ProfileTable = (props) => {
@@ -178,8 +179,9 @@ const ProfileTable = (props) => {
         <div></div>
         <div>
         { Number(citizenId) != 0 ?
-        <div style={{textAlign:'center', marginBottom:'15px', fontSize:'18px'}}>
-        {'Citizen ID ' + citizenIDvalue}
+        <div style={{textAlign:'center', marginBottom:'15px'}}>
+        
+        <GradientTitle margin="0 0 10px">{'Citizen ID ' + citizenIDvalue}</GradientTitle>
         </div>
         :
         ''

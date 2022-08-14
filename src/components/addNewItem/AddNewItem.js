@@ -5,6 +5,7 @@ import React, { useEffect, useState, useRef } from "react";
 import useUpdateSettings from '../../hooks/useUpdateSetting'
 import Swal from "sweetalert2";
 import axios from 'axios';
+import { GradientTitle } from '../text/Title';
 
 const AddNewItem = (props) => {
   const {citizenId} = props
@@ -57,7 +58,7 @@ const AddNewItem = (props) => {
       if(item.value == undefined || !item.value) {
         isCorrect = false
         return Swal.fire({
-          text: `Please fill the ${item.key} input`,
+          text: `Please enter ${item.key}.`,
           icon: 'error',
           showConfirmButton: false,
           timer: 2500,
@@ -66,7 +67,7 @@ const AddNewItem = (props) => {
       if(item.key == undefined || !item.key) {
         isCorrect = false
         return Swal.fire({
-          text: 'Please fill the input',
+          text: 'Please enter key.',
           icon: 'error',
           showConfirmButton: false,
           timer: 2500,
@@ -86,7 +87,7 @@ const AddNewItem = (props) => {
       // console.log(valuesList, keysList)
       if (valuesList.length == 0) {
         return Swal.fire({
-          text: 'No data for Update',
+          text: 'No data to update',
           icon: 'error',
           showConfirmButton: false,
           timer: 2500,
@@ -261,7 +262,8 @@ const AddNewItem = (props) => {
         <div className="container">
           <div></div>
           <div>
-            <div style={{textAlign:'center', marginBottom:'15px', fontSize:'18px'}}>Settings</div>
+            <div style={{textAlign:'center', marginBottom:'15px'}}>
+              <GradientTitle margin="0 0 10px">Settings</GradientTitle></div>
             <div className="profile-item" >
               <Table id="table">
                 <Tbody>

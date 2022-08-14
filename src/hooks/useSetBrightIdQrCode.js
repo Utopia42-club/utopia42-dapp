@@ -56,16 +56,16 @@ const useSetBrightIdQrCode = (NFTs, checkNFT, setBtnName) => {
             lastId = 0
             let text;
             if(isMobile){
-                text = "Link you'r BrightID to Utopia42"
+                text = "If you linked you'r BrightID to Utopia42, please wait a few seconds to sync the data."
             }
             else{
-                text = "Please scan QR code. (If you have scanned the QR Code Please wait for a few seconds to sync the data)"
+                text = "If you have scanned the QR code, please wait a few seconds to sync the data."
             }
             return Swal.fire({
                 text: text,
                 icon: 'error',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 5500
     
             })
         }

@@ -125,7 +125,7 @@ function BrightIdApp(props) {
         updateBrightID ?
         <GradientTitle margin="0 0 10px">Connect new wallet to BrightID</GradientTitle>
         :
-        <GradientTitle margin="0 0 10px">Connect your wallet to BrightID</GradientTitle>
+        <GradientTitle margin="0 0 10px">Please scan the QR code and then click on the Connect button.</GradientTitle>
       }
         {/* <header style={{marginBottom:"5px"}}>BrightID App</header> */}
         <div>
@@ -151,7 +151,7 @@ function BrightIdApp(props) {
               <header style={{marginBottom:"10px", color:"#999"}}>Linking QR Code</header>
                 <QRCode style={{width:'70%', height:'50%'}} value={deeplink ? deeplink : ''} />
                 {/* {!updateBrightID ? */}
-                <button className='setBrightIDbuttonQR' onClick={handleSetBrightID} style={{fontSize:'16px',marginTop:'10px',backgroundColor:"#76568e", border:'none', padding:'10px 20px', color:'white', fontWeight:"bold", borderRadius:'5px', cursor:'pointer'}}>{btnName}</button>
+                <button className='setBrightIDbuttonQR' onClick={handleSetBrightID} style={{fontSize:'18px',marginTop:'10px',backgroundColor:"#76568e", border:'none', padding:'10px 20px', color:'white', fontWeight:"bold", borderRadius:'5px', cursor:'pointer'}}>{btnName}</button>
                 {/* :
                 '' */}
               
