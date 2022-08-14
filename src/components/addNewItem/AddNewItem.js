@@ -55,6 +55,15 @@ const AddNewItem = (props) => {
   const handleSave = async () => {
     let isCorrect = true
     data.map((item) => {
+      if(item.value == '' && item.key == '') {
+        isCorrect = false
+        return Swal.fire({
+          text: `Please enter value.`,
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 2500,
+        })
+      }
       if(item.value == undefined || !item.value) {
         isCorrect = false
         return Swal.fire({
