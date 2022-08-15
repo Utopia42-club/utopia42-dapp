@@ -57,6 +57,7 @@ const CreateNewAvatar = () => {
       return null;
     }
   }
+  
   window.addEventListener('message', subscribe);
   document.addEventListener('message', subscribe);
 

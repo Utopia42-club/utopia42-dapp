@@ -7,6 +7,7 @@ import { Box, Container, Wrapper } from '../container/Container';
 import { Flex } from "rebass";
 import { Button } from '../button/Button'
 import { Type } from '../text/Text'
+import { useEffect } from 'react';
 
 
 
@@ -15,6 +16,11 @@ const AvatarForm = (props) => {
   const [btnName, setBtnName] = useState('Update Avatar')
   const  updateSetting = useUpdateSetting()
   const { account, chainId } = useWeb3React()
+  const [link, setLink] = useState()
+
+  useEffect(() => {
+    setLink(avatarLink)
+  }, [avatarLink])
 
   let valuesList = [];
   let keyList = [];
@@ -30,9 +36,9 @@ const AvatarForm = (props) => {
       })
     }
 
-    if(avatarLink){
+    if(link){
       // console.log(valuesList)
-      valuesList.push(avatarLink)
+      valuesList.push(link)
       keyList.push('avatar')
     }
     if(valuesList.length == 0){
@@ -58,7 +64,7 @@ const AvatarForm = (props) => {
       <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
       {Number(citizenID) != 0 ? 
       <>
-      <Input width='100%' placeholder='Avatar Link' value={avatarLink ?? ''} readOnly/>
+      <Input width='100%' placeholder='Avatar Link' value={link ?? ''} onChange ={ e => setLink(e.target.value)}/>
 
       <Button 
           margin="10px"
