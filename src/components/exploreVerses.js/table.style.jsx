@@ -40,13 +40,16 @@ export const Th = styled.th`{
 
 export const Thead = styled.thead`{
   flex: 0 0 auto;
+  // position:fixed;
+  position: sticky; top: 0; z-index: 1;
 }`
 
 export const WrapTable = styled.div `
   
-  overflow-y:scroll;
+  overflow-y: ${({scroll}) => { scroll ?' scroll' : 'hidden'}};
   overflow-x:hidden;
   background:none;
+  max-height:329px;
   width:50%;
   @media screen and (max-width: 1280px) {
     width:100%;

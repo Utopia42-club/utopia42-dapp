@@ -15,6 +15,7 @@ const ExploreVerses = () => {
     const [lastCreateTime, setLastCreateTime] = useState()
     const [firstCreateTime, setFirstCreateTime] = useState()
     const [pageNumber, setPageNumber] = useState(1)
+    const [scroll, setScroll] = useState(false)
     let data;
 
     const collections = async() => {
@@ -22,6 +23,9 @@ const ExploreVerses = () => {
         setFirstCreateTime(data.data.data.verses[0].createdAt)
         setTotalVerse(data.data.data.factories[0].totalVerse)
         data = data.data.data.verses
+        if(data.length >= 8) {
+            setScroll(true)
+        }
         data.map( async (item) => {
             setVerses(oldName => [...oldName, item.id])
             setNames(oldName => [...oldName, item.name])
@@ -53,7 +57,7 @@ const ExploreVerses = () => {
             <div style={{marginBottom:"50px"}}>
                 <GradientTitle >All Utopia42 Verses</GradientTitle>
             </div>
-            <WrapTable>
+            <WrapTable scroll = {scroll}>
                 <Table id="table">
                     <Thead>
                     <Tr>
