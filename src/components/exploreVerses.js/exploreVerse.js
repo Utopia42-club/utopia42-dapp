@@ -72,11 +72,11 @@ const ExploreVerses = () => {
                     {
                             verses.map((item, index) => (
                                 <Tr key={index} id={index}>
-                                    <Td style={{width:'5%'}}><a target="_blank" href={'https://dev.utopia42.club/game?network=80001&contract=' + item}>{index+1}</a></Td>
-                                    <Td  style={{width:'10%'}}><a target="_blank" href={'https://dev.utopia42.club/game?network=80001&contract=' + item}>{names[index]}</a></Td>
-                                    {/* <Td style={{width:'25%'}}><a target="_blank" href={'https://dev.utopia42.club/game?network=80001&contract=' + item}>{item}</a></Td> */}
+                                    <Td style={{width:'5%'}}><a target="_blank" href={'https://verse.utopia42.club/80001/' + item}>{index+1}</a></Td>
+                                    <Td  style={{width:'10%'}}><a target="_blank" href={'https://verse.utopia42.club/80001/' + item}>{names[index]}</a></Td>
+                                    {/* <Td style={{width:'25%'}}><a target="_blank" href={'https://verse.utopia42.club/80001/' + item}>{item}</a></Td> */}
                                     {/* <Td>{collections[index]}</Td> */}
-                                    <Td style={{width:'5%'}}><a target="_blank" href={'https://dev.utopia42.club/game?network=80001&contract=' + item}><img src='media/common/openLink.png' width="20px"/></a></Td>
+                                    <Td style={{width:'5%'}}><a target="_blank" href={'https://verse.utopia42.club/80001/' + item}><img src='media/common/openLink.png' width="20px"/></a></Td>
                                 </Tr>
                             ))
                         } 

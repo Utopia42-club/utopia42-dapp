@@ -49,15 +49,15 @@ export const walletconnect = new WalletConnectConnector({
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   infuraId: '',
-  rpc: { 80001: RPC_URLS[80001]},
-  network: 'mumbai', 
-  chainId: 80001,
+  rpc: { 137: RPC_URLS[137]},
+  network: 'Polygon', 
+  chainId: 137,
   supportedChainIds: validChains,
   pollingInterval: POLLING_INTERVAL,
 })
 
 export const walletlink = new WalletLinkConnector({
-  url: RPC_URLS[80001],
+  url: RPC_URLS[137],
   appName: 'app.deus.finance',
 })
 
@@ -66,7 +66,7 @@ export const fortmatic = new FortmaticConnector({
   chainId: 1,
 })
 
-export const frame = new FrameConnector({ supportedChainIds: [8001] })
+export const frame = new FrameConnector({ supportedChainIds: [137] })
 
 export const ConnectorNames = {
   Injected: 'MetaMask',

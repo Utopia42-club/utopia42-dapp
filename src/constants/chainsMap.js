@@ -21,7 +21,7 @@ export const NameChainMap = {
   4: 'Rinkeby',
   56: 'BSC',
   97: 'BSC TEST',
-  137: 'MATIC',
+  137: 'Polygon',
   80001: 'Mumbai',
   100: 'xDAI',
   77: 'Sokol',
