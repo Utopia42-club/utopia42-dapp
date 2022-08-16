@@ -120,7 +120,7 @@ const AddNewItem = (props) => {
   const getData = async () => {
     // console.log('Get Item', citizenId, account)
     let res = await axios.post(
-      'https://api.thegraph.com/subgraphs/name/jafari-mi/utopia42-settings-mumbai',
+      'https://api.thegraph.com/subgraphs/name/jafari-mi/utopia42-settings-polygon',
       {
         query: `
         {
