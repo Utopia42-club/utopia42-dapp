@@ -102,7 +102,7 @@ export const rpcConfig = {
       symbol: 'MATIC',
       decimals: 18,
     },
-    rpcUrls: ['https://polygon-rpc.com/'],
+    rpcUrls: ['https://rpc.ankr.com/polygon'],
     blockExplorerUrls: ['https://polygonscan.com/'],
     iconUrls: [],
   },
