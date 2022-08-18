@@ -10,7 +10,7 @@ const ActionButtonComponent = (props) => {
   const { account, chainId, error } = useWeb3React()
 
   let contentBtn;
-  if(status == 'Mint' || status == 'Minting ...') {
+  if(status == 'Mint for 5.5 MATIC' || status == 'Minting ...') {
 
         contentBtn = (
           <button className='profile-btn'  onClick={handleMint} >

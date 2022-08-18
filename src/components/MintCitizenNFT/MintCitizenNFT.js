@@ -26,7 +26,7 @@ const MintCitizenNFT = () => {
           setStatus('Duplicate citizenID')
       }
       else
-      setStatus('Mint')
+      setStatus('Mint for 5.5 MATIC')
     }
 
     useEffect(() => {
