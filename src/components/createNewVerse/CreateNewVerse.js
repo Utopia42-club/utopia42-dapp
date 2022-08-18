@@ -11,6 +11,7 @@ import ConnectWallet from '../connectWallet/ConnectWallet'
 import { useWeb3React } from '@web3-react/core';
 import CreateCollectionsTable from '../createCollectionsTable/createCollectionsTable';
 import { toCheckSumAddress } from '../../utils/toCheckSumAddress';
+import ToastMessage from '../ToastMessage/TostMessage';
 
 const CreateVerse = () => {
 
@@ -75,9 +76,12 @@ const CreateVerse = () => {
     return(
 <>
 {account && chainId == process.env.NEXT_PUBLIC_VALID_CHAIN ?
+
 <Container>
+
   <Wrapper maxWidth="300px" width="100%"></Wrapper>
   <Wrapper maxWidth="470px" width="100%">
+  <ToastMessage  messages={[<span>Creating Utopia42 Verses is not public yet. Please contact the team on <a href='https://discord.com/invite/TphaKUZzHx' target="_blank">Utopia42 discord</a> channel for more information.</span>]}/>
   <Flex flexDirection="column" justifyContent="center" alignItems="center" width="100%">
   <GradientTitle margin="0 0 10px">Create a new Verse</GradientTitle>
   <Box background="linear-gradient(0deg,#D3DBE3 0%,rgba(231,235,243,0) 106.95%);">

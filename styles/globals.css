@@ -355,3 +355,43 @@ select:focus {
   outline: none;
 
 }
+
+.messageBox {
+  animation: MoveUpDown 2s ;
+  width:100%; 
+  position: relative;
+  border:1px solid #ccc;
+  padding:15px;
+
+  border-radius:5px;
+  opacity:0.7;
+  margin-top: 20px;
+  background-color: #cdf0fa ;
+  border-color:#aeedfd;
+  top:0px;
+  z-index: 99999 !important;
+  color: rgb(52, 74, 79);
+}
+
+.messageBox a{ cursor: pointer;}
+
+.closeMessageBox {
+  right:10px;
+  position:absolute;
+  cursor: pointer;
+  color:rgb(105, 72, 112);
+  text-align: center;
+}
+
+@keyframes MoveUpDown {
+  0%, 100% {
+    top: -150px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+
+.messages-item {
+  margin-right: 30px;
+}
