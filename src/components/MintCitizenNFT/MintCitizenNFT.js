@@ -28,8 +28,6 @@ const MintCitizenNFT = () => {
     const checkCitizenID = async () => {
       const citizenID = await getCitizenId(account)
       const price = fromWei(await getPrice())
-
-      console.log(price)
       if (Number(citizenID) != 0 ){
           setStatus('Duplicate citizenID')
       }

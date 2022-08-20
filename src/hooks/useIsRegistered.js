@@ -4,7 +4,7 @@ import { sendTransaction } from '../utils/sendTx'
 import useWeb3 from './useWeb3'
 
 const useMinterNft = (address, chainId, count, toAddress) => {
-  console.log(chainId)
+  // console.log(chainId)
   const web3 = useWeb3()
   const contractAddress = '0xaF7f06309dbefd4cA671111B587013B7B58588cc'
 

@@ -14,8 +14,8 @@ export const sendTransaction = (status, contract, methodName, params, account,
         options['value'] = payableValue
       }
       const gasEstimate = await axios.get('https://gasstation-mainnet.matic.network/v2')
-      console.log(gasEstimate)
-      console.log(options, 'options')
+      // console.log(gasEstimate)
+      // console.log(options, 'options')
       options.gasPrice = Web3.utils.toWei(Number(gasEstimate.data.standard.maxFee).toFixed().toString(), 'gwei')
       contract.methods[methodName](...params)
         .send(options)

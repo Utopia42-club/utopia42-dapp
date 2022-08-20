@@ -4,7 +4,7 @@ import Script from 'next/script'
 export default function Show3dAvatar(props) {
   const [file, setFile] = useState('media/common/avatar-1.jpg');
   const {avatarLink} = props
-  console.log(avatarLink)
+  // console.log(avatarLink)
   const modelRef = React.useRef();
   const [annots, setAnnots] = useState([]);
   const modelViewerStyle = {
