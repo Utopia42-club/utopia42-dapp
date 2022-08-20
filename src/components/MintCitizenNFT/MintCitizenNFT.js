@@ -10,6 +10,8 @@ import useMinterNft from '../../hooks/useMinterNft'
 import { useWeb3React } from '@web3-react/core';
 import useCitizenId from '../../hooks/useCitizenId'
 import ConnectWallet from '../connectWallet/ConnectWallet';
+import useGetMaticPrice from '../../hooks/useGetMaticPrice';
+import { fromWei } from '../../utils/wei';
 // import ToastMessage from '../ToastMessage/TostMessage';
 
 
@@ -19,16 +21,20 @@ const MintCitizenNFT = () => {
     const [status, setStatus] = useState()
     const getCitizenId = useCitizenId()
     const mint = useMinterNft(account, chainId)
+    const getPrice = useGetMaticPrice()
     // const [showMessage, setShowMessage] = useState(true)
 
 
     const checkCitizenID = async () => {
       const citizenID = await getCitizenId(account)
+      const price = fromWei(await getPrice())
+
+      console.log(price)
       if (Number(citizenID) != 0 ){
           setStatus('Duplicate citizenID')
       }
       else
-      setStatus('Mint for 5.5 MATIC')
+      setStatus(`Mint for ${price} MATIC`)
     }
 
     useEffect(() => {
