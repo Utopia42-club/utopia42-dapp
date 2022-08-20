@@ -22,17 +22,19 @@ const MintCitizenNFT = () => {
     const getCitizenId = useCitizenId()
     const mint = useMinterNft(account, chainId)
     const getPrice = useGetMaticPrice()
+    const [price, setPrice] = useState();
     // const [showMessage, setShowMessage] = useState(true)
 
 
     const checkCitizenID = async () => {
       const citizenID = await getCitizenId(account)
-      const price = fromWei(await getPrice())
+      setPrice(fromWei(await getPrice()))
+      let newPrice =  fromWei(await getPrice())
       if (Number(citizenID) != 0 ){
           setStatus('Duplicate citizenID')
       }
       else
-      setStatus(`Mint for ${price} MATIC`)
+      setStatus(`Mint for ${newPrice} MATIC`)
     }
 
     useEffect(() => {
@@ -94,7 +96,7 @@ const MintCitizenNFT = () => {
       </Box>
       <div style={{width:"100%", background:"linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%"}}>
       <Box marginTop="10" background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
-      <ActionButton checkCitizenID={checkCitizenID} handleMint={handleMint} status={status} />
+      <ActionButton checkCitizenID={checkCitizenID} handleMint={handleMint} status={status} price={price}/>
 
       </Box>
       </div>

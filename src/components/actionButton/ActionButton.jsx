@@ -5,12 +5,12 @@ import WalletModal from '../modal/WalletModal'
 
 
 const ActionButtonComponent = (props) => {
-  const { handleMint, status, } = props
+  const { handleMint, status, price } = props
   const [open, setOpen] = useState(false)
   const { account, chainId, error } = useWeb3React()
 
   let contentBtn;
-  if(status == 'Mint for 5.5 MATIC' || status == 'Minting ...') {
+  if(status == `Mint for ${price} MATIC` || status == 'Minting ...') {
 
         contentBtn = (
           <button className='profile-btn'  onClick={handleMint} >
