@@ -10,7 +10,7 @@ const ActionButtonComponent = (props) => {
   const { account, chainId, error } = useWeb3React()
 
   let contentBtn;
-  if(status == `Mint for ${price} MATIC` || status == 'Minting ...') {
+  if(status != 'Duplicate citizenID') {
 
         contentBtn = (
           <button className='profile-btn'  onClick={handleMint} >

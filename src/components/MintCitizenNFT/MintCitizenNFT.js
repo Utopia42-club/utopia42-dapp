@@ -54,7 +54,7 @@ const MintCitizenNFT = () => {
               try{
                 setStatus('Minting ...')
                 await mint()
-                setStatus('Mint')
+                setStatus(`Mint for ${newPrice} MATIC`)
                 checkCitizenID()
               }
               catch{
