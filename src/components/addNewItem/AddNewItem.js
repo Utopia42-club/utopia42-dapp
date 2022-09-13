@@ -12,7 +12,7 @@ const AddNewItem = (props) => {
   const { account } = useWeb3React();
   const updateSettings = useUpdateSettings()
   const [tableItem, setTableItem] = useState([])
-  const optionList = ['Name', 'Bio', 'Instagram', 'Telegram', 'Discord', 'Facebook', 'Other']
+  const optionList = ['Name', 'Bio', 'Instagram', 'Telegram', 'Discord', 'Twitter' ,'Facebook', 'Other']
   const [socialMedias, setSocialMedias ]= useState([])
   const refs = useRef([])
   const [saveBtnName, setSaveBtnName] = useState('Save')
