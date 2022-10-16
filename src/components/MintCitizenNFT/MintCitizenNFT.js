@@ -12,6 +12,7 @@ import useCitizenId from '../../hooks/useCitizenId'
 import ConnectWallet from '../connectWallet/ConnectWallet';
 import useGetMaticPrice from '../../hooks/useGetMaticPrice';
 import { fromWei } from '../../utils/wei';
+import UsersAndVerifyCount from '../usersAndVerifyCount/UsersAndVerifyCount';
 // import ToastMessage from '../ToastMessage/TostMessage';
 
 
@@ -97,7 +98,7 @@ const MintCitizenNFT = () => {
       <div style={{width:"100%", background:"linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%"}}>
       <Box marginTop="10" background="linear-gradient(0deg, #D3DBE3 0%, rgba(231, 235, 243, 0) 110.95%)">
       <ActionButton checkCitizenID={checkCitizenID} handleMint={handleMint} status={status} price={price}/>
-
+      <UsersAndVerifyCount />
       </Box>
       </div>
       </Flex>
