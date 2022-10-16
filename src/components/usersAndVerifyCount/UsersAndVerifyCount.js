@@ -20,13 +20,13 @@ const UsersAndVerifyCount = () => {
   return (
       <>
         <div style={{display:'flex',flexDirection:'column',alignItems:'center',width:'100%', marginTop:'20px', color:'#814f8c', borderTop:'2px solid #fff', textAlign:'left'}}>
-          <div style={{display:'flex', columnGap: '10px', marginTop:'10px', alignItems:'left', justifyContent:'left',minWidth:'120px'}}>
+          <div style={{display:'flex', columnGap: '5px', marginTop:'10px', alignItems:'left', justifyContent:'left',minWidth:'150px'}}>
               Utopia42 Citizens:
               <div>
                 {totalSupply}
               </div>
           </div>
-          <div style={{display:'flex', columnGap: '10px',alignItems:'center', justifyContent:'left',minWidth:'120px'}}>
+          <div style={{display:'flex', columnGap: '5px',alignItems:'center', justifyContent:'left',minWidth:'150px'}}>
             Verified Citizens:
             <div>
               {citizenIDVerifications}
