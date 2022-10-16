@@ -21,7 +21,7 @@ const UsersAndVerifyCount = () => {
       <>
         <div style={{display:'flex',flexDirection:'column',alignItems:'center',width:'100%', marginTop:'20px', color:'#814f8c', borderTop:'2px solid #fff', textAlign:'left'}}>
           <div style={{display:'flex', columnGap: '10px', marginTop:'10px', alignItems:'left', justifyContent:'left',minWidth:'120px'}}>
-              Total Users:
+              Total users:
               <div>
                 {totalSupply}
               </div>
