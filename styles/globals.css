@@ -124,7 +124,8 @@ body{
     z-index: 999;
   }
 
-  .ui.menu .item> p {
+  .ui.menu .item> a > p {
+    /* background-color: red; */
     position: relative;
     top:-10px;
     height: 40px;

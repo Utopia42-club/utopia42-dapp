@@ -20,7 +20,7 @@ const DropdownExamplePointing = (props) => {
                           {item.subMenu.map((subName) => {
                               return (<Dropdown.Item
                               >
-                                  <Link href={subName.link} ><p>{subName.name}</p></Link>
+                                  <Link href={subName.link}><a href={subName.link} target={subName.target}><p>{subName.name}</p></a></Link>
                               </Dropdown.Item>)
                           })}
                         </Dropdown.Menu>

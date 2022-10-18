@@ -13,7 +13,13 @@ const DropdownPointing = () => {
         const [show, setShow] = useState(false)
         const menuItem = [ 
         {name: 'Citizen ID', subMenu:[{name:'Mint', link:'/Mint'}, {name:'Profile', link:'/Profile'}]}, 
-        {name:'Verses', subMenu:[{name:'Create Verse', link:'/CreateVerse'}, {name:'My Verses', link:'/Verses'}, {name:'Explore Verses', link:'/ExploreVerses'}]}
+        {name:'Verses', subMenu:[{name:'Create Verse', link:'/CreateVerse'}, {name:'My Verses', link:'/Verses'}, {name:'Explore Verses', link:'/ExploreVerses'}]},
+        // {name: 'Communities', subMenu:[{name:'Communities ', link:'/Communities '},{name:'My communities', link:'MyCommunities'},{name:'Create a new community', link:'/CreateNewCommunity'}]}
+        {name:'Support', subMenu:[{name:'CitizenID tutorial', link: 'https://utopia42club.gitbook.io/docs/how-to-mint-utopia42-citizenid', target:'_blank'},
+        {name:'BrightID tutorial', link:'https://brightid.gitbook.io/brightid/', target:'_blank'},
+        {name:'ReadyPlayer.Me tutorial', link:'https://support.readyplayer.me/hc/en-us/articles/360020887418-How-to-create-a-3D-avatar-with-Ready-Player-Me-', target:'_blank'},
+        {name:'Have more questions?', link:'https://discord.gg/TphaKUZzHx', target:'_blank'}
+        ]}
       ]
       const wrapperRef = useRef(null)
 
@@ -56,7 +62,7 @@ const DropdownPointing = () => {
                     <Dropdown.Menu>
                     {item.subMenu.map((subName) => {
                         return (<Dropdown.Item>
-                            <Link href={subName.link} ><p>{subName.name}</p></Link>
+                            <Link href={subName.link}><a href={subName.link} target={subName.target}><p>{subName.name}</p></a></Link>
                         </Dropdown.Item>)
                     })}
                     </Dropdown.Menu>
@@ -64,7 +70,7 @@ const DropdownPointing = () => {
                 }
                 else{
                     return <Menu.Item>
-                      <a href={item.link} ><p>{item.name}</p></a>
+                      <a href={item.link}><p>{item.name}</p></a>
                     </Menu.Item>
                 }
                 })}
